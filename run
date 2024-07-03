@@ -1,0 +1,56 @@
+#!/bin/bash
+
+compile() {
+    echo "Compiling..."
+    mvn package
+}
+
+go() {
+    echo "Building & running..."
+    mvn package
+    java -cp target/CVForYou-1.0-SNAPSHOT.jar MK.CVForYou.App
+}
+
+run() {
+    echo "Running..."
+    java -cp target/CVForYou-1.0-SNAPSHOT.jar MK.CVForYou.App
+}
+
+test() {
+    echo "Running tests..."
+    mvn test
+}
+
+slow_test() {
+    echo "Running acceptance tests..."
+    mvn test -Pslow-tests
+}
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 {compile|go|go-docker|run|test|slow_test}"
+    exit 1
+fi
+
+case "$1" in
+    compile)
+        compile
+        ;;
+    go)
+        go
+        ;;
+    run)
+        run
+        ;;
+    test)
+        test
+        ;;
+    slowtest)
+        slow_test
+        ;;
+    *)
+        echo "Invalid argument: $1"
+        echo "Usage: $0 {compile|go|run|test|slow_test}"
+        exit 1
+        ;;
+esac
+
