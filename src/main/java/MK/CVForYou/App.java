@@ -1,50 +1,55 @@
 package MK.CVForYou;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        new App("hello, neo the matrix has you", 
+                "neo, there is a glitch in the matrix");
 
-        int v1[] = new int[]{1,1,1,1,1,0,0};
-        int v2[] = new int[]{0,0,1,1,0,1,1};
-
-        cosineSimilarity(v1,v2);
-
-
-
-        String test = "hello, neo the matrix has you";
-        System.out.println(removePunctuation(test));
-        String[] atoms = test.split(" ");
-
-
-
-        //HashMap<String, int> word_table = wordsToMap();
-
-
-
-
+        new App("the best data science course",
+                "data science is popular");
     }
 
-    public int calculateConsineSimarity(String a, String b)
+
+    public App(String a, String b)
     {
-        HashMap<String, Integer> mapA = wordsToMap(a);
-        HashMap<String, Integer> mapB = wordsToMap(b);
+        String text1 = removePunctuation(a);
+        String text2 = removePunctuation(b);
+
+        System.out.println(text1);
+        System.out.println(text2);
+
+        HashMap<String, Integer> word_table1 = wordsToMap(text1);
+        HashMap<String, Integer> word_table2 = wordsToMap(text2);
+
+        HashSet<String> keys = new HashSet<String>();
+        keys.addAll(word_table1.keySet());
+        keys.addAll(word_table2.keySet());
+
+        int total_keys = keys.size();
+        
+        int v1[] = new int[total_keys];
+        int v2[] = new int[total_keys];
 
 
-        for(String key: mapA.keySet()) {
-            System.out.println(mapA.get(key));
+        int next = 0;
+        for(String key : keys)
+        {
+            if(word_table1.containsKey(key))
+                v1[next] = word_table1.get(key);
+
+            if(word_table2.containsKey(key))
+                v2[next] = word_table2.get(key);
+
+            next++;
         }
 
-        for(String key: mapB.keySet()) {
-            System.out.println(mapB.get(key));
-        }
-
-        return -1;
+        double result = cosineSimilarity(v1,v2);
     }
-
 
     public static double magnitude(int v[])
     {
@@ -99,9 +104,20 @@ public class App
         return sb.toString();
     }
 
-    public HashMap<String,Integer> wordsToMap(String text)
+    public static HashMap<String,Integer> wordsToMap(String text)
     {
+        String[] atoms = removePunctuation(text).split(" ");
+        HashMap<String, Integer> map = new HashMap<String, Integer>();
+
+        for(int i = 0; i < atoms.length; i++)
+        {
+            String key = atoms[i];
+            if(map.containsKey(key))
+                map.put(key, map.get(key) );
+            else
+                map.put(atoms[i],1);
+        }
         
-        return new HashMap<String, Integer>();
+        return map;
     }
 }
