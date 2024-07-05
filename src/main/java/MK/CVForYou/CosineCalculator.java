@@ -104,7 +104,7 @@ public class CosineCalculator
         {
             String key = atoms[i];
             if(map.containsKey(key))
-                map.put(key, map.get(key) );
+                map.put(key, map.get(key)+1 );
             else
                 map.put(atoms[i],1);
         }
