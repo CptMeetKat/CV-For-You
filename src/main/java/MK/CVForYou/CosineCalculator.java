@@ -84,7 +84,8 @@ public class CosineCalculator
     public static String removePunctuation(String s)
     {
         StringBuilder sb = new StringBuilder(s);
-        for (int i = 0; i < sb.length(); i++) {
+        //for (int i = 0; i < sb.length(); i++) {
+        for (int i = sb.length()-1; i >= 0; i--) {
            char letter = sb.charAt(i); 
 
            if(  !Character.isAlphabetic(letter) && 

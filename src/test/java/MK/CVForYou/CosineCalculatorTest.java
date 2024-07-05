@@ -49,7 +49,18 @@ public class CosineCalculatorTest
         assertEquals(map.get("a").intValue(), 2);
     }
 
-//removePunctuation
+    @Test
+    public void shouldKeepLettersAndSpaces()
+    {
+        String input = "Neo, Follow 10 white rabbits\n";
+        String expected = "Neo Follow  white rabbits";
+        String result = CosineCalculator.removePunctuation(input);
+        
+        System.out.println(result);
+        assertEquals(expected, result);
+    }
+
+
 //dotProduct
 //calculateCosineSimilarityFromVectors
 
