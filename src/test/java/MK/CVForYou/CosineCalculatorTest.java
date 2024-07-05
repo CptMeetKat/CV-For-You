@@ -61,9 +61,17 @@ public class CosineCalculatorTest
     }
 
 
-//dotProduct
+    @Test
+    public void shouldCalculateDotProduct()
+    {
+        int[] v1 = new int[]{1,1,1,1,1,0,0};
+        int[] v2 = new int[]{0,0,1,1,0,1,1};
+
+        int expected = 2;
+        int result = CosineCalculator.dotProduct(v1, v2);
+
+        assertEquals(expected, result);
+    }
+
 //calculateCosineSimilarityFromVectors
-
-
-
 }
