@@ -73,5 +73,17 @@ public class CosineCalculatorTest
         assertEquals(expected, result);
     }
 
-//calculateCosineSimilarityFromVectors
+    @Test
+    public void shouldCalculateCosineSimilarityFromVectors()
+    {
+        int[] v1 = new int[]{1,1,1,1,1,0,0};
+        int[] v2 = new int[]{0,0,1,1,0,1,1};
+        double expected = 0.44721;
+
+        double result = CosineCalculator.cosineSimilarity(v1, v2);
+        long a = Math.round(expected * 10000.0);
+        long b = Math.round(result * 10000.0);
+
+        assertEquals(a,b);
+    }
 }
