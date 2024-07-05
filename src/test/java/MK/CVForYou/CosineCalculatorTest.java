@@ -56,7 +56,6 @@ public class CosineCalculatorTest
         String expected = "Neo Follow  white rabbits";
         String result = CosineCalculator.removePunctuation(input);
         
-        System.out.println(result);
         assertEquals(expected, result);
     }
 
