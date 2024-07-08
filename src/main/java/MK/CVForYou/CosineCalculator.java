@@ -10,8 +10,6 @@ public class CosineCalculator
         String text1 = removePunctuation(a);
         String text2 = removePunctuation(b);
 
-        System.out.println(text1);
-        System.out.println(text2);
 
         HashMap<String, Integer> word_table1 = wordsToMap(text1);
         HashMap<String, Integer> word_table2 = wordsToMap(text2);
@@ -71,12 +69,8 @@ public class CosineCalculator
         double v1Magnitude = magnitude(v1);
         double v2Magnitude = magnitude(v2);
 
-        System.out.printf("Dot product: %d\n", dot_product);
-        System.out.printf("Magnitude1: %.4f\n", v1Magnitude);
-        System.out.printf("Magnitude2: %.4f\n", v2Magnitude);
 
         double result = ((double)dot_product) / (v1Magnitude * v2Magnitude);
-        System.out.printf("Cosine Similarity: %.4f\n", result);
 
         return result;
     }
