@@ -8,12 +8,12 @@ compile() {
 go() {
     echo "Building & running..."
     mvn package
-    java -cp target/CVForYou-1.0-SNAPSHOT.jar MK.CVForYou.App
+    mvn exec:java
 }
 
 run() {
     echo "Running..."
-    java -cp target/CVForYou-1.0-SNAPSHOT.jar MK.CVForYou.App
+    mvn exec:java
 }
 
 test() {
