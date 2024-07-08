@@ -1,9 +1,9 @@
 package MK.CVForYou;
 
-
 import org.json.JSONObject;
 import org.json.JSONArray;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class DocumentGenerator
 {
@@ -26,31 +26,53 @@ public class DocumentGenerator
 
         JSONObject object = array.toJSONObject(list);
         System.out.println("Final JSONOBject: " + object);
-
+            
         return object;
+    }
+
+
+    private static ArrayList<DynamicHTMLElement> deserializeDynamicHTMLElements(JSONObject object)
+    {
+        ArrayList<DynamicHTMLElement> arr = new ArrayList<>();
+        Iterator<String> keys = object.keys();
+        
+        while(keys.hasNext())
+        {
+            String key = keys.next();
+            JSONObject element = object.getJSONObject(key);
+
+            String keywords = element.get("keywords").toString();
+            String html = element.get("element").toString();
+            
+            arr.add(new DynamicHTMLElement(keywords, html));
+        }
+
+        return arr;
     }
 
     public void run()
     {
         JSONObject object  = stringToJSON(element);
-        JSONObject x = object.getJSONObject("0");
-        //System.out.println(x.get("keywords"));
-        //System.out.println(x.get("element"));
+        ArrayList<DynamicHTMLElement> arr = deserializeDynamicHTMLElements(object);
+        for(DynamicHTMLElement elt : arr)
+        {
+            System.out.printf("%s %s\n", elt.keywords, elt.html);
+        }
 
-
-        String newHTML = x.get("element").toString();
+        String newHTML = arr.get(0).html;
+        
         document = document.replace("{$projects}", newHTML);
 
         System.out.println("\n\n\n\n" + document);
 
-        boolean success = IOUtils.writeToFile(document, "generated_document.html");
+        String out_path = "generated_document.html";
+
+        boolean success = IOUtils.writeToFile(document, out_path);
         if(success)
-            System.out.printf("Document has been generated at: %s\n", "__TODO__");
+            System.out.printf("Document has been generated at: %s\n", out_path);
 
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
-
-
 
     private static JSONArray listNumberArray(int max){
     	JSONArray res = new JSONArray();
