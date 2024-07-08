@@ -8,12 +8,18 @@ import java.util.Iterator;
 public class DocumentGenerator
 {
     String document;
-    String element;
+    ArrayList<DynamicHTMLElement> dynamic_options;
 
-    public DocumentGenerator(String input_document, String input_elements)
+    public DocumentGenerator(String document_path, String elements_path)
     {
-        document = IOUtils.readFile(input_document);
-        element = IOUtils.readFile(input_elements);
+        document = IOUtils.readFile(document_path);
+
+
+        String elements = IOUtils.readFile(elements_path);
+        JSONObject object  = stringToJSON(elements);
+        dynamic_options = deserializeDynamicHTMLElements(object);
+        for(DynamicHTMLElement elt : dynamic_options)
+            System.out.printf("%s %s\n", elt.keywords, elt.html);
     }
 
     private JSONObject stringToJSON(String data)
@@ -29,7 +35,6 @@ public class DocumentGenerator
             
         return object;
     }
-
 
     private static ArrayList<DynamicHTMLElement> deserializeDynamicHTMLElements(JSONObject object)
     {
@@ -52,14 +57,7 @@ public class DocumentGenerator
 
     public void run()
     {
-        JSONObject object  = stringToJSON(element);
-        ArrayList<DynamicHTMLElement> arr = deserializeDynamicHTMLElements(object);
-        for(DynamicHTMLElement elt : arr)
-        {
-            System.out.printf("%s %s\n", elt.keywords, elt.html);
-        }
-
-        String newHTML = arr.get(0).html;
+        String newHTML = dynamic_options.get(0).html;
         
         document = document.replace("{$projects}", newHTML);
 
