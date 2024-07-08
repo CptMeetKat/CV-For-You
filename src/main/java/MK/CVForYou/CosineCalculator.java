@@ -7,8 +7,10 @@ public class CosineCalculator
 {
     public static double calculate(String a, String b)
     {
-        String text1 = removePunctuation(a);
-        String text2 = removePunctuation(b);
+        String text1 = removePunctuation(a).toLowerCase();
+        String text2 = removePunctuation(b).toLowerCase();
+
+        
 
 
         HashMap<String, Integer> word_table1 = wordsToMap(text1);
