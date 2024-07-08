@@ -7,7 +7,8 @@ import java.nio.file.Paths;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 
 
@@ -58,6 +59,8 @@ public class App
 
         System.out.println("\n\n\n\n" + document);
 
+        writeToFile(document, "generated_document.html");
+
 
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
@@ -69,9 +72,6 @@ public class App
         try {
             List<String> lines = Files.readAllLines(Paths.get(path));
             result = String.join("", lines);
-            //for (String line : lines) {
-            //    System.out.println(line);
-            //}
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -80,18 +80,22 @@ public class App
     }
 
 
+    public static void writeToFile(String data, String path)
+    {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
+            writer.write(data);
+            System.out.printf("Document has been generated at %s\n", path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-
-
-
-
-
-private static JSONArray listNumberArray(int max){
-	JSONArray res = new JSONArray();
-	for (int i=0; i<max;i++) {
-		//The value of the labels must be an String in order to make it work
-		res.put(String.valueOf(i));
-	}
-	return res;
-}
+    private static JSONArray listNumberArray(int max){
+    	JSONArray res = new JSONArray();
+    	for (int i=0; i<max;i++) {
+    		//The value of the labels must be an String in order to make it work
+    		res.put(String.valueOf(i));
+    	}
+    	return res;
+    }
 }
