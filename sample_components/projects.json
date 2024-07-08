@@ -1,6 +1,14 @@
 [
     {
         "keywords": "Java",
-        "element": "<div> this is my Java element </div>"
-    }
+        "element": "<div> This section is for Java users </div>"
+    },
+    {
+        "keywords": "C++",
+        "element": "<div> This section is for C++ users </div>"
+    },
+    {
+        "keywords": "Javascript",
+        "element": "<div> This section is for Javascript users </div>"
+    },
 ]
