@@ -1,0 +1,26 @@
+About you
+
+To be successful in this role you will be able to convey their knowledge and experience in the general, technical and behavioural competencies listed above with the most desirable experience being:
+
+Develops, documents and maintains reusable architectures, requirements, algorithms, interfaces and designs for kernel software.
+Serves as a subject matter expert for kernel internals, system-specific issues, and processes and regulations.
+Creates and organises a well-defined, estimated and prioritised set of initiatives, epics and stories to maintain a robust backlog for time-phasing and planning.
+Participates in daily scrums, using agile practices, to communicate clearly and openly on incremental progress and to inform the team of any help needed on impediments and roadblocks and suggest timely remedies for common ailments during retrospectives.
+1+ years of Linux operating systems
+1+ years of experience with C++, C, C#
+Real-time software development experience
+Experience with modern processor architectures
+Participation in total software development lifecycle
+Experience with UNIX systems
+Development in Continuous Integration (CI) / Continuous Deployment (CD) pipelines
+Creation of hermetic builds
+Configuration management of diverse systems
+Safety-Critical / FAA software certification experience
+Experience with Product-Line Engineering
+Experience with Real Time Operating Systems (RTOS)
+Contributions to open source projects
+Member of an Agile development team
+Experience building Linux kernel from source
+Experience building a custom Linux distribution using yocto
+
+

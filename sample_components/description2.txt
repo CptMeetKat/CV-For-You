@@ -1,0 +1,26 @@
+What have you done:
+• Bachelor's degree in computer science or a related field is an
+advantage.
+• Minimum of 2 years of experience developing modern, responsive,
+and cross-browser compatible websites using HTML, CSS, and
+JavaScript.
+• Knowledge of JavaScript frameworks such as React.
+• Experience with JavaScript libraries such as jQuery and Bootstrap.
+• Proficiency with HTML5, including semantic HTML5 elements,
+microformats, and WAI-ARIA.
+• Familiarity with CSS pre-processors such as Sass, SCSS or Less.
+• Working knowledge of SEO principles.
+• Experience with tools such as Vite, TypeScript or ESLint.
+• Basic proficiency with Photoshop and web design.
+• Experience with cross-browser compatibility testing and cross
+platform (mobile and desktop)
+• Experience in writing software tests (unit, jest, integration and end-to-
+end)
+• Experience using Figma 2.0 is an advantage.
+
+
+Personal Skillset:
+• Javascript / React / jQuery / Bootstrap
+• HTML5, CSS, Sass, Less and other related technologies.
+• MySQL and Linux experience is a particular advantage.
+• Scrum / Agile

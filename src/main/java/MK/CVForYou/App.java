@@ -9,8 +9,9 @@ public class App
             "sample_components/projects.json",
             "sample_components/tags.json"
         };
+        String compare_document_path = "sample_components/description2.txt";
 
-        DocumentGenerator generator = new DocumentGenerator(input_document, section_definition_paths);
+        DocumentGenerator generator = new DocumentGenerator(input_document, section_definition_paths, compare_document_path);
         generator.run();
     }
 
