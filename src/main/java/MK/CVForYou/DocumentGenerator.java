@@ -18,26 +18,6 @@ public class DocumentGenerator
         }
     }
 
-
-    private static ArrayList<DynamicHTMLElement> deserializeDynamicHTMLElements(JSONObject object)
-    {
-        ArrayList<DynamicHTMLElement> arr = new ArrayList<>();
-        Iterator<String> keys = object.keys();
-        
-        while(keys.hasNext())
-        {
-            String key = keys.next();
-            JSONObject element = object.getJSONObject(key);
-
-            String keywords = element.get("keywords").toString();
-            String html = element.get("element").toString();
-            
-            arr.add(new DynamicHTMLElement(keywords, html));
-        }
-
-        return arr;
-    }
-
     public void run()
     {
         for(DynamicSection section : sections)
