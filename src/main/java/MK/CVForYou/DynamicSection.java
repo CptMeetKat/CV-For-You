@@ -3,6 +3,7 @@ package MK.CVForYou;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 
 
@@ -10,6 +11,11 @@ import java.util.Iterator;
 public class DynamicSection
 {
     ArrayList<DynamicHTMLElement> dynamic_options;
+
+    public void sort(Comparator<DynamicHTMLElement> sorter)
+    {
+        dynamic_options.sort(sorter);
+    }
 
     public DynamicSection(String section_path)
     {
