@@ -1,7 +1,5 @@
 package MK.CVForYou;
 
-
-
 public class DynamicHTMLElement
 {
     String keywords;
@@ -12,7 +10,13 @@ public class DynamicHTMLElement
         this.html = html;
     }
 
+    public String getKeywords()
+    {
+        return keywords;
+    }
 
-
-
+    public String getHTML()
+    {
+        return html;
+    }
 }
