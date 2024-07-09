@@ -7,7 +7,7 @@ import java.util.Iterator;
 public class DocumentGenerator
 {
     String document;
-    ArrayList<DynamicSection> sections;
+    ArrayList<DynamicSection> sections = new ArrayList<DynamicSection>();
 
     public DocumentGenerator(String document_path, String[] section_file_paths)
     {
