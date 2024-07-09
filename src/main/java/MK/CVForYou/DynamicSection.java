@@ -2,6 +2,8 @@ package MK.CVForYou;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
+
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -11,6 +13,7 @@ import java.util.Iterator;
 public class DynamicSection
 {
     ArrayList<DynamicHTMLElement> dynamic_options;
+    String section_name;
 
     public void sort(Comparator<DynamicHTMLElement> sorter)
     {
@@ -19,23 +22,26 @@ public class DynamicSection
 
     public DynamicSection(String section_path)
     {
+        section_name = Paths.get(section_path).getFileName().toString();
+//        System.out.printf("section name: %s\n", section_name);
+
         String elements = IOUtils.readFile(section_path);
         JSONObject object  = stringToJSON(elements);
         dynamic_options = deserializeDynamicHTMLElements(object);
-        for(DynamicHTMLElement elt : dynamic_options)
-            System.out.printf("%s %s\n", elt.keywords, elt.html);
+//        for(DynamicHTMLElement elt : dynamic_options)
+//            System.out.printf("%s %s\n", elt.keywords, elt.html);
     }
 
     private JSONObject stringToJSON(String data)
     {
         JSONArray array = new JSONArray(data);
-        System.out.println("Values array: "+ array);
+        //System.out.println("Values array: "+ array);
 
         JSONArray list = listNumberArray(array.length());
-        System.out.println("Label Array: "+ list.toString());
+        //System.out.println("Label Array: "+ list.toString());
 
         JSONObject object = array.toJSONObject(list);
-        System.out.println("Final JSONOBject: " + object);
+        //System.out.println("Final JSONOBject: " + object);
             
         return object;
     }
