@@ -12,14 +12,6 @@ public class App
 
         DocumentGenerator generator = new DocumentGenerator(input_document, section_definition_paths);
         generator.run();
-
-        //CosineCalculator.calculate("hello, neo the matrix has you", 
-        //        "neo, there is a glitch in the matrix");
-
-        //CosineCalculator.calculate("the best data science course",
-        //        "data science is popular");
-        //
-        //
     }
 
 
