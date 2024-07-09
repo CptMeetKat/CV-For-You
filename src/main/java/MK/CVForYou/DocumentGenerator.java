@@ -1,8 +1,6 @@
 package MK.CVForYou;
 
-import org.json.JSONObject;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class DocumentGenerator
 {
@@ -22,23 +20,19 @@ public class DocumentGenerator
     {
         for(DynamicSection section : sections)
         {
-            //section
+            System.out.println(section.getSectionName());
+            String section_marker = "{$" + section.getSectionName() + "}";
 
-
+            document = document.replace(section_marker, section.compose());
         }
-        //String newHTML = dynamic_options.get(0).html;
-        //
-        //document = document.replace("{$projects}", newHTML);
 
-        //System.out.println("\n\n\n\n" + document);
+        System.out.println("\n\n\n\n" + document);
+        String out_path = "generated_document.html";
+        boolean success = IOUtils.writeToFile(document, out_path);
+        if(success)
+            System.out.printf("Document has been generated at: %s\n", out_path);
 
-        //String out_path = "generated_document.html";
-
-        //boolean success = IOUtils.writeToFile(document, out_path);
-        //if(success)
-        //    System.out.printf("Document has been generated at: %s\n", out_path);
-
-        //System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 
 }

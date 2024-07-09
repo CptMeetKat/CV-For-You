@@ -13,7 +13,28 @@ import java.util.Iterator;
 public class DynamicSection
 {
     ArrayList<DynamicHTMLElement> dynamic_options;
-    String section_name;
+    String file_name;
+    
+
+    public String compose()
+    {
+        StringBuilder result = new StringBuilder();
+        for(DynamicHTMLElement elt : dynamic_options)
+        {
+            result.append(elt.getHTML());
+        }
+
+        return result.toString();
+    }
+
+    public String getSectionName()
+    {
+        int extension_pos = file_name.lastIndexOf(".");
+        if(extension_pos == -1)
+            return file_name;
+
+        return file_name.substring(0, extension_pos);
+    }
 
     public void sort(Comparator<DynamicHTMLElement> sorter)
     {
@@ -22,7 +43,7 @@ public class DynamicSection
 
     public DynamicSection(String section_path)
     {
-        section_name = Paths.get(section_path).getFileName().toString();
+        file_name = Paths.get(section_path).getFileName().toString();
 //        System.out.printf("section name: %s\n", section_name);
 
         String elements = IOUtils.readFile(section_path);
