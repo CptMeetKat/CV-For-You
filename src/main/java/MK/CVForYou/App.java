@@ -5,10 +5,12 @@ public class App
     public static void main( String[] args )
     {
         String input_document = "sample_components/document.html";
-        String input_elements = "sample_components/projects.json";
+        String[] section_definition_paths= new String[]{
+            "sample_components/projects.json",
+            "sample_components/tags.json"
+        };
 
-        
-        DocumentGenerator generator = new DocumentGenerator(input_document, input_elements);
+        DocumentGenerator generator = new DocumentGenerator(input_document, section_definition_paths);
         generator.run();
 
         //CosineCalculator.calculate("hello, neo the matrix has you", 
