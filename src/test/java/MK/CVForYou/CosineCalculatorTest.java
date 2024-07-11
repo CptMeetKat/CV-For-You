@@ -85,4 +85,16 @@ public class CosineCalculatorTest
 
         assertEquals(a,b);
     }
+
+
+
+    @Test
+    public void shouldKeepLettersSpacePlusHash()
+    {
+        String input = "C++ C# 55% Mr.Anderson";
+        String expected = "C++ C#  MrAnderson";
+        String result = CosineCalculator.removePunctuation(input);
+        
+        assertEquals(expected, result);
+    } 
 }

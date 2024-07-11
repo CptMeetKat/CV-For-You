@@ -7,6 +7,8 @@ public class CosineCalculator
 {
     public static double calculate(String a, String b)
     {
+
+        final String whitelist = "";
         String text1 = removePunctuation(a).toLowerCase();
         String text2 = removePunctuation(b).toLowerCase();
 
@@ -79,12 +81,14 @@ public class CosineCalculator
 
     public static String removePunctuation(String s)
     {
+        String whitelist = "#+";
         StringBuilder sb = new StringBuilder(s);
         for (int i = sb.length()-1; i >= 0; i--) {
            char letter = sb.charAt(i); 
 
            if(  !Character.isAlphabetic(letter) && 
-                !Character.isSpaceChar(letter))
+                !Character.isSpaceChar(letter) &&
+                whitelist.indexOf(letter) == -1 )
                 sb.deleteCharAt(i);
 
         }
