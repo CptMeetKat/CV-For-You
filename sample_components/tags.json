@@ -1,14 +1,16 @@
-[
-    {
-        "keywords": "Java",
-        "element": "<div> Java, Object-Oriented</div>"
-    },
-    {
-        "keywords": "C++",
-        "element": "<div> C++ </div>"
-    },
-    {
-        "keywords": "Javascript",
-        "element": "<div> Front-End, HTML, CSS, JS </div>"
-    },
-]
+{
+    "options": [
+        {
+            "keywords": "Java",
+            "element": "<div> Java, Object-Oriented</div>"
+        },
+        {
+            "keywords": "C++",
+            "element": "<div> C++ </div>"
+        },
+        {
+            "keywords": "Javascript",
+            "element": "<div> Front-End, HTML, CSS, JS </div>"
+        }
+    ]
+}

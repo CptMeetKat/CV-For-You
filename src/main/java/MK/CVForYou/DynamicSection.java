@@ -55,7 +55,10 @@ public class DynamicSection
 
     private JSONObject stringToJSON(String data)
     {
-        JSONArray array = new JSONArray(data);
+        JSONObject json = new JSONObject(data);
+
+
+        JSONArray array = json.getJSONArray("options");
         //System.out.println("Values array: "+ array);
 
         JSONArray list = listNumberArray(array.length());
