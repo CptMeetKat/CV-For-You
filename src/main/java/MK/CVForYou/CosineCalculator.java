@@ -85,9 +85,9 @@ public class CosineCalculator
            char letter = sb.charAt(i); 
 
            if(  !Character.isAlphabetic(letter) && 
-                !Character.isSpaceChar(letter) &&
-                whitelist.indexOf(letter) == -1 )
-                sb.deleteCharAt(i);
+                   !Character.isSpaceChar(letter) &&
+                   whitelist.indexOf(letter) == -1 )
+               sb.deleteCharAt(i);
 
         }
         return sb.toString();
@@ -95,7 +95,7 @@ public class CosineCalculator
 
     public static HashMap<String,Integer> wordsToMap(String text)
     {
-        String[] atoms = removePunctuation(text).split(" ");
+        String[] atoms = removePunctuation(text.replaceAll("\n", " ")).split(" ");
         HashMap<String, Integer> map = new HashMap<String, Integer>();
 
         for(int i = 0; i < atoms.length; i++)

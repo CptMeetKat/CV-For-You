@@ -40,13 +40,19 @@ public class CosineCalculatorTest
     public void shouldAccumalateFrequencyOfWords()
     {
         HashMap<String, Integer> map = 
-            CosineCalculator.wordsToMap("neo there is a glitch a glitch");
-
+            CosineCalculator.wordsToMap("neo there is a glitch a glitch C#\nC#\n");
+        for(String key : map.keySet())
+        {
+            System.out.printf("key: %s\n", key);
+        }
+        
+        assertEquals(map.size(), 6);
         assertEquals(map.get("neo").intValue(), 1);
         assertEquals(map.get("glitch").intValue(), 2);
         assertEquals(map.get("there").intValue(), 1);
         assertEquals(map.get("is").intValue(), 1);
         assertEquals(map.get("a").intValue(), 2);
+        assertEquals(map.get("C#").intValue(), 2);
     }
 
     @Test
