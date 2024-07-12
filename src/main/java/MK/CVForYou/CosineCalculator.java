@@ -7,8 +7,6 @@ public class CosineCalculator
 {
     public static double calculate(String a, String b)
     {
-
-        final String whitelist = "";
         String text1 = removePunctuation(a).toLowerCase();
         String text2 = removePunctuation(b).toLowerCase();
 
