@@ -9,7 +9,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 
-
 public class DynamicSection
 {
     ArrayList<DynamicHTMLElement> dynamic_options;
@@ -44,54 +43,35 @@ public class DynamicSection
     public DynamicSection(String section_path)
     {
         file_name = Paths.get(section_path).getFileName().toString();
-//        System.out.printf("section name: %s\n", section_name);
+        //System.out.printf("section name: %s\n", section_name);
 
         String elements = IOUtils.readFile(section_path);
-        JSONObject object  = stringToJSON(elements);
+        JSONObject object  = new JSONObject(elements);
         dynamic_options = deserializeDynamicHTMLElements(object);
-//        for(DynamicHTMLElement elt : dynamic_options)
-//            System.out.printf("%s %s\n", elt.keywords, elt.html);
-    }
-
-    private JSONObject stringToJSON(String data)
-    {
-        JSONObject json = new JSONObject(data);
-
-
-        JSONArray array = json.getJSONArray("options");
-        //System.out.println("Values array: "+ array);
-
-        JSONArray list = listNumberArray(array.length());
-        //System.out.println("Label Array: "+ list.toString());
-
-        JSONObject object = array.toJSONObject(list);
-        //System.out.println("Final JSONOBject: " + object);
-            
-        return object;
-    }
-
-    private static JSONArray listNumberArray(int max){
-    	JSONArray res = new JSONArray();
-    	for (int i=0; i<max;i++) {
-    		//The value of the labels must be an String in order to make it work
-    		res.put(String.valueOf(i));
-    	}
-    	return res;
     }
 
     private static ArrayList<DynamicHTMLElement> deserializeDynamicHTMLElements(JSONObject object)
     {
         ArrayList<DynamicHTMLElement> arr = new ArrayList<>();
-        Iterator<String> keys = object.keys();
-        
-        while(keys.hasNext())
-        {
-            String key = keys.next();
-            JSONObject element = object.getJSONObject(key);
 
-            String keywords = element.get("keywords").toString();
-            String html = element.get("element").toString();
+        String container = (String)object.get("container");
+
+        JSONArray options = (JSONArray) object.query("/options");
+        Iterator<Object> options_itr = options.iterator();
+        while(options_itr.hasNext())
+        {
+            JSONObject option = (JSONObject)options_itr.next();
+                           
+            String keywords = (String) option.get("keywords");
+            String html = new String(container);
             
+            JSONArray elements = option.getJSONArray("elements");
+            for(int i = 0; i < elements.length(); i++)
+            {
+                String key = "{$elements[" + i + "]}";
+                html = html.replace(key, elements.get(i).toString());
+            }
+
             arr.add(new DynamicHTMLElement(keywords, html));
         }
 

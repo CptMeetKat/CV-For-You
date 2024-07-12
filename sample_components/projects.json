@@ -1,16 +1,17 @@
 {
+    "container": "<div>{$elements[0]}</div>",
     "options": [
         {
             "keywords": "Java",
-            "element": "<div> This section is for Java users </div>"
+            "elements": ["This section is for Java users"]
         },
         {
             "keywords": "C++",
-            "element": "<div> This section is for C++ users </div>"
+            "elements": ["This section is for C++ users"]
         },
         {
             "keywords": "Javascript",
-            "element": "<div> This section is for Javascript users </div>"
+            "elements": ["This section is for Javascript users"]
         }
     ]
 }

@@ -1,16 +1,17 @@
 {
+    "container": "<div>{$elements[0]} {$elements[1]}</div>",
     "options": [
         {
             "keywords": "Java",
-            "element": "<div> Java, Object-Oriented</div>"
+            "elements": ["Java1", "Java2"]
         },
         {
             "keywords": "C++",
-            "element": "<div> C++ </div>"
+            "elements": ["C++1,", "C++2"]
         },
         {
             "keywords": "Javascript",
-            "element": "<div> Front-End, HTML, CSS, JS </div>"
+            "elements": ["Front-End1" , "Front-End2"]
         }
     ]
 }
