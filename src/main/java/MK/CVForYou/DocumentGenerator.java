@@ -21,7 +21,7 @@ public class DocumentGenerator
         }
     }
 
-    public void run()
+    public void generateDocument()
     {
         Comparator<DynamicHTMLElement> sorter = new CosineSimilarityComparator(compare_text);
 

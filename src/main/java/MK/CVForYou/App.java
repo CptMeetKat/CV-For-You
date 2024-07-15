@@ -57,7 +57,7 @@ public class App
         }
 
         DocumentGenerator generator = new DocumentGenerator(input_document, section_definition_paths, compare_document_path);
-        generator.run();
+        generator.generateDocument();
     }
 
 
