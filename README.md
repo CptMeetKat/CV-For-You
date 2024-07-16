@@ -7,6 +7,11 @@ Automatically create the most effective version of your resume, ensuring your sk
 - Ensure your CV is always highly relevant to each role
 
 ## How does it work?
+- You define information to display
+- You input a job description
+- The algorithm will insert the most relevant information and generate a file
+
+## Example
 Define generic sections in your CV, so they be programmatically populated
 
 ![image](https://github.com/user-attachments/assets/5b89d723-d546-43b3-af23-e0d68a8bf846)
