@@ -3,6 +3,7 @@ package MK.CVForYou;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -41,11 +42,12 @@ public class DynamicSection
     }
 
     public DynamicSection(String section_path)
+        throws IOException
     {
         file_name = Paths.get(section_path).getFileName().toString();
         //System.out.printf("section name: %s\n", section_name);
 
-        String elements = IOUtils.readFile(section_path);
+        String elements = IOUtils.readFile(section_path); //This should be try catch
         JSONObject object  = new JSONObject(elements);
         dynamic_options = deserializeDynamicHTMLElements(object);
     }

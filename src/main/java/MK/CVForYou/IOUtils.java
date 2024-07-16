@@ -9,16 +9,13 @@ import java.io.FileWriter;
 
 public class IOUtils
 {
-    public static String readFile(String path)
+    public static String readFile(String path) 
+    throws IOException
     {
         String result = null;
         
-        try {
-            List<String> lines = Files.readAllLines(Paths.get(path));
-            result = String.join("", lines);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        List<String> lines = Files.readAllLines(Paths.get(path));
+        result = String.join("", lines);
 
         return result;
     }

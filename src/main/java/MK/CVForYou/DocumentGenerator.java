@@ -1,5 +1,6 @@
 package MK.CVForYou;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -13,12 +14,16 @@ public class DocumentGenerator
     public DocumentGenerator(String document_path, String[] section_file_paths,
                              String compare_document_path)
     {
-        compare_text = IOUtils.readFile(compare_document_path);
-        document = IOUtils.readFile(document_path);
-        for(String path : section_file_paths)
-        {
-           sections.add(new DynamicSection(path));
+        try {
+            compare_text = IOUtils.readFile(compare_document_path);
+            document = IOUtils.readFile(document_path);
+            for(String path : section_file_paths)
+               sections.add(new DynamicSection(path));
         }
+        catch(IOException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public void generateDocument()
