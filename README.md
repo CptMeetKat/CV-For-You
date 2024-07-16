@@ -2,10 +2,6 @@
 
 Automatically create the most effective version of your resume, ensuring your skills are tailored to match every role you apply for.
 
-## Benefits
-- Eliminate the need for manual reorganising CV
-- Ensure your CV is always highly relevant to each role
-
 ## How does it work?
 - You define information to display
 - You input a job description
