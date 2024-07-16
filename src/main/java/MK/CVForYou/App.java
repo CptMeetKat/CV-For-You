@@ -22,6 +22,8 @@ public class App
         options.addOption("c", "compare", true, "file to compare keywords to");
         options.addOption("h", "help", false, "print this message");
 
+        options.addOption("cs", "EXPERIMENT", true, "try experimental feature");
+
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
 
@@ -43,11 +45,19 @@ public class App
                 compare_document_path = cmd.getOptionValue("c");
                 //System.out.println("value: " + value);
             }
+            if (cmd.hasOption("cs"))
+            {
+                String seek_url = cmd.getOptionValue("cs");
+                //seek_url = "https://www.seek.com.au/job/76113399";
+                new SeekWrapper(seek_url).getJD();
+                return;
+            }
 
             if (cmd.hasOption("s")) {
                 section_definition_paths = cmd.getOptionValues("s");
                 //System.out.println("value: " + String.join(", ", value));
             }
+
 
         } catch (ParseException e) {
             System.out.println(e.getMessage());
@@ -56,7 +66,9 @@ public class App
             System.exit(1);
         }
 
-        DocumentGenerator generator = new DocumentGenerator(input_document, section_definition_paths, compare_document_path);
+        DocumentGenerator generator = new DocumentGenerator(input_document,
+                                                            section_definition_paths,
+                                                            compare_document_path);
         generator.generateDocument();
     }
 
