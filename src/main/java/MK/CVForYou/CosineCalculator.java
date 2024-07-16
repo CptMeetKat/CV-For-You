@@ -5,16 +5,10 @@ import java.util.HashSet;
 
 public class CosineCalculator
 {
-    public static double calculate(String a, String b)
+    public static double calculate(String textA, String textB)
     {
-        String text1 = removePunctuation(a).toLowerCase();
-        String text2 = removePunctuation(b).toLowerCase();
-
-        
-
-
-        HashMap<String, Integer> word_table1 = wordsToMap(text1);
-        HashMap<String, Integer> word_table2 = wordsToMap(text2);
+        HashMap<String, Integer> word_table1 = wordsToMap(textA);
+        HashMap<String, Integer> word_table2 = wordsToMap(textB);
 
         HashSet<String> keys = new HashSet<String>();
         keys.addAll(word_table1.keySet());
@@ -95,7 +89,10 @@ public class CosineCalculator
 
     public static HashMap<String,Integer> wordsToMap(String text)
     {
-        String[] atoms = removePunctuation(text.replaceAll("\n", " ")).split(" ");
+        String formatted_text = text.replaceAll("\n", " ");
+        formatted_text = removePunctuation(formatted_text);
+
+        String[] atoms = formatted_text.split(" "); 
         HashMap<String, Integer> map = new HashMap<String, Integer>();
 
         for(int i = 0; i < atoms.length; i++)
