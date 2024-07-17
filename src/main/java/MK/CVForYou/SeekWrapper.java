@@ -51,13 +51,8 @@ public class SeekWrapper {
     {
         StringBuilder job_description = new StringBuilder();
         Element divElement = doc.select("div[data-automation=jobAdDetails]").first();
-        // String innerHTML = divElement.html();
-        // System.out.println(doc);
 
-        // Print the content of the selected <div> element
         if (divElement != null) {
-            // System.out.println(divElement.outerHtml());
-            // System.out.println(divElement.wholeText());
 
             Elements elements = divElement.getAllElements();
             for (Element e : elements) {
