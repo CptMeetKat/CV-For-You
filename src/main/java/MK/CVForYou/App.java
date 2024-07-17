@@ -12,21 +12,32 @@ public class App
         String document = null;
         String generated_document_path = null;
 
-
         Options options = new Options();
-     
+
         Option option_section = Option.builder("s").hasArgs()
                                       .longOpt("section")
                                       .desc("path to section definition files")
                                       .build();
-
         options.addOption(option_section);
         options.addOption("d", "document", true, "path to the dynamic document");
-        options.addOption("c", "compare", true, "file to compare keywords to");
         options.addOption("h", "help", false, "print this message");
         options.addOption("o", "output", true, "path of output");
 
-        options.addOption("cs", "compare-seek", true, "pull JD from seek to compare");
+        Option compare_from_file = Option.builder("c")
+                                      .longOpt("compare").hasArg()
+                                      .desc("file to compare keywords to")
+                                      .build();
+
+        Option compare_from_seek = Option.builder("cs")
+                                      .longOpt("compare-seek").hasArg()
+                                      .desc("pull JD from seek to compare")
+                                      .build();
+
+        OptionGroup compare_input = new OptionGroup();
+        compare_input.addOption(compare_from_file);
+        compare_input.addOption(compare_from_seek);
+
+        options.addOptionGroup(compare_input);
 
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
@@ -42,25 +53,20 @@ public class App
 
             if (cmd.hasOption("d")) {
                 input_document = cmd.getOptionValue("d");
-                //System.out.println("value: " + value);
             }
 
             if (cmd.hasOption("c")) {
                 String compare_document_path = cmd.getOptionValue("c");
                 document = getDocument(compare_document_path);
-                
-                //System.out.println("value: " + value);
             }
             if (cmd.hasOption("cs"))
             {
                 String seek_url = cmd.getOptionValue("cs");
-                //seek_url = "https://www.seek.com.au/job/76113399";
                 document = new SeekWrapper(seek_url).getJD();
             }
 
             if (cmd.hasOption("s")) {
                 section_definition_paths = cmd.getOptionValues("s");
-                //System.out.println("value: " + String.join(", ", value));
             }
 
             if(cmd.hasOption("o"))
