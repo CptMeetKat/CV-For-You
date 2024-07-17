@@ -12,10 +12,10 @@ public class DocumentGenerator
 
 
     public DocumentGenerator(String document_path, String[] section_file_paths,
-                             String compare_document_path)
+                             String compare_text)
     {
         try {
-            compare_text = IOUtils.readFile(compare_document_path);
+            this.compare_text = compare_text;
             document = IOUtils.readFile(document_path);
             for(String path : section_file_paths)
                sections.add(new DynamicSection(path));

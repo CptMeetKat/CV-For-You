@@ -1,4 +1,6 @@
 package MK.CVForYou;
+import java.io.IOException;
+
 import org.apache.commons.cli.*;
 
 public class App 
@@ -7,7 +9,7 @@ public class App
     {
         String input_document = null; 
         String[] section_definition_paths = null;
-        String compare_document_path = null;
+        String document = null;
 
 
         Options options = new Options();
@@ -42,15 +44,16 @@ public class App
             }
 
             if (cmd.hasOption("c")) {
-                compare_document_path = cmd.getOptionValue("c");
+                String compare_document_path = cmd.getOptionValue("c");
+                document = getDocument(compare_document_path);
+                
                 //System.out.println("value: " + value);
             }
             if (cmd.hasOption("cs"))
             {
                 String seek_url = cmd.getOptionValue("cs");
                 //seek_url = "https://www.seek.com.au/job/76113399";
-                new SeekWrapper(seek_url).getJD();
-                return;
+                document = new SeekWrapper(seek_url).getJD();
             }
 
             if (cmd.hasOption("s")) {
@@ -68,8 +71,22 @@ public class App
 
         DocumentGenerator generator = new DocumentGenerator(input_document,
                                                             section_definition_paths,
-                                                            compare_document_path);
+                                                            document);
         generator.generateDocument();
+    }
+
+
+    public static String getDocument(String document_path)
+    {
+        String document = null;
+        try {
+            document = IOUtils.readFile(document_path);
+            
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
+        return document;
     }
 
 

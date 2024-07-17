@@ -16,9 +16,10 @@ public class SeekWrapper
     }
 
 
-    public void getJD()
+    public String getJD()
     {
         //Seek does not respond to jsoup default useragent
+        StringBuilder job_description = new StringBuilder();
         String useragent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
         try {
             Document doc = Jsoup.connect(job_url)
@@ -31,20 +32,23 @@ public class SeekWrapper
             
             // Print the content of the selected <div> element
             if (divElement != null) {
-                //System.out.println("Content of the <div> element:");
-                ////System.out.println(divElement.outerHtml()); // This prints the entire div with its content
-                //System.out.println(divElement.wholeText()); // This prints the entire div with its content
-                //System.exit(1);
+                //System.out.println(divElement.outerHtml()); 
+                //System.out.println(divElement.wholeText());
 
                 Elements elements = divElement.getAllElements();
-                for(Element e : elements)
+                for(Element e : elements) {
                     System.out.println(e.ownText());
-            } else {
+                    job_description.append(e.ownText());
+                }
+            }
+            else
+            {
                 System.out.println("The <div> element with data-automation='jobAdDetails' was not found.");
             } 
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
 
+        return job_description.toString();
+    }
 }
