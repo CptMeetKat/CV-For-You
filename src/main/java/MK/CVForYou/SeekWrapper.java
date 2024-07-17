@@ -61,8 +61,8 @@ public class SeekWrapper {
 
             Elements elements = divElement.getAllElements();
             for (Element e : elements) {
-                System.out.println(e.ownText());
-                job_description.append(e.ownText());
+                System.out.println(e.ownText() + "\n"); //Prevent text blocks from concatenating
+                job_description.append(e.ownText() + "\n");
             }
         } else {
             System.out.println("The <div> element with data-automation='jobAdDetails' was not found.");
