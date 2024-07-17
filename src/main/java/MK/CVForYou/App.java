@@ -17,9 +17,10 @@ public class App
         Option option_section = Option.builder("s").hasArgs()
                                       .longOpt("section")
                                       .desc("path to section definition files")
+                                      .required()
                                       .build();
         options.addOption(option_section);
-        options.addOption("d", "document", true, "path to the dynamic document");
+        options.addRequiredOption("d", "document", true, "path to the dynamic document");
         options.addOption("h", "help", false, "print this message");
         options.addOption("o", "output", true, "path of output");
 
@@ -34,6 +35,8 @@ public class App
                                       .build();
 
         OptionGroup compare_input = new OptionGroup();
+        compare_input.setRequired(true);
+
         compare_input.addOption(compare_from_file);
         compare_input.addOption(compare_from_seek);
 
