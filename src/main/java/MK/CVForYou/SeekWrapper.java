@@ -12,7 +12,6 @@ import org.jsoup.select.Elements;
 
 public class SeekWrapper {
     String job_url;
-    String job_description;
 
     public SeekWrapper(String job_url) {
         this.job_url = job_url;
@@ -32,46 +31,67 @@ public class SeekWrapper {
     }
 
     private String getJDFromCache() {
-        return null;
-        // String id = getSeekJobID();
+        String result = null;
+        String job_id = getSeekJobID();
+
+        Path directoryPath = Paths.get("./cache/" + job_id);
+        try {
+            String html = IOUtils.readFile(directoryPath.toString());
+            Document doc = Jsoup.parse(html);
+            result = extractJobSectionFromHTML(doc);
+            System.out.println("JD cache found!");
+        } catch (Exception e) {
+            System.out.println("JD cache not found");
+        }
+
+        return result;
+    }
+
+    private String extractJobSectionFromHTML(Document doc)
+    {
+        StringBuilder job_description = new StringBuilder();
+        Element divElement = doc.select("div[data-automation=jobAdDetails]").first();
+        // String innerHTML = divElement.html();
+        // System.out.println(doc);
+
+        // Print the content of the selected <div> element
+        if (divElement != null) {
+            // System.out.println(divElement.outerHtml());
+            // System.out.println(divElement.wholeText());
+
+            Elements elements = divElement.getAllElements();
+            for (Element e : elements) {
+                System.out.println(e.ownText());
+                job_description.append(e.ownText());
+            }
+        } else {
+            System.out.println("The <div> element with data-automation='jobAdDetails' was not found.");
+        }
+        return job_description.toString();
     }
 
     private String getJDFromSeek() {
         // Seek does not respond to jsoup default useragent
-        StringBuilder job_description = new StringBuilder();
+        String job_description = null;
         String useragent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
         try {
             Document doc = Jsoup.connect(job_url)
                     .userAgent(useragent)
                     .get();
 
-            Path directoryPath = Paths.get("./cache/");
+            Path directoryPath = Paths.get("./cache/"); //WRITE TO CACHE
             if (!Files.exists(directoryPath)) {
                 Files.createDirectories(directoryPath);
             }
             IOUtils.writeToFile(doc.toString(), directoryPath + getSeekJobID());
 
-            Element divElement = doc.select("div[data-automation=jobAdDetails]").first();
-            // String innerHTML = divElement.html();
-            // System.out.println(doc);
 
-            // Print the content of the selected <div> element
-            if (divElement != null) {
-                // System.out.println(divElement.outerHtml());
-                // System.out.println(divElement.wholeText());
+            job_description = extractJobSectionFromHTML(doc);
 
-                Elements elements = divElement.getAllElements();
-                for (Element e : elements) {
-                    System.out.println(e.ownText());
-                    job_description.append(e.ownText());
-                }
-            } else {
-                System.out.println("The <div> element with data-automation='jobAdDetails' was not found.");
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return job_description.toString();
+        return job_description;
     }
 }
