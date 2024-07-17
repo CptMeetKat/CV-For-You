@@ -40,7 +40,6 @@ public class DocumentGenerator
             document = document.replace(section_marker, section.compose());
         }
 
-        System.out.println("\n\n\n\n" + document);
         String out_path = "generated_document.html";
         boolean success = IOUtils.writeToFile(document, out_path);
         if(success)
