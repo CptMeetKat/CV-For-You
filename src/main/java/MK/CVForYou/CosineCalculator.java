@@ -90,7 +90,8 @@ public class CosineCalculator
     public static HashMap<String,Integer> wordsToMap(String text)
     {
         String formatted_text = text.replaceAll("\n", " ");
-        formatted_text = removePunctuation(formatted_text);
+        formatted_text = removePunctuation(formatted_text).toLowerCase();
+        
 
         String[] atoms = formatted_text.split(" "); 
         HashMap<String, Integer> map = new HashMap<String, Integer>();
