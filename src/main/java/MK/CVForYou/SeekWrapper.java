@@ -52,14 +52,14 @@ public class SeekWrapper {
         StringBuilder job_description = new StringBuilder();
         Element divElement = doc.select("div[data-automation=jobAdDetails]").first();
 
-        if (divElement != null) {
-
+        if (divElement != null)
+        {
             Elements elements = divElement.getAllElements();
-            for (Element e : elements) {
-                System.out.println(e.ownText() + "\n"); //Prevent text blocks from concatenating
+            for (Element e : elements)
                 job_description.append(e.ownText() + "\n");
-            }
-        } else {
+        }
+        else 
+        {
             System.out.println("The <div> element with data-automation='jobAdDetails' was not found.");
         }
         return job_description.toString();
