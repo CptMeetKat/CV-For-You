@@ -59,8 +59,7 @@ public class App
                 String compare_document_path = cmd.getOptionValue("c");
                 document = getDocument(compare_document_path);
             }
-            if (cmd.hasOption("cs"))
-            {
+            if (cmd.hasOption("cs")) {
                 String seek_url = cmd.getOptionValue("cs");
                 document = new SeekWrapper(seek_url).getJD();
             }
@@ -69,11 +68,9 @@ public class App
                 section_definition_paths = cmd.getOptionValues("s");
             }
 
-            if(cmd.hasOption("o"))
-            {
+            if(cmd.hasOption("o")) {
                 generated_document_path = cmd.getOptionValue("o");
             }
-
 
         } catch (ParseException e) {
             System.out.println(e.getMessage());
