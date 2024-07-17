@@ -7,7 +7,7 @@ public class CosineCalculator
 {
     public static double calculate(String textA, String textB)
     {
-        HashMap<String, Integer> word_table1 = wordsToMap(textA);
+        HashMap<String, Integer> word_table1 = wordsToMap(textA); //TODO: This could be cached
         HashMap<String, Integer> word_table2 = wordsToMap(textB);
 
         HashSet<String> keys = new HashSet<String>();
@@ -91,7 +91,7 @@ public class CosineCalculator
     {
         String formatted_text = text.replaceAll("\n", " ");
         formatted_text = removePunctuation(formatted_text).toLowerCase();
-        
+
 
         String[] atoms = formatted_text.split(" "); 
         HashMap<String, Integer> map = new HashMap<String, Integer>();
