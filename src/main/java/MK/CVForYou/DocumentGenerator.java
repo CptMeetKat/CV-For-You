@@ -9,13 +9,16 @@ public class DocumentGenerator
     String document;
     ArrayList<DynamicSection> sections = new ArrayList<DynamicSection>();
     String compare_text;
-
+    String output_directory = "";
 
     public DocumentGenerator(String document_path, String[] section_file_paths,
-                             String compare_text)
+                             String compare_text, String output_directory )
     {
+        this.compare_text = compare_text;
+        if(output_directory != null)
+            this.output_directory = output_directory;
+
         try {
-            this.compare_text = compare_text;
             document = IOUtils.readFile(document_path);
             for(String path : section_file_paths)
                sections.add(new DynamicSection(path));
@@ -40,7 +43,7 @@ public class DocumentGenerator
             document = document.replace(section_marker, section.compose());
         }
 
-        String out_path = "generated_document.html";
+        String out_path = output_directory + "generated_document.html"; //TODO: / or no / ending case
         boolean success = IOUtils.writeToFile(document, out_path);
         if(success)
             System.out.printf("Document has been generated at: %s\n", out_path);

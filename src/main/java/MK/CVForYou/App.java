@@ -10,6 +10,7 @@ public class App
         String input_document = null; 
         String[] section_definition_paths = null;
         String document = null;
+        String generated_document_path = null;
 
 
         Options options = new Options();
@@ -23,6 +24,7 @@ public class App
         options.addOption("d", "document", true, "path to the dynamic document");
         options.addOption("c", "compare", true, "file to compare keywords to");
         options.addOption("h", "help", false, "print this message");
+        options.addOption("o", "output", true, "path of output");
 
         options.addOption("cs", "compare-seek", true, "pull JD from seek to compare");
 
@@ -61,6 +63,11 @@ public class App
                 //System.out.println("value: " + String.join(", ", value));
             }
 
+            if(cmd.hasOption("o"))
+            {
+                generated_document_path = cmd.getOptionValue("o");
+            }
+
 
         } catch (ParseException e) {
             System.out.println(e.getMessage());
@@ -71,7 +78,9 @@ public class App
 
         DocumentGenerator generator = new DocumentGenerator(input_document,
                                                             section_definition_paths,
-                                                            document);
+                                                            document,
+                                                            generated_document_path
+                                                            );
         generator.generateDocument();
     }
 
