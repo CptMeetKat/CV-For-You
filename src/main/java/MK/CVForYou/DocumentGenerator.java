@@ -34,7 +34,7 @@ public class DocumentGenerator
         {
             section.sort(sorter);
 
-            System.out.println(section.getSectionName());
+            //System.out.println(section.getSectionName());
             String section_marker = "{$" + section.getSectionName() + "}";
 
             document = document.replace(section_marker, section.compose());
