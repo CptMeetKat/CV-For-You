@@ -24,7 +24,7 @@ public class App
         options.addOption("c", "compare", true, "file to compare keywords to");
         options.addOption("h", "help", false, "print this message");
 
-        options.addOption("cs", "EXPERIMENT", true, "try experimental feature");
+        options.addOption("cs", "compare-seek", true, "pull JD from seek to compare");
 
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
