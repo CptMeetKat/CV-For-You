@@ -9,17 +9,19 @@ public class App
     {
 		try {
 			ArgParser ap = new ArgParser(args);
-            String job_description = getJobDescription(ap);
+            new App(ap);
+		} catch (ParseException e) {}
+    }
 
-            DocumentGenerator generator = new DocumentGenerator(ap.input_document,
-                    ap.getSections(),
-                    job_description,
-                    ap.getOutput());
-            generator.generateDocument();
+    public App(ArgParser ap)
+    {
+        String job_description = getJobDescription(ap);
 
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+        DocumentGenerator generator = new DocumentGenerator(ap.input_document,
+                ap.getSections(),
+                job_description,
+                ap.getOutput());
+        generator.generateDocument();
     }
 
     public static String getJobDescription(ArgParser ap)
