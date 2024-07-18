@@ -10,16 +10,15 @@ public class App
 
         if(ap.getRunType() == 1)
         {
-            String document;
+            String job_description;
             if(ap.document_source.equals("seek"))
-                document = new SeekWrapper(ap.seek_url).getJD();
+                job_description = new SeekWrapper(ap.seek_url).getJD();
             else
-                document = getDocument(ap.compare_document_path);
-
+                job_description = getDocument(ap.compare_document_path);
 
             DocumentGenerator generator = new DocumentGenerator(ap.input_document,
                     ap.section_definition_paths,
-                    document,
+                    job_description,
                     ap.generated_document_path);
             generator.generateDocument();
         }
