@@ -1,16 +1,14 @@
 package MK.CVForYou;
 
 import java.io.IOException;
-import org.apache.commons.cli.ParseException;
 
 public class App 
 {
     public static void main( String[] args )
     {
-		try {
-			ArgParser ap = new ArgParser(args);
+        ArgParser ap = new ArgParser();
+        if ( ap.parseArgs(args) )
             new App(ap);
-		} catch (ParseException e) {}
     }
 
     public App(ArgParser ap)

@@ -14,11 +14,9 @@ public class ArgParser
     String compare_document_path;
     String seek_url; 
 
-    public ArgParser(String[] args)
-        throws ParseException
+    public ArgParser()
     {
         options = getDefaultOptions();
-        parseArgs(args);
     }
 
     public Options getOptions() {
@@ -69,9 +67,9 @@ public class ArgParser
         return options;
     }
 
-    public void parseArgs(String[] args)
-        throws ParseException
+    public boolean parseArgs(String[] args)
     {
+        boolean success = true;
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
 
@@ -109,7 +107,8 @@ public class ArgParser
             System.out.println(e.getMessage());
             formatter.printHelp("java App -d <document_path> -c <compare_path> -s <section_paths>",
                                     options);
-            throw e;
+            success = false;
         }
+        return success;
     }
 }
