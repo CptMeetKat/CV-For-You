@@ -47,8 +47,6 @@ public class DocumentGenerator
         boolean success = IOUtils.writeToFile(document, out_path);
         if(success)
             System.out.printf("Document has been generated at: %s\n", out_path);
-
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 
 }
