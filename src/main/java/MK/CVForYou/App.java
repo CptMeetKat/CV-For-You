@@ -29,10 +29,12 @@ public class App
     public static String getDocument(String document_path)
     {
         String document = null;
-        try {
+        try
+        {
             document = IOUtils.readFile(document_path);
-            
-        } catch (IOException e) {
+        }
+        catch (IOException e) 
+        {
             System.out.println(e.getMessage());
             System.exit(1);
         }
