@@ -6,11 +6,11 @@ public class ArgParser
 {
     Options options;
 
-    public String input_document = null; 
-    public String[] section_definition_paths = null;
-    private String output_path = null;
+    public String input_document; 
+    public String[] section_definition_paths;
+    private String output_path;
 
-    public String document_source = null;
+    public String document_source;
     String compare_document_path;
     String seek_url; 
 
