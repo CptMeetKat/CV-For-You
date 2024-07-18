@@ -1,15 +1,14 @@
 package MK.CVForYou;
 
 import java.io.IOException;
+import org.apache.commons.cli.ParseException;
 
 public class App 
 {
     public static void main( String[] args )
     {
-        ArgParser ap = new ArgParser(args);
-
-        if(ap.getRunType() == 1)
-        {
+		try {
+			ArgParser ap = new ArgParser(args);
             String job_description = getJobDescription(ap);
 
             DocumentGenerator generator = new DocumentGenerator(ap.input_document,
@@ -17,7 +16,10 @@ public class App
                     job_description,
                     ap.getOutput());
             generator.generateDocument();
-        }
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
     }
 
     public static String getJobDescription(ArgParser ap)

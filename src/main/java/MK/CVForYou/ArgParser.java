@@ -14,9 +14,8 @@ public class ArgParser
     String compare_document_path;
     String seek_url; 
 
-    int runType = 0;
-
     public ArgParser(String[] args)
+        throws ParseException
     {
         options = getDefaultOptions();
         parseArgs(args);
@@ -71,6 +70,7 @@ public class ArgParser
     }
 
     public void parseArgs(String[] args)
+        throws ParseException
     {
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
@@ -104,18 +104,12 @@ public class ArgParser
             if(cmd.hasOption("o")) {
                 output_path = cmd.getOptionValue("o");
             }
-            runType = 1;
 
         } catch (ParseException e) {
-            runType = -1;
             System.out.println(e.getMessage());
             formatter.printHelp("java App -d <document_path> -c <compare_path> -s <section_paths>",
                                     options);
+            throw e;
         }
-    }
-
-    public int getRunType()
-    {
-        return runType;
     }
 }
