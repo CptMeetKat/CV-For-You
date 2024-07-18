@@ -5,13 +5,8 @@ import org.apache.commons.cli.*;
 
 public class App 
 {
-    public static void main( String[] args )
+    public static Options getArgOptions()
     {
-        String input_document = null; 
-        String[] section_definition_paths = null;
-        String document = null;
-        String generated_document_path = null;
-
         Options options = new Options();
 
         Option option_section = Option.builder("s").hasArgs()
@@ -41,6 +36,19 @@ public class App
         compare_input.addOption(compare_from_seek);
 
         options.addOptionGroup(compare_input);
+
+        return options;
+    }
+
+
+    public static void main( String[] args )
+    {
+        String input_document = null; 
+        String[] section_definition_paths = null;
+        String document = null;
+        String generated_document_path = null;
+        
+        Options options = getArgOptions();
 
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
@@ -74,19 +82,17 @@ public class App
             if(cmd.hasOption("o")) {
                 generated_document_path = cmd.getOptionValue("o");
             }
+            DocumentGenerator generator = new DocumentGenerator(input_document,
+                    section_definition_paths,
+                    document,
+                    generated_document_path);
+            generator.generateDocument();
 
         } catch (ParseException e) {
             System.out.println(e.getMessage());
             formatter.printHelp("java App -d <document_path> -c <compare_path> -s <section_paths>",
                                     options);
-            System.exit(1);
         }
-
-        DocumentGenerator generator = new DocumentGenerator(input_document,
-                                                            section_definition_paths,
-                                                            document,
-                                                            generated_document_path);
-        generator.generateDocument();
     }
 
 
