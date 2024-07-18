@@ -1,5 +1,7 @@
 package MK.CVForYou;
 
+import java.io.IOException;
+
 public class App 
 {
     public static void main( String[] args )
@@ -7,24 +9,33 @@ public class App
         ArgParser ap = new ArgParser();
         ap.parseArgs(args);
 
-        String input_document = ap.input_document; 
-        String[] section_definition_paths = ap.section_definition_paths;
-        String document = ap.document; 
-        String generated_document_path = ap.generated_document_path;
-
-
-        int run = ap.getRunType();
-        if(run == 1)
+        if(ap.getRunType() == 1)
         {
-            DocumentGenerator generator = new DocumentGenerator(input_document,
-                    section_definition_paths,
+            String document;
+            if(ap.document_source.equals("seek"))
+                document = new SeekWrapper(ap.seek_url).getJD();
+            else
+                document = getDocument(ap.compare_document_path);
+
+
+            DocumentGenerator generator = new DocumentGenerator(ap.input_document,
+                    ap.section_definition_paths,
                     document,
-                    generated_document_path);
+                    ap.generated_document_path);
             generator.generateDocument();
         }
     }
 
-
-
-
+    public static String getDocument(String document_path)
+    {
+        String document = null;
+        try {
+            document = IOUtils.readFile(document_path);
+            
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
+        return document;
+    }
 }

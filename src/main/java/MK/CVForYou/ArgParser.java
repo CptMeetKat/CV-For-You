@@ -1,7 +1,5 @@
 package MK.CVForYou;
 
-import java.io.IOException;
-
 import org.apache.commons.cli.*;
 
 public class ArgParser
@@ -10,8 +8,12 @@ public class ArgParser
 
     public String input_document = null; 
     public String[] section_definition_paths = null;
-    public String document = null;
     public String generated_document_path = null;
+
+    public String document_source = null;
+    String compare_document_path;
+    String seek_url; 
+
     int runType = 0;
 
     public ArgParser()
@@ -79,12 +81,12 @@ public class ArgParser
             }
 
             if (cmd.hasOption("c")) {
-                String compare_document_path = cmd.getOptionValue("c");
-                document = getDocument(compare_document_path); //TODO: Move this out
+                compare_document_path = cmd.getOptionValue("c");
+                document_source = "file";
             }
             if (cmd.hasOption("cs")) {
-                String seek_url = cmd.getOptionValue("cs");
-                document = new SeekWrapper(seek_url).getJD(); //TODO: Move this out
+                seek_url = cmd.getOptionValue("cs");
+                document_source = "seek";
             }
 
             if (cmd.hasOption("s")) {
@@ -107,19 +109,5 @@ public class ArgParser
     public int getRunType()
     {
         return runType;
-    }
-
-
-    public static String getDocument(String document_path)
-    {
-        String document = null;
-        try {
-            document = IOUtils.readFile(document_path);
-            
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            System.exit(1);
-        }
-        return document;
     }
 }
