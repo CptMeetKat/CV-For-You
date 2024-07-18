@@ -10,18 +10,24 @@ public class App
 
         if(ap.getRunType() == 1)
         {
-            String job_description;
+            String job_description = getJobDescription(ap);
+
+            DocumentGenerator generator = new DocumentGenerator(ap.input_document,
+                    ap.getSections(),
+                    job_description,
+                    ap.getOutput());
+            generator.generateDocument();
+        }
+    }
+
+    public static String getJobDescription(ArgParser ap)
+    {
+        String job_description;
             if(ap.document_source.equals("seek"))
                 job_description = new SeekWrapper(ap.seek_url).getJD();
             else
                 job_description = getDocument(ap.compare_document_path);
-
-            DocumentGenerator generator = new DocumentGenerator(ap.input_document,
-                    ap.section_definition_paths,
-                    job_description,
-                    ap.generated_document_path);
-            generator.generateDocument();
-        }
+        return job_description;
     }
 
     public static String getDocument(String document_path)

@@ -8,7 +8,7 @@ public class ArgParser
 
     public String input_document = null; 
     public String[] section_definition_paths = null;
-    public String generated_document_path = null;
+    private String output_path = null;
 
     public String document_source = null;
     String compare_document_path;
@@ -22,9 +22,16 @@ public class ArgParser
         parseArgs(args);
     }
 
-    public Options getOptions()
-    {
+    public Options getOptions() {
         return options;
+    }
+
+    public String getOutput() {
+        return output_path;
+    }
+
+    public String[] getSections() {
+        return section_definition_paths;
     }
 
 
@@ -95,7 +102,7 @@ public class ArgParser
             }
 
             if(cmd.hasOption("o")) {
-                generated_document_path = cmd.getOptionValue("o");
+                output_path = cmd.getOptionValue("o");
             }
             runType = 1;
 
