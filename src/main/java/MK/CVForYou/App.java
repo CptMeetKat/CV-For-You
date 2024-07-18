@@ -6,8 +6,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
+        ArgParser ap = new ArgParser(args);
 
         if(ap.getRunType() == 1)
         {

@@ -16,9 +16,10 @@ public class ArgParser
 
     int runType = 0;
 
-    public ArgParser()
+    public ArgParser(String[] args)
     {
         options = getDefaultOptions();
+        parseArgs(args);
     }
 
     public Options getOptions()
