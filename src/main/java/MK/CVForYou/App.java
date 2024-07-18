@@ -85,8 +85,7 @@ public class App
         DocumentGenerator generator = new DocumentGenerator(input_document,
                                                             section_definition_paths,
                                                             document,
-                                                            generated_document_path
-                                                            );
+                                                            generated_document_path);
         generator.generateDocument();
     }
 
