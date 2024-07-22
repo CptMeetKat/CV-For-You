@@ -16,7 +16,7 @@ public class SeekSavedJobs
         secret = getBearerTokenFromFile("auth");
     }
 
-    public void doThing() throws IOException, InterruptedException
+    public void getSavedJobs() throws IOException, InterruptedException
     {
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create("https://www.seek.com.au/graphql"))
@@ -44,5 +44,7 @@ public class SeekSavedJobs
 
         return token;
     }
+
+    
 
 }
