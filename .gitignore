@@ -8,3 +8,4 @@ run_prod2.sh
 run_sample2.sh
 /cache
 auth
+all_saved.json
