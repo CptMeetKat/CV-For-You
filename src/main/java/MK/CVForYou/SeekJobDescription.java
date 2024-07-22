@@ -39,9 +39,9 @@ public class SeekJobDescription {
             String html = IOUtils.readFile(directoryPath.toString());
             Document doc = Jsoup.parse(html);
             result = extractJobSectionFromHTML(doc);
-            System.out.println("JD cache found!");
+            System.out.println("JD cache found: " + job_id + "");
         } catch (Exception e) {
-            System.out.println("JD cache not found");
+            System.out.println("JD cache not found: " + job_id);
         }
 
         return result;
@@ -70,6 +70,7 @@ public class SeekJobDescription {
         String job_description = null;
         String useragent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
         try {
+            System.out.println("Obtaining job description from Seek" + job_url);
             Document doc = Jsoup.connect(job_url)
                     .userAgent(useragent)
                     .get();
