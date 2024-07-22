@@ -2,6 +2,7 @@ package MK.CVForYou;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class App 
 {
@@ -14,29 +15,29 @@ public class App
 
     public App(ArgParser ap)
     {
-        ArrayList<String> job_descriptions = getJobDescriptions(ap);
+        HashMap<String, String> job_descriptions = getJobDescriptions(ap);
 
-        for (String jd : job_descriptions) 
+        for (String job_id: job_descriptions.keySet()) 
         {
             DocumentGenerator generator = new DocumentGenerator(ap.input_document,
                                     ap.getSections(),
                                     ap.getOutput());
-            generator.generateDocument(jd);
+            generator.generateDocument(job_descriptions.get(job_id), job_id);
         }
 
     }
 
-    public static ArrayList<String> getJobDescriptions(ArgParser ap)
+    public static HashMap<String, String> getJobDescriptions(ArgParser ap)
     {
-        ArrayList<String> job_descriptions = new ArrayList<String>();
+        HashMap<String, String> job_descriptions = new HashMap<String, String>();
 
         if(ap.document_source.equals("seek"))
         {
-            job_descriptions.add( new SeekJobDescription(ap.seek_url).getJD() );
+            job_descriptions.put(ap.seek_url, new SeekJobDescription(ap.seek_url).getJD() );
         }
         else if(ap.document_source.equals("file"))
         {
-            job_descriptions.add( getDocument(ap.compare_document_path)   );
+            job_descriptions.put(ap.seek_url, getDocument(ap.compare_document_path)   );
         }
         else if(ap.document_source.equals("seek_saved"))
         {
@@ -45,24 +46,13 @@ public class App
 
             for (String url : job_urls)
             {
-                job_descriptions.add( new SeekJobDescription(url).getJD() );
-                sleep(); //Artificial delay to prevent flagging Seek
+                String id = url.substring(url.lastIndexOf("/")+1);
+                job_descriptions.put(id, new SeekJobDescription(url).getJD() );
             }
-            System.exit(0);
         }
 
         return job_descriptions;
     }
-
-    public static void sleep()
-    {
-        try {
-            Thread.sleep(5000); // Sleep for 3000 milliseconds (3 seconds)
-        } catch (InterruptedException e) {
-            System.out.println("Thread was interrupted");
-        }
-    }
-
 
     public static String getDocument(String document_path)
     {

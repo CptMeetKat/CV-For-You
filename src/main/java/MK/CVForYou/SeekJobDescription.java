@@ -25,9 +25,21 @@ public class SeekJobDescription {
     public String getJD() {
         String job_description = getJDFromCache();
         if (job_description == null)
+        {
             job_description = getJDFromSeek();
+            sleep(); //Avoid flagging Seek systems
+        }
 
         return job_description;
+    }
+
+    private static void sleep()
+    {
+        try {
+            Thread.sleep(1000); // Sleep for 3000 milliseconds (3 seconds)
+        } catch (InterruptedException e) {
+            System.out.println("Thread was interrupted");
+        }
     }
 
     private String getJDFromCache() {
