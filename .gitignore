@@ -7,3 +7,4 @@ run_prod1.sh
 run_prod2.sh
 run_sample2.sh
 /cache
+auth
