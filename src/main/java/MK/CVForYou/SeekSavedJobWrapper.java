@@ -6,18 +6,60 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class SeekSavedJobs
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+public class SeekSavedJobWrapper
 {
     String secret = "";
     String timezone;
 
-    public SeekSavedJobs()
+    public SeekSavedJobWrapper()
     {
         secret = getBearerTokenFromFile("auth");
     }
 
-    public ArrayList<String> getSavedJobs() throws IOException, InterruptedException
+    private String buildJobUrl(String id)
+    {
+        return "https://www.seek.com.au/job/" + id;
+    }
+
+    public ArrayList<String> getSavedJobURLs()
+    {
+        ArrayList<String> job_urls = new ArrayList<String>();
+
+		try {
+			String jobs_data = getSavedJobsAsJson();
+            deserializeSavedJobs(new JSONObject(jobs_data));
+
+            //System.out.println(  buildJobUrl(    )  ) ;
+
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+		}
+        return job_urls;
+    }
+    
+
+    public ArrayList<SeekSavedJob> deserializeSavedJobs(JSONObject object)
+    {
+        ArrayList<SeekSavedJob> arr = new ArrayList<>();
+
+        JSONArray saved_jobs = (JSONArray) object.query("/data/viewer/savedJobs/edges");
+        Iterator<Object> job_itr = saved_jobs.iterator();
+        while(job_itr.hasNext())
+        {
+            JSONObject job = (JSONObject)job_itr.next();
+
+            SeekSavedJob deserialised = new SeekSavedJob(job.getJSONObject("node"));
+        }
+
+        return new ArrayList<SeekSavedJob>(); 
+    }
+
+    public String getSavedJobsAsJson() throws IOException, InterruptedException
     {
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create("https://www.seek.com.au/graphql"))
@@ -30,10 +72,9 @@ public class SeekSavedJobs
 
 
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.body());
+            System.out.println(response.body().substring(0, 30));
 
-            return new ArrayList<String>(); //TODO: STUB!!
-            //return response.body();
+            return response.body();
     }
 
     private String getBearerTokenFromFile(String file)
@@ -48,7 +89,5 @@ public class SeekSavedJobs
 
         return token;
     }
-
-    
 
 }

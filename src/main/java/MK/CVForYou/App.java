@@ -42,13 +42,8 @@ public class App
             }
             else if(ap.document_source.equals("seek_saved"))
             {
-                SeekSavedJobs ssj = new SeekSavedJobs();
-                try {
-                    job_descriptions = ssj.getSavedJobs();
-                } catch (IOException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-
+                SeekSavedJobWrapper ssj = new SeekSavedJobWrapper();
+                job_descriptions = ssj.getSavedJobURLs();
                 System.exit(0);
             }
 
