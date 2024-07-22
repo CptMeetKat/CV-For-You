@@ -1,6 +1,7 @@
 package MK.CVForYou;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class App 
 {
@@ -13,23 +14,45 @@ public class App
 
     public App(ArgParser ap)
     {
-        String job_description = getJobDescription(ap);
+        ArrayList<String> job_descriptions = getJobDescriptions(ap);
 
-        DocumentGenerator generator = new DocumentGenerator(ap.input_document,
-                ap.getSections(),
-                job_description,
-                ap.getOutput());
-        generator.generateDocument();
+        for (String jd : job_descriptions) 
+        {
+            DocumentGenerator generator = new DocumentGenerator(ap.input_document,
+                                    ap.getSections(),
+                                    ap.getOutput());
+            generator.generateDocument(jd);
+        }
+
     }
 
-    public static String getJobDescription(ArgParser ap)
+    public static ArrayList<String> getJobDescriptions(ArgParser ap)
     {
-        String job_description;
+        ArrayList<String> job_descriptions = null;
+
             if(ap.document_source.equals("seek"))
-                job_description = new SeekJobDescription(ap.seek_url).getJD();
-            else
-                job_description = getDocument(ap.compare_document_path);
-        return job_description;
+            {
+                job_descriptions = new ArrayList<String>();
+                job_descriptions.add( new SeekJobDescription(ap.seek_url).getJD() );
+            }
+            else if(ap.document_source.equals("file"))
+            {
+                job_descriptions = new ArrayList<String>();
+                job_descriptions.add( getDocument(ap.compare_document_path)   );
+            }
+            else if(ap.document_source.equals("seek_saved"))
+            {
+                SeekSavedJobs ssj = new SeekSavedJobs();
+                try {
+                    job_descriptions = ssj.getSavedJobs();
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                System.exit(0);
+            }
+
+        return job_descriptions;
     }
 
     public static String getDocument(String document_path)

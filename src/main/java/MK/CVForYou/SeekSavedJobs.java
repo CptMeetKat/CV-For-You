@@ -5,6 +5,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 
 public class SeekSavedJobs
 {
@@ -16,7 +17,7 @@ public class SeekSavedJobs
         secret = getBearerTokenFromFile("auth");
     }
 
-    public String getSavedJobs() throws IOException, InterruptedException
+    public ArrayList<String> getSavedJobs() throws IOException, InterruptedException
     {
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create("https://www.seek.com.au/graphql"))
@@ -31,7 +32,8 @@ public class SeekSavedJobs
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
             System.out.println(response.body());
 
-            return response.body();
+            return new ArrayList<String>(); //TODO: STUB!!
+            //return response.body();
     }
 
     private String getBearerTokenFromFile(String file)

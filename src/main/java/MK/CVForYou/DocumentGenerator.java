@@ -6,32 +6,36 @@ import java.util.Comparator;
 
 public class DocumentGenerator
 {
-    String document;
+    String template;
     ArrayList<DynamicSection> sections = new ArrayList<DynamicSection>();
-    String compare_text;
     String output_directory = "";
 
-    public DocumentGenerator(String document_path, String[] section_file_paths,
-                             String compare_text, String output_directory )
+    public DocumentGenerator(String template_path, String[] component_paths,
+                             String output_directory )
     {
-        this.compare_text = compare_text;
+        //this.model_text = model_text;
         if(output_directory != null)
             this.output_directory = output_directory;
 
         try {
-            document = IOUtils.readFile(document_path);
-            for(String path : section_file_paths)
+            template = IOUtils.readFile(template_path);
+            for(String path : component_paths)
                sections.add(new DynamicSection(path));
         }
         catch(IOException e) {
             System.out.println(e.getMessage());
         }
-
     }
 
-    public void generateDocument()
+    
+    public void generateDocument(String model_text)
     {
-        Comparator<DynamicHTMLElement> sorter = new CosineSimilarityComparator(compare_text);
+        generateDocument(model_text, "generated_document.html");
+    }
+
+    public void generateDocument(String model_text, String output_name)
+    {
+        Comparator<DynamicHTMLElement> sorter = new CosineSimilarityComparator(model_text);
 
         for(DynamicSection section : sections)
         {
@@ -40,11 +44,11 @@ public class DocumentGenerator
             //System.out.println(section.getSectionName());
             String section_marker = "{$" + section.getSectionName() + "}";
 
-            document = document.replace(section_marker, section.compose());
+            template = template.replace(section_marker, section.compose());
         }
 
-        String out_path = output_directory + "generated_document.html"; //TODO: / or no / ending case
-        boolean success = IOUtils.writeToFile(document, out_path);
+        String out_path = output_directory + output_name; //TODO: / or no / ending case
+        boolean success = IOUtils.writeToFile(template, out_path);
         if(success)
             System.out.printf("Document has been generated at: %s\n", out_path);
     }
