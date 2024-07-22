@@ -26,7 +26,7 @@ public class App
     {
         String job_description;
             if(ap.document_source.equals("seek"))
-                job_description = new SeekWrapper(ap.seek_url).getJD();
+                job_description = new SeekJobDescription(ap.seek_url).getJD();
             else
                 job_description = getDocument(ap.compare_document_path);
         return job_description;

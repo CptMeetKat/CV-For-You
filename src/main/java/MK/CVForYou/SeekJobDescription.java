@@ -10,10 +10,10 @@ import java.nio.file.Paths;
 
 import org.jsoup.select.Elements;
 
-public class SeekWrapper {
+public class SeekJobDescription {
     String job_url;
 
-    public SeekWrapper(String job_url) {
+    public SeekJobDescription(String job_url) {
         this.job_url = job_url;
     }
 
@@ -90,3 +90,4 @@ public class SeekWrapper {
         return job_description;
     }
 }
+
