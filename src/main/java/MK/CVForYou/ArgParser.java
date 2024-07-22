@@ -56,11 +56,17 @@ public class ArgParser
                                       .desc("pull JD from seek to compare")
                                       .build();
 
+        Option compare_from_all_seek = Option.builder("ca")
+                                      .longOpt("compare-seek-all")
+                                      .desc("compare from your seek saved job")
+                                      .build();
+
         OptionGroup compare_input = new OptionGroup();
         compare_input.setRequired(true);
 
         compare_input.addOption(compare_from_file);
         compare_input.addOption(compare_from_seek);
+        compare_input.addOption(compare_from_all_seek);
 
         options.addOptionGroup(compare_input);
 
