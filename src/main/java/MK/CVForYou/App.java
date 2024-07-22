@@ -30,22 +30,22 @@ public class App
     {
         ArrayList<String> job_descriptions = null;
 
-            if(ap.document_source.equals("seek"))
-            {
-                job_descriptions = new ArrayList<String>();
-                job_descriptions.add( new SeekJobDescription(ap.seek_url).getJD() );
-            }
-            else if(ap.document_source.equals("file"))
-            {
-                job_descriptions = new ArrayList<String>();
-                job_descriptions.add( getDocument(ap.compare_document_path)   );
-            }
-            else if(ap.document_source.equals("seek_saved"))
-            {
-                SeekSavedJobWrapper ssj = new SeekSavedJobWrapper();
-                job_descriptions = ssj.getSavedJobURLs();
-                System.exit(0);
-            }
+        if(ap.document_source.equals("seek"))
+        {
+            job_descriptions = new ArrayList<String>();
+            job_descriptions.add( new SeekJobDescription(ap.seek_url).getJD() );
+        }
+        else if(ap.document_source.equals("file"))
+        {
+            job_descriptions = new ArrayList<String>();
+            job_descriptions.add( getDocument(ap.compare_document_path)   );
+        }
+        else if(ap.document_source.equals("seek_saved"))
+        {
+            SeekSavedJobWrapper ssj = new SeekSavedJobWrapper();
+            job_descriptions = ssj.getSavedJobURLs();
+            System.exit(0);
+        }
 
         return job_descriptions;
     }
