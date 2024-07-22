@@ -32,10 +32,12 @@ public class SeekSavedJobWrapper
 
 		try {
 			String jobs_data = getSavedJobsAsJson();
-            deserializeSavedJobs(new JSONObject(jobs_data));
-
-            //System.out.println(  buildJobUrl(    )  ) ;
-
+            ArrayList<SeekSavedJob> saved_jobs = deserializeSavedJobs(new JSONObject(jobs_data));
+            for ( SeekSavedJob job : saved_jobs)
+            {
+                job_urls.add( buildJobUrl(job.getID()));
+                System.out.println( buildJobUrl(job.getID()));
+            }
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -53,10 +55,10 @@ public class SeekSavedJobWrapper
         {
             JSONObject job = (JSONObject)job_itr.next();
 
-            SeekSavedJob deserialised = new SeekSavedJob(job.getJSONObject("node"));
+            arr.add(new SeekSavedJob(job.getJSONObject("node")));
         }
 
-        return new ArrayList<SeekSavedJob>(); 
+        return arr; 
     }
 
     public String getSavedJobsAsJson() throws IOException, InterruptedException

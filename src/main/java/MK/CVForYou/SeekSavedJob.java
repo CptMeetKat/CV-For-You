@@ -28,5 +28,11 @@ public class SeekSavedJob
     {
 
     }
+
+
+    public String getID()
+    {
+        return job_id;
+    }
 }
 
