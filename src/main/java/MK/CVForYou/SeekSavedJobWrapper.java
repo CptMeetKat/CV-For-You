@@ -36,7 +36,6 @@ public class SeekSavedJobWrapper
             for ( SeekSavedJob job : saved_jobs)
             {
                 job_urls.add( buildJobUrl(job.getID()));
-                System.out.println( buildJobUrl(job.getID()));
             }
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();

@@ -38,10 +38,11 @@ public class SeekJobDescription {
         try {
             String html = IOUtils.readFile(directoryPath.toString());
             Document doc = Jsoup.parse(html);
+            System.out.println("Extract job from HTML: " + job_id + "");
             result = extractJobSectionFromHTML(doc);
             System.out.println("JD cache found: " + job_id + "");
         } catch (Exception e) {
-            System.out.println("JD cache not found: " + job_id);
+            System.out.println("JD cache not found: ");
         }
 
         return result;
