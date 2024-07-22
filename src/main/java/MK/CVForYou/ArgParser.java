@@ -100,6 +100,9 @@ public class ArgParser
                 seek_url = cmd.getOptionValue("cs");
                 document_source = "seek";
             }
+            if (cmd.hasOption("ca")) {
+                document_source = "seek_saved";
+            }
 
             if (cmd.hasOption("s")) {
                 section_definition_paths = cmd.getOptionValues("s");
