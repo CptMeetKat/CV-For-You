@@ -22,12 +22,12 @@ public class SeekSavedJobWrapper
         secret = getBearerTokenFromFile("auth");
     }
 
-    private String buildJobUrl(String id)
+    private static String buildJobUrl(String id)
     {
         return "https://www.seek.com.au/job/" + id;
     }
 
-    private void checkResponseForError(JSONObject jobs_data)
+    public void checkResponseForError(JSONObject jobs_data)
         throws BadAuthenticationException
     {
         try {
@@ -43,7 +43,6 @@ public class SeekSavedJobWrapper
 
 		try
         {
-
 			JSONObject jobs_data = getSavedJobsAsJson();
             checkResponseForError(jobs_data);
 
