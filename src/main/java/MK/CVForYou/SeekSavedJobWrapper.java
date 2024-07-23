@@ -11,6 +11,7 @@ import java.util.Iterator;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONPointerException;
 
 public class SeekSavedJobWrapper
 {
@@ -64,13 +65,23 @@ public class SeekSavedJobWrapper
     public static ArrayList<SeekSavedJob> deserializeSavedJobs(JSONObject object)
     {
         ArrayList<SeekSavedJob> arr = new ArrayList<>();
-
-        JSONArray saved_jobs = (JSONArray) object.query("/data/viewer/savedJobs/edges");
-        Iterator<Object> job_itr = saved_jobs.iterator();
-        while(job_itr.hasNext())
+        try
         {
-            JSONObject job = (JSONObject)job_itr.next();
-            arr.add(new SeekSavedJob(job.getJSONObject("node")));
+            JSONArray saved_jobs = (JSONArray) object.query("/data/viewer/savedJobs/edges");
+            if(saved_jobs == null)
+                throw new NullPointerException();
+
+            Iterator<Object> job_itr = saved_jobs.iterator();
+            while(job_itr.hasNext())
+            {
+                JSONObject job = (JSONObject)job_itr.next();
+                arr.add(new SeekSavedJob(job.getJSONObject("node")));
+            }
+        } catch (JSONPointerException e) {
+            System.out.println("Error: Unable to deserialise SavedJobs object");
+        }
+        catch(NullPointerException e) {
+            System.out.println("Error: Null found when querying SavedJobs");
         }
 
         return arr; 
