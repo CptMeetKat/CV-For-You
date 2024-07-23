@@ -27,7 +27,7 @@ public class SeekSavedJobWrapper
         return "https://www.seek.com.au/job/" + id;
     }
 
-    public void checkResponseForError(JSONObject jobs_data)
+    public static void checkResponseForError(JSONObject jobs_data)
         throws BadAuthenticationException
     {
         try {
@@ -61,7 +61,7 @@ public class SeekSavedJobWrapper
     }
     
 
-    public ArrayList<SeekSavedJob> deserializeSavedJobs(JSONObject object)
+    public static ArrayList<SeekSavedJob> deserializeSavedJobs(JSONObject object)
     {
         ArrayList<SeekSavedJob> arr = new ArrayList<>();
 
@@ -92,7 +92,7 @@ public class SeekSavedJobWrapper
 
             //System.out.println(response.headers()); 
             //System.out.println();
-            //System.out.println(response.body()); 
+            System.out.println(response.body()); 
 
             return new JSONObject(response.body());
     }
