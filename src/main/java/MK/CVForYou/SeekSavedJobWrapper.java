@@ -73,7 +73,7 @@ public class SeekSavedJobWrapper
 
 
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.body().substring(0, 30));
+            System.out.println(response.body().substring(0, 30)); //TODO: UNSAFE substring oversized error
 
             return response.body();
     }
