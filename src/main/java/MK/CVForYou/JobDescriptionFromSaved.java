@@ -17,7 +17,7 @@ public class JobDescriptionFromSaved implements JobDescriptionSource
 
         for (String url : job_urls) {
             String id = url.substring(url.lastIndexOf("/")+1); //TODO: Unsafe -1 return value
-            jobs.add(new InputJob(id, new SeekJobDescription(url).getJD()));
+            jobs.add(new InputJob(id, new SeekJobDescriptionWrapper(url).getJD()));
         }
 
         return jobs;
