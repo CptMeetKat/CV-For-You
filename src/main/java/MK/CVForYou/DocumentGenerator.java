@@ -47,7 +47,7 @@ public class DocumentGenerator
             template = template.replace(section_marker, section.compose());
         }
 
-        String out_path = output_directory + output_name + ".html"; //TODO: / or no / ending case
+        String out_path = output_directory + output_name + ".html"; //TODO: / or no / ending case //TODO: Unsafe
         boolean success = IOUtils.writeToFile(template, out_path);
         if(success)
             System.out.printf("Document has been generated at: %s\n", out_path);
