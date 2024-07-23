@@ -23,7 +23,7 @@ public class ArgParser
         return options;
     }
 
-    public String getOutput() {
+    public String getOutputPath() {
         return output_path;
     }
 

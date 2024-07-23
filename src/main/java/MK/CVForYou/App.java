@@ -21,7 +21,7 @@ public class App
         {
             DocumentGenerator generator = new DocumentGenerator(ap.input_document,
                                     ap.getSections(),
-                                    ap.getOutput());
+                                    ap.getOutputPath());
             generator.generateDocument(job_descriptions.get(job_id), job_id);
         }
 
