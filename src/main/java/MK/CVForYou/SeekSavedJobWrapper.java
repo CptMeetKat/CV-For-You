@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SeekSavedJobWrapper
@@ -26,20 +27,37 @@ public class SeekSavedJobWrapper
         return "https://www.seek.com.au/job/" + id;
     }
 
+    private void checkResponseForError(JSONObject jobs_data)
+        throws BadAuthenticationException
+    {
+        try {
+            jobs_data.get("errors");
+            throw new BadAuthenticationException("Unable to retrieve 'Saved Jobs' from Seek");
+        } catch (JSONException e) {
+        }
+    }
+    
     public ArrayList<String> getSavedJobURLs()
     {
         ArrayList<String> job_urls = new ArrayList<String>();
 
-		try {
-			String jobs_data = getSavedJobsAsJson();
-            ArrayList<SeekSavedJob> saved_jobs = deserializeSavedJobs(new JSONObject(jobs_data));
+		try
+        {
+
+			JSONObject jobs_data = getSavedJobsAsJson();
+            checkResponseForError(jobs_data);
+
+            ArrayList<SeekSavedJob> saved_jobs = deserializeSavedJobs(jobs_data);
             for ( SeekSavedJob job : saved_jobs)
-            {
                 job_urls.add( buildJobUrl(job.getID()));
-            }
-		} catch (IOException | InterruptedException e) {
+		
+        }
+        catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
+        catch (BadAuthenticationException e) {
+            System.out.println("ERROR: Authentication token invalid");
+        }
         return job_urls;
     }
     
@@ -53,14 +71,13 @@ public class SeekSavedJobWrapper
         while(job_itr.hasNext())
         {
             JSONObject job = (JSONObject)job_itr.next();
-
             arr.add(new SeekSavedJob(job.getJSONObject("node")));
         }
 
         return arr; 
     }
 
-    public String getSavedJobsAsJson() throws IOException, InterruptedException
+    public JSONObject getSavedJobsAsJson() throws IOException, InterruptedException
     {
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create("https://www.seek.com.au/graphql"))
@@ -73,9 +90,12 @@ public class SeekSavedJobWrapper
 
 
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.body().substring(0, 30)); //TODO: UNSAFE substring oversized error
 
-            return response.body();
+            //System.out.println(response.headers()); 
+            //System.out.println();
+            //System.out.println(response.body()); 
+
+            return new JSONObject(response.body());
     }
 
     private String getBearerTokenFromFile(String file)
