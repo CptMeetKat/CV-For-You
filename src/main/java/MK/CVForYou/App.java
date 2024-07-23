@@ -1,6 +1,5 @@
 package MK.CVForYou;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -29,43 +28,24 @@ public class App
 
     public static HashMap<String, String> getJobDescriptions(ArgParser ap)
     {
+        String source = ap.document_source;
+        JobDescriptionSource jd_source = null;
+
+        if(source.equals("seek"))
+            jd_source = new JobDescriptionFromSeekJob(ap.seek_url);
+        else if(source.equals("file"))
+            jd_source = new JobDescriptionFromFile(ap.compare_document_path);
+        else if(source.equals("seek_saved"))
+            jd_source = new JobDescriptionFromSaved();
+
+//TODO: Do we care about SRP here?
         HashMap<String, String> job_descriptions = new HashMap<String, String>();
-
-        if(ap.document_source.equals("seek"))
-        {
-            job_descriptions.put(ap.seek_url, new SeekJobDescription(ap.seek_url).getJD() );
-        }
-        else if(ap.document_source.equals("file"))
-        {
-            job_descriptions.put(ap.seek_url, getDocument(ap.compare_document_path)   );
-        }
-        else if(ap.document_source.equals("seek_saved"))
-        {
-            SeekSavedJobWrapper ssj = new SeekSavedJobWrapper();
-            ArrayList<String> job_urls = ssj.getSavedJobURLs();
-
-            for (String url : job_urls)
-            {
-                String id = url.substring(url.lastIndexOf("/")+1);
-                job_descriptions.put(id, new SeekJobDescription(url).getJD() );
-            }
+        ArrayList<InputJob> jobs = jd_source.getJobDescriptions();
+        for (InputJob job : jobs) {
+            job_descriptions.put(job.name, job.description);
         }
 
         return job_descriptions;
     }
 
-    public static String getDocument(String document_path)
-    {
-        String document = null;
-        try
-        {
-            document = IOUtils.readFile(document_path);
-        }
-        catch (IOException e) 
-        {
-            System.out.println(e.getMessage());
-            System.exit(1);
-        }
-        return document;
-    }
 }
