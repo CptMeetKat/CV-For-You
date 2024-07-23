@@ -23,7 +23,6 @@ public class App
                                     ap.getOutputPath());
             generator.generateDocument(job_descriptions.get(job_id), job_id);
         }
-
     }
 
     public static HashMap<String, String> getJobDescriptions(ArgParser ap)
@@ -47,5 +46,4 @@ public class App
 
         return job_descriptions;
     }
-
 }
