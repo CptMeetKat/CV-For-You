@@ -5,9 +5,9 @@ import org.json.JSONObject;
 public class SeekSavedJob
 {
     String job_id;
-    boolean isActive;
+    Boolean isActive;
     String notes;
-    boolean isExternal;
+    Boolean isExternal;
     String title;
     String location;
 
@@ -17,32 +17,34 @@ public class SeekSavedJob
     public SeekSavedJob(JSONObject node)
     {
         job_id = node.optString("id");
-        isActive = (boolean) node.get("isActive");
+        isActive =  node.optBooleanObject("isActive", null);
         notes = node.optString(notes);
-        isExternal = (boolean) node.get("isExternal");
+        isExternal =  node.optBooleanObject("isExternal", null);
 
 
-        JSONObject job = (JSONObject) node.query("/job");
+        JSONObject job = (JSONObject) node.optQuery("/job");
+        if(job == null)
+            return;
         title = job.optString("title");
         location = job.optString("location");
         job_abstract = job.optString("abstract");
 
-        JSONObject advertiser = (JSONObject) job.getJSONObject("advertiser");
+        JSONObject advertiser = (JSONObject) job.optJSONObject("advertiser");
+        if(advertiser == null)
+            return;
         company = advertiser.optString("name");
 
 
         JSONObject salaryJson = job.optJSONObject("salary");
         if (salaryJson != null) {
-            salary = salaryJson.optString("label", null);
+            salary = salaryJson.optString("label");
         }
-
-
-
     }
 
     public String getID()
     {
         return job_id;
     }
+
 }
 
