@@ -11,7 +11,7 @@ import org.junit.Test;
 public class SeekSavedJobWrapperTest 
 {
     @Test
-    public void shouldThrowAuthExceptionIfJSONContainsError()
+    public void shouldThrowAuthExceptionIfResponseReturnsErrors()
     {
         String error_response = "{\"errors\":[{\"message\":\"An error occurred\",\"path\":[\"viewer\",\"id\"],\"extensions\":{\"code\":\"UNAUTHENTICATED\"}}],\"data\":{\"viewer\":null}}";
 
@@ -29,7 +29,7 @@ public class SeekSavedJobWrapperTest
 
 
     @Test
-    public void jsonWithNoErrorShouldNotThrow()
+    public void shouldNotThrowWhenResponseHasNoError()
     {
         String empty_response = "{}";
 
@@ -46,7 +46,7 @@ public class SeekSavedJobWrapperTest
 
 
     @Test
-    public void shouldReturnNothingWhenCannotTraverseJSON()
+    public void shouldReturnNothingWhenCannotTraverseJSONToDeserialise()
     {
         String single_saved_job = "{}";
         JSONObject json = new JSONObject(single_saved_job);
@@ -55,7 +55,7 @@ public class SeekSavedJobWrapperTest
     }
 
     @Test
-    public void shouldReturnNothingWhenKeyDoesNotExist()
+    public void shouldReturnNothingWhenKeyDoesNotExistInDeserialisedJSON()
     {
         String single_saved_job = "{\"data\": {\"viewer\": {\"savedJobs\": {}}}}";
 
@@ -72,7 +72,5 @@ public class SeekSavedJobWrapperTest
         JSONObject json = new JSONObject(empty_saved_job);
         ArrayList<SeekSavedJob> jobs = SeekSavedJobWrapper.deserializeSavedJobs(json);
         Assert.assertEquals(jobs.size(), 1);
-
-
     }
 }
