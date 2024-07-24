@@ -65,4 +65,14 @@ public class SeekSavedJobWrapperTest
     }
 
 
+    @Test
+    public void shouldCreateAnEmptySavedJobFromGoodResponse()
+    {
+        String empty_saved_job = "{\"data\":{\"viewer\":{\"id\":40911111,\"savedJobs\":{\"edges\":[{\"node\":{}}]}}}}";
+        JSONObject json = new JSONObject(empty_saved_job);
+        ArrayList<SeekSavedJob> jobs = SeekSavedJobWrapper.deserializeSavedJobs(json);
+        Assert.assertEquals(jobs.size(), 1);
+
+
+    }
 }
