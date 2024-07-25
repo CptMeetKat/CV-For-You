@@ -16,7 +16,14 @@ public class JobDescriptionFromSaved implements JobDescriptionSource
         ArrayList<String> job_urls = ssj.getSavedJobURLs();
 
         for (String url : job_urls) {
-            String id = url.substring(url.lastIndexOf("/")+1); //TODO: Unsafe -1 return value
+            //e.g. url https://www.seek.com.au/job/77111111
+            int idStart = url.lastIndexOf("/")+1; //Use whole URL can't extract id
+            if(idStart == -1)
+            {
+                System.out.printf("Error: Bad URL can't process %s\n", url);
+                continue;
+            }
+            String id = url.substring(idStart); 
             jobs.add(new InputJob(id, new SeekJobDescriptionWrapper(url).getJD()));
         }
 
