@@ -16,8 +16,11 @@ public class JobDescriptionFromSeekJob implements JobDescriptionSource
         
         ArrayList<InputJob> jobs = new ArrayList<>();
 
-        String id = url.substring(url.lastIndexOf("/")+1); //TODO: Unsafe -1 return value
-        jobs.add(  new InputJob(id, new SeekJobDescriptionWrapper(url).getJD()  )   );
+        SeekJobDescriptionWrapper wrapper = new SeekJobDescriptionWrapper(url);
+        String job_description = wrapper.getJD();
+        String id = wrapper.getSeekJobID();
+        if(id != null)
+            jobs.add(  new InputJob(id, job_description));
 
         return jobs;
 	}

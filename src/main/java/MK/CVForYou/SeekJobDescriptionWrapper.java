@@ -19,8 +19,14 @@ public class SeekJobDescriptionWrapper {
     }
 
     public String getSeekJobID() {
-        int start = job_url.lastIndexOf("/");
-        return job_url.substring(start);
+
+        int slash_position = job_url.lastIndexOf("/");
+        if(slash_position == -1)
+        {
+            System.out.printf("WARNING: Unable to extract ID from %s\n", job_url);
+            return null;
+        }
+        return job_url.substring(slash_position+1); //Unsafe if / is last character
     }
 
     public String getJD() {
@@ -84,7 +90,7 @@ public class SeekJobDescriptionWrapper {
         String job_description = null;
         String useragent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
         try {
-            System.out.println("Obtaining job description from Seek" + job_url);
+            System.out.println("Obtaining job description from Seek: " + job_url);
             Document doc = Jsoup.connect(job_url)
                     .userAgent(useragent)
                     .get();
@@ -93,7 +99,7 @@ public class SeekJobDescriptionWrapper {
             if (!Files.exists(directoryPath)) {
                 Files.createDirectories(directoryPath);
             }
-            IOUtils.writeToFile(doc.toString(), directoryPath + getSeekJobID());
+            IOUtils.writeToFile(doc.toString(), directoryPath + "/" + getSeekJobID());
 
 
             job_description = extractJobSectionFromHTML(doc);
