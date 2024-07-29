@@ -17,5 +17,8 @@ WORKDIR /app
 COPY --from=build /app/target/* /app/
 COPY auth /app/
 
+
+COPY ./cache/* /app/cache/
+
 # Set the entry point
 ENTRYPOINT ["java", "-cp", "/app/CVForYou-1.0-SNAPSHOT-jar-with-dependencies.jar", "MK.CVForYou.App"]
