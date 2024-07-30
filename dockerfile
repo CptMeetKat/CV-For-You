@@ -7,18 +7,37 @@ COPY src /app/src
 COPY sample_components/ /app/sample_components
 RUN mvn clean package
 
-# Runtime stage: Use a minimal OpenJDK image
+
+
+
+
+
 FROM openjdk:17-slim
 
-# Set the working directory
+RUN apt-get update && \
+    apt-get install -y apt-utils && \
+    apt-get install -y gnupg && \
+    apt-get install -y wget && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
+RUN apt-get update && apt-get -y install google-chrome-stable=127.0.6533.72-1
+
+RUN apt-get -y install pdftk
+
 WORKDIR /app
 
 # Copy the JAR file from the build stage
 COPY --from=build /app/target/* /app/
 COPY auth /app/
 
+#VOLUME ["/app/cache"]
+
 
 COPY ./cache/* /app/cache/
 
-# Set the entry point
+
 ENTRYPOINT ["java", "-cp", "/app/CVForYou-1.0-SNAPSHOT-jar-with-dependencies.jar", "MK.CVForYou.App"]
