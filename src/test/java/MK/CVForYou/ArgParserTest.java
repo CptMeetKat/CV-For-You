@@ -13,7 +13,7 @@ public class ArgParserTest
                                      "-cs", "https://www.seek.com.au/job/00000001",
                                      "-c", "compare_file.txt",
                                      "-s", "section1.json", "section2.json",
-                                     "-o", "output.out/"};
+                                     "-o", "output.out/"}; //TODO: This looks wrong as -o is output directory not name
 
         ArgParser ap = new ArgParser();
         boolean result = ap.parseArgs(args);

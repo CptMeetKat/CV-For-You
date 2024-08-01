@@ -14,7 +14,7 @@ public class DynamicSectionTest
     {
         try
         {
-            DynamicSection d = new DynamicSection("sample_components/tags.json");
+            DynamicSection d = new DynamicSection("sample_components/tags.json"); //TODO: dont use sample_components, tests should be in test folder
             String expected = "tags";
             String result = d.getSectionName();
             assertEquals( expected, result);
