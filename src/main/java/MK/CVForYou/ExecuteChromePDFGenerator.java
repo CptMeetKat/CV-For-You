@@ -5,8 +5,8 @@ public class ExecuteChromePDFGenerator {
     public static void run(String num) {
         try {
             String currentDir = System.getProperty("user.dir");
-            String base = "file://" + currentDir + "/prod_components/";
-            ProcessBuilder processBuilder = new ProcessBuilder("google-chrome", "--no-sandbox", "--headless", "--disable-gpu", "--print-to-pdf-first-page" , "--no-pdf-header-footer", "--print-to-pdf=./prod_components/cv" + num + ".pdf", base+num+".html");
+            String base = "file://" + currentDir + "/assets/prod_components/";
+            ProcessBuilder processBuilder = new ProcessBuilder("google-chrome", "--no-sandbox", "--headless", "--disable-gpu", "--print-to-pdf-first-page" , "--no-pdf-header-footer", "--print-to-pdf=./assets/prod_components/cv" + num + ".pdf", base+num+".html");
 
             Process process = processBuilder.start();
             

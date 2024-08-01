@@ -8,10 +8,6 @@ COPY sample_components/ /app/sample_components
 RUN mvn clean package
 
 
-
-
-
-
 FROM openjdk:17-slim
 
 RUN apt-get update && \
@@ -28,16 +24,29 @@ RUN apt-get update && apt-get -y install google-chrome-stable=127.0.6533.72-1
 
 RUN apt-get -y install pdftk
 
+
 WORKDIR /app
+
+
 
 # Copy the JAR file from the build stage
 COPY --from=build /app/target/* /app/
 COPY auth /app/
 
-#VOLUME ["/app/cache"]
+
+RUN apt-get update && apt-get install -y \
+    fontconfig \
+    unzip \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY ./assets/ ./assets/*
+COPY install-fonts.sh /usr/local/bin/install-fonts.sh
+RUN chmod +x /usr/local/bin/install-fonts.sh
+RUN /usr/local/bin/install-fonts.sh
+
 
 
 COPY ./cache/* /app/cache/
 
-
 ENTRYPOINT ["java", "-cp", "/app/CVForYou-1.0-SNAPSHOT-jar-with-dependencies.jar", "MK.CVForYou.App"]
+
