@@ -92,7 +92,7 @@ public class ArgParser
             if (cmd.hasOption("h")) {
                 formatter.printHelp("java App -d <document_path> -c <compare_path> -s <section_paths>",
                                     options);
-                success = false;
+                success = false; //TODO: This is never reached
             }
             else
             {
