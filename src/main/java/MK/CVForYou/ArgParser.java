@@ -95,29 +95,25 @@ public class ArgParser
             }
             else
             {
-                if (cmd.hasOption("d")) {
+                if (cmd.hasOption("d"))
                     input_document = cmd.getOptionValue("d");
-                }
 
                 if (cmd.hasOption("c")) {
                     compare_document_path = cmd.getOptionValue("c");
                     jd_source = new JobDescriptionFromFile(compare_document_path);
                 }
+
                 if (cmd.hasOption("cs")) {
                     seek_url = cmd.getOptionValue("cs");
                     jd_source = new JobDescriptionFromSeekJob(seek_url);
                 }
-                if (cmd.hasOption("ca")) {
+
+                if (cmd.hasOption("ca")) 
                     jd_source = new JobDescriptionFromSaved();
-                }
-
-                if (cmd.hasOption("s")) {
+                if (cmd.hasOption("s")) 
                     section_definition_paths = cmd.getOptionValues("s");
-                }
-
-                if(cmd.hasOption("o")) {
+                if (cmd.hasOption("o"))
                     output_path = cmd.getOptionValue("o");
-                }
             }
 
         } catch (ParseException e) {
