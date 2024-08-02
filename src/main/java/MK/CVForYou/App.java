@@ -16,13 +16,14 @@ public class App
     {
         HashMap<String, String> job_descriptions = getJobDescriptions(ap.getJDSource());
 
+
         for (String job_id: job_descriptions.keySet()) 
         {
             DocumentGenerator generator = new DocumentGenerator(ap.input_document,
                                     ap.getSections(),
                                     ap.getOutputPath());
             generator.generateDocument(job_descriptions.get(job_id), job_id);
-            ExecuteChromePDFGenerator .run(job_id);
+            ExecuteChromePDFGenerator.run(job_id);
         }
     }
 
