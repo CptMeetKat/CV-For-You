@@ -10,9 +10,11 @@ public class ArgParser
     public String[] section_definition_paths;
     private String output_path;
 
-    public String document_source;
+    public String document_source; //TODO: This makes more sense enum
     String compare_document_path;
     String seek_url; 
+
+    private JobDescriptionSource jd_source; 
 
     public ArgParser()
     {
@@ -73,7 +75,12 @@ public class ArgParser
         return options;
     }
 
-    public boolean parseArgs(String[] args)
+    public JobDescriptionSource getJDSource()
+    {
+        return jd_source;
+    }
+
+    public boolean parseArgs(String[] args) //TODO: Maybe should return a mode ???
     {
         boolean success = true;
         CommandLineParser parser = new DefaultParser();
@@ -85,31 +92,36 @@ public class ArgParser
             if (cmd.hasOption("h")) {
                 formatter.printHelp("java App -d <document_path> -c <compare_path> -s <section_paths>",
                                     options);
-                System.exit(0);
+                success = false;
             }
+            else
+            {
+                if (cmd.hasOption("d")) {
+                    input_document = cmd.getOptionValue("d");
+                }
 
-            if (cmd.hasOption("d")) {
-                input_document = cmd.getOptionValue("d");
-            }
+                if (cmd.hasOption("c")) {
+                    compare_document_path = cmd.getOptionValue("c");
+                    document_source = "file";
+                    jd_source = new JobDescriptionFromFile(compare_document_path);
+                }
+                if (cmd.hasOption("cs")) {
+                    seek_url = cmd.getOptionValue("cs");
+                    document_source = "seek";
+                    jd_source = new JobDescriptionFromSeekJob(seek_url);
+                }
+                if (cmd.hasOption("ca")) {
+                    document_source = "seek_saved";
+                      jd_source = new JobDescriptionFromSaved();
+                }
 
-            if (cmd.hasOption("c")) {
-                compare_document_path = cmd.getOptionValue("c");
-                document_source = "file";
-            }
-            if (cmd.hasOption("cs")) {
-                seek_url = cmd.getOptionValue("cs");
-                document_source = "seek";
-            }
-            if (cmd.hasOption("ca")) {
-                document_source = "seek_saved";
-            }
+                if (cmd.hasOption("s")) {
+                    section_definition_paths = cmd.getOptionValues("s");
+                }
 
-            if (cmd.hasOption("s")) {
-                section_definition_paths = cmd.getOptionValues("s");
-            }
-
-            if(cmd.hasOption("o")) {
-                output_path = cmd.getOptionValue("o");
+                if(cmd.hasOption("o")) {
+                    output_path = cmd.getOptionValue("o");
+                }
             }
 
         } catch (ParseException e) {

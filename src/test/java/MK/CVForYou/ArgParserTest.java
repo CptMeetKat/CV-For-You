@@ -58,4 +58,17 @@ public class ArgParserTest
         assertFalse(result);
     }
 
+
+    @Test
+    public void shouldReturnFalseWhenHelp()
+    {
+        String[] args = new String[]{"-d", "CV_template.html",
+                                     "-c", "compare_file.txt",
+                                     };
+
+        ArgParser ap = new ArgParser();
+        boolean result = ap.parseArgs(args);
+        assertFalse(result);
+    }
+
 }
