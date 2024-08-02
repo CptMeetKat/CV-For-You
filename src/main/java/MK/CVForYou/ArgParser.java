@@ -10,7 +10,6 @@ public class ArgParser
     public String[] section_definition_paths;
     private String output_path;
 
-    public String document_source; //TODO: This makes more sense enum
     String compare_document_path;
     String seek_url; 
 
@@ -92,7 +91,7 @@ public class ArgParser
             if (cmd.hasOption("h")) {
                 formatter.printHelp("java App -d <document_path> -c <compare_path> -s <section_paths>",
                                     options);
-                success = false; //TODO: This is never reached
+                success = false; //TODO: This is never reached and technically should semantically be TRUE, however required to return FALSE to work
             }
             else
             {
@@ -102,17 +101,14 @@ public class ArgParser
 
                 if (cmd.hasOption("c")) {
                     compare_document_path = cmd.getOptionValue("c");
-                    document_source = "file";
                     jd_source = new JobDescriptionFromFile(compare_document_path);
                 }
                 if (cmd.hasOption("cs")) {
                     seek_url = cmd.getOptionValue("cs");
-                    document_source = "seek";
                     jd_source = new JobDescriptionFromSeekJob(seek_url);
                 }
                 if (cmd.hasOption("ca")) {
-                    document_source = "seek_saved";
-                      jd_source = new JobDescriptionFromSaved();
+                    jd_source = new JobDescriptionFromSaved();
                 }
 
                 if (cmd.hasOption("s")) {
