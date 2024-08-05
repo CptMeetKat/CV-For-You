@@ -20,8 +20,13 @@ usage: java App -d <document_path> -c <compare_path> -s <section_paths>
 ```
 
 # Basic Usage
+## Pre-requisites
+Either:
+- Maven, Chrome
+- Docker
+
 ## Use Textfile as input
-- 
+- `mvn clean compile exec:java -Dexec.args="-d assets/sample_components/document.html -c assets/sample_components/description1.txt -s assets/sample_components/projects.json assets/sample_components/tags.json"`
 ## Use URL as input
 - 
 
