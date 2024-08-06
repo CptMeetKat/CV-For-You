@@ -9,3 +9,5 @@ run_sample2.sh
 /cache
 auth
 all_saved.json
+run_seek.sh
+run_seek2.sh
