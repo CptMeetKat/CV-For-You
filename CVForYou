@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ARGS="$*"
+mvn exec:java -Dexec.args="$ARGS"
