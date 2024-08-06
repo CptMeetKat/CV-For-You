@@ -45,7 +45,7 @@ public class ArgParser
         options.addOption(option_section);
         options.addRequiredOption("d", "document", true, "path to the dynamic document");
         options.addOption("h", "help", false, "print this message");
-        options.addOption("o", "output", true, "path of output");
+        options.addOption("o", "output", true, "output directory");
 
         Option compare_from_file = Option.builder("c")
                                       .longOpt("compare").hasArg()
