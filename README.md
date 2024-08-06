@@ -9,7 +9,7 @@ Automatically create the most effective version of your resume, ensuring your sk
 
 ## How to use?
 ```
-usage: java App -d <document_path> -c <compare_path> -s <section_paths>
+usage: ./CVForYou -d <document_path> -c <compare_path> -s <section_paths>
  -c,--compare <arg>         file to compare keywords to
  -ca,--compare-seek-all     compare from your seek saved job
  -cs,--compare-seek <arg>   pull JD from seek to compare
