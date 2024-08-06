@@ -89,7 +89,7 @@ public class ArgParser
             CommandLine cmd = parser.parse(options, args);
 
             if (cmd.hasOption("h")) {
-                formatter.printHelp("java App -d <document_path> -c <compare_path> -s <section_paths>",
+                formatter.printHelp("./CVForYou -d <document_path> -c <compare_path> -s <section_paths>",
                                     options);
                 success = false; //TODO: This is never reached and technically should semantically be TRUE, however required to return FALSE to work
             }
@@ -118,7 +118,7 @@ public class ArgParser
 
         } catch (ParseException e) {
             System.out.println(e.getMessage());
-            formatter.printHelp("java App -d <document_path> -c <compare_path> -s <section_paths>",
+            formatter.printHelp("./CVForYou -d <document_path> -c <compare_path> -s <section_paths>",
                                     options);
             success = false;
         }
