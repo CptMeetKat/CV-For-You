@@ -3,10 +3,8 @@
 Automatically create the most effective version of your resume, ensuring your skills are tailored to match every role you apply for.
 
 ### Table of contents
-- [CV 'For You'](#cv-for-you)
-      + [Table of contents](#table-of-contents)
-   * [How does it work?](#how-does-it-work)
-   * [How to use?](#how-to-use)
+- [How does it work?](#how-does-it-work)
+- [How to use?](#how-to-use)
 - [Basic Usage](#basic-usage)
    * [Pre-requisites](#pre-requisites)
    * [Use Textfile as input](#use-textfile-as-input)
