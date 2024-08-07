@@ -2,6 +2,22 @@
 
 Automatically create the most effective version of your resume, ensuring your skills are tailored to match every role you apply for.
 
+### Table of contents
+- [CV 'For You'](#cv-for-you)
+      + [Table of contents](#table-of-contents)
+   * [How does it work?](#how-does-it-work)
+   * [How to use?](#how-to-use)
+- [Basic Usage](#basic-usage)
+   * [Pre-requisites](#pre-requisites)
+   * [Use Textfile as input](#use-textfile-as-input)
+   * [Use Seek URL as input](#use-seek-url-as-input)
+- [Using SEEK integration as input](#using-seek-integration-as-input)
+- [Using Docker](#using-docker)
+      + [How to configure Seek auth token?](#how-to-configure-seek-auth-token)
+   * [Demo](#demo)
+      + [Demo 1 - .NET](#demo-1---net)
+      + [Demo 2 - Javascript](#demo-2---javascript)
+
 ## How does it work?
 1. You define dynamic sections in your CV template
 2. You provide the program a job description (via Seek or Textfile)
