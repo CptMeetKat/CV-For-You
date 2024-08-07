@@ -27,17 +27,29 @@ Either:
 
 ## Use Textfile as input
 1. Build the project
-- `./build`
-2. Build sample document via textfile job description
-- `./CvForYou -d assets/sample_components/document.html -c assets/sample_components/description1.txt -s assets/sample_components/projects.json assets/sample_components/tags.json`
+```
+./build
+```
+3. Build sample document via textfile job description
+```
+./CvForYou -d assets/sample_components/document.html \
+           -c assets/sample_components/description1.txt \
+           -s assets/sample_components/projects.json assets/sample_components/tags.json
+```
 
 ## Use Seek URL as input
 1. Build the project
-- `./build`
+```
+./build
+```
 2. Obtain a Seek Job URL
 - e.g. `https://www.seek.com.au/job/12345678`
 3. Build the sample document via seek integration
-- `./CvForYou -d assets/sample_components/document.html -cs <seek_job_url> -s assets/sample_components/projects.json assets/sample_components/tags.json`
+```
+./CvForYou -d assets/sample_components/document.html \
+           -cs <seek_job_url> \
+           -s assets/sample_components/projects.json assets/sample_components/tags.json
+```
 
 
 # Using SEEK integration as input
@@ -50,7 +62,13 @@ The command line argument `-ca, --compare-seek-all` pulls data from your 'Saved 
 Note: You will need to rebuild if you manually update the auth key
 
 2. Generate the sample document
-- `docker run -v ./assets:/app/assets -v ./cache:/app/cache cv-for-you -d assets/sample_components/document.html -c assets/sample_components/description1.txt -s assets/sample_components/projects.json assets/sample_components/tags.json`
+``` bash
+docker run -v ./assets:/app/assets \
+           -v ./cache:/app/cache cv-for-you \
+           -d assets/sample_components/document.html \
+           -c assets/sample_components/description1.txt \
+           -s assets/sample_components/projects.json assets/sample_components/tags.json
+```
 
 ### How to configure Seek auth token?
 1. Login to Seek
