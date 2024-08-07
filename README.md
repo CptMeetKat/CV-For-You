@@ -27,11 +27,11 @@ Either:
 
 ## Use Textfile as input
 1. Build the project
-```
+``` bash
 ./build
 ```
 3. Build sample document via textfile job description
-```
+``` bash
 ./CvForYou -d assets/sample_components/document.html \
            -c assets/sample_components/description1.txt \
            -s assets/sample_components/projects.json assets/sample_components/tags.json
@@ -39,13 +39,13 @@ Either:
 
 ## Use Seek URL as input
 1. Build the project
-```
+``` bash
 ./build
 ```
 2. Obtain a Seek Job URL
 - e.g. `https://www.seek.com.au/job/12345678`
 3. Build the sample document via seek integration
-```
+``` bash
 ./CvForYou -d assets/sample_components/document.html \
            -cs <seek_job_url> \
            -s assets/sample_components/projects.json assets/sample_components/tags.json
@@ -57,7 +57,9 @@ The command line argument `-ca, --compare-seek-all` pulls data from your 'Saved 
 
 # Using Docker
 1. Build the docker image
-- `docker build -t cv-for-you .`
+``` bash
+docker build -t cv-for-you .
+```
 
 Note: You will need to rebuild if you manually update the auth key
 
