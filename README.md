@@ -10,11 +10,11 @@ Automatically create the most effective version of your resume, ensuring your sk
    * [Use Textfile as input](#use-textfile-as-input)
    * [Use Seek URL as input](#use-seek-url-as-input)
 - [Using SEEK integration as input](#using-seek-integration-as-input)
-- [Using Docker](#using-docker)
-      + [How to configure Seek auth token?](#how-to-configure-seek-auth-token)
-   * [Demo](#demo)
-      + [Demo 1 - .NET](#demo-1---net)
-      + [Demo 2 - Javascript](#demo-2---javascript)
+   * [How to configure Seek auth token?](#how-to-configure-seek-auth-token)
+- [Using Docker](#using-docker)   
+- [Demo](#demo)
+   * [Demo 1 - .NET](#demo-1---net)
+   * [Demo 2 - Javascript](#demo-2---javascript)
 
 ## How does it work?
 1. You define dynamic sections in your CV template
@@ -69,23 +69,6 @@ Either:
 # Using SEEK integration as input
 The command line argument `-ca, --compare-seek-all` pulls data from your 'Saved Jobs' list in Seek to generate CVs. As such it requires an extra step to configure the auth token. 
 
-# Using Docker
-1. Build the docker image
-``` bash
-docker build -t cv-for-you .
-```
-
-Note: You will need to rebuild if you manually update the auth key
-
-2. Generate the sample document
-``` bash
-docker run -v ./assets:/app/assets \
-           -v ./cache:/app/cache cv-for-you \
-           -d assets/sample_components/document.html \
-           -c assets/sample_components/description1.txt \
-           -s assets/sample_components/projects.json assets/sample_components/tags.json
-```
-
 ### How to configure Seek auth token?
 1. Login to Seek
 2. Open browser console
@@ -103,7 +86,26 @@ for (let i = 0; i < localStorage.length; i++) {
 ```
 4. Copy-paste result in file named `auth` in repo directory
 
-## Demo
+
+# Using Docker
+1. Build the docker image
+``` bash
+docker build -t cv-for-you .
+```
+
+Note: You will need to rebuild if you manually update the auth key
+
+2. Generate the sample document
+``` bash
+docker run -v ./assets:/app/assets \
+           -v ./cache:/app/cache cv-for-you \
+           -d assets/sample_components/document.html \
+           -c assets/sample_components/description1.txt \
+           -s assets/sample_components/projects.json assets/sample_components/tags.json
+```
+
+
+# Demo
 Define generic sections in your CV, so they be programmatically populated
 
 ![image](https://github.com/user-attachments/assets/5b89d723-d546-43b3-af23-e0d68a8bf846)
