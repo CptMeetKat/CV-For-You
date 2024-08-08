@@ -79,12 +79,21 @@ public class DynamicSectionTest
         }
     }
 
-//   ./DynamicSectionTest_tags_with_negative_limit.json
-//   ./DynamicSectionTest_tags_with_no_limit.json
-//   ./DynamicSectionTest_tags_with_limit.json
 
-
-
-
+    @Test
+    public void renderAllWhenNoMaxComponentsExist()
+    {
+        try {
+            DynamicSection d = new DynamicSection("./src/test/test_files/DynamicSectionTest_tags_with_no_limit.json");
+            String result = d.compose();
+            String expected = "<div>Java1</div><div>C++1</div><div>Front-End1</div>";
+            assertEquals( expected, result);
+        }
+        catch(IOException e)
+        {
+             System.out.println(e.getMessage());
+             fail("Unable to read file");
+        }
+    }
 }
 
