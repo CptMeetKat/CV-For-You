@@ -1,0 +1,18 @@
+{
+    "container": "<div>{$elements[0]}</div>",
+    "max":2,
+    "options": [
+        {
+            "keywords": "Java",
+            "elements": ["Java1"]
+        },
+        {
+            "keywords": "C++",
+            "elements": ["C++1"]
+        },
+        {
+            "keywords": "Javascript",
+            "elements": ["Front-End1"]
+        }
+    ]
+}
