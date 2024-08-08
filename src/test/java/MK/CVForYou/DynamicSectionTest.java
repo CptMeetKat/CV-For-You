@@ -14,8 +14,8 @@ public class DynamicSectionTest
     {
         try
         {
-            DynamicSection d = new DynamicSection("./src/test/test_files/tags.json"); 
-            String expected = "tags";
+            DynamicSection d = new DynamicSection("./src/test/test_files/DynamicSectionTest_tags.json"); 
+            String expected = "DynamicSectionTest_tags";
             String result = d.getSectionName();
             assertEquals( expected, result);
         }
@@ -31,9 +31,9 @@ public class DynamicSectionTest
     public void fileWithNoExtensionShouldHaveFileNameAsName()
     {
         try {
-            DynamicSection d = new DynamicSection("./src/test/test_files/tags");
+            DynamicSection d = new DynamicSection("./src/test/test_files/DynamicSectionTest_tags");
             
-            String expected = "tags";
+            String expected = "DynamicSectionTest_tags";
             String result = d.getSectionName();
             assertEquals( expected, result);
         }
