@@ -23,7 +23,7 @@ public class App
                                     ap.getSections(),
                                     ap.getOutputPath());
             generator.generateDocument(job_descriptions.get(job_id), job_id);
-            ExecuteChromePDFGenerator.run(job_id);
+            ExecuteChromePDFGenerator.run(job_id, ap.getOutputPath());
         }
     }
 
