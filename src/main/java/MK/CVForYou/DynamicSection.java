@@ -21,8 +21,9 @@ public class DynamicSection
     public String compose()
     {
         StringBuilder result = new StringBuilder();
-        for(DynamicHTMLElement elt : dynamic_options)
+        for(int i = 0; i < dynamic_options.size() && i < max_display; i++)
         {
+            DynamicHTMLElement elt = dynamic_options.get(i);
             result.append(elt.getHTML());
         }
 
