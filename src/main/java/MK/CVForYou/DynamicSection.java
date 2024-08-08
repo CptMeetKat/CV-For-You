@@ -48,7 +48,6 @@ public class DynamicSection
         throws IOException
     {
         file_name = Paths.get(section_path).getFileName().toString();
-        //System.out.printf("section name: %s\n", section_name);
 
         String elements = IOUtils.readFile(section_path); 
         JSONObject object  = new JSONObject(elements);
