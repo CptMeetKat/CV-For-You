@@ -12,6 +12,8 @@ import java.util.Iterator;
 
 public class DynamicSection
 {
+    int max_display;
+
     ArrayList<DynamicHTMLElement> dynamic_options;
     String file_name;
     
@@ -49,14 +51,16 @@ public class DynamicSection
 
         String elements = IOUtils.readFile(section_path); 
         JSONObject object  = new JSONObject(elements);
-        dynamic_options = deserializeDynamicHTMLElements(object);
+        deserializeDynamicHTMLElements(object);
     }
 
-    private static ArrayList<DynamicHTMLElement> deserializeDynamicHTMLElements(JSONObject object)
+    private void deserializeDynamicHTMLElements(JSONObject object)
     {
         ArrayList<DynamicHTMLElement> arr = new ArrayList<>();
 
         String container = (String)object.get("container");
+        
+        max_display = object.optInt("max", Integer.MAX_VALUE);
 
         JSONArray options = (JSONArray) object.query("/options");
         Iterator<Object> options_itr = options.iterator();
@@ -77,6 +81,6 @@ public class DynamicSection
             arr.add(new DynamicHTMLElement(keywords, html));
         }
 
-        return arr;
+        this.dynamic_options = arr;   
     }
 }
