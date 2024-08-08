@@ -9,6 +9,7 @@ import org.junit.Test;
 
 public class DynamicSectionTest 
 {
+    //TODO: Refactor for test data to exist in this file, not in external file
     @Test
     public void fileWithExtensionShouldHaveNoExtensionInName()
     {
@@ -43,4 +44,30 @@ public class DynamicSectionTest
              fail("Unable to read file");
         }
     }
+
+
+    @Test
+    public void sectionDefinitionMaxComponentsShouldLimitComponentsRendered()
+    {
+        try {
+            DynamicSection d = new DynamicSection("./src/test/test_files/DynamicSectionTest_tags_with_limit.json");
+            String result = d.compose();
+            String expected = "<div>Java1</div><div>C++1</div>";
+            assertEquals( expected, result);
+        }
+        catch(IOException e)
+        {
+             System.out.println(e.getMessage());
+             fail("Unable to read file");
+        }
+    }
+
+//   ./DynamicSectionTest_tags_with_negative_limit.json
+//   ./DynamicSectionTest_tags_with__no_limit.json
+//   ./DynamicSectionTest_tags_with_limit.json
+
+
+
+
 }
+
