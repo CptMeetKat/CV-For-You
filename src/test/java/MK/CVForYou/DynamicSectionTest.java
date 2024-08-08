@@ -47,7 +47,7 @@ public class DynamicSectionTest
 
 
     @Test
-    public void sectionDefinitionMaxComponentsShouldLimitComponentsRendered()
+    public void maxComponentsShouldLimitComponentsRendered()
     {
         try {
             DynamicSection d = new DynamicSection("./src/test/test_files/DynamicSectionTest_tags_with_limit.json");
