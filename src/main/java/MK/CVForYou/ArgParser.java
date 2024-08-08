@@ -18,6 +18,7 @@ public class ArgParser
     public ArgParser()
     {
         options = getDefaultOptions();
+        output_path = "./";
     }
 
     public Options getOptions() {
