@@ -120,28 +120,11 @@ public class ArgParser
             }
             else
             {
-                if (cmd.hasOption("d"))
-                    input_document = cmd.getOptionValue("d");
-
-                if (cmd.hasOption("c")) {
-                    compare_document_path = cmd.getOptionValue("c");
-                    jd_source = new JobDescriptionFromFile(compare_document_path);
-                }
-
-                if (cmd.hasOption("cs")) {
-                    seek_url = cmd.getOptionValue("cs");
-                    jd_source = new JobDescriptionFromSeekJob(seek_url);
-                }
-
-                if (cmd.hasOption("ca")) 
-                    jd_source = new JobDescriptionFromSaved();
-                if (cmd.hasOption("s")) 
-                {
-                    section_definition_paths = cmd.getOptionValues("s");
-                    System.out.printf("___PATHS: %s\n", String.join(" ", section_definition_paths));
-                }
-                if (cmd.hasOption("o"))
-                    output_path = cmd.getOptionValue("o");
+                handleDocumentFlags(cmd);
+                handleCompareFlags(cmd);
+                handleSectionFlags(cmd);
+                handleOutputFlags(cmd);
+                //section_definition_paths = new String[section];
             }
 
         } catch (ParseException e) {
@@ -151,5 +134,47 @@ public class ArgParser
             success = false;
         }
         return success;
+    }
+
+    private void handleOutputFlags(CommandLine cmd)
+    {
+        if (cmd.hasOption("o"))
+            output_path = cmd.getOptionValue("o");
+    }
+
+    private void handleDocumentFlags(CommandLine cmd)
+    {
+        if (cmd.hasOption("d"))
+            input_document = cmd.getOptionValue("d");
+    }
+
+    private void handleCompareFlags(CommandLine cmd)
+    {
+        if (cmd.hasOption("c")) {
+            compare_document_path = cmd.getOptionValue("c");
+            jd_source = new JobDescriptionFromFile(compare_document_path);
+        }
+        if (cmd.hasOption("cs")) {
+            seek_url = cmd.getOptionValue("cs");
+            jd_source = new JobDescriptionFromSeekJob(seek_url);
+        }
+        if (cmd.hasOption("ca")) 
+            jd_source = new JobDescriptionFromSaved();
+    }
+
+
+    private void handleSectionFlags(CommandLine cmd)
+    {
+        if (cmd.hasOption("s")) 
+        {
+            section_definition_paths = cmd.getOptionValues("s");
+        //    String section_definition_files[] = cmd.getOptionValues("s");
+        }
+        if (cmd.hasOption("sd")) 
+        {
+         //   String section_definition_directories[] = cmd.getOptionValues("sd");
+        }
+
+        //System.out.printf("___PATHS: %s\n", String.join(" ", section_definition_paths));
     }
 }
