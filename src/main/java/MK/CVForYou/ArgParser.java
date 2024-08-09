@@ -44,14 +44,14 @@ public class ArgParser
         Option option_section_files = Option.builder("s").hasArgs()
                                       .longOpt("section")
                                       .desc("path to section definition files")
-                                      .required()
+//                                      .required()
                                       .build();
 
 
         Option option_section_directory = Option.builder("sd").hasArgs()
                                       .longOpt("section directory") //Check this valid??
                                       .desc("directory of section definition files")
-                                      .required()
+//                                      .required()
                                       .build();
 
         OptionGroup section_options = new OptionGroup();
