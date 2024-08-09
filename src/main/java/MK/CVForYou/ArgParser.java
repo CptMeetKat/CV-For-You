@@ -36,14 +36,38 @@ public class ArgParser
 
     private static Options getDefaultOptions()
     {
-        Options options = new Options();
 
-        Option option_section = Option.builder("s").hasArgs()
+
+
+
+
+        Option option_section_files = Option.builder("s").hasArgs()
                                       .longOpt("section")
                                       .desc("path to section definition files")
                                       .required()
                                       .build();
-        options.addOption(option_section);
+
+
+        Option option_section_directory = Option.builder("sd").hasArgs()
+                                      .longOpt("section directory") //Check this valid??
+                                      .desc("directory of section definition files")
+                                      .required()
+                                      .build();
+
+        OptionGroup section_options = new OptionGroup();
+        section_options.setRequired(true);
+        section_options.addOption(option_section_files);
+        section_options.addOption(option_section_directory);
+
+
+
+
+
+        Options options = new Options();
+        options.addOptionGroup(section_options);
+
+
+
         options.addRequiredOption("d", "document", true, "path to the dynamic document");
         options.addOption("h", "help", false, "print this message");
         options.addOption("o", "output", true, "output directory");
@@ -112,7 +136,10 @@ public class ArgParser
                 if (cmd.hasOption("ca")) 
                     jd_source = new JobDescriptionFromSaved();
                 if (cmd.hasOption("s")) 
+                {
                     section_definition_paths = cmd.getOptionValues("s");
+                    System.out.printf("___PATHS: %s\n", String.join(" ", section_definition_paths));
+                }
                 if (cmd.hasOption("o"))
                     output_path = cmd.getOptionValue("o");
             }
