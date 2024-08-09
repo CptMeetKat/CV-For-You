@@ -101,9 +101,10 @@ docker run -v ./assets:/app/assets \
            -v ./cache:/app/cache cv-for-you \
            -d assets/sample_components/document.html \
            -c assets/sample_components/description1.txt \
-           -s assets/sample_components/projects.json assets/sample_components/tags.json
+           -s assets/sample_components/projects.json assets/sample_components/tags.json \
+           -o ./assets/
 ```
-
+Note: Be sure to output to a mounted location
 
 # Demo
 Define generic sections in your CV, so they be programmatically populated
