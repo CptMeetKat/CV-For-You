@@ -7,7 +7,7 @@ public class ArgParser
     Options options;
 
     public String input_document; 
-    public String[] section_definition_paths;
+    private String[] section_definition_paths;
     private String output_path;
 
     String compare_document_path;
