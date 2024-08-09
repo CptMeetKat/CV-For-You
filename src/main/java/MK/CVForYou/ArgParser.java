@@ -2,6 +2,10 @@ package MK.CVForYou;
 
 import org.apache.commons.cli.*;
 
+import java.io.IOException;
+import java.nio.file.*;
+import java.util.ArrayList;
+
 public class ArgParser
 {
     Options options;
@@ -44,14 +48,12 @@ public class ArgParser
         Option option_section_files = Option.builder("s").hasArgs()
                                       .longOpt("section")
                                       .desc("path to section definition files")
-//                                      .required()
                                       .build();
 
 
         Option option_section_directory = Option.builder("sd").hasArgs()
                                       .longOpt("section directory") //Check this valid??
                                       .desc("directory of section definition files")
-//                                      .required()
                                       .build();
 
         OptionGroup section_options = new OptionGroup();
@@ -124,7 +126,6 @@ public class ArgParser
                 handleCompareFlags(cmd);
                 handleSectionFlags(cmd);
                 handleOutputFlags(cmd);
-                //section_definition_paths = new String[section];
             }
 
         } catch (ParseException e) {
@@ -165,16 +166,48 @@ public class ArgParser
 
     private void handleSectionFlags(CommandLine cmd)
     {
-        if (cmd.hasOption("s")) 
+        ArrayList<String> files = new ArrayList<String>();
+        String section_files[] = cmd.getOptionValues("s");
+
+        if(section_files != null)
+            for(String file : section_files)
+                files.add(file);
+
+
+
+        String section_directories[] = cmd.getOptionValues("sd");
+        if(section_directories != null)
         {
-            section_definition_paths = cmd.getOptionValues("s");
-        //    String section_definition_files[] = cmd.getOptionValues("s");
-        }
-        if (cmd.hasOption("sd")) 
-        {
-         //   String section_definition_directories[] = cmd.getOptionValues("sd");
+            for(String dir : section_directories)
+            {
+                String[] json_files = listJSONFilesInDirectory(dir); 
+                for(String file : json_files)
+                    files.add(dir+file);
+            }
         }
 
-        //System.out.printf("___PATHS: %s\n", String.join(" ", section_definition_paths));
+       section_definition_paths = files.toArray(new String[0]);
+    }
+
+    private String[] listJSONFilesInDirectory(String directory_path)
+    {
+        Path directory = Paths.get(directory_path);
+        String fileArray[] = null;
+
+        try {
+            ArrayList<String> fileNames = new ArrayList<>();
+
+            Files.list(directory)
+                 .filter(Files::isRegularFile)
+                 .filter(path -> path.getFileName().toString().endsWith(".json")) 
+                 .forEach(path -> fileNames.add(path.getFileName().toString()));
+
+            fileArray = fileNames.toArray(new String[0]);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return fileArray;
     }
 }
