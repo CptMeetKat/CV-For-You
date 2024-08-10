@@ -69,7 +69,7 @@ public class ArgParserTest
 
 
     @Test
-    public void sectionDirectoryFlagShouldReturnAllFilesInDirectory()
+    public void sectionDirectoryFlagShouldReturnAllJSONFilesInDirectory()
     {
         String[] args = new String[]{"-d", "CV_template.html",
                                      "-c", "compare_file.txt",
