@@ -147,7 +147,7 @@ public class ArgParserTest
         String[] result = ap.getSections();
         
         if(expected.length != result.length)
-            fail("Expected and result differ in total files");
+            fail("Expected <" + expected.length + "> and result <" + result.length + "> differ in total files");
         for(int i = 0; i < expected.length; i++)
             assertEquals(expected[i], result[i]);
     }
@@ -172,7 +172,7 @@ public class ArgParserTest
         String[] result = ap.getSections();
         
         if(expected.length != result.length)
-            fail("Expected and result differ in total files");
+            fail("Expected <" + expected.length + "> and result <" + result.length + "> differ in total files");
         for(int i = 0; i < expected.length; i++)
             assertEquals(expected[i], result[i]);
     }
