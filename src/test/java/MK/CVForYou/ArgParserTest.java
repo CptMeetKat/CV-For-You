@@ -67,6 +67,25 @@ public class ArgParserTest
     //TODO: SD Folder dosent exist????
 
 
+    @Test
+    public void sectionFlagShouldReturnAFileWhenItExists()
+    {
+        String[] args = new String[]{"-d", "CV_template.html",
+                                     "-c", "compare_file.txt",
+                                     "-s", "src/test/test_files/ArgParser/directory1/A.json",
+                                     };
+
+
+        String expected = "src/test/test_files/ArgParser/directory1/A.json";
+
+
+        ArgParser ap = new ArgParser();
+        ap.parseArgs(args);
+        String[] result = ap.getSections();
+        assertEquals(result.length, 1);
+        assertEquals(expected, result[0]);
+
+    }
 
 
     @Test
