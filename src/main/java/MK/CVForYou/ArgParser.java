@@ -181,8 +181,9 @@ public class ArgParser
             for(String dir : section_directories)
             {
                 String[] json_files = listJSONFilesInDirectory(dir); 
-                for(String file : json_files)
-                    files.add(dir+file);
+                if(json_files != null)
+                    for(String file : json_files)
+                        files.add(dir+file);
             }
         }
 
@@ -204,9 +205,11 @@ public class ArgParser
 
             fileArray = fileNames.toArray(new String[0]);
 
+        } catch (NoSuchFileException e) {
+            System.out.printf("Warning: Unable to find files in %s\n", e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
-        }
+			e.printStackTrace();
+		}
 
         return fileArray;
     }

@@ -68,6 +68,24 @@ public class ArgParserTest
 
 
 
+
+    @Test
+    public void sectionDirectoryFlagShouldReturnNothingIfDirectoryDoesNotExist()
+    {
+        String[] args = new String[]{"-d", "CV_template.html",
+                                     "-c", "compare_file.txt",
+                                     "-sd", "src/test/test_files/ArgParser/DOESNOTEXIST/",
+                                     };
+
+        ArgParser ap = new ArgParser();
+        ap.parseArgs(args);
+        String[] result = ap.getSections();
+        
+        assertEquals(result.length, 0);
+    }
+
+
+
     @Test
     public void sectionDirectoryFlagShouldReturnAllJSONFilesInDirectory()
     {
