@@ -2,7 +2,12 @@ package MK.CVForYou;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -59,12 +64,7 @@ public class ArgParserTest
         boolean result = ap.parseArgs(args);
         assertFalse(result);
     }
-    //Section -sd 1 directory
-
-    //TODO: Section -s getSections checkResults
-    //TODO Section -sd 2 directory
-    //TODO: use both -sd and -s
-    //TODO: SD Folder dosent exist????
+    
 
 
     @Test
@@ -86,6 +86,34 @@ public class ArgParserTest
         assertEquals(expected, result[0]);
 
     }
+
+    @Test
+    public void sectionDirectoryAndSectionFlagShouldReturnACombinedArrayOfJSONFiles()
+    {
+        String[] args = new String[]{"-d", "CV_template.html",
+                                     "-c", "compare_file.txt",
+                                     "-s", "src/test/test_files/ArgParser/directory2/C.json",
+                                     "-sd", "src/test/test_files/ArgParser/directory1/",
+                                     };
+
+        Set<String> expected = new HashSet<>(Arrays.asList(
+                    "src/test/test_files/ArgParser/directory1/A.json",
+                    "src/test/test_files/ArgParser/directory1/B.json",
+                    "src/test/test_files/ArgParser/directory2/C.json"
+                    ));
+
+
+
+        ArgParser ap = new ArgParser();
+        ap.parseArgs(args);
+        String[] result = ap.getSections();
+
+        if(expected.size() != result.length)
+            fail("Expected <" + expected.size() + "> and result <" + result.length + "> differ in total files");
+        for(int i = 0; i < result.length; i++)
+            assertTrue(expected.contains(result[i]));
+    }
+
 
 
     @Test
@@ -149,16 +177,6 @@ public class ArgParserTest
             assertEquals(expected[i], result[i]);
     }
 
-
-
-
-
-
-
-
-
-
-
     @Test
     public void shouldReturnFalseWhenHelp()
     {
@@ -170,8 +188,4 @@ public class ArgParserTest
         boolean result = ap.parseArgs(args);
         assertFalse(result);
     }
-
-
-
-
 }

@@ -52,21 +52,13 @@ public class ArgParser
 
 
         Option option_section_directory = Option.builder("sd").hasArgs()
-                                      .longOpt("section directory") //Check this valid??
+                                      .longOpt("section directory") 
                                       .desc("directory of section definition files")
                                       .build();
 
-        OptionGroup section_options = new OptionGroup();
-        section_options.setRequired(true);
-        section_options.addOption(option_section_files);
-        section_options.addOption(option_section_directory);
-
-
-
-
-
         Options options = new Options();
-        options.addOptionGroup(section_options);
+        options.addOption(option_section_files);
+        options.addOption(option_section_directory);
 
 
 
@@ -114,6 +106,9 @@ public class ArgParser
 
         try {
             CommandLine cmd = parser.parse(options, args);
+
+            if (!cmd.hasOption("sd") && !cmd.hasOption("s"))
+                throw new ParseException("Either -sd or -s must be provided");
 
             if (cmd.hasOption("h")) {
                 formatter.printHelp("./CVForYou -d <document_path> -c <compare_path> -s <section_paths>",
