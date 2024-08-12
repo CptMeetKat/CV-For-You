@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class ArgParser
 {
     Options options;
+    Options help_option;
 
     public String input_document; 
     private String[] section_definition_paths;
@@ -22,7 +23,16 @@ public class ArgParser
     public ArgParser()
     {
         options = getDefaultOptions();
+        help_option = getHelpOption();
         output_path = "./";
+    }
+
+    private static Options getHelpOption()
+    {
+        Options options = new Options();
+        
+        options.addOption("h", "help", false, "print this message");
+        return options;
     }
 
     public Options getOptions() {
@@ -93,11 +103,24 @@ public class ArgParser
         return jd_source;
     }
 
-    public boolean parseArgs(String[] args) //TODO: Maybe should return a mode ???
+    public boolean parseArgs(String[] args) //TODO: Consider replaceing boolean with an enum Mode
     {
         boolean success = true;
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
+
+        try
+        {
+            CommandLine help_cmd = parser.parse(help_option, args, true);
+            if(help_cmd.hasOption("h"))
+            {
+                formatter.printHelp("./CVForYou -d <document_path> -c <compare_path> -s <section_paths>",
+                                    options);
+                return false;
+            }
+        }
+        catch (ParseException e) {}
+
 
         try {
             CommandLine cmd = parser.parse(options, args);
@@ -105,18 +128,10 @@ public class ArgParser
             if (!cmd.hasOption("sd") && !cmd.hasOption("s"))
                 throw new ParseException("Either -sd or -s must be provided");
 
-            if (cmd.hasOption("h")) {
-                formatter.printHelp("./CVForYou -d <document_path> -c <compare_path> -s <section_paths>",
-                                    options);
-                success = false; //TODO: This is never reached and technically should semantically be TRUE, however required to return FALSE to work
-            }
-            else
-            {
-                handleDocumentFlags(cmd);
-                handleCompareFlags(cmd);
-                handleSectionFlags(cmd);
-                handleOutputFlags(cmd);
-            }
+              handleDocumentFlags(cmd);
+              handleCompareFlags(cmd);
+              handleSectionFlags(cmd);
+              handleOutputFlags(cmd);
 
         } catch (ParseException e) {
             System.out.println(e.getMessage());

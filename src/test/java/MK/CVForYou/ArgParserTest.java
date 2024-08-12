@@ -180,11 +180,20 @@ public class ArgParserTest
     }
 
     @Test
-    public void shouldReturnFalseWhenHelp()
+    public void parseArgsShouldReturnFalseWhenBadArgsAreProvided()
     {
-        String[] args = new String[]{"-d", "CV_template.html",
-                                     "-c", "compare_file.txt",
-                                     };
+        String[] args = new String[]{};
+
+        ArgParser ap = new ArgParser();
+        boolean result = ap.parseArgs(args);
+        assertFalse(result);
+    }
+
+
+    @Test
+    public void parseArgsShouldReturnFalseWhenHelpIsFlagged()
+    {
+        String[] args = new String[]{"-h"};
 
         ArgParser ap = new ArgParser();
         boolean result = ap.parseArgs(args);
