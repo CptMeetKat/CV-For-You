@@ -11,6 +11,8 @@ import java.util.Set;
 
 import org.junit.Test;
 
+//TODO: it would better, if each test created the fielstructure it needed and then ran tests
+
 public class ArgParserTest 
 {
     @Test
