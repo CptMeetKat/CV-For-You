@@ -40,11 +40,6 @@ public class ArgParser
 
     private static Options getDefaultOptions()
     {
-
-
-
-
-
         Option option_section_files = Option.builder("s").hasArgs()
                                       .longOpt("section")
                                       .desc("path to section definition files")
