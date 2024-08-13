@@ -104,6 +104,20 @@ docker run -v ./assets:/app/assets \
            -s assets/sample_components/sections/projects.json assets/sample_components/sections/tags.json \
            -o ./assets/
 ```
+
+As you add more dynamic sections you may prefer to run the following to shrink the command size
+
+``` bash
+docker run \
+-v ./assets:/app/assets \
+-v ./cache:/app/cache \
+cv-for-you \
+	-d /app/assets/sample_components/CV_Pretty.html \
+	-ca \
+	-sd /app/assets/sample_components/sections/ \
+	-o ./assets/sample_components/
+```
+
 Note: Be sure to output to a mounted location
 
 # Demo
