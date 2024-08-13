@@ -46,7 +46,7 @@ Either:
 ```
 3. Build sample document via textfile job description
 ``` bash
-./CvForYou -d assets/sample_components/document.html \
+./CVForYou -d assets/sample_components/document.html \
            -c assets/sample_components/description1.txt \
            -s assets/sample_components/sections/projects.json assets/sample_components/sections/tags.json
 ```
@@ -60,7 +60,7 @@ Either:
 - e.g. `https://www.seek.com.au/job/12345678`
 3. Build the sample document via seek integration
 ``` bash
-./CvForYou -d assets/sample_components/document.html \
+./CVForYou -d assets/sample_components/document.html \
            -cs <seek_job_url> \
            -s assets/sample_components/sections/projects.json assets/sample_components/sections/tags.json
 ```
