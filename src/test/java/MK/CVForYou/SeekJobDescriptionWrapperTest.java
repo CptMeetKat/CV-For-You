@@ -29,18 +29,4 @@ public class SeekJobDescriptionWrapperTest
 
         assertEquals(result, expected);
     }
-
-
-
-    //TODO: Complete this test case
-    //@Test
-    //public void xxx()
-    //{
-    //    String expected = "77111111";
-    //    String url = "https://www.seek.com.au/job/77111111/";
-    //    SeekJobDescriptionWrapper wrapper = new SeekJobDescriptionWrapper(url);
-    //    String result = wrapper.getSeekJobID();
-
-    //    assertEquals(result, expected);
-    //}
 }
