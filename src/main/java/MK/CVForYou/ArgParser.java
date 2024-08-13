@@ -20,6 +20,8 @@ public class ArgParser
 
     private JobDescriptionSource jd_source; 
 
+    private static final String BASIC_USAGE = "./CVForYou -d <document_path> -c <compare_path> -s <section_paths>";
+
     public ArgParser()
     {
         options = getDefaultOptions();
@@ -114,7 +116,7 @@ public class ArgParser
             CommandLine help_cmd = parser.parse(help_option, args, true);
             if(help_cmd.hasOption("h"))
             {
-                formatter.printHelp("./CVForYou -d <document_path> -c <compare_path> -s <section_paths>",
+                formatter.printHelp(BASIC_USAGE,
                                     options);
                 return false;
             }
@@ -135,7 +137,7 @@ public class ArgParser
 
         } catch (ParseException e) {
             System.out.println(e.getMessage());
-            formatter.printHelp("./CVForYou -d <document_path> -c <compare_path> -s <section_paths>",
+            formatter.printHelp(BASIC_USAGE,
                                     options);
             success = false;
         }
