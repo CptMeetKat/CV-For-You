@@ -4,7 +4,6 @@ WORKDIR /app
 
 COPY pom.xml /app/
 COPY src /app/src
-#COPY sample_components/ /app/sample_components
 RUN mvn clean package
 
 
