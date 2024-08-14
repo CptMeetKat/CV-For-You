@@ -11,7 +11,7 @@ public class ArgParser
     Options options;
     Options help_option;
 
-    private String input_document; 
+    private Path input_document; 
     private String[] section_definition_paths;
     private Path output_directory;
 
@@ -37,7 +37,7 @@ public class ArgParser
         return options;
     }
 
-    public String getInputDocument()
+    public Path getInputDocument()
     {
         return input_document;
     }
@@ -162,7 +162,7 @@ public class ArgParser
     private void handleDocumentFlags(CommandLine cmd)
     {
         if (cmd.hasOption("d"))
-            input_document = cmd.getOptionValue("d");
+            input_document = Paths.get(cmd.getOptionValue("d"));
     }
 
     private void handleCompareFlags(CommandLine cmd)
