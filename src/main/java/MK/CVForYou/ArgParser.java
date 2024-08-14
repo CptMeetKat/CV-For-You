@@ -12,7 +12,7 @@ public class ArgParser
     Options help_option;
 
     Path input_document; 
-    String[] section_definition_paths;
+    Path[] section_definition_paths;
     Path output_directory;
 
     Path compare_document_path;
@@ -54,7 +54,7 @@ public class ArgParser
         output_directory = Paths.get(path);
     }
 
-    public String[] getSections() {
+    public Path[] getSections() {
         return section_definition_paths;
     }
 
@@ -182,12 +182,12 @@ public class ArgParser
 
     private void handleSectionFlags(CommandLine cmd)
     {
-        ArrayList<String> files = new ArrayList<String>();
+        ArrayList<Path> files = new ArrayList<Path>();
         String section_files[] = cmd.getOptionValues("s");
 
         if(section_files != null)
             for(String file : section_files)
-                files.add(file);
+                files.add(Paths.get(file));
 
 
 
@@ -199,11 +199,11 @@ public class ArgParser
                 String[] json_files = listJSONFilesInDirectory(dir); 
                 if(json_files != null)
                     for(String file : json_files)
-                        files.add(dir+file);
+                        files.add(Paths.get(dir+file));
             }
         }
 
-       section_definition_paths = files.toArray(new String[0]);
+       section_definition_paths = files.toArray(new Path[0]);
     }
 
     private String[] listJSONFilesInDirectory(String directory_path)

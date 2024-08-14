@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -83,9 +84,9 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         ap.parseArgs(args);
-        String[] result = ap.getSections();
+        Path[] result = ap.getSections();
         assertEquals(result.length, 1);
-        assertEquals(expected, result[0]);
+        assertEquals(expected, result[0].toString());
 
     }
 
@@ -108,12 +109,12 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         ap.parseArgs(args);
-        String[] result = ap.getSections();
+        Path[] result = ap.getSections();
 
         if(expected.size() != result.length)
             fail("Expected <" + expected.size() + "> and result <" + result.length + "> differ in total files");
         for(int i = 0; i < result.length; i++)
-            assertTrue(expected.contains(result[i]));
+            assertTrue(expected.contains(result[i].toString()));
     }
 
 
@@ -128,7 +129,7 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         ap.parseArgs(args);
-        String[] result = ap.getSections();
+        Path[] result = ap.getSections();
         
         assertEquals(result.length, 0);
     }
@@ -146,12 +147,12 @@ public class ArgParserTest
                                          "src/test/test_files/ArgParser/directory1/B.json"};
         ArgParser ap = new ArgParser();
         ap.parseArgs(args);
-        String[] result = ap.getSections();
+        Path[] result = ap.getSections();
         
         if(expected.length != result.length)
             fail("Expected <" + expected.length + "> and result <" + result.length + "> differ in total files");
         for(int i = 0; i < expected.length; i++)
-            assertEquals(expected[i], result[i]);
+            assertEquals(expected[i], result[i].toString());
     }
 
 
@@ -171,12 +172,12 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         ap.parseArgs(args);
-        String[] result = ap.getSections();
+        Path[] result = ap.getSections();
         
         if(expected.length != result.length)
             fail("Expected <" + expected.length + "> and result <" + result.length + "> differ in total files");
         for(int i = 0; i < expected.length; i++)
-            assertEquals(expected[i], result[i]);
+            assertEquals(expected[i], result[i].toString());
     }
 
     @Test

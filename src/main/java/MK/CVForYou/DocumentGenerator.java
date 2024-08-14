@@ -12,7 +12,7 @@ public class DocumentGenerator
     ArrayList<DynamicSection> sections = new ArrayList<DynamicSection>();
     Path output_directory = Paths.get("./");
 
-    public DocumentGenerator(Path template_file, String[] component_paths,
+    public DocumentGenerator(Path template_file, Path[] component_paths,
                              Path output_directory )
     {
         //this.model_text = model_text;
@@ -21,8 +21,8 @@ public class DocumentGenerator
 
         try {
             template = IOUtils.readFile(template_file.toString());
-            for(String path : component_paths)
-               sections.add(new DynamicSection(path));
+            for(Path path : component_paths)
+               sections.add(new DynamicSection(path.toString()));
         }
         catch(IOException e) {
             System.out.println(e.getMessage());
