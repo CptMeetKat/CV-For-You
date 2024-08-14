@@ -15,7 +15,7 @@ public class ArgParser
     String[] section_definition_paths;
     Path output_directory;
 
-    String compare_document_path;
+    Path compare_document_path;
     String seek_url; 
 
     JobDescriptionSource jd_source; 
@@ -168,7 +168,7 @@ public class ArgParser
     private void handleCompareFlags(CommandLine cmd)
     {
         if (cmd.hasOption("c")) {
-            compare_document_path = cmd.getOptionValue("c");
+            compare_document_path = Paths.get(cmd.getOptionValue("c"));
             jd_source = new JobDescriptionFromFile(compare_document_path);
         }
         if (cmd.hasOption("cs")) {

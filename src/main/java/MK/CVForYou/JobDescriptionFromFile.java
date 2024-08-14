@@ -1,12 +1,13 @@
 package MK.CVForYou;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class JobDescriptionFromFile implements JobDescriptionSource
 {
-    String filePath;
-    public JobDescriptionFromFile(String filePath)
+    Path filePath;
+    public JobDescriptionFromFile(Path filePath)
     {
         this.filePath = filePath;
     }
@@ -19,11 +20,11 @@ public class JobDescriptionFromFile implements JobDescriptionSource
         return jobs;
 	}
 
-    public static String getDocument(String document_path)
+    public static String getDocument(Path document_path)
     {
         String document = null;
         try {
-            document = IOUtils.readFile(document_path);
+            document = IOUtils.readFile(document_path.toString());
         }
         catch (IOException e) {
             System.out.println(e.getMessage());
