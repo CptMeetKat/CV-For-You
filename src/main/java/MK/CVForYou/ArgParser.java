@@ -13,7 +13,7 @@ public class ArgParser
 
     public String input_document; 
     private String[] section_definition_paths;
-    private String output_directory;
+    private Path output_directory;
 
     String compare_document_path;
     String seek_url; 
@@ -26,7 +26,7 @@ public class ArgParser
     {
         options = getDefaultOptions();
         help_option = getHelpOption();
-        output_directory = "./";
+        output_directory = Paths.get("./");
     }
 
     private static Options getHelpOption()
@@ -41,8 +41,12 @@ public class ArgParser
         return options;
     }
 
-    public String getOutputFolder() {
+    public Path getOutputFolder() {
         return output_directory;
+    }
+
+    public void setOutputFolder(String path) {
+        output_directory = Paths.get(path);
     }
 
     public String[] getSections() {
@@ -147,7 +151,7 @@ public class ArgParser
     private void handleOutputFlags(CommandLine cmd)
     {
         if (cmd.hasOption("o"))
-            output_directory = cmd.getOptionValue("o");
+            setOutputFolder(cmd.getOptionValue("o"));
     }
 
     private void handleDocumentFlags(CommandLine cmd)

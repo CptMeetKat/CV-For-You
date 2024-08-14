@@ -1,15 +1,21 @@
 package MK.CVForYou;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class ExecuteChromePDFGenerator {
 
     //TODO: This needs an acceptance test
 
-    public static void run(String num, String output_directory) {
+    public static void run(String num, Path output_directory) {
         try {
-            String currentDir = System.getProperty("user.dir");
-            String base = "file://" + currentDir + "/" + output_directory;
+            String base = output_directory.toAbsolutePath().toString();
+            
+            String pdf_name = "cv" + num + ".pdf";
+            Path print_to_pdf = Paths.get(output_directory.toString(), pdf_name);
+            Path input_file = Paths.get(base, num + ".html"); 
 
-            ProcessBuilder processBuilder = new ProcessBuilder("google-chrome", "--no-sandbox", "--headless", "--disable-gpu", "--print-to-pdf-first-page" , "--no-pdf-header-footer", "--print-to-pdf=./" + output_directory + "cv" + num + ".pdf", base+num+".html");
+            ProcessBuilder processBuilder = new ProcessBuilder("google-chrome", "--no-sandbox", "--headless", "--disable-gpu", "--print-to-pdf-first-page" , "--no-pdf-header-footer", "--print-to-pdf=" + print_to_pdf , input_file.toString());
 
             Process process = processBuilder.start();
             

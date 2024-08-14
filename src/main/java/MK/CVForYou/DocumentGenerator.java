@@ -1,6 +1,8 @@
 package MK.CVForYou;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -8,10 +10,10 @@ public class DocumentGenerator
 {
     String template;
     ArrayList<DynamicSection> sections = new ArrayList<DynamicSection>();
-    String output_directory = "";
+    Path output_directory = Paths.get("./");
 
     public DocumentGenerator(String template_path, String[] component_paths,
-                             String output_directory )
+                             Path output_directory )
     {
         //this.model_text = model_text;
         if(output_directory != null)
@@ -47,7 +49,8 @@ public class DocumentGenerator
             template = template.replace(section_marker, section.compose());
         }
 
-        String out_path = output_directory + output_name + ".html"; //TODO: / or no / ending case //TODO: Unsafe
+        String out_path = output_directory.resolve(output_name + ".html").toString(); 
+
         boolean success = IOUtils.writeToFile(template, out_path);
         if(success)
             System.out.printf("Document has been generated at: %s\n", out_path);
