@@ -19,7 +19,7 @@ public class App
 
         for (String job_id: job_descriptions.keySet()) 
         {
-            DocumentGenerator generator = new DocumentGenerator(ap.input_document,
+            DocumentGenerator generator = new DocumentGenerator(ap.getInputDocument(),
                                     ap.getSections(),
                                     ap.getOutputFolder());
             generator.generateDocument(job_descriptions.get(job_id), job_id);

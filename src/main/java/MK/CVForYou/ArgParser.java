@@ -11,7 +11,7 @@ public class ArgParser
     Options options;
     Options help_option;
 
-    public String input_document; 
+    private String input_document; 
     private String[] section_definition_paths;
     private Path output_directory;
 
@@ -35,6 +35,11 @@ public class ArgParser
         
         options.addOption("h", "help", false, "print this message");
         return options;
+    }
+
+    public String getInputDocument()
+    {
+        return input_document;
     }
 
     public Options getOptions() {
