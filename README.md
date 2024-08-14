@@ -112,7 +112,7 @@ docker run \
 -v ./assets:/app/assets \
 -v ./cache:/app/cache \
 cv-for-you \
-	-d /app/assets/sample_components/CV_Pretty.html \
+	-d /app/assets/sample_components/document.html \
 	-ca \
 	-sd /app/assets/sample_components/sections/ \
 	-o ./assets/sample_components/
