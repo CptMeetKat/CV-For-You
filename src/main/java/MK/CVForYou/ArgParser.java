@@ -11,14 +11,14 @@ public class ArgParser
     Options options;
     Options help_option;
 
-    private Path input_document; 
-    private String[] section_definition_paths;
-    private Path output_directory;
+    Path input_document; 
+    String[] section_definition_paths;
+    Path output_directory;
 
     String compare_document_path;
     String seek_url; 
 
-    private JobDescriptionSource jd_source; 
+    JobDescriptionSource jd_source; 
 
     private static final String BASIC_USAGE = "./CVForYou -d <document_path> -c <compare_path> -s <section_paths>";
 
