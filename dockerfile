@@ -31,7 +31,6 @@ WORKDIR /app
 
 # Copy the JAR file from the build stage
 COPY --from=build /app/target/* /app/
-COPY auth /app/
 
 
 RUN apt-get update && apt-get install -y \
@@ -47,6 +46,7 @@ RUN /usr/local/bin/install-fonts.sh
 
 
 COPY ./cache/* /app/cache/
+COPY auth /app/
 
 ENTRYPOINT ["java", "-cp", "/app/CVForYou-1.0-SNAPSHOT-jar-with-dependencies.jar", "MK.CVForYou.App"]
 
