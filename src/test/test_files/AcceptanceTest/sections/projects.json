@@ -1,0 +1,17 @@
+{
+    "container": "<div> <div> Name: {$elements[0]} </div> <div> Language: {$elements[1]} </div></div>",
+    "options": [
+        {
+            "keywords": "Java",
+            "elements": ["Project-J", "Java"]
+        },
+        {
+            "keywords": "C++",
+            "elements": ["Project-C", "C++"]
+        },
+        {
+            "keywords": "Python",
+            "elements": ["Project-P" , "Python"]
+        }
+    ]
+}
