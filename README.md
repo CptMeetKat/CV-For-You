@@ -102,7 +102,7 @@ docker run -v ./assets:/app/assets \
            -d assets/sample_components/document.html \
            -c assets/sample_components/description1.txt \
            -s assets/sample_components/sections/projects.json assets/sample_components/sections/tags.json \
-           -o ./assets/
+           -o ./assets/sample_components/
 ```
 
 As you add more dynamic sections you may prefer to run the following to shrink the command size
