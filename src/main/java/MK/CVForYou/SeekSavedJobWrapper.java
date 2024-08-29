@@ -37,7 +37,9 @@ public class SeekSavedJobWrapper
     private static boolean responseHasAuthError(JSONObject jobs_data)
     {
         //TODO: Limit to auth error, instead of all errors
-        boolean hasError = jobs_data.has("errors"); 
+        boolean hasError = jobs_data.has("errors");
+        if(hasError)
+            System.out.println(jobs_data.toString());
         return hasError;
     }
     
