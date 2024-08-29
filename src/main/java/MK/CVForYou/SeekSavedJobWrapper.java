@@ -54,6 +54,7 @@ public class SeekSavedJobWrapper
 
             if( responseHasAuthError(jobs_data)) 
             {
+                System.out.println("Trying to refresh token....");
                 tryRefreshToken();
                 jobs_data = getSavedJobsAsJson();
             }
