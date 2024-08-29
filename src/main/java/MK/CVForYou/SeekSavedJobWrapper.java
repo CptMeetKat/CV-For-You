@@ -21,6 +21,8 @@ public class SeekSavedJobWrapper
     String refresh_token;
     String client_id;
 
+    final String auth_file = "auth";
+
 
     public SeekSavedJobWrapper()
     {
@@ -123,7 +125,7 @@ public class SeekSavedJobWrapper
 
     private void readAuthFromFile()
     {
-        String file = "auth2";
+        String file = auth_file;
         JSONObject auth = null;
         try {
             String data = IOUtils.readFile(file);
@@ -194,6 +196,6 @@ public class SeekSavedJobWrapper
         auth.put("JobseekerSessionId", JobseekerSessionId);
         auth.put("client_id", client_id);
 
-        IOUtils.writeToFile(auth.toString(), "auth2");
+        IOUtils.writeToFile(auth.toString(), auth_file);
     }
 }
