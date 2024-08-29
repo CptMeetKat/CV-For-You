@@ -172,8 +172,12 @@ public class SeekSavedJobWrapper
             System.out.println(response.body());
             
             JSONObject auth = new JSONObject(response.body());
-            setAccessToken(auth.optString("access_token"));
-            setRefreshToken(auth.optString("refresh_token"));
+            String access_token = auth.optString("access_token");
+            String refresh_token = auth.optString("refresh_token");
+            if(!access_token.equals(""))
+                setAccessToken(access_token);
+            if(!refresh_token.equals(""))
+                setRefreshToken(refresh_token);
             writeAuthToFile();
         } catch (IOException | InterruptedException e) {
             // TODO Auto-generated catch block
