@@ -74,16 +74,35 @@ The command line argument `-ca, --compare-seek-all` pulls data from your 'Saved 
 2. Open browser console
 3. Run Script in console
 ``` js
+let auth = {};
+
+const cookies = document.cookie.split('; ');
+cookies.forEach(cookie => {
+  const [key, value] = cookie.split('=');
+  if(key == "JobseekerSessionId") { 
+      auth[key] = value;
+  }
+});
+
+
+
 for (let i = 0; i < localStorage.length; i++) {
   const key = localStorage.key(i);
+
+  // Check if the key contains a specific pattern or substring
   if (key.includes("auth0spajs")) {
     const value = localStorage.getItem(key);
     let obj = JSON.parse(value);
-    let access_token = "Bearer " + obj.body.access_token;
-    console.log(access_token);
+    auth["access_token"] = "Bearer " + obj.body.access_token;
+    auth["refresh_token"] =  obj.body.refresh_token;
+    auth["client_id"] =  obj.body.client_id;
   }
 }
+
+console.log(JSON.stringify(auth));
+
 ```
+
 4. Copy-paste result in file named `auth` in repo directory
 
 
