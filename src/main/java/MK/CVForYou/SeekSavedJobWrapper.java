@@ -182,7 +182,7 @@ public class SeekSavedJobWrapper
 
     private void setAccessToken(String access_token)
     {
-        this.access_token = "Bearer " + access_token;
+        this.access_token = access_token;
     }
 
     private void setRefreshToken(String refresh_token)
