@@ -12,8 +12,12 @@ public class App
     public static void main( String[] args )
     {
 	    Logger logger = LoggerFactory.getLogger(App.class);
-		logger.info("Info Message Logged !!!");
 
+        logger.trace("test");
+        logger.debug("test");
+        logger.info("test");
+        logger.warn("test");
+        logger.error("test");
 
 
 
