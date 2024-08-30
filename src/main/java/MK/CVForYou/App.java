@@ -3,10 +3,21 @@ package MK.CVForYou;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 public class App 
 {
     public static void main( String[] args )
     {
+	    Logger logger = LoggerFactory.getLogger(App.class);
+		logger.info("Info Message Logged !!!");
+
+
+
+
+
         ArgParser ap = new ArgParser();
         if ( ap.parseArgs(args) )
             new App(ap);
