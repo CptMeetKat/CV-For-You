@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ArgParser
 {
     Options options;
@@ -21,6 +24,8 @@ public class ArgParser
     JobDescriptionSource jd_source; 
 
     private static final String BASIC_USAGE = "./CVForYou -d <document_path> -c <compare_path> -s <section_paths>";
+
+    static final Logger logger = LoggerFactory.getLogger(App.class);
 
     public ArgParser()
     {
@@ -222,7 +227,7 @@ public class ArgParser
             fileArray = fileNames.toArray(new String[0]);
 
         } catch (NoSuchFileException e) {
-            System.out.printf("Warning: Unable to find files in %s\n", e.getMessage());
+            logger.warn("Unable to find files in %s\n", e.getMessage());
         } catch (IOException e) {
 			e.printStackTrace();
 		}

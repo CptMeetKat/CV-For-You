@@ -83,7 +83,7 @@ public class SeekJobDescriptionWrapper {
         }
         else 
         {
-            System.out.println("The <div> element with data-automation='jobAdDetails' was not found.");
+            logger.warn("The <div> element with data-automation='jobAdDetails' was not found.");
         }
         return job_description.toString();
     }
@@ -93,7 +93,7 @@ public class SeekJobDescriptionWrapper {
         String job_description = null;
         String useragent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
         try {
-            System.out.println("Obtaining job description from Seek: " + job_url);
+            logger.info("Obtaining job description from Seek: " + job_url);
             Document doc = Jsoup.connect(job_url)
                     .userAgent(useragent)
                     .get();

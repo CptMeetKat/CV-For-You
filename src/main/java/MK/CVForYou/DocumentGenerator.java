@@ -29,7 +29,7 @@ public class DocumentGenerator
                sections.add(new DynamicSection(path.toString()));
         }
         catch(IOException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
