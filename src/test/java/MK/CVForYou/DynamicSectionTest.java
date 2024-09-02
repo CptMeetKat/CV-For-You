@@ -7,8 +7,12 @@ import java.io.IOException;
 
 import org.junit.Test;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class DynamicSectionTest 
 {
+    static final Logger logger = LoggerFactory.getLogger(DynamicSectionTest.class);
     //TODO: Refactor for test data to exist in this file, not in external file
     @Test
     public void fileWithExtensionShouldHaveNoExtensionInName()
@@ -21,7 +25,7 @@ public class DynamicSectionTest
             assertEquals( expected, result);
         }
         catch(IOException e) {
-             System.out.println(e.getMessage());
+             logger.error(e.getMessage());
              fail("Unable to read file");
         }
         
@@ -40,7 +44,7 @@ public class DynamicSectionTest
         }
         catch(IOException e)
         {
-             System.out.println(e.getMessage());
+             logger.error(e.getMessage());
              fail("Unable to read file");
         }
     }
@@ -57,7 +61,7 @@ public class DynamicSectionTest
         }
         catch(IOException e)
         {
-             System.out.println(e.getMessage());
+             logger.error(e.getMessage());
              fail("Unable to read file");
         }
     }
@@ -74,7 +78,7 @@ public class DynamicSectionTest
         }
         catch(IOException e)
         {
-             System.out.println(e.getMessage());
+             logger.error(e.getMessage());
              fail("Unable to read file");
         }
     }
@@ -91,7 +95,7 @@ public class DynamicSectionTest
         }
         catch(IOException e)
         {
-             System.out.println(e.getMessage());
+             logger.error(e.getMessage());
              fail("Unable to read file");
         }
     }
