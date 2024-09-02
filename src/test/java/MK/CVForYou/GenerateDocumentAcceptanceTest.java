@@ -54,8 +54,8 @@ public class GenerateDocumentAcceptanceTest
 
         PDFTextStripper pdfStripper = new PDFTextStripper();
         String text = pdfStripper.getText(document);
-        System.out.println(text);
-        System.out.println(expected);
+        //System.out.println(text);
+        //System.out.println(expected);
 
         assertEquals(expected, text); 
     }
