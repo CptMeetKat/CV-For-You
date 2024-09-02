@@ -44,7 +44,7 @@ public class SeekSavedJobWrapper
         //TODO: Limit to auth error, instead of all errors
         boolean hasError = jobs_data.has("errors");
         if(hasError)
-            System.out.println(jobs_data.toString());
+            logger.error(jobs_data.toString());
         return hasError;
     }
     
@@ -59,7 +59,7 @@ public class SeekSavedJobWrapper
 
             if( responseHasAuthError(jobs_data)) 
             {
-                System.out.println("Trying to refresh token....");
+                logger.info("Trying to refresh token....");
                 tryRefreshToken();
                 jobs_data = getSavedJobsAsJson();
             }
@@ -126,7 +126,7 @@ public class SeekSavedJobWrapper
             //System.out.println(response.headers()); 
             //System.out.println();
             //System.out.println(response.body()); 
-            System.out.println("Printing: SavedJobsAsJson...."); 
+            //logger.trace("Printing SavedJobsAsJson...."); //Where is this printing what?
 
             return new JSONObject(response.body());
     }
