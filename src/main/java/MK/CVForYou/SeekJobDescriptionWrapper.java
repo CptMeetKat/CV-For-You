@@ -10,8 +10,11 @@ import java.nio.file.Paths;
 
 import org.jsoup.select.Elements;
 
-public class SeekJobDescriptionWrapper {
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+public class SeekJobDescriptionWrapper {
+    static final Logger logger = LoggerFactory.getLogger(SeekJobDescriptionWrapper.class);
     String job_url;
 
     public SeekJobDescriptionWrapper(String job_url) {
@@ -23,7 +26,7 @@ public class SeekJobDescriptionWrapper {
         int slash_position = job_url.lastIndexOf("/");
         if(slash_position == -1)
         {
-            System.out.printf("WARNING: Unable to extract ID from %s\n", job_url);
+            logger.warn("Unable to extract ID from {}\n", job_url);
             return null;
         }
         return job_url.substring(slash_position+1); //Unsafe if / is last character
@@ -45,7 +48,7 @@ public class SeekJobDescriptionWrapper {
         try {
             Thread.sleep(1000); // Sleep for 3000 milliseconds (3 seconds)
         } catch (InterruptedException e) {
-            System.out.println("Thread was interrupted");
+            logger.info("Thread was interrupted");
         }
     }
 
@@ -57,11 +60,11 @@ public class SeekJobDescriptionWrapper {
         try {
             String html = IOUtils.readFile(directoryPath.toString());
             Document doc = Jsoup.parse(html);
-            System.out.println("Extract job from HTML: " + job_id + "");
+            logger.info("Extract job from HTML: " + job_id + "");
             result = extractJobSectionFromHTML(doc);
-            System.out.println("JD cache found: " + job_id + "");
+            logger.info("JD cache found: " + job_id + "");
         } catch (Exception e) {
-            System.out.println("JD cache not found: ");
+            logger.info("JD cache not found");
         }
 
         return result;

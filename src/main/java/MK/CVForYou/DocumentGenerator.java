@@ -6,8 +6,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class DocumentGenerator
 {
+    static final Logger logger = LoggerFactory.getLogger(DocumentGenerator.class);
     String template;
     ArrayList<DynamicSection> sections = new ArrayList<DynamicSection>();
     Path output_directory = Paths.get("./");
@@ -53,7 +57,7 @@ public class DocumentGenerator
 
         boolean success = IOUtils.writeToFile(template, out_path);
         if(success)
-            System.out.printf("Document has been generated at: %s\n", out_path);
+            logger.info("Document has been generated at: {}\n", out_path);
     }
 
 }
