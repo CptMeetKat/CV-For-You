@@ -12,8 +12,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONPointerException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class SeekSavedJobWrapper
 {
+    static final Logger logger = LoggerFactory.getLogger(SeekSavedJobWrapper.class);
+
     String timezone;
 
     String JobseekerSessionId;
@@ -73,7 +78,7 @@ public class SeekSavedJobWrapper
 			e.printStackTrace();
 		}
         catch (BadAuthenticationException e) {
-            System.out.println("ERROR: Authentication token invalid");
+            logger.error("Authentication token invalid");
         }
         return job_urls;
     }
@@ -95,10 +100,10 @@ public class SeekSavedJobWrapper
                 arr.add(new SeekSavedJob(job.getJSONObject("node")));
             }
         } catch (JSONPointerException e) {
-            System.out.println("Error: Unable to deserialise SavedJobs object");
+            logger.error("Unable to deserialise SavedJobs object");
         }
         catch(NullPointerException e) {
-            System.out.println("Error: Null found when querying SavedJobs");
+            logger.error("Null found when querying SavedJobs");
         }
 
         return arr; 
