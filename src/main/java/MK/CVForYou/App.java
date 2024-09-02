@@ -9,16 +9,14 @@ import org.slf4j.LoggerFactory;
 
 public class App 
 {
+    static final Logger logger = LoggerFactory.getLogger(App.class);
     public static void main( String[] args )
     {
-	    Logger logger = LoggerFactory.getLogger(App.class);
-
         logger.trace("test");
         logger.debug("test");
         logger.info("test");
         logger.warn("test");
         logger.error("test");
-
 
 
 
