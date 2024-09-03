@@ -93,7 +93,7 @@ for (let i = 0; i < localStorage.length; i++) {
   if (key.includes("auth0spajs")) {
     const value = localStorage.getItem(key);
     let obj = JSON.parse(value);
-    auth["access_token"] = "Bearer " + obj.body.access_token;
+    auth["access_token"] = obj.body.access_token;
     auth["refresh_token"] =  obj.body.refresh_token;
     auth["client_id"] =  obj.body.client_id;
   }
