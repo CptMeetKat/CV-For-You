@@ -150,7 +150,7 @@ public class ArgParser
               handleOutputFlags(cmd);
 
         } catch (ParseException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
             formatter.printHelp(BASIC_USAGE,
                                     options);
             success = false;

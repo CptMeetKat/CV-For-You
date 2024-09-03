@@ -4,8 +4,12 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class JobDescriptionFromFile implements JobDescriptionSource
 {
+    static final Logger logger = LoggerFactory.getLogger(JobDescriptionFromFile.class);
     Path filePath;
     public JobDescriptionFromFile(Path filePath)
     {
@@ -27,7 +31,7 @@ public class JobDescriptionFromFile implements JobDescriptionSource
             document = IOUtils.readFile(document_path.toString());
         }
         catch (IOException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
             System.exit(1);
         }
         return document;

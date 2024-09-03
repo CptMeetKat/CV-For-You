@@ -174,7 +174,7 @@ public class SeekSavedJobWrapper
         try {
             HttpResponse<String> response;
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.body());
+            logger.debug(response.body());
             
             JSONObject auth = new JSONObject(response.body());
             String access_token = auth.optString("access_token");
