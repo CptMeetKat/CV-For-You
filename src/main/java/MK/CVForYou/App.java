@@ -12,13 +12,6 @@ public class App
     static final Logger logger = LoggerFactory.getLogger(App.class);
     public static void main( String[] args )
     {
-        logger.trace("test");
-        logger.debug("test");
-        logger.info("test");
-        logger.warn("test");
-        logger.error("test");
-
-
 
         ArgParser ap = new ArgParser();
         if ( ap.parseArgs(args) )
