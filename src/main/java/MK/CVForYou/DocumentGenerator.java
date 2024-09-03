@@ -57,7 +57,7 @@ public class DocumentGenerator
 
         boolean success = IOUtils.writeToFile(template, out_path);
         if(success)
-            logger.info("Document has been generated at: {}\n", out_path);
+            logger.info("Document has been generated at: {}", out_path);
     }
 
 }
