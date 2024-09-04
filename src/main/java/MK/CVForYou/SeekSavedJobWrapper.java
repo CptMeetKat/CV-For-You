@@ -43,8 +43,6 @@ public class SeekSavedJobWrapper
     {
         //TODO: Limit to auth error, instead of all errors
         boolean hasError = jobs_data.has("errors");
-        if(hasError)
-            logger.error(jobs_data.toString());
         return hasError;
     }
     
@@ -59,13 +57,14 @@ public class SeekSavedJobWrapper
 
             if( responseHasAuthError(jobs_data)) 
             {
-                logger.info("Trying to refresh token....");
+                logger.info("Access token invalid, trying to refresh token...");
                 tryRefreshToken();
                 jobs_data = getSavedJobsAsJson();
             }
 
             if( responseHasAuthError(jobs_data) )
             {
+                logger.error(jobs_data.toString());
                 throw new BadAuthenticationException("Unable to refresh access token, please refresh auth file"); 
             }
 
