@@ -32,7 +32,7 @@ public class ReplaceableKey
     {
         String result = key.replaceAll("{}$", "");
         result = result.replaceAll("\\(.*?\\)", "");
-        section_name = result;
+        section_name = result.trim();
     }
 
     private void extractFields(String key)
