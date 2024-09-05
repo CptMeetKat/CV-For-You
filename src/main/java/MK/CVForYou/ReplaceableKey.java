@@ -30,7 +30,7 @@ public class ReplaceableKey
 
     private void extractSectionName(String key)
     {
-        String result = key.replaceAll("{}$", "");
+        String result = key.replaceAll("\\{|\\}|\\$", "");
         result = result.replaceAll("\\(.*?\\)", "");
         section_name = result.trim();
     }
