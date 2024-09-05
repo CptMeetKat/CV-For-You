@@ -41,9 +41,16 @@ public class ReplaceableKey
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(key);
-
-        while (matcher.find()) {
-            fields.add(matcher.group());
+        
+        if(matcher.find())
+        {
+            String segment = matcher.group();
+            segment = segment.substring(1, segment.length() - 1); //Remove first and last char
+            String[] atoms = segment.split(",");
+            
+            for (String s : atoms) {
+                fields.add(s);
+            }
         }
     }
 
