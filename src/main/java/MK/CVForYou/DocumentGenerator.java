@@ -9,6 +9,10 @@ import java.util.Comparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+
 public class DocumentGenerator
 {
     static final Logger logger = LoggerFactory.getLogger(DocumentGenerator.class);
@@ -30,6 +34,25 @@ public class DocumentGenerator
         catch(IOException e) {
             logger.error(e.getMessage());
         }
+    }
+
+    private ArrayList<String> getKeysToReplace()
+    {
+        ArrayList<String> substitutes = new ArrayList<String>();
+        String regex = "\\{\\$.*?\\}"; //e.g. 1. "{$title(job_title)}", "{$job_description}"
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(template);
+
+        while (matcher.find()) {
+            System.out.println("Found at: " + matcher.start() + " - " + matcher.end());
+            System.out.println("Found at: " + matcher.group());
+            substitutes.add(matcher.group());
+        }
+
+        logger.debug("Replaceable sections detected: {}", substitutes);
+
+        return substitutes;
     }
 
     public void generateDocument(InputJob model, String output_name)
