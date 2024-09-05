@@ -49,7 +49,7 @@ public class ReplaceableKey
             String[] atoms = segment.split(",");
             
             for (String s : atoms) {
-                fields.add(s);
+                fields.add(s.trim());
             }
         }
     }
