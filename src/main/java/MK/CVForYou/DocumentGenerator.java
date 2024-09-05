@@ -36,31 +36,40 @@ public class DocumentGenerator
         }
     }
 
-    private ArrayList<String> getKeysToReplace()
+    private ArrayList<ReplaceableKey> getKeysToReplace()
     {
-        ArrayList<String> substitutes = new ArrayList<String>();
+        ArrayList<ReplaceableKey> substitutes = new ArrayList<ReplaceableKey>();
         String regex = "\\{\\$.*?\\}"; //e.g. 1. "{$title(job_title)}", "{$job_description}"
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(template);
 
+        String log_string = "";
+
         while (matcher.find()) {
-            System.out.println("Found at: " + matcher.start() + " - " + matcher.end());
-            System.out.println("Found at: " + matcher.group());
-            substitutes.add(matcher.group());
+            log_string += matcher.group() + " ";
+            substitutes.add(new ReplaceableKey(matcher.group()));
         }
 
-        logger.debug("Replaceable sections detected: {}", substitutes);
+        logger.debug("Replaceable sections detected: {}", log_string);
 
         return substitutes;
     }
 
     public void generateDocument(InputJob model, String output_name)
     {
+        ArrayList<ReplaceableKey> replaceableKeys = getKeysToReplace();
+//        for(ReplaceableKey key : replaceableKeys)
+//        {
+//        }
+
+        //If model has the field as NON-NULL value use that filed for the comparator
+
         Comparator<DynamicHTMLElement> sorter = new CosineSimilarityComparator(model.job_description);
 
         for(DynamicSection section : sections)
         {
+            //if SECTION???
             section.sort(sorter);
 
             //System.out.println(section.getSectionName());
