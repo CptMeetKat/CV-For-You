@@ -36,7 +36,7 @@ public class App
     public static HashMap<String, String> getJobDescriptions(JobDescriptionSource jd_source)
     {
         HashMap<String, String> job_descriptions = new HashMap<String, String>();
-        ArrayList<InputJob> jobs = jd_source.getJobDescriptions();
+        ArrayList<InputJob> jobs = jd_source.getJobModel(); 
         for (InputJob job : jobs) {
             job_descriptions.put(job.name, job.description);
         }

@@ -8,7 +8,7 @@ public class JobDescriptionFromSaved implements JobDescriptionSource
     public JobDescriptionFromSaved(){}
 
 	@Override
-	public ArrayList<InputJob> getJobDescriptions()
+	public ArrayList<InputJob> getJobModel()
     {
         ArrayList<InputJob> jobs = new ArrayList<>();
 

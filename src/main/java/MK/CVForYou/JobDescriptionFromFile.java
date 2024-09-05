@@ -17,7 +17,7 @@ public class JobDescriptionFromFile implements JobDescriptionSource
     }
 
 	@Override
-	public ArrayList<InputJob> getJobDescriptions() {
+	public ArrayList<InputJob> getJobModel() {
         ArrayList<InputJob> jobs = new ArrayList<>();
         jobs.add(  new InputJob("generated_document", getDocument(filePath))  ); //TODO: add post path slash to end of file name
 

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public interface JobDescriptionSource {
 
-    public ArrayList<InputJob> getJobDescriptions();
-
+    public ArrayList<InputJob> getJobModel();
 }
 

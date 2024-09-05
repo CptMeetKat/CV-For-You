@@ -12,7 +12,7 @@ public class JobDescriptionFromSeekJob implements JobDescriptionSource
     }
 
 	@Override
-	public ArrayList<InputJob> getJobDescriptions() {
+	public ArrayList<InputJob> getJobModel() {
         
         ArrayList<InputJob> jobs = new ArrayList<>();
 
