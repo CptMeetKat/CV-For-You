@@ -20,7 +20,7 @@ public class App
 
     public App(ArgParser ap)
     {
-        HashMap<String, String> job_descriptions = getJobDescriptions(ap.getJDSource());
+        HashMap<String, InputJob> job_descriptions = getJobs(ap.getJDSource());
 
 
         for (String job_id: job_descriptions.keySet()) 
@@ -28,17 +28,17 @@ public class App
             DocumentGenerator generator = new DocumentGenerator(ap.getInputDocument(),
                                     ap.getSections(),
                                     ap.getOutputFolder());
-            generator.generateDocument(job_descriptions.get(job_id), job_id);
+            generator.generateDocument(job_descriptions.get(job_id).job_description, job_id);
             ExecuteChromePDFGenerator.run(job_id, ap.getOutputFolder());
         }
     }
 
-    public static HashMap<String, String> getJobDescriptions(JobDescriptionSource jd_source)
+    public static HashMap<String, InputJob> getJobs(JobDescriptionSource jd_source)
     {
-        HashMap<String, String> job_descriptions = new HashMap<String, String>();
+        HashMap<String, InputJob> job_descriptions = new HashMap<String, InputJob>();
         ArrayList<InputJob> jobs = jd_source.getJobModel(); 
         for (InputJob job : jobs) {
-            job_descriptions.put(job.name, job.job_description);
+            job_descriptions.put(job.name, job);
         }
 
         return job_descriptions;
