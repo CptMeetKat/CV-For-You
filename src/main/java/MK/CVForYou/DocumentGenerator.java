@@ -19,7 +19,6 @@ public class DocumentGenerator
     public DocumentGenerator(Path template_file, Path[] component_paths,
                              Path output_directory )
     {
-        //this.model_text = model_text;
         if(output_directory != null)
             this.output_directory = output_directory;
 
