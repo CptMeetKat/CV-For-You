@@ -4,10 +4,10 @@ package MK.CVForYou;
 public class InputJob
 {
     public String name;
-    public String description;
-    public InputJob(String name, String description)
+    public String job_description;
+    public InputJob(String name, String job_description)
     {
         this.name = name;
-        this.description = description;
+        this.job_description = job_description;
     }
 }
