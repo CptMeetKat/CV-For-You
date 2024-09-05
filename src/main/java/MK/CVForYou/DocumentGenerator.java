@@ -32,12 +32,6 @@ public class DocumentGenerator
         }
     }
 
-    
-    public void generateDocument(InputJob model)
-    {
-        generateDocument(model, "generated_document.html");
-    }
-
     public void generateDocument(InputJob model, String output_name)
     {
         Comparator<DynamicHTMLElement> sorter = new CosineSimilarityComparator(model.job_description);
