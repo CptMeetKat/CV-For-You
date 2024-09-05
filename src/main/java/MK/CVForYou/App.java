@@ -28,7 +28,7 @@ public class App
             DocumentGenerator generator = new DocumentGenerator(ap.getInputDocument(),
                                     ap.getSections(),
                                     ap.getOutputFolder());
-            generator.generateDocument(job_descriptions.get(job_id).job_description, job_id);
+            generator.generateDocument(job_descriptions.get(job_id), job_id); //UGLY! FIX!
             ExecuteChromePDFGenerator.run(job_id, ap.getOutputFolder());
         }
     }

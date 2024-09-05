@@ -34,14 +34,14 @@ public class DocumentGenerator
     }
 
     
-    public void generateDocument(String model_text)
+    public void generateDocument(InputJob model)
     {
-        generateDocument(model_text, "generated_document.html");
+        generateDocument(model, "generated_document.html");
     }
 
-    public void generateDocument(String model_text, String output_name)
+    public void generateDocument(InputJob model, String output_name)
     {
-        Comparator<DynamicHTMLElement> sorter = new CosineSimilarityComparator(model_text);
+        Comparator<DynamicHTMLElement> sorter = new CosineSimilarityComparator(model.job_description);
 
         for(DynamicSection section : sections)
         {
