@@ -76,7 +76,17 @@ public class ReplaceableKeyTest
     }
 
 
-    //INVALID
-    //""
+	@SuppressWarnings("unused")
+	@Test
+    public void emptyKeyThrowsInvalid()
+    {
+        try
+        {
+            ReplaceableKey key1 = new ReplaceableKey("");
+            fail("Badly formatted key did not throw exception");
+        }
+        catch(IllegalArgumentException e){}
+    }
+
     //{$}
 }
