@@ -81,7 +81,7 @@ public class DocumentGenerator
 				Field f1 = InputJob.class.getField(p);
 				String value = (String)f1.get(job);
                 if(value != null) {
-                    logger.debug("The field '{}' will be used to generate section {}", f1.getName(), replaceable_key.getOriginalKey());
+                    logger.debug("The field '{}' will be used to generate section '{}'", f1.getName(), replaceable_key.getOriginalKey());
                     return value;
                 }
 			} 
