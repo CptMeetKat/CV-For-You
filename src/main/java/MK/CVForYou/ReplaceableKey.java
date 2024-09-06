@@ -22,6 +22,9 @@ public class ReplaceableKey
 
     public static boolean validKeyString(String key)
     {
+        if( key.length() == 3 ) //${} is invalid
+            return false;
+
         String regex = "\\{\\$.*?\\}"; //e.g. {$_____}"
 
         Pattern pattern = Pattern.compile(regex);

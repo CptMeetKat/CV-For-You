@@ -88,5 +88,15 @@ public class ReplaceableKeyTest
         catch(IllegalArgumentException e){}
     }
 
-    //{$}
+
+	@Test
+    public void keyWithNoSectionThrowsException()
+    {
+        try
+        {
+            ReplaceableKey key = new ReplaceableKey("{$}");
+            fail("Badly formatted key did not throw exception");
+        }
+        catch(IllegalArgumentException e){}
+    }
 }
