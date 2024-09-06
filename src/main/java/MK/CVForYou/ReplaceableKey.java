@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 public class ReplaceableKey
 {
+    String original_key;
     String section_name;
     ArrayList<String> fields = new ArrayList<String>();
 
@@ -14,6 +15,8 @@ public class ReplaceableKey
     {
         if(!validKeyString(key))
             throw new IllegalArgumentException("Invalid key: Key is not formatted correctly '" + key + "'");
+
+        original_key = key;
         extractFields(key);
         extractSectionName(key);
         if(fields.isEmpty())
@@ -67,6 +70,11 @@ public class ReplaceableKey
                     fields.add(s.trim());
             }
         }
+    }
+
+    public String getOriginalKey()
+    {
+        return original_key;
     }
 
 }

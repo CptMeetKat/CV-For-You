@@ -99,4 +99,12 @@ public class ReplaceableKeyTest
         }
         catch(IllegalArgumentException e){}
     }
+
+
+	@Test
+    public void originalKeyIsStored()
+    {
+        ReplaceableKey key = new ReplaceableKey("{$original_key}");
+        assertEquals(key.getOriginalKey(), "{$original_key}");
+    }
 }
