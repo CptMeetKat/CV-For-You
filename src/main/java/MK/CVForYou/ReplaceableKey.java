@@ -12,10 +12,21 @@ public class ReplaceableKey
 
     public ReplaceableKey(String key)
     {
+        if(!validKeyString(key))
+            throw new IllegalArgumentException("Invalid key: Key is not formatted correctly '" + key + "'");
         extractFields(key);
         extractSectionName(key);
         if(fields.isEmpty())
             fields.add("job_description");
+    }
+
+    public static boolean validKeyString(String key)
+    {
+        String regex = "\\{\\$.*?\\}"; //e.g. {$_____}"
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(key);
+        return matcher.find();
     }
 
     public String getSectionName()

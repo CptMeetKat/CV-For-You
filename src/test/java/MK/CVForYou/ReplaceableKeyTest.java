@@ -3,6 +3,7 @@ package MK.CVForYou;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 
@@ -45,8 +46,37 @@ public class ReplaceableKeyTest
         assertEquals(fields.size(), 1);
         assertEquals(fields.get(0), "job_description");
     }
-    //{$section_name1()}
-    //{$section_name1}
+
+
+    @Test
+    public void keyWithNoParenthesisShouldHaveSectionAndDefaultField()
+    {
+        ReplaceableKey key = new ReplaceableKey("{$title}");
+        ArrayList<String> fields = key.getFields();
+        String section_name = key.getSectionName();
+
+        assertEquals("title", section_name);
+        assertEquals(fields.size(), 1);
+        assertEquals(fields.get(0), "job_description");
+    }
+
+
+    @SuppressWarnings("unused")
+	@Test
+    public void keyWithoutBraceDollarSignBraceAreInvalid()
+    {
+        try
+        {
+            ReplaceableKey key1 = new ReplaceableKey("{$");
+            ReplaceableKey key2 = new ReplaceableKey("{}");
+            ReplaceableKey key3 = new ReplaceableKey("$}");
+            fail("Badly formatted key did not throw exception");
+        }
+        catch(IllegalArgumentException e){}
+    }
+
+
     //INVALID
     //""
+    //{$}
 }
