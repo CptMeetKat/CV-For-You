@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,9 +57,21 @@ public class DocumentGenerator
         return substitutes;
     }
 
+    private HashMap<String, ReplaceableKey> createMapOnKeysArray( ArrayList<ReplaceableKey> replaceable_keys )
+    {
+        HashMap<String, ReplaceableKey> map = new HashMap<String, ReplaceableKey>();
+
+        for(ReplaceableKey key : replaceable_keys)
+        {
+            map.put(key.getSectionName(), key);
+        }
+
+        return map;
+    }
+
     public void generateDocument(InputJob model, String output_name)
     {
-        ArrayList<ReplaceableKey> replaceableKeys = getKeysToReplace();
+        HashMap<String, ReplaceableKey> replaceableKeys = createMapOnKeysArray(getKeysToReplace());
 //        for(ReplaceableKey key : replaceableKeys)
 //        {
 //        }
@@ -69,6 +82,7 @@ public class DocumentGenerator
 
         for(DynamicSection section : sections)
         {
+            logger.debug(section.getSectionName());
             //if SECTION???
             section.sort(sorter);
 
