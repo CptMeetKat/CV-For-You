@@ -34,6 +34,17 @@ public class ReplaceableKeyTest
     }
 
 
+    @Test
+    public void keyWithEmptyFieldShouldHaveSectionAndDefaultField()
+    {
+        ReplaceableKey key = new ReplaceableKey("{$title()}");
+        ArrayList<String> fields = key.getFields();
+        String section_name = key.getSectionName();
+
+        assertEquals("title", section_name);
+        assertEquals(fields.size(), 1);
+        assertEquals(fields.get(0), "job_description");
+    }
     //{$section_name1()}
     //{$section_name1}
     //INVALID
