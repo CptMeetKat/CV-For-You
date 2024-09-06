@@ -101,26 +101,15 @@ public class DocumentGenerator
     public void generateDocument(InputJob model, String output_name)
     {
         HashMap<String, ReplaceableKey> replaceableKeys = createMapOnKeysArray(getKeysToReplace());
-//        for(ReplaceableKey key : replaceableKeys)
-//        {
-//        }
-
-        //If model has the field as NON-NULL value use that filed for the comparator
-
-        Comparator<DynamicHTMLElement> sorter = new CosineSimilarityComparator(model.job_description);
-
+        
         for(DynamicSection section : sections)
         {
             ReplaceableKey key_to_replace = replaceableKeys.get(section.getSectionName());
             String evaluation_value = getPreferredValueToEvaluateSectionFrom(key_to_replace, model);
-            logger.debug(section.getSectionName());
-            //if SECTION???
+            Comparator<DynamicHTMLElement> sorter = new CosineSimilarityComparator(evaluation_value);
             section.sort(sorter);
 
-            //System.out.println(section.getSectionName());
-            String section_marker = "{$" + section.getSectionName() + "}"; //This will no longer work
-
-            template = template.replace(section_marker, section.compose());
+            template = template.replace(key_to_replace.getOriginalKey(), section.compose());
         }
 
         String out_path = output_directory.resolve(output_name + ".html").toString(); 
