@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.lang.reflect.Field;
 
 
 public class DocumentGenerator
@@ -69,6 +70,34 @@ public class DocumentGenerator
         return map;
     }
 
+    //TODO: Abstract and write tests 
+    private String getPreferredValueToEvaluateSectionFrom(ReplaceableKey replaceable_key, InputJob job)
+    {
+        ArrayList<String> preferences = replaceable_key.getFields();
+
+        for(String p : preferences) { 
+
+            try {
+				Field f1 = InputJob.class.getField(p);
+				String value = (String)f1.get(job);
+                if(value != null) {
+                    logger.debug("The field {} will be used to generate section {}", f1.getName(), replaceable_key.getOriginalKey());
+                    return value;
+                }
+			} 
+            catch (NoSuchFieldException e) {
+                logger.warn("The field {} can not be used to evaluate a dynamic section", p);
+            }
+            catch (IllegalArgumentException | IllegalAccessException e) {
+                logger.error(e.getMessage());
+				e.printStackTrace();
+			}
+        }
+        
+        logger.warn("No field to evaluate section {} from", replaceable_key.getOriginalKey());
+        return null;
+    }
+
     public void generateDocument(InputJob model, String output_name)
     {
         HashMap<String, ReplaceableKey> replaceableKeys = createMapOnKeysArray(getKeysToReplace());
@@ -82,12 +111,14 @@ public class DocumentGenerator
 
         for(DynamicSection section : sections)
         {
+            ReplaceableKey key_to_replace = replaceableKeys.get(section.getSectionName());
+            String evaluation_value = getPreferredValueToEvaluateSectionFrom(key_to_replace, model);
             logger.debug(section.getSectionName());
             //if SECTION???
             section.sort(sorter);
 
             //System.out.println(section.getSectionName());
-            String section_marker = "{$" + section.getSectionName() + "}";
+            String section_marker = "{$" + section.getSectionName() + "}"; //This will no longer work
 
             template = template.replace(section_marker, section.compose());
         }
