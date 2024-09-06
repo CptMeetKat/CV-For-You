@@ -94,7 +94,8 @@ public class ReplaceableKeyTest
     {
         try
         {
-            ReplaceableKey key = new ReplaceableKey("{$}");
+            @SuppressWarnings("unused")
+			ReplaceableKey key = new ReplaceableKey("{$}");
             fail("Badly formatted key did not throw exception");
         }
         catch(IllegalArgumentException e){}
