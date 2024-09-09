@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 public class SeekJobDescriptionWrapper {
     static final Logger logger = LoggerFactory.getLogger(SeekJobDescriptionWrapper.class);
     String job_url;
-    Document page; //TODO: Remove this, only store the necessary fields from this object
     String job_description;
 
 
@@ -43,14 +42,13 @@ public class SeekJobDescriptionWrapper {
 
     public void initialise()
     {
-        Document d = getJDPageFromCache();
-        if(d == null)
+        Document page = getJDPageFromCache();
+        if(page == null)
         {
-            initJDPage();
+            page = initJDPage();
             cachePage(page, getSeekJobID()); //TODO: this getSeekJobID() function smells funny
             sleep();
         }
-        page = d;
         job_description = extractJobSectionFromHTML(page);
 
         sleep(); //Avoid flagging seek systems
@@ -70,19 +68,21 @@ public class SeekJobDescriptionWrapper {
         }
     }
 
-    private void initJDPage()
+    private Document initJDPage()
     {
         // Seek does not respond to jsoup default useragent
+        Document result = null;
         String useragent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
         try {
             logger.info("Obtaining job description from Seek: " + job_url);
             Document doc = Jsoup.connect(job_url)
                     .userAgent(useragent)
                     .get();
-            this.page = doc;
+            result = doc;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return result;
     }
 
     private static void cachePage(Document doc, String filename)
