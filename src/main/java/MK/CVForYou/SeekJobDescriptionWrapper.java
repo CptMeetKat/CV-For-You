@@ -17,6 +17,7 @@ public class SeekJobDescriptionWrapper {
     static final Logger logger = LoggerFactory.getLogger(SeekJobDescriptionWrapper.class);
     String job_url;
     Document page;
+    String job_description;
 
 
     public SeekJobDescriptionWrapper(String job_url, boolean initialise) { 
@@ -44,6 +45,7 @@ public class SeekJobDescriptionWrapper {
     {
         initJDPage();
         cachePage(page, getSeekJobID()); //TODO: this getSeekJobID() function smells funny
+        job_description = extractJobSectionFromHTML(page);
 
         sleep(); //Avoid flagging seek systems
     }
