@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 public class SeekJobDescriptionWrapper {
     static final Logger logger = LoggerFactory.getLogger(SeekJobDescriptionWrapper.class);
     String job_url;
-    Document page;
+    Document page; //TODO: Remove this, only store the necessary fields from this object
     String job_description;
 
 
