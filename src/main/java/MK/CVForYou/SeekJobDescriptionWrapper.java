@@ -16,9 +16,17 @@ import org.slf4j.LoggerFactory;
 public class SeekJobDescriptionWrapper {
     static final Logger logger = LoggerFactory.getLogger(SeekJobDescriptionWrapper.class);
     String job_url;
+    Document page;
 
-    public SeekJobDescriptionWrapper(String job_url) {
+
+    public SeekJobDescriptionWrapper(String job_url, boolean initialise) { 
         this.job_url = job_url;
+        if(initialise)
+            initialise();
+    }
+
+    public SeekJobDescriptionWrapper(String job_url) { 
+        this(job_url, false);
     }
 
     public String getSeekJobID() {
@@ -30,6 +38,14 @@ public class SeekJobDescriptionWrapper {
             return null;
         }
         return job_url.substring(slash_position+1); //Unsafe if / is last character
+    }
+
+    public void initialise()
+    {
+        initJDPage();
+        cachePage(page, getSeekJobID()); //TODO: this getSeekJobID() function smells funny
+
+        sleep(); //Avoid flagging seek systems
     }
 
     public String getJD() {
@@ -49,6 +65,35 @@ public class SeekJobDescriptionWrapper {
             Thread.sleep(1000); // Sleep for 1000 milliseconds (1 second)
         } catch (InterruptedException e) {
             logger.info("Thread was interrupted");
+        }
+    }
+
+    private void initJDPage()
+    {
+        // Seek does not respond to jsoup default useragent
+        String job_description = null;
+        String useragent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
+        try {
+            logger.info("Obtaining job description from Seek: " + job_url);
+            Document doc = Jsoup.connect(job_url)
+                    .userAgent(useragent)
+                    .get();
+            this.page = doc;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void cachePage(Document doc, String filename)
+    {
+        try {
+            Path directoryPath = Paths.get("./cache/"); //WRITE TO CACHE
+            if (!Files.exists(directoryPath)) {
+                Files.createDirectories(directoryPath);
+            }
+            IOUtils.writeToFile(doc.toString(), directoryPath + "/" + filename);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
