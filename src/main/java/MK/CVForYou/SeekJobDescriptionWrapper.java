@@ -84,7 +84,6 @@ public class SeekJobDescriptionWrapper {
     private void initJDPage()
     {
         // Seek does not respond to jsoup default useragent
-        String job_description = null;
         String useragent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
         try {
             logger.info("Obtaining job description from Seek: " + job_url);
