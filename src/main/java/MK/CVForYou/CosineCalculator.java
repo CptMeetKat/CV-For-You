@@ -13,14 +13,22 @@ import org.slf4j.LoggerFactory;
 public class CosineCalculator
 {
     static final Logger logger = LoggerFactory.getLogger(CosineCalculator.class);
+ 
+    public static double calculate(HashMap<String, Integer> word_table, String text)
+    {
+        return calculate(word_table, wordsToMap(text));
+    }
+
     public static double calculate(String textA, String textB)
     {
-        HashMap<String, Integer> word_table1 = wordsToMap(textA); //TODO: This could be cached
-        HashMap<String, Integer> word_table2 = wordsToMap(textB);
+        return calculate(wordsToMap(textA), wordsToMap(textB));
+    }
 
+    public static double calculate(HashMap<String, Integer> word_tableA, HashMap<String, Integer> word_tableB)
+    {
         HashSet<String> keys = new HashSet<String>();
-        keys.addAll(word_table1.keySet());
-        keys.addAll(word_table2.keySet());
+        keys.addAll(word_tableA.keySet());
+        keys.addAll(word_tableB.keySet());
 
         int total_keys = keys.size();
         
@@ -31,11 +39,11 @@ public class CosineCalculator
         int next = 0;
         for(String key : keys)
         {
-            if(word_table1.containsKey(key))
-                v1[next] = word_table1.get(key);
+            if(word_tableA.containsKey(key))
+                v1[next] = word_tableA.get(key);
 
-            if(word_table2.containsKey(key))
-                v2[next] = word_table2.get(key);
+            if(word_tableB.containsKey(key))
+                v2[next] = word_tableB.get(key);
 
             next++;
         }
