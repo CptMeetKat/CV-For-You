@@ -91,6 +91,9 @@ public class CosineCalculator
         return sb.toString();
     }
 
+    /**
+     * @return mapping of a word to the words count
+     */
     public static HashMap<String,Integer> wordsToMap(String text)
     {
         String formatted_text = text.replaceAll("\n", " ");
