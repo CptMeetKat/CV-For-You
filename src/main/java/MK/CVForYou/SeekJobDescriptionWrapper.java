@@ -47,12 +47,11 @@ public class SeekJobDescriptionWrapper {
         {
             page = initJDPage();
             cachePage(page, getSeekJobID()); //TODO: this getSeekJobID() function smells funny
-            sleep();
+            sleep(); //Avoid flagging seek systems
         }
         job_description = extractJobSectionFromHTML(page);
-
-        sleep(); //Avoid flagging seek systems
     }
+
 
     public String getJobDescription()
     {
