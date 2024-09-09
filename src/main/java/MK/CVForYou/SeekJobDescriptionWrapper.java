@@ -55,7 +55,7 @@ public class SeekJobDescriptionWrapper {
 
     //OPTIONS: SEEK_APOLLO_DATA, SEEK_CONFIG, SK_DL, SEEK_APP_CONFIG, SEEK_REDUX_DATA
     //TODO: Make this more dynamic in how it obtains fields
-    private String extractServerState(Document doc, String field)
+    private static String extractServerState(Document doc, String field)
     {
         Element divElement = doc.select("script[data-automation=server-state]").first();
         if (divElement != null)
