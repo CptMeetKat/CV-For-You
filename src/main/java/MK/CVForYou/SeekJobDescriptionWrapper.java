@@ -43,8 +43,14 @@ public class SeekJobDescriptionWrapper {
 
     public void initialise()
     {
-        initJDPage();
-        cachePage(page, getSeekJobID()); //TODO: this getSeekJobID() function smells funny
+        Document d = getJDPageFromCache();
+        if(d == null)
+        {
+            initJDPage();
+            cachePage(page, getSeekJobID()); //TODO: this getSeekJobID() function smells funny
+            sleep();
+        }
+        page = d;
         job_description = extractJobSectionFromHTML(page);
 
         sleep(); //Avoid flagging seek systems
@@ -55,16 +61,16 @@ public class SeekJobDescriptionWrapper {
         return job_description;
     }
 
-    public String _getJD() {
-        String job_description = getJDFromCache();
-        if (job_description == null)
-        {
-            job_description = getJDFromSeek();
-            sleep(); //Avoid flagging Seek systems
-        }
+    //public String _getJD() {
+    //    String job_description = _getJDFromCache();
+    //    if (job_description == null)
+    //    {
+    //        job_description = getJDFromSeek();
+    //        sleep(); //Avoid flagging Seek systems
+    //    }
 
-        return job_description;
-    }
+    //    return job_description;
+    //}
 
     private static void sleep()
     {
@@ -104,16 +110,15 @@ public class SeekJobDescriptionWrapper {
         }
     }
 
-    private String getJDFromCache() {
-        String result = null;
+
+    private Document getJDPageFromCache() {
+        Document result = null;
         String job_id = getSeekJobID();
 
         Path directoryPath = Paths.get("./cache/" + job_id);
         try {
             String html = IOUtils.readFile(directoryPath.toString());
-            Document doc = Jsoup.parse(html);
-            logger.info("Extract job from HTML: " + job_id + "");
-            result = extractJobSectionFromHTML(doc);
+            result = Jsoup.parse(html);
             logger.info("JD cache found: " + job_id + "");
         } catch (Exception e) {
             logger.info("JD cache not found");
@@ -121,6 +126,24 @@ public class SeekJobDescriptionWrapper {
 
         return result;
     }
+
+    //private String _getJDFromCache() {
+    //    String result = null;
+    //    String job_id = getSeekJobID();
+
+    //    Path directoryPath = Paths.get("./cache/" + job_id);
+    //    try {
+    //        String html = IOUtils.readFile(directoryPath.toString());
+    //        Document doc = Jsoup.parse(html);
+    //        logger.info("Extract job from HTML: " + job_id + "");
+    //        result = extractJobSectionFromHTML(doc);
+    //        logger.info("JD cache found: " + job_id + "");
+    //    } catch (Exception e) {
+    //        logger.info("JD cache not found");
+    //    }
+
+    //    return result;
+    //}
 
     private static String extractJobSectionFromHTML(Document doc)
     {
