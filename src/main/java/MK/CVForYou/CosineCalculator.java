@@ -124,7 +124,7 @@ public class CosineCalculator
                 map.put(atoms[i],1);
         }
 
-       //logger.info("Text: {}", text);
+       //logger.trace("Text: {}", text);
        //printOrderedWordsOrderedByCount(map);
 
        return map;
@@ -133,11 +133,13 @@ public class CosineCalculator
     private static void printOrderedWordsOrderedByCount(HashMap<String, Integer> map)
     {
         List<Map.Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
-
         list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+
+        String log_statement = "";
         for (Map.Entry<String, Integer> entry : list) {
-            logger.trace("{} {}", entry.getKey(), entry.getValue());
+            log_statement += String.format("\n%s %s", entry.getKey(), entry.getValue());
         }
+        logger.trace(log_statement);
     }
 
 }
