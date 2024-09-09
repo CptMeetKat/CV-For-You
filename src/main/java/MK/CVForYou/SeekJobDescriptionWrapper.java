@@ -50,6 +50,11 @@ public class SeekJobDescriptionWrapper {
         sleep(); //Avoid flagging seek systems
     }
 
+    public String getJobDescription()
+    {
+        return job_description;
+    }
+
     public String getJD() {
         String job_description = getJDFromCache();
         if (job_description == null)
