@@ -1,7 +1,11 @@
 package MK.CVForYou;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -111,8 +115,21 @@ public class CosineCalculator
             else
                 map.put(atoms[i],1);
         }
-        
-        return map;
+
+       //logger.info("Text: {}", text);
+       //printOrderedWordsOrderedByCount(map);
+
+       return map;
+    }
+
+    private static void printOrderedWordsOrderedByCount(HashMap<String, Integer> map)
+    {
+        List<Map.Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
+
+        list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+        for (Map.Entry<String, Integer> entry : list) {
+            logger.trace("{} {}", entry.getKey(), entry.getValue());
+        }
     }
 
 }
