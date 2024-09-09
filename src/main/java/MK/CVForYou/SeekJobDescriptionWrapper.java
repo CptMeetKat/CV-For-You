@@ -131,31 +131,5 @@ public class SeekJobDescriptionWrapper {
         }
         return job_description.toString();
     }
-
-    private String getJDFromSeek() {
-        // Seek does not respond to jsoup default useragent
-        String job_description = null;
-        String useragent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
-        try {
-            logger.info("Obtaining job description from Seek: " + job_url);
-            Document doc = Jsoup.connect(job_url)
-                    .userAgent(useragent)
-                    .get();
-
-            Path directoryPath = Paths.get("./cache/"); //WRITE TO CACHE
-            if (!Files.exists(directoryPath)) {
-                Files.createDirectories(directoryPath);
-            }
-            IOUtils.writeToFile(doc.toString(), directoryPath + "/" + getSeekJobID());
-
-
-            job_description = extractJobSectionFromHTML(doc);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return job_description;
-    }
 }
 
