@@ -55,7 +55,7 @@ public class SeekJobDescriptionWrapper {
         return job_description;
     }
 
-    public String getJD() {
+    public String _getJD() {
         String job_description = getJDFromCache();
         if (job_description == null)
         {

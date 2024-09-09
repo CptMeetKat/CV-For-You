@@ -16,8 +16,8 @@ public class JobDescriptionFromSeekJob implements JobDescriptionSource
         
         ArrayList<InputJob> jobs = new ArrayList<>();
 
-        SeekJobDescriptionWrapper wrapper = new SeekJobDescriptionWrapper(url);
-        String job_description = wrapper.getJD();
+        SeekJobDescriptionWrapper wrapper = new SeekJobDescriptionWrapper(url, true);
+        String job_description = wrapper.getJobDescription();
         String id = wrapper.getSeekJobID();
         if(id != null)
             jobs.add(  new InputJob(id, job_description));
