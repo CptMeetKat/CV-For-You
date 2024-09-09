@@ -115,7 +115,7 @@ public class SeekJobDescriptionWrapper {
         return result;
     }
 
-    private String extractJobSectionFromHTML(Document doc)
+    private static String extractJobSectionFromHTML(Document doc)
     {
         StringBuilder job_description = new StringBuilder();
         Element divElement = doc.select("div[data-automation=jobAdDetails]").first();
