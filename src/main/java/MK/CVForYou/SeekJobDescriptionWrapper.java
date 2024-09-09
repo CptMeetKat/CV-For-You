@@ -74,7 +74,7 @@ public class SeekJobDescriptionWrapper {
                 if(states[i].startsWith("window."+field))
                     return states[i];
             }
-            logger.warn("Unable to obtain {} from HTML");
+            logger.warn("Unable to obtain {} from HTML", field);
         }
         else 
         {
