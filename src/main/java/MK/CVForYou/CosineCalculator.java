@@ -3,8 +3,12 @@ package MK.CVForYou;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class CosineCalculator
 {
+    static final Logger logger = LoggerFactory.getLogger(CosineCalculator.class);
     public static double calculate(String textA, String textB)
     {
         HashMap<String, Integer> word_table1 = wordsToMap(textA); //TODO: This could be cached
