@@ -50,8 +50,44 @@ public class SeekJobDescriptionWrapper {
             sleep(); //Avoid flagging seek systems
         }
         job_description = extractJobSectionFromHTML(page);
+        String server_state = extractServerState(page, "SEEK_REDUX_DATA");
     }
 
+    //OPTIONS: SEEK_APOLLO_DATA, SEEK_CONFIG, SK_DL, SEEK_APP_CONFIG, SEEK_REDUX_DATA
+    //TODO: Make this more dynamic in how it obtains fields
+    private String extractServerState(Document doc, String field)
+    {
+        Element divElement = doc.select("script[data-automation=server-state]").first();
+        if (divElement != null)
+        {
+            String temp = divElement.data();
+
+            temp = insertNewLineBefore(temp, "window.SEEK_APOLLO_DATA");
+            temp = insertNewLineBefore(temp, "window.SEEK_CONFIG");
+            temp = insertNewLineBefore(temp, "window.SK_DL");
+            temp = insertNewLineBefore(temp, "window.SEEK_APP_CONFIG");
+            temp = insertNewLineBefore(temp, "window.SEEK_REDUX_DATA");
+
+            String[] states = temp.split("\n");
+
+            for (int i = 0; i < states.length; i++) {
+                if(states[i].startsWith("window."+field))
+                    return states[i];
+            }
+        }
+        else 
+        {
+            logger.warn("The <script> element with data-automation='server-state' was not found.");
+        }
+
+        return null;
+
+    }
+
+    private static String insertNewLineBefore(String text, String before)
+    {
+        return text.replace(before, "\n"+before);
+    }
 
     public String getJobDescription()
     {
