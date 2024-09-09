@@ -46,7 +46,7 @@ public class SeekJobDescriptionWrapper {
     private static void sleep()
     {
         try {
-            Thread.sleep(1000); // Sleep for 1000 milliseconds (3 seconds)
+            Thread.sleep(1000); // Sleep for 1000 milliseconds (1 second)
         } catch (InterruptedException e) {
             logger.info("Thread was interrupted");
         }
