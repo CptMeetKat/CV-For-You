@@ -1,5 +1,6 @@
 package MK.CVForYou;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -57,10 +58,15 @@ public class SeekJobDescriptionWrapper {
 
     private String extractJobTitleFromHTML(Document doc)
     {
+        String job_title = null;
         String server_state = extractServerState(doc, "SK_DL");
-        //System.out.println(server_state);
-        JSONObject json = new JSONObject(server_state);
-        return json.optString("jobTitle");
+        try {
+            JSONObject json = new JSONObject(server_state);
+            job_title = json.optString("jobTitle");
+        } catch (JSONException e) {
+            logger.warn("Unable to parse Seek server state as JSON: {}", server_state);
+        }
+        return job_title;
     }
 
     //OPTIONS: SEEK_APOLLO_DATA, SEEK_CONFIG, SK_DL, SEEK_APP_CONFIG, SEEK_REDUX_DATA
