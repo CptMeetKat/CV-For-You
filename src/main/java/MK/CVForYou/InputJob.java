@@ -11,4 +11,8 @@ public class InputJob
         this.name = name;
         this.job_description = job_description;
     }
+
+    public InputJob()
+    {
+    }
 }
