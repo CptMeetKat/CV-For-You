@@ -39,9 +39,9 @@ public class GenerateDocumentAcceptanceTest
     throws IOException
     {
         String[] args = new String[]{
-                "-d", "src/test/test_files/AcceptanceTest/document.html",
-                "-c", "src/test/test_files/AcceptanceTest/description.txt",
-                "-sd", "src/test/test_files/AcceptanceTest/sections/", 
+                "-d", "src/test/test_files/AcceptanceTest/1/document.html",
+                "-c", "src/test/test_files/AcceptanceTest/1/description.txt",
+                "-sd", "src/test/test_files/AcceptanceTest/1/sections/", 
                 "-o", testDirectory.toString()
         };
         App.main(args);
