@@ -35,7 +35,7 @@ public class GenerateDocumentAcceptanceTest
 
 
     @Test
-    public void shouldGeneratePDFWithDynamicSections()
+    public void shouldGeneratePDFWithDynamicSectionsWhenSourceIsFile()
     throws IOException
     {
         String[] args = new String[]{
