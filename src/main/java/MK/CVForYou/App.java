@@ -38,7 +38,8 @@ public class App
         HashMap<String, InputJob> job_descriptions = new HashMap<String, InputJob>();
         ArrayList<InputJob> jobs = jd_source.getJobModel(); 
         for (InputJob job : jobs) {
-            job_descriptions.put(job.name, job);
+            if(job.name != null)
+                job_descriptions.put(job.name, job);
         }
 
         return job_descriptions;
