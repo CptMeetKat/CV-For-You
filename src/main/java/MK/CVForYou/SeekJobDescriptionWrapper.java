@@ -159,6 +159,10 @@ public class SeekJobDescriptionWrapper {
         }
     }
 
+    public void setCacheDirectory(Path directory)
+    {
+        cache_directory = directory;
+    }
 
     private Document getJDPageFromCache() {
         Document result = null;
