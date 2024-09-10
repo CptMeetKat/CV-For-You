@@ -1,5 +1,6 @@
 package MK.CVForYou;
 
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -17,7 +18,7 @@ public class SeekJobDescriptionWrapper {
     static final Logger logger = LoggerFactory.getLogger(SeekJobDescriptionWrapper.class);
     String job_url;
     String job_description;
-
+    String job_title;
 
     public SeekJobDescriptionWrapper(String job_url, boolean initialise) { 
         this.job_url = job_url;
@@ -50,7 +51,16 @@ public class SeekJobDescriptionWrapper {
             sleep(); //Avoid flagging seek systems
         }
         job_description = extractJobSectionFromHTML(page);
-        String server_state = extractServerState(page, "SEEK_REDUX_DATA");
+        job_title = extractJobTitleFromHTML(page);
+        System.out.println(job_title);
+    }
+
+    private String extractJobTitleFromHTML(Document doc)
+    {
+        String server_state = extractServerState(doc, "SK_DL");
+        //System.out.println(server_state);
+        JSONObject json = new JSONObject(server_state);
+        return json.optString("jobTitle");
     }
 
     //OPTIONS: SEEK_APOLLO_DATA, SEEK_CONFIG, SK_DL, SEEK_APP_CONFIG, SEEK_REDUX_DATA
@@ -72,7 +82,10 @@ public class SeekJobDescriptionWrapper {
 
             for (int i = 0; i < states.length; i++) {
                 if(states[i].startsWith("window."+field))
-                    return states[i];
+                {
+                    int json_start = states[i].indexOf("{");
+                    return states[i].substring(json_start);
+                }
             }
             logger.warn("Unable to obtain {} from HTML", field);
         }
