@@ -22,6 +22,7 @@ public class JobDescriptionFromFile implements JobDescriptionSource
         InputJob work_item = new InputJob();
         work_item.name = "generated_document";
         work_item.job_description = getDocument(filePath); //TODO: add post path slash to end of file name
+        jobs.add(work_item);
 
         return jobs;
 	}
