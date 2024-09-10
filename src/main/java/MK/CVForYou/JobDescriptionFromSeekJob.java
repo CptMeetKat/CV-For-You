@@ -16,6 +16,7 @@ public class JobDescriptionFromSeekJob implements JobDescriptionSource
         
         ArrayList<InputJob> jobs = new ArrayList<>();
 
+        //TODO: This section of code is duplicate with other JobDescriptionSource...
         SeekJobDescriptionWrapper wrapper = new SeekJobDescriptionWrapper(url, true);
         String job_description = wrapper.getJobDescription();
         String id = wrapper.getSeekJobID();

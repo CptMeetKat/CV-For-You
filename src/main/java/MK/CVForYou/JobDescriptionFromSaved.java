@@ -16,7 +16,7 @@ public class JobDescriptionFromSaved implements JobDescriptionSource
         ArrayList<String> job_urls = ssj.getSavedJobURLs();
 
         for (String url : job_urls) {
-            SeekJobDescriptionWrapper wrapper = new SeekJobDescriptionWrapper(url, true);
+            SeekJobDescriptionWrapper wrapper = new SeekJobDescriptionWrapper(url, true); //TODO: This code is duplicate with other JobDescriptionSource
             String job_description = wrapper.getJobDescription();
             String id = wrapper.getSeekJobID();
             if(id != null)
