@@ -53,7 +53,7 @@ public class SeekJobDescriptionWrapper {
         }
         job_description = extractJobSectionFromHTML(page);
         job_title = extractJobTitleFromHTML(page);
-        System.out.println(job_title);
+        logger.trace("Job title detected: {}", job_title);
     }
 
     private String extractJobTitleFromHTML(Document doc)
