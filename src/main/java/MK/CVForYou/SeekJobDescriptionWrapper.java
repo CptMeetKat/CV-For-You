@@ -114,6 +114,11 @@ public class SeekJobDescriptionWrapper {
         return job_description;
     }
 
+    public String getJobTitle()
+    {
+        return job_title;
+    }
+
     private static void sleep()
     {
         try {
