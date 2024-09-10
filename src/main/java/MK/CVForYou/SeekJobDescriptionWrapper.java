@@ -164,7 +164,9 @@ public class SeekJobDescriptionWrapper {
         Document result = null;
         String job_id = getSeekJobID();
 
-        Path directoryPath = Paths.get("./cache/" + job_id); //TODO: Remove hardcode
+        Path directoryPath = Paths.get(cache_directory.toString(), job_id); 
+        logger.trace(directoryPath.toString());
+
         try {
             String html = IOUtils.readFile(directoryPath.toString());
             result = Jsoup.parse(html);
