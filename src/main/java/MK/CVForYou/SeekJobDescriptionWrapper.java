@@ -21,6 +21,8 @@ public class SeekJobDescriptionWrapper {
     String job_description;
     String job_title;
 
+    Path cache_directory = Paths.get("./cache/");
+
     public SeekJobDescriptionWrapper(String job_url, boolean initialise) { 
         this.job_url = job_url;
         if(initialise)
@@ -48,7 +50,7 @@ public class SeekJobDescriptionWrapper {
         if(page == null)
         {
             page = initJDPage();
-            cachePage(page, getSeekJobID()); //TODO: this getSeekJobID() function smells funny
+            cachePage(page, getSeekJobID(), this.cache_directory); //TODO: this getSeekJobID() function smells funny
             sleep(); //Avoid flagging seek systems
         }
         job_description = extractJobSectionFromHTML(page);
@@ -145,14 +147,13 @@ public class SeekJobDescriptionWrapper {
         return result;
     }
 
-    private static void cachePage(Document doc, String filename)
+    private static void cachePage(Document doc, String filename, Path cache_directory)
     {
         try {
-            Path directoryPath = Paths.get("./cache/"); //WRITE TO CACHE
-            if (!Files.exists(directoryPath)) {
-                Files.createDirectories(directoryPath);
+            if (!Files.exists(cache_directory)) {
+                Files.createDirectories(cache_directory);
             }
-            IOUtils.writeToFile(doc.toString(), directoryPath + "/" + filename);
+            IOUtils.writeToFile(doc.toString(), cache_directory + "/" + filename);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -163,7 +164,7 @@ public class SeekJobDescriptionWrapper {
         Document result = null;
         String job_id = getSeekJobID();
 
-        Path directoryPath = Paths.get("./cache/" + job_id);
+        Path directoryPath = Paths.get("./cache/" + job_id); //TODO: Remove hardcode
         try {
             String html = IOUtils.readFile(directoryPath.toString());
             result = Jsoup.parse(html);
