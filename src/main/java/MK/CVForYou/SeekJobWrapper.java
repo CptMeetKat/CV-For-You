@@ -44,18 +44,19 @@ public class SeekJobWrapper {
     public void initialise()
     {
         String job_id = getSeekJobID();
-        Document page = getJDPageFromCache(Paths.get(cache_directory.toString(), job_id));
-        if(page == null)
-        {
-            logger.info("JD cache not found");
+        Document page;
+		try {
+            Path cache_path = Paths.get(cache_directory.toString(), job_id);
+			page = getJDPageFromCache(cache_path);
+            logger.info("JD cache found: {}", job_id);
+		}
+        catch (IOException e) {
+            logger.info("JD cache not found"); //TODO: Maybe we don't even care about this
             page = initJDPage();
             cachePage(page, getSeekJobID(), this.cache_directory); //TODO: this getSeekJobID() function smells funny
             sleep(); //Avoid flagging seek systems
-        }
-        else
-        {
-            logger.info("JD cache found: {}", job_id);
-        }
+		}
+
         job_description = SeekJobParser.extractJobSectionFromHTML(page); //SeekJobPageParser //SeekJobDescriptionParser
         job_title = SeekJobParser.extractJobTitleFromHTML(page);
         logger.trace("Job title detected: {}", job_title);
@@ -114,16 +115,12 @@ public class SeekJobWrapper {
         cache_directory = directory;
     }
 
-    private static Document getJDPageFromCache(Path file) {
+    private static Document getJDPageFromCache(Path file) 
+        throws IOException
+    {
         Document result = null;
-
-
-        try {
-            String html = IOUtils.readFile(file.toString());
-            result = Jsoup.parse(html);
-        } catch (IOException e) {
-            logger.info("Unable to open cache file");
-        }
+        String html = IOUtils.readFile(file.toString());
+        result = Jsoup.parse(html);
 
         return result;
     }
