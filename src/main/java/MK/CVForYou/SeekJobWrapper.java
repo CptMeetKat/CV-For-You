@@ -46,7 +46,8 @@ public class SeekJobWrapper {
 
     public void initialise()
     {
-        Document page = getJDPageFromCache();
+        Document page = getJDPageFromCache(cache_directory, getSeekJobID());
+
         if(page == null)
         {
             page = initJDPage();
@@ -164,11 +165,10 @@ public class SeekJobWrapper {
         cache_directory = directory;
     }
 
-    private Document getJDPageFromCache() {
+    private static Document getJDPageFromCache(Path directory, String job_id) {
         Document result = null;
-        String job_id = getSeekJobID();
 
-        Path directoryPath = Paths.get(cache_directory.toString(), job_id); 
+        Path directoryPath = Paths.get(directory.toString(), job_id); 
         logger.trace(directoryPath.toString());
 
         try {
