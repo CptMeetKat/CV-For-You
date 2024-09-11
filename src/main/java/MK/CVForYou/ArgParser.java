@@ -21,7 +21,7 @@ public class ArgParser
     Path compare_document_path;
     String seek_url; 
 
-    JobDescriptionSource jd_source; 
+    JobSource jd_source; 
 
     private static final String BASIC_USAGE = "./CVForYou -d <document_path> -c <compare_path> -s <section_paths>";
 
