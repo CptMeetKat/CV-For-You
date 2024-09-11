@@ -59,4 +59,40 @@ public class GenerateDocumentAcceptanceTest
 
         assertEquals(expected, text); 
     }
+
+    @Test
+    public void shouldGenerateDynamicPDFWhenSourceIsFromSeekAndCached()
+    throws IOException
+    {
+        String[] args = new String[]{
+                "-d", "src/test/test_files/AcceptanceTest/2/document.html",
+                "-cs", "https://www.seek.com.au/job/78678834",
+                "-sd", "src/test/test_files/AcceptanceTest/2/sections/", 
+                "-o", testDirectory.toString()
+        };
+        App.main(args);
+
+//        String expected = "Projects\nName: Project-C\nLanguage: C++\nName: Project-P\nLanguage: Python\n" 
+//                 + "Name: Project-J\nLanguage: Java\nTags\nC++\nPYTHON\nJAVA\n";
+//
+//        File file = new File(testDirectory.toString(), "cvgenerated_document.pdf");
+//        PDDocument document = Loader.loadPDF(file);
+//
+//        PDFTextStripper pdfStripper = new PDFTextStripper();
+//        String text = pdfStripper.getText(document);
+//        //System.out.println(text);
+//        //System.out.println(expected);
+//
+//        assertEquals(expected, text); 
+//
+
+    }
+
+
+
+
+
+
+
+
 }
