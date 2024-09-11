@@ -117,7 +117,6 @@ public class SeekJobWrapper {
     private static Document getJDPageFromCache(Path file) {
         Document result = null;
 
-        logger.trace(file.toString());
 
         try {
             String html = IOUtils.readFile(file.toString());
