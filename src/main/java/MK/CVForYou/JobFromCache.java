@@ -4,8 +4,12 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class JobFromCache implements JobSource
 {
+    static final Logger logger = LoggerFactory.getLogger(JobFromCache.class);
     Path path;
 
     public JobFromCache(Path path)
@@ -26,7 +30,7 @@ public class JobFromCache implements JobSource
 
             jobs.add(work_item);
 		} catch (IOException e) {
-			e.printStackTrace(); //TODO: Add warning
+			logger.error("Unable to open cache file: {}", e.getMessage());
 		}
         return jobs;
 	}
