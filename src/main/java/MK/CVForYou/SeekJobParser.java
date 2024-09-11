@@ -30,7 +30,7 @@ public class SeekJobParser
         page = getJobCacheFromFile(path);
     }
 
-    private static Document getJobCacheFromFile(Path file) 
+    public static Document getJobCacheFromFile(Path file) 
         throws IOException
     {
         Document result = null;

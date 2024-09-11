@@ -48,6 +48,7 @@ public class SeekJobWrapper {
 		try {
             Path cache_path = Paths.get(cache_directory.toString(), job_id);
 			page = getJDPageFromCache(cache_path);
+            SeekJobParser
             logger.info("JD cache found: {}", job_id);
 		}
         catch (IOException e) {
@@ -113,16 +114,6 @@ public class SeekJobWrapper {
     public void setCacheDirectory(Path directory)
     {
         cache_directory = directory;
-    }
-
-    private static Document getJDPageFromCache(Path file) 
-        throws IOException
-    {
-        Document result = null;
-        String html = IOUtils.readFile(file.toString());
-        result = Jsoup.parse(html);
-
-        return result;
     }
 }
 
