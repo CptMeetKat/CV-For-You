@@ -15,18 +15,14 @@ import org.slf4j.LoggerFactory;
 public class SeekJobParser
 {
     static final Logger logger = LoggerFactory.getLogger(SeekJobParser.class);
-    public SeekJobParser()
-    {
-
-    }
-
-    public SeekJobParser(Document doc)
-    {
-
-    }
-
+//    public SeekJobParser(Document doc)
+//    {
+//
+//    }
+//
     public SeekJobParser(Path path)
     {
+
     }
 
     public static String extractJobSectionFromHTML(Document doc)

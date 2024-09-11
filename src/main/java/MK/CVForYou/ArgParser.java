@@ -21,6 +21,8 @@ public class ArgParser
     Path compare_document_path;
     String seek_url; 
 
+    Path compare_cache_path;
+
     JobSource jd_source; 
 
     private static final String BASIC_USAGE = "./CVForYou -d <document_path> -c <compare_path> -s <section_paths>";
@@ -190,8 +192,11 @@ public class ArgParser
         if (cmd.hasOption("ca")) 
             jd_source = new JobFromSeekSaved();
 
-//        if (cmd.hasOption("cc")) 
-//            jd_source = new JobDescriptionFromCache();
+        if (cmd.hasOption("cc")) 
+        {
+            compare_cache_path = Paths.get(cmd.getOptionValue("cc"));
+            jd_source = new JobFromCache(compare_cache_path);
+        }
     }
 
 
