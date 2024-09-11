@@ -33,7 +33,7 @@ public class App
         }
     }
 
-    public static HashMap<String, InputJob> getJobs(JobDescriptionSource jd_source)
+    public static HashMap<String, InputJob> getJobs(JobSource jd_source)
     {
         HashMap<String, InputJob> job_descriptions = new HashMap<String, InputJob>();
         ArrayList<InputJob> jobs = jd_source.getJobModel(); 

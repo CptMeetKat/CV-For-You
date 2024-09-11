@@ -2,10 +2,10 @@ package MK.CVForYou;
 
 import java.util.ArrayList;
 
-public class JobDescriptionFromSaved implements JobDescriptionSource
+public class JobFromSeekSaved implements JobSource
 {
 
-    public JobDescriptionFromSaved(){}
+    public JobFromSeekSaved(){}
 
 	@Override
 	public ArrayList<InputJob> getJobModel()

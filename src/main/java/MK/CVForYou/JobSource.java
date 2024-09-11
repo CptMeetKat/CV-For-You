@@ -3,7 +3,7 @@ package MK.CVForYou;
 import java.util.ArrayList;
 
 
-public interface JobDescriptionSource {
+public interface JobSource {
 
     public ArrayList<InputJob> getJobModel();
 }

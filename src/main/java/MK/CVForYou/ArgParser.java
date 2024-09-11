@@ -114,7 +114,7 @@ public class ArgParser
         return options;
     }
 
-    public JobDescriptionSource getJDSource()
+    public JobSource getJDSource()
     {
         return jd_source;
     }
@@ -174,14 +174,14 @@ public class ArgParser
     {
         if (cmd.hasOption("c")) {
             compare_document_path = Paths.get(cmd.getOptionValue("c"));
-            jd_source = new JobDescriptionFromFile(compare_document_path);
+            jd_source = new JobFromFile(compare_document_path);
         }
         if (cmd.hasOption("cs")) {
             seek_url = cmd.getOptionValue("cs");
-            jd_source = new JobDescriptionFromSeekJob(seek_url);
+            jd_source = new JobFromSeekJob(seek_url);
         }
         if (cmd.hasOption("ca")) 
-            jd_source = new JobDescriptionFromSaved();
+            jd_source = new JobFromSeekSaved();
     }
 
 

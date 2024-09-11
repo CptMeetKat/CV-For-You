@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JobDescriptionFromFile implements JobDescriptionSource
+public class JobFromFile implements JobSource
 {
-    static final Logger logger = LoggerFactory.getLogger(JobDescriptionFromFile.class);
+    static final Logger logger = LoggerFactory.getLogger(JobFromFile.class);
     Path filePath;
-    public JobDescriptionFromFile(Path filePath)
+    public JobFromFile(Path filePath)
     {
         this.filePath = filePath;
     }

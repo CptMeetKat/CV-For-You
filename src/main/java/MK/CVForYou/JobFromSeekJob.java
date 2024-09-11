@@ -2,11 +2,11 @@ package MK.CVForYou;
 
 import java.util.ArrayList;
 
-public class JobDescriptionFromSeekJob implements JobDescriptionSource
+public class JobFromSeekJob implements JobSource
 {
     String url;
 
-    public JobDescriptionFromSeekJob(String url)
+    public JobFromSeekJob(String url)
     {
         this.url = url;
     }
