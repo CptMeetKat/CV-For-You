@@ -47,7 +47,7 @@ public class SeekJobParser
         return job_description.toString();
     }
 
-    public String extractJobTitleFromHTML(Document doc)
+    public static String extractJobTitleFromHTML(Document doc)
     {
         String job_title = null;
         String server_state = extractServerState(doc, "SK_DL");
