@@ -102,12 +102,19 @@ public class ArgParser
                                       .desc("compare from your seek saved job")
                                       .build();
 
+
+        Option compare_from_cache = Option.builder("cc")
+                                      .longOpt("compare-cache").hasArg()
+                                      .desc("compare from a previous cached seek saved job")
+                                      .build();
+
         OptionGroup compare_input = new OptionGroup();
         compare_input.setRequired(true);
 
         compare_input.addOption(compare_from_file);
         compare_input.addOption(compare_from_seek);
         compare_input.addOption(compare_from_all_seek);
+        compare_input.addOption(compare_from_cache);
 
         options.addOptionGroup(compare_input);
 
@@ -182,6 +189,9 @@ public class ArgParser
         }
         if (cmd.hasOption("ca")) 
             jd_source = new JobFromSeekSaved();
+
+//        if (cmd.hasOption("cc")) 
+//            jd_source = new JobDescriptionFromCache();
     }
 
 
