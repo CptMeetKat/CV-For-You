@@ -16,7 +16,7 @@ public class JobFromSeekSaved implements JobSource
         ArrayList<String> job_urls = ssj.getSavedJobURLs();
 
         for (String url : job_urls) {
-            SeekJobDescriptionWrapper wrapper = new SeekJobDescriptionWrapper(url, true);
+            SeekJobWrapper wrapper = new SeekJobWrapper(url, true);
             jobs.add(InputJobFactory.createWorkItem(wrapper));
         }
 

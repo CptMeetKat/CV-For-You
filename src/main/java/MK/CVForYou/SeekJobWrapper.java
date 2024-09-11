@@ -15,21 +15,21 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SeekJobDescriptionWrapper {
-    static final Logger logger = LoggerFactory.getLogger(SeekJobDescriptionWrapper.class);
+public class SeekJobWrapper {
+    static final Logger logger = LoggerFactory.getLogger(SeekJobWrapper.class);
     String job_url;
     String job_description;
     String job_title;
 
     Path cache_directory = Paths.get("./cache/");
 
-    public SeekJobDescriptionWrapper(String job_url, boolean initialise) { 
+    public SeekJobWrapper(String job_url, boolean initialise) { 
         this.job_url = job_url;
         if(initialise)
             initialise();
     }
 
-    public SeekJobDescriptionWrapper(String job_url) { 
+    public SeekJobWrapper(String job_url) { 
         this(job_url, false);
     }
 

@@ -14,7 +14,7 @@ public class JobFromSeekJob implements JobSource
 	@Override
 	public ArrayList<InputJob> getJobModel() {
         ArrayList<InputJob> jobs = new ArrayList<>();
-        SeekJobDescriptionWrapper wrapper = new SeekJobDescriptionWrapper(url, true);
+        SeekJobWrapper wrapper = new SeekJobWrapper(url, true);
         jobs.add(InputJobFactory.createWorkItem(wrapper));
         return jobs;
 	}

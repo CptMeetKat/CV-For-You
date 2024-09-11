@@ -2,7 +2,7 @@ package MK.CVForYou;
 
 public class InputJobFactory
 {
-    public static InputJob createWorkItem(SeekJobDescriptionWrapper wrapper)
+    public static InputJob createWorkItem(SeekJobWrapper wrapper)
     {
         InputJob work_item = new InputJob();
         work_item.name = wrapper.getSeekJobID();
