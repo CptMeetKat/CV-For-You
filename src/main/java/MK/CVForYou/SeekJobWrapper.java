@@ -122,7 +122,7 @@ public class SeekJobWrapper {
         try {
             String html = IOUtils.readFile(file.toString());
             result = Jsoup.parse(html);
-        } catch (Exception e) {
+        } catch (IOException e) {
             logger.info("Unable to open cache file");
         }
 
