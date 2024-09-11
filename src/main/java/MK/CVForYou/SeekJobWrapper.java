@@ -47,8 +47,7 @@ public class SeekJobWrapper {
         Document page;
 		try {
             Path cache_path = Paths.get(cache_directory.toString(), job_id);
-			page = getJDPageFromCache(cache_path);
-            SeekJobParser
+			page = SeekJobParser.getJobCacheFromFile(cache_path);
             logger.info("JD cache found: {}", job_id);
 		}
         catch (IOException e) {
