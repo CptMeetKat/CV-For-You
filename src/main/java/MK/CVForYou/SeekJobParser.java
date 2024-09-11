@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.nio.file.Path;
 
@@ -26,7 +27,24 @@ public class SeekJobParser
 
     public SeekJobParser(Path path)
     {
+    }
 
+    public static String extractJobSectionFromHTML(Document doc)
+    {
+        StringBuilder job_description = new StringBuilder();
+        Element divElement = doc.select("div[data-automation=jobAdDetails]").first();
+
+        if (divElement != null)
+        {
+            Elements elements = divElement.getAllElements();
+            for (Element e : elements)
+                job_description.append(e.ownText() + "\n");
+        }
+        else 
+        {
+            logger.warn("The <div> element with data-automation='jobAdDetails' was not found.");
+        }
+        return job_description.toString();
     }
 
     public String extractJobTitleFromHTML(Document doc)
