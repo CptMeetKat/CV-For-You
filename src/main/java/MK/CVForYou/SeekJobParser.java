@@ -30,6 +30,16 @@ public class SeekJobParser
         page = getJobCacheFromFile(path);
     }
 
+    public String getJobDescription()
+    {
+        return extractJobSectionFromHTML(page);
+    }
+
+    public String getJobTitle()
+    {
+        return extractJobTitleFromHTML(page);
+    }
+
     public static Document getJobCacheFromFile(Path file) 
         throws IOException
     {
