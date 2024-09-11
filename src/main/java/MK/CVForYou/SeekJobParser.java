@@ -3,10 +3,12 @@ package MK.CVForYou;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
 import java.nio.file.Path;
 
 import org.slf4j.Logger;
@@ -15,14 +17,27 @@ import org.slf4j.LoggerFactory;
 public class SeekJobParser
 {
     static final Logger logger = LoggerFactory.getLogger(SeekJobParser.class);
-//    public SeekJobParser(Document doc)
-//    {
-//
-//    }
-//
-    public SeekJobParser(Path path)
-    {
+    Document page;
 
+    public SeekJobParser(Document doc)
+    {
+        page = doc;
+    }
+
+    public SeekJobParser(Path path)
+        throws IOException
+    {
+        page = getJobCacheFromFile(path);
+    }
+
+    private static Document getJobCacheFromFile(Path file) 
+        throws IOException
+    {
+        Document result = null;
+        String html = IOUtils.readFile(file.toString());
+        result = Jsoup.parse(html);
+
+        return result;
     }
 
     public static String extractJobSectionFromHTML(Document doc)
