@@ -49,7 +49,6 @@ public class SeekJobWrapper {
             logger.info("JD cache found: {}", job_id);
 		}
         catch (IOException e) {
-            logger.info("JD cache not found"); //TODO: Maybe we don't even care about this
             page = initJDPage();
             cachePage(page, getSeekJobID(), this.cache_directory); //TODO: this getSeekJobID() function smells funny
             sleep(); //Avoid flagging seek systems
