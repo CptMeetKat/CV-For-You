@@ -35,7 +35,7 @@ public class JobFromFile implements JobSource
         }
         catch (IOException e) {
             logger.error(e.getMessage());
-            System.exit(1);
+            System.exit(1); //TOOO: Can this be made more graceful
         }
         return document;
     }
