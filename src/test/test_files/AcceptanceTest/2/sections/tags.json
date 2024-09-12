@@ -1,0 +1,17 @@
+{
+    "container": "<div>{$elements[0]}</div>",
+    "options": [
+        {
+            "keywords": "Java",
+            "elements": ["JAVA"]
+        },
+        {
+            "keywords": "SQL",
+            "elements": ["SQL"]
+        },
+        {
+            "keywords": "C#",
+            "elements": ["C#"]
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "container": "<div>{$elements[0]}</div>",
+    "max":1,
+    "options": [
+        {
+            "keywords": "Engineer",
+            "elements": ["Software Engineer"]
+        },
+        {
+            "keywords": "Developer",
+            "elements": ["Software Developer"]
+        }
+    ]
+}

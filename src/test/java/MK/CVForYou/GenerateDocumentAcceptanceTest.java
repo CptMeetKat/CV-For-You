@@ -64,27 +64,28 @@ public class GenerateDocumentAcceptanceTest
     public void shouldGenerateDynamicPDFWhenSourceIsFromSeekAndCached()
     throws IOException
     {
+        String cache_id = "78678834";
         String[] args = new String[]{
                 "-d", "src/test/test_files/AcceptanceTest/2/document.html",
-                "-cs", "https://www.seek.com.au/job/78678834",
+                "-cc", "src/test/test_files/AcceptanceTest/2/cache/" + cache_id,
                 "-sd", "src/test/test_files/AcceptanceTest/2/sections/", 
                 "-o", testDirectory.toString()
         };
         App.main(args);
 
-//        String expected = "Projects\nName: Project-C\nLanguage: C++\nName: Project-P\nLanguage: Python\n" 
-//                 + "Name: Project-J\nLanguage: Java\nTags\nC++\nPYTHON\nJAVA\n";
-//
-//        File file = new File(testDirectory.toString(), "cvgenerated_document.pdf");
-//        PDDocument document = Loader.loadPDF(file);
-//
-//        PDFTextStripper pdfStripper = new PDFTextStripper();
-//        String text = pdfStripper.getText(document);
-//        //System.out.println(text);
-//        //System.out.println(expected);
-//
-//        assertEquals(expected, text); 
-//
+
+
+        String expected = "Professional Title\nSoftware Developer\nTags\nSQL\nC#\nJAVA\n";
+
+        File file = new File(testDirectory.toString(), "cv" + cache_id + ".pdf");
+        PDDocument document = Loader.loadPDF(file);
+        PDFTextStripper pdfStripper = new PDFTextStripper();
+        String text = pdfStripper.getText(document);
+        System.out.println("'" + text + "'");
+
+        System.out.println();
+        System.out.println("'" + expected + "'");
+        assertEquals(expected, text); 
 
     }
 
