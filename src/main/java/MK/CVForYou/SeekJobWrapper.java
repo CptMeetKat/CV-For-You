@@ -43,6 +43,7 @@ public class SeekJobWrapper {
 
     public void initialise()
     {
+        //TODO: Migrate into a private function
         String job_id = getSeekJobID();
         Document page;
 		try {
