@@ -201,10 +201,12 @@ public class ArgParser
                 Path path = Paths.get(cache);
                 if(Files.isDirectory(path))
                 {
-                    //TODO: Expand directory for files to use
+                    String[] files = listFilesInDirectory(path.toString(), "");
+                    for(String f :files) {
+                        paths.add(Paths.get(path.toString(), f));
+                    }
                 }
-                else if(Files.isRegularFile(path))
-                {
+                else if(Files.isRegularFile(path)) {
                     paths.add(path);
                 }
             }
@@ -239,6 +241,7 @@ public class ArgParser
        section_definition_paths = files.toArray(new Path[0]);
     }
 
+    //TODO: Add unit test for this
     private static String[] listFilesInDirectory(String directory_path, String suffix)
     {
         Path directory = Paths.get(directory_path);
