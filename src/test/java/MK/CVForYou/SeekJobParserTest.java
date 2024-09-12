@@ -37,4 +37,17 @@ public class SeekJobParserTest
 
         Assert.assertEquals(expected, result);
     }
+
+    @Test
+    public void shouldExtractServerStateFromCachedPage() throws IOException
+    {
+        String expected = "{\"SEEK_CONFIG_DATA\":\"test_data1\"};";
+    
+        Path cached_page = Paths.get("src/test/test_files/SeekJobParser/78678834");
+        
+        Document page = SeekJobParser.getJobCacheFromFile(cached_page);
+        String result = SeekJobParser.extractServerState(page, "SEEK_CONFIG");
+
+        Assert.assertEquals(expected, result);
+    }
 }
