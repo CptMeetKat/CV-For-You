@@ -229,7 +229,7 @@ public class ArgParser
         {
             for(String dir : section_directories)
             {
-                String[] json_files = listJSONFilesInDirectory(dir); 
+                String[] json_files = listFilesInDirectory(dir, ".json"); 
                 if(json_files != null)
                     for(String file : json_files)
                         files.add(Paths.get(dir+file));
@@ -239,7 +239,7 @@ public class ArgParser
        section_definition_paths = files.toArray(new Path[0]);
     }
 
-    private static String[] listJSONFilesInDirectory(String directory_path)
+    private static String[] listFilesInDirectory(String directory_path, String suffix)
     {
         Path directory = Paths.get(directory_path);
         String fileArray[] = null;
@@ -249,7 +249,7 @@ public class ArgParser
 
             Files.list(directory)
                  .filter(Files::isRegularFile)
-                 .filter(path -> path.getFileName().toString().endsWith(".json")) 
+                 .filter(path -> path.getFileName().toString().endsWith(suffix)) 
                  .forEach(path -> fileNames.add(path.getFileName().toString()));
 
             fileArray = fileNames.toArray(new String[0]);
