@@ -19,24 +19,24 @@ public class JobFromFile implements JobSource
 	@Override
 	public ArrayList<InputJob> getJobModel() {
         ArrayList<InputJob> jobs = new ArrayList<>();
-        InputJob work_item = new InputJob();
-        work_item.name = "generated_document";
-        work_item.job_description = getDocument(filePath);
-        jobs.add(work_item);
+        try {
+            InputJob work_item = new InputJob();
+            work_item.name = "generated_document";
+            work_item.job_description = getDocument(filePath);
+            jobs.add(work_item);
+            
+        } catch (IOException e) {
+            logger.error("Unable to process Job from file {}", e.getMessage());
+        }
 
         return jobs;
 	}
 
     public static String getDocument(Path document_path)
+        throws IOException
     {
         String document = null;
-        try {
-            document = IOUtils.readFile(document_path.toString());
-        }
-        catch (IOException e) {
-            logger.error(e.getMessage());
-            System.exit(1); //TOOO: Can this be made more graceful
-        }
+        document = IOUtils.readFile(document_path.toString());
         return document;
     }
 }
