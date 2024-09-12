@@ -32,7 +32,7 @@ public class SeekJobParser
 
     public String getJobDescription()
     {
-        return extractJobSectionFromHTML(page);
+        return extractJobDescriptionFromHTML(page);
     }
 
     public String getJobTitle()
@@ -50,7 +50,7 @@ public class SeekJobParser
         return result;
     }
 
-    public static String extractJobSectionFromHTML(Document doc)
+    public static String extractJobDescriptionFromHTML(Document doc)
     {
         StringBuilder job_description = new StringBuilder();
         Element divElement = doc.select("div[data-automation=jobAdDetails]").first();
