@@ -80,7 +80,7 @@ public class DocumentGenerator
             try {
 				Field f1 = InputJob.class.getField(p);
 				String value = (String)f1.get(job);
-                if(value != null) {
+                if(value != null && !value.isEmpty()) {
                     logger.debug("The field '{}' will be used to generate section '{}'", f1.getName(), replaceable_key.getOriginalKey());
                     return value;
                 }
@@ -94,7 +94,6 @@ public class DocumentGenerator
 			}
         }
         
-        logger.warn("No field to evaluate section '{}' from", replaceable_key.getOriginalKey());
         return null;
     }
 
@@ -106,8 +105,13 @@ public class DocumentGenerator
         {
             ReplaceableKey key_to_replace = replaceableKeys.get(section.getSectionName());
             String evaluation_value = getPreferredValueToEvaluateSectionFrom(key_to_replace, model);
-            Comparator<DynamicHTMLElement> sorter = new CosineSimilarityComparator(evaluation_value);
-            section.sort(sorter);
+            if(evaluation_value == null) {
+                logger.warn("No data in field(s) to evaluate section '{}' from, the default order will be used", key_to_replace.getOriginalKey());
+            }
+            else {
+                Comparator<DynamicHTMLElement> sorter = new CosineSimilarityComparator(evaluation_value);
+                section.sort(sorter);
+            }
 
             template = template.replace(key_to_replace.getOriginalKey(), section.compose());
         }
