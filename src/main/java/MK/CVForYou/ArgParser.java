@@ -21,7 +21,7 @@ public class ArgParser
     Path compare_document_path;
     String seek_url; 
 
-    Path compare_cache_path;
+    String[] compare_cache_paths;
 
     JobSource jd_source; 
 
@@ -106,7 +106,7 @@ public class ArgParser
 
 
         Option compare_from_cache = Option.builder("cc")
-                                      .longOpt("compare-cache").hasArg()
+                                      .longOpt("compare-cache").hasArgs()
                                       .desc("compare from a previous cached seek saved job")
                                       .build();
 
@@ -194,8 +194,21 @@ public class ArgParser
 
         if (cmd.hasOption("cc")) 
         {
-            compare_cache_path = Paths.get(cmd.getOptionValue("cc"));
-            jd_source = new JobFromCache(compare_cache_path);
+            compare_cache_paths = cmd.getOptionValues("cc");
+            ArrayList<Path> paths = new ArrayList<>();
+            for(String cache : compare_cache_paths)
+            {
+                Path path = Paths.get(cache);
+                if(Files.isDirectory(path))
+                {
+                    //TODO: Expand directory for files to use
+                }
+                else if(Files.isRegularFile(path))
+                {
+                    paths.add(path);
+                }
+            }
+            jd_source = new JobFromCache(paths);
         }
     }
 
