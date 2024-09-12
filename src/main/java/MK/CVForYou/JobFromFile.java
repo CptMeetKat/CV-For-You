@@ -21,7 +21,7 @@ public class JobFromFile implements JobSource
         ArrayList<InputJob> jobs = new ArrayList<>();
         InputJob work_item = new InputJob();
         work_item.name = "generated_document";
-        work_item.job_description = getDocument(filePath); //TODO: add post path slash to end of file name
+        work_item.job_description = getDocument(filePath);
         jobs.add(work_item);
 
         return jobs;
