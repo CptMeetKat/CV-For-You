@@ -65,7 +65,8 @@ public class SeekJobParser
         {
             logger.warn("The <div> element with data-automation='jobAdDetails' was not found.");
         }
-        return job_description.toString();
+
+        return job_description.isEmpty() ? null : job_description.toString();
     }
 
     public static String extractJobTitleFromHTML(Document doc)
@@ -78,7 +79,7 @@ public class SeekJobParser
         } catch (JSONException e) {
             logger.warn("Unable to parse Seek server state as JSON: {}", server_state);
         }
-        return job_title;
+        return job_title == null || job_title.isEmpty() ? null : job_title;
     }
 
     //OPTIONS: SEEK_APOLLO_DATA, SEEK_CONFIG, SK_DL, SEEK_APP_CONFIG, SEEK_REDUX_DATA
