@@ -5,8 +5,6 @@ import java.nio.file.Paths;
 
 public class ExecuteChromePDFGenerator {
 
-    //TODO: This needs an acceptance test
-
     public static void run(String num, Path output_directory) {
         try {
             String base = output_directory.toAbsolutePath().toString();
