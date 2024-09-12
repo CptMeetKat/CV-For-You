@@ -73,27 +73,12 @@ public class GenerateDocumentAcceptanceTest
         };
         App.main(args);
 
-
-
         String expected = "Professional Title\nSoftware Developer\nTags\nSQL\nC#\nJAVA\n";
 
         File file = new File(testDirectory.toString(), "cv" + cache_id + ".pdf");
         PDDocument document = Loader.loadPDF(file);
         PDFTextStripper pdfStripper = new PDFTextStripper();
         String text = pdfStripper.getText(document);
-        System.out.println("'" + text + "'");
-
-        System.out.println();
-        System.out.println("'" + expected + "'");
         assertEquals(expected, text); 
-
     }
-
-
-
-
-
-
-
-
 }
