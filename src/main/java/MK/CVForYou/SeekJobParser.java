@@ -102,7 +102,7 @@ public class SeekJobParser
                 if(states[i].startsWith("window."+field))
                 {
                     int json_start = states[i].indexOf("{");
-                    return states[i].substring(json_start);
+                    return states[i].substring(json_start).trim();
                 }
             }
             logger.warn("Unable to obtain {} from HTML", field);
