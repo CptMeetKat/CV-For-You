@@ -23,4 +23,18 @@ public class SeekJobParserTest
 
         Assert.assertEquals(expected, result);
     }
+    
+
+    @Test
+    public void shouldExtractJobDescriptionFromCachedPage() throws IOException
+    {
+        String expected = "\n\nWe build financial processing\nYou will build software\n";
+
+        Path cached_page = Paths.get("src/test/test_files/SeekJobParser/78678834");
+        
+        Document page = SeekJobParser.getJobCacheFromFile(cached_page);
+        String result = SeekJobParser.extractJobDescriptionFromHTML(page);
+
+        Assert.assertEquals(expected, result);
+    }
 }
