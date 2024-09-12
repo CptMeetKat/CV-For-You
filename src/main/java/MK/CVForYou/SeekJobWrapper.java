@@ -40,11 +40,8 @@ public class SeekJobWrapper {
         return job_url.substring(slash_position+1); //Unsafe if / is last character
     }
 
-
-    public void initialise()
+    private Document fetchJob(String job_id)
     {
-        //TODO: Migrate into a private function
-        String job_id = getSeekJobID();
         Document page;
 		try {
             Path cache_path = Paths.get(cache_directory.toString(), job_id);
@@ -57,6 +54,14 @@ public class SeekJobWrapper {
             cachePage(page, getSeekJobID(), this.cache_directory); //TODO: this getSeekJobID() function smells funny
             sleep(); //Avoid flagging seek systems
 		}
+        return page;
+    }
+
+
+    public void initialise()
+    {
+        String job_id = getSeekJobID();
+        Document page = fetchJob(job_id);
 
         job_description = SeekJobParser.extractJobSectionFromHTML(page); //SeekJobPageParser //SeekJobDescriptionParser
         job_title = SeekJobParser.extractJobTitleFromHTML(page);
