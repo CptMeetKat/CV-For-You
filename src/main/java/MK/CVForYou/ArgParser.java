@@ -239,7 +239,7 @@ public class ArgParser
        section_definition_paths = files.toArray(new Path[0]);
     }
 
-    private String[] listJSONFilesInDirectory(String directory_path)
+    private static String[] listJSONFilesInDirectory(String directory_path)
     {
         Path directory = Paths.get(directory_path);
         String fileArray[] = null;
