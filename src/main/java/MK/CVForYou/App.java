@@ -12,6 +12,8 @@ public class App
     static final Logger logger = LoggerFactory.getLogger(App.class);
     public static void main( String[] args )
     {
+        new SeekAppliedJobsWrapper();
+        System.exit(0);
 
         ArgParser ap = new ArgParser();
         if ( ap.parseArgs(args) )
