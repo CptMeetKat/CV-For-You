@@ -27,7 +27,7 @@ public class ArgParser
 
     private static final String BASIC_USAGE = "./CVForYou -d <document_path> -c <compare_path> -s <section_paths>";
 
-    static final Logger logger = LoggerFactory.getLogger(App.class);
+    static final Logger logger = LoggerFactory.getLogger(ArgParser.class);
 
     public ArgParser()
     {
