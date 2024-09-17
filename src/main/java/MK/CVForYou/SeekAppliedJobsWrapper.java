@@ -55,12 +55,12 @@ public class SeekAppliedJobsWrapper implements Requestable
     {
         JSONObject applied_data = session_manager.makeRequest(this);
         
-        //ArrayList<SeekAppliedJob> applied_jobs = deserializeAppliedJobs(applied_data);
+        ArrayList<SeekAppliedJob> applied_jobs = deserializeAppliedJobs(applied_data);
 
-        //for ( SeekAppliedJob job : applied_jobs)
-        //{
-        //    System.out.println(job);
-        //}
+        for ( SeekAppliedJob job : applied_jobs)
+        {
+            System.out.println(job.job_title);
+        }
 		
         return null;
     }
