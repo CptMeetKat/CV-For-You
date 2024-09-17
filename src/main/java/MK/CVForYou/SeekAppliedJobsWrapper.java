@@ -2,24 +2,34 @@
 package MK.CVForYou;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.json.JSONObject;
 
 public class SeekAppliedJobsWrapper implements Requestable
 {
+    SeekSessionManager session_manager;
     public SeekAppliedJobsWrapper()
     {
-        System.out.println("I am alive!");
+        this.session_manager = SeekSessionManager.getManager();
     }
 
 	@Override
 	public JSONObject request(String access_token) throws IOException, InterruptedException {
-        return getAppliedJobs(access_token);
+        return fetchAppliedJobs(access_token);
 	}
 
-    public JSONObject getAppliedJobs(String access_token) throws IOException, InterruptedException {
+    public JSONObject fetchAppliedJobs(String access_token) throws IOException, InterruptedException {
 
             JSONObject result = null;
+
             return result;
+    }
+
+    public ArrayList<String> getAppliedJobsStats()
+    {
+        session_manager.makeRequest(this);
+
+        return null;
     }
 }
