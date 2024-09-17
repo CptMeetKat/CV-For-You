@@ -42,7 +42,7 @@ public class SeekSavedJobWrapper implements Requestable
 
         ArrayList<SeekSavedJob> saved_jobs = deserializeSavedJobs(jobs_data);
         for ( SeekSavedJob job : saved_jobs)
-            job_urls.add( buildJobUrl(job.getID()));
+            job_urls.add( buildJobUrl(job.job_id));
 		
         return job_urls;
     }

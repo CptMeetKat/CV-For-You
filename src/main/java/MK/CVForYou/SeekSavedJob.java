@@ -45,10 +45,5 @@ public class SeekSavedJob
             salary = salaryJson.optString("label");
         }
     }
-
-    public String getID()
-    {
-        return job_id;
-    }
 }
 
