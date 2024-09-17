@@ -7,7 +7,7 @@ public class SeekAppliedJob
     public String job_id;
     public String job_title;
     public String status;
-    public boolean String;
+    public boolean active;
     public String company;
 
     public SeekAppliedJob(JSONObject node)
