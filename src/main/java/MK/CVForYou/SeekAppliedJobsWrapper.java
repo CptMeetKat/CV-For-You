@@ -59,7 +59,7 @@ public class SeekAppliedJobsWrapper implements Requestable
 
         for ( SeekAppliedJob job : applied_jobs)
         {
-            System.out.printf("%s %s %s\n", job.job_title, job.active, job.company);
+            System.out.printf("Title: %s\n Active: %b\n Company: %s\n Company ID: %s\n", job.job_title, job.active, job.company_name, job.company_id);
         }
 		
         return null;
