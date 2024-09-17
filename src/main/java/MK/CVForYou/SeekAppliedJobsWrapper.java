@@ -71,7 +71,7 @@ public class SeekAppliedJobsWrapper implements Requestable
         ArrayList<SeekAppliedJob> arr = new ArrayList<>();
         try
         {
-            JSONArray saved_jobs = (JSONArray) object.query("/data/viewer/savedJobs/edges");
+            JSONArray saved_jobs = (JSONArray) object.query("/data/viewer/appliedJobs/edges");
             if(saved_jobs == null)
                 throw new NullPointerException();
 
