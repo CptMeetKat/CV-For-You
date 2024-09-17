@@ -36,7 +36,7 @@ public class SeekSavedJob
 
         JSONObject advertiser = (JSONObject) job.optJSONObject("advertiser");
         if(advertiser == null)
-            return;
+            return; //TODO: This is valid but weird
         company = advertiser.optString("name");
 
 
