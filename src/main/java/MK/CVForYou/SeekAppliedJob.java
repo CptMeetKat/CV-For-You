@@ -51,5 +51,13 @@ public class SeekAppliedJob
         }
 
     }
+
+
+    public String getLastestStatus()
+    {
+        if(status.size() > 0)
+            return status.get(status.size()-1);
+        return null;
+    }
 }
 
