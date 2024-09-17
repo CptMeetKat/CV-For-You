@@ -76,10 +76,10 @@ public class SeekSavedJobWrapper implements Requestable
     public JSONObject request(String access_token)
         throws IOException, InterruptedException
     {
-        return getSavedJobsAsJson(access_token);
+        return fetchSavedJobs(access_token);
     }
 
-    public JSONObject getSavedJobsAsJson(String access_token) throws IOException, InterruptedException
+    public JSONObject fetchSavedJobs(String access_token) throws IOException, InterruptedException
     {
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create("https://www.seek.com.au/graphql"))
