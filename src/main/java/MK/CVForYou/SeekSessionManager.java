@@ -16,7 +16,7 @@ public class SeekSessionManager
 {
     static SeekSessionManager manager;
     
-    static final Logger logger = LoggerFactory.getLogger(App.class);
+    static final Logger logger = LoggerFactory.getLogger(SeekSessionManager.class);
 
     String JobseekerSessionId;
     String access_token;
