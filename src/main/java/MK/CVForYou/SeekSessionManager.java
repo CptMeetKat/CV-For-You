@@ -33,9 +33,7 @@ public class SeekSessionManager
     public static synchronized SeekSessionManager getManager()
     {
         if (manager == null)
-        {
             manager = new SeekSessionManager();
-        }
         return manager;
     }
 
