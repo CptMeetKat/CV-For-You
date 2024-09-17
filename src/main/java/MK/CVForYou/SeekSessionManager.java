@@ -27,6 +27,7 @@ public class SeekSessionManager
 
     private SeekSessionManager()
     {
+        readAuthFromFile();
     }
 
     public static synchronized SeekSessionManager getManager()
@@ -100,4 +101,30 @@ public class SeekSessionManager
         IOUtils.writeToFile(auth.toString(), auth_file);
     }
 
+    public static boolean responseHasAuthError(JSONObject jobs_data)
+    {
+        //TODO: Limit to auth error, instead of all errors
+        boolean hasError = jobs_data.has("errors");
+        return hasError;
+    }
+
+
+    private void readAuthFromFile()
+    {
+        String file = auth_file;
+        JSONObject auth = null;
+        try {
+            String data = IOUtils.readFile(file);
+            auth = new JSONObject(data);
+		} catch (IOException e) {
+			e.printStackTrace();
+            System.err.println("Could not get refresh params from file");
+		}
+
+
+        JobseekerSessionId = auth.optString("JobseekerSessionId");
+        setAccessToken(auth.optString("access_token"));
+        refresh_token = auth.optString("refresh_token");
+        client_id = auth.optString("client_id");
+    }
 }
