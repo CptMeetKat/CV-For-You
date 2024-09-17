@@ -40,7 +40,7 @@ public class SeekJobWrapper {
         return job_url.substring(slash_position+1); //Unsafe if / is last character
     }
 
-    private Document fetchJob(String job_id)
+    private Document fetchJob(String job_id) //TODO: Unsafe function
     {
         Document page;
 		try {
@@ -60,7 +60,7 @@ public class SeekJobWrapper {
     public void initialise()
     {
         String job_id = getSeekJobID();
-        Document page = fetchJob(job_id);
+        Document page = fetchJob(job_id); //TODO: This CAN cause a fatal error IF null 
 
         job_description = SeekJobParser.extractJobDescriptionFromHTML(page); //SeekJobPageParser //SeekJobDescriptionParser
         job_title = SeekJobParser.extractJobTitleFromHTML(page);
