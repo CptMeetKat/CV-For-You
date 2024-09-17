@@ -82,10 +82,10 @@ public class SeekAppliedJobsWrapper implements Requestable
                 arr.add(new SeekAppliedJob(job.getJSONObject("node")));
             }
         } catch (JSONPointerException e) {
-            logger.error("Unable to deserialise SavedJobs object");
+            logger.error("Unable to deserialise AppliedJobs object");
         }
         catch(NullPointerException e) {
-            logger.error("Null found when querying SavedJobs");
+            logger.error("Null found when querying AppliedJobs");
         }
 
         return arr; 
