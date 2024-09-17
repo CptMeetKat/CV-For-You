@@ -39,6 +39,35 @@ public class SeekSessionManager
         return manager;
     }
 
+    public JSONObject makeRequest(Requestable requestable)
+    {
+        JSONObject response = null;
+        try
+        {
+            response = requestable.request(access_token);
+            if( SeekSessionManager.responseHasAuthError(response)) 
+            {
+                logger.info("Access token invalid, trying to refresh token...");
+                tryRefreshToken();
+                response = requestable.request(access_token);
+            }
+
+            if( responseHasAuthError(response) )
+            {
+                logger.error(response.toString());
+                throw new BadAuthenticationException("Unable to refresh access token, please refresh auth file"); 
+            }
+        }
+        catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+		}
+        catch (BadAuthenticationException e) {
+            logger.error("Authentication token invalid");
+        }
+
+        return response;
+    }
+
 
     private void tryRefreshToken()
     {
