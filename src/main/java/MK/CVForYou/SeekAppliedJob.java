@@ -16,6 +16,8 @@ public class SeekAppliedJob
     public String company_id;
     public String applied_at;
     public String created_at;
+    public boolean applied_with_cv;
+    public boolean applied_with_cover;
     
     
 
@@ -23,6 +25,8 @@ public class SeekAppliedJob
     {
         job_id = node.optString("id");
         active = node.optBoolean("isActive");
+        applied_with_cv = node.optBoolean("hasAppliedWithResume");
+        applied_with_cover = node.optBoolean("hasAppliedWithCoverLetter");
 
         JSONObject job = (JSONObject) node.optQuery("/job");
         if(job != null)
@@ -84,6 +88,8 @@ public class SeekAppliedJob
         sb.append(String.format("'%s',", getLastestStatus()));
         sb.append(String.format("'%s',", applied_at));
         sb.append(String.format("'%s',", created_at));
+        sb.append(String.format("'%s',", applied_with_cover));
+        sb.append(String.format("'%s',", applied_with_cv));
         sb.append("\n");
 
         return sb.toString();
