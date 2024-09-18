@@ -17,7 +17,8 @@ public class App
             return;
         else if(args[0].equals("-a"))
         {
-            new SeekAppliedJobsWrapper().getAppliedJobsStats();
+            SeekAppliedJobsWrapper appliedJobWrapper = new SeekAppliedJobsWrapper();
+            ArrayList<SeekAppliedJob> applied = appliedJobWrapper.getAppliedJobsStats();
             System.exit(0);
         }
 
