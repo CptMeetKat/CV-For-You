@@ -2,6 +2,7 @@ package MK.CVForYou;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -76,7 +77,7 @@ public class SeekAppliedJob
         return null;
     }
 
-    public static String toCSV(ArrayList<SeekAppliedJob> applied_jobs)
+    public static String toCSV(List<SeekAppliedJob> applied_jobs)
     {
         StringBuilder sb = new StringBuilder();
         String[] fields = {"job_id", "job_title", "active", "company_name", "company_id", "status", "applied_at", "created_at", "applied_with_cover", "applied_with_cv"}; 
