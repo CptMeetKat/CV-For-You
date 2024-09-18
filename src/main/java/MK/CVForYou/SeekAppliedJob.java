@@ -14,6 +14,9 @@ public class SeekAppliedJob
     public boolean active;
     public String company_name;
     public String company_id;
+    public String applied_at;
+    
+    
 
     public SeekAppliedJob(JSONObject node)
     {
@@ -47,6 +50,11 @@ public class SeekAppliedJob
             }
         }
 
+        JSONObject appliedJSON = (JSONObject) node.optQuery("/appliedAt");
+        if(appliedJSON != null)
+        {
+            applied_at = appliedJSON.optString("dateTimeUtc");
+        }
     }
 
 
@@ -67,6 +75,7 @@ public class SeekAppliedJob
         sb.append(String.format("'%s',", company_name));
         sb.append(String.format("'%s',", company_id));
         sb.append(String.format("'%s',", getLastestStatus()));
+        sb.append(String.format("'%s',", applied_at));
         sb.append("\n");
 
         return sb.toString();
