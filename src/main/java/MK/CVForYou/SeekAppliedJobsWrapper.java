@@ -69,16 +69,9 @@ public class SeekAppliedJobsWrapper implements Requestable
         }
         sb.append("\n");
 
-
         for ( SeekAppliedJob job : applied_jobs)
         {
-            sb.append(String.format("'%s',", job.job_id));
-            sb.append(String.format("'%s',", job.job_title));
-            sb.append(String.format("'%s',", job.active));
-            sb.append(String.format("'%s',", job.company_name));
-            sb.append(String.format("'%s',", job.company_id));
-            sb.append(String.format("'%s',", job.getLastestStatus()));
-            sb.append("\n");
+            sb.append(job.toCSV());
         }
         System.out.println(sb.toString());
         System.out.printf("total: %d\n", applied_jobs.size());
