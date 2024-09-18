@@ -19,6 +19,7 @@ public class App
         {
             SeekAppliedJobsWrapper appliedJobWrapper = new SeekAppliedJobsWrapper();
             ArrayList<SeekAppliedJob> applied = appliedJobWrapper.getAppliedJobsStats();
+            ApplicationAggregator.readData();
             System.exit(0);
         }
 
