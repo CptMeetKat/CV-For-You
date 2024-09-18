@@ -18,25 +18,22 @@ public class SeekAppliedJob
     public SeekAppliedJob(JSONObject node)
     {
         job_id = node.optString("id");
+        active = node.optBoolean("isActive");
 
         JSONObject job = (JSONObject) node.optQuery("/job");
         if(job != null)
         {
             job_title = job.optString("title");
+            JSONObject advertiser = (JSONObject) job.optQuery("/advertiser");
+            if(advertiser != null)
+            {
+                company_name = advertiser.optString("name");
+                company_id = advertiser.optString("id");
+            }
         }
 
-        active = node.optBoolean("isActive");
-
-        JSONObject advertiser = (JSONObject) job.optQuery("/advertiser");
-        if(advertiser != null)
-        {
-            company_name = advertiser.optString("name");
-            company_id = advertiser.optString("id");
-        }
 
         status = new ArrayList<String>(3);
-
-
         JSONArray events = (JSONArray) node.query("/events");
         if(events != null)
         {
