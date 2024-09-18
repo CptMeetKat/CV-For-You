@@ -52,7 +52,7 @@ public class SeekAppliedJobsWrapper implements Requestable
             return new JSONObject(response.body());
     }
 
-    public ArrayList<String> getAppliedJobsStats()
+    public ArrayList<SeekAppliedJob> getAppliedJobsStats()
     {
         JSONObject applied_data = session_manager.makeRequest(this);
         
@@ -76,7 +76,7 @@ public class SeekAppliedJobsWrapper implements Requestable
         System.out.println(sb.toString());
         System.out.printf("total: %d\n", applied_jobs.size());
 		
-        return null;
+        return applied_jobs;
     }
 
 
