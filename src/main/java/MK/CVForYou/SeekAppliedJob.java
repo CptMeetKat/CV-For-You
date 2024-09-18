@@ -76,23 +76,35 @@ public class SeekAppliedJob
         return null;
     }
 
-    public String toCSV()
+    public static String toCSV(ArrayList<SeekAppliedJob> applied_jobs)
     {
         StringBuilder sb = new StringBuilder();
-
-        sb.append(String.format("'%s',", job_id));
-        sb.append(String.format("'%s',", job_title));
-        sb.append(String.format("'%s',", active));
-        sb.append(String.format("'%s',", company_name));
-        sb.append(String.format("'%s',", company_id));
-        sb.append(String.format("'%s',", getLastestStatus()));
-        sb.append(String.format("'%s',", applied_at));
-        sb.append(String.format("'%s',", created_at));
-        sb.append(String.format("'%s',", applied_with_cover));
-        sb.append(String.format("'%s',", applied_with_cv));
+        String[] fields = {"job_id", "job_title", "active", "company_name", "company_id", "status", "applied_at", "created_at", "applied_with_cover", "applied_with_cv"}; 
+        for(String f : fields)
+            sb.append(String.format("'%s',", f));
         sb.append("\n");
 
+        for (SeekAppliedJob job : applied_jobs) 
+        {
+            sb.append( csvFormat(job.job_id));
+            sb.append( csvFormat(job.job_title));
+            sb.append( csvFormat(job.active));
+            sb.append( csvFormat(job.company_name));
+            sb.append( csvFormat(job.company_id));
+            sb.append( csvFormat(job.getLastestStatus()));
+            sb.append( csvFormat(job.applied_at));
+            sb.append( csvFormat(job.created_at));
+            sb.append( csvFormat(job.applied_with_cover));
+            sb.append( csvFormat(job.applied_with_cv));
+            sb.append("\n");
+        }
+
         return sb.toString();
+    }
+
+    private static String csvFormat(Object value)
+    {
+        return String.format("'%s',", value.toString());
     }
 
 }

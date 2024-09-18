@@ -58,24 +58,6 @@ public class SeekAppliedJobsWrapper implements Requestable
         
         ArrayList<SeekAppliedJob> applied_jobs = deserializeAppliedJobs(applied_data);
 
-        
-        //TODO: adjust function for SRP 
-        String[] fields = {"job_id", "job_title", "active", "company_name", "company_id", "status", "applied_at", "created_at", "applied_with_cover", "applied_with_cv"}; 
-
-        StringBuilder sb = new StringBuilder();
-        for(String f : fields)
-        {
-            sb.append(String.format("'%s',", f));
-        }
-        sb.append("\n");
-
-        for ( SeekAppliedJob job : applied_jobs)
-        {
-            sb.append(job.toCSV());
-        }
-        System.out.println(sb.toString());
-        System.out.printf("total: %d\n", applied_jobs.size());
-		
         return applied_jobs;
     }
 
