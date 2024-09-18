@@ -60,7 +60,7 @@ public class SeekAppliedJobsWrapper implements Requestable
 
         
         //TODO: adjust function for SRP 
-        String[] fields = {"job_id", "job_title", "active", "company_name", "company_id", "status", "applied_at"}; 
+        String[] fields = {"job_id", "job_title", "active", "company_name", "company_id", "status", "applied_at", "created_at"}; 
 
         StringBuilder sb = new StringBuilder();
         for(String f : fields)

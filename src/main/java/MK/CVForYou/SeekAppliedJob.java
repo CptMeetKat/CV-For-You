@@ -15,6 +15,7 @@ public class SeekAppliedJob
     public String company_name;
     public String company_id;
     public String applied_at;
+    public String created_at;
     
     
 
@@ -32,6 +33,12 @@ public class SeekAppliedJob
             {
                 company_name = advertiser.optString("name");
                 company_id = advertiser.optString("id");
+            }
+
+            JSONObject createdJSON = (JSONObject) job.optQuery("/createdAt");
+            if(createdJSON != null)
+            {
+                created_at = createdJSON.optString("dateTimeUtc");
             }
         }
 
@@ -76,6 +83,7 @@ public class SeekAppliedJob
         sb.append(String.format("'%s',", company_id));
         sb.append(String.format("'%s',", getLastestStatus()));
         sb.append(String.format("'%s',", applied_at));
+        sb.append(String.format("'%s',", created_at));
         sb.append("\n");
 
         return sb.toString();
