@@ -20,7 +20,7 @@ public class SeekAppliedJob
     public boolean applied_with_cv;
     public boolean applied_with_cover;
     
-    
+    public SeekAppliedJob(){}
 
     public SeekAppliedJob(JSONObject node)
     {
