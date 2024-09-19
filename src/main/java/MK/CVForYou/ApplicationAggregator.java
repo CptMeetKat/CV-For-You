@@ -40,19 +40,12 @@ public class ApplicationAggregator
 
                             try {
                                 Field f = SeekAppliedJob.class.getField(field_trimmed);
-                                System.out.println(f.getType().toString());
-                                System.out.printf("csvFields_length: %d %d %d\n", csv_fields.length, i, csv_data.length);
                                 if(f.getType() == Boolean.class || f.getType() == boolean.class)
                                     f.setBoolean(row, Boolean.getBoolean(csv_data[i]));
                                 else if(f.getType() == ArrayList.class)
-                                {
                                     logger.warn("not implemented: did not populate array type"); //TODO: Incomplete
-                                }
                                 else
-                                {
-                                    System.out.printf("%s %s\n", f.getType().toString(), csv_data[i]);
                                     f.set(row, csv_data[i]);
-                                }
                             }
                             catch(IllegalAccessException | NoSuchFieldException e) {
                                 e.printStackTrace();
