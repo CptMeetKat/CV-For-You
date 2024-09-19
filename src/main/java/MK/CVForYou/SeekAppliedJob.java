@@ -11,6 +11,7 @@ public class SeekAppliedJob
     public String job_id;
     public String job_title;
     public ArrayList<String> status;
+    public ArrayList<String> status_times;
     public boolean active;
     public String company_name;
     public String company_id;
@@ -48,6 +49,7 @@ public class SeekAppliedJob
 
 
         status = new ArrayList<String>(3);
+        status_times = new ArrayList<String>(3);
         JSONArray events = (JSONArray) node.query("/events");
         if(events != null)
         {
@@ -58,6 +60,11 @@ public class SeekAppliedJob
                 String status_value = event.optString("status");
                 if(status_value != null)
                     status.add( status_value  );
+
+
+                JSONObject timestamps = (JSONObject) event.query("/timestamp");
+                if(timestamps != null)
+                    status_times.add(timestamps.optString("dateTimeUtc"));
             }
         }
 
