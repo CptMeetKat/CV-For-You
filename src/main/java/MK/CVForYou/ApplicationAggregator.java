@@ -28,13 +28,6 @@ public class ApplicationAggregator
                 String[] csv_fields = line.split(delimiter);
 
                 while ((line = br.readLine()) != null) {
-
-                    if(line.equals("") )
-                    {
-                        System.out.println("LAST CHAR EMPTY");
-                        System.exit(1);
-                    }
-
                     String[] csv_data = line.split(delimiter);
 
                     SeekAppliedJob row = new SeekAppliedJob();
@@ -53,7 +46,7 @@ public class ApplicationAggregator
                                     f.setBoolean(row, Boolean.getBoolean(csv_data[i]));
                                 else if(f.getType() == ArrayList.class)
                                 {
-                                    logger.warn("not implmented: did not populate array type");
+                                    logger.warn("not implemented: did not populate array type");
                                 }
                                 else
                                 {
