@@ -46,7 +46,7 @@ public class ApplicationAggregator
                                     f.setBoolean(row, Boolean.getBoolean(csv_data[i]));
                                 else if(f.getType() == ArrayList.class)
                                 {
-                                    logger.warn("not implemented: did not populate array type");
+                                    logger.warn("not implemented: did not populate array type"); //TODO: Incomplete
                                 }
                                 else
                                 {
