@@ -34,22 +34,22 @@ public class ApplicationAggregator
                     for (int i = 0; i < csv_fields.length; i++) {
 
                         String field = csv_fields[i];
-                        if (field.length() > 2)
-                        {
-                            String field_trimmed = field.substring(1, field.length() - 1);
+                        if (field.length() <= 2)
+                            continue;
 
-                            try {
-                                Field f = SeekAppliedJob.class.getField(field_trimmed);
-                                if(f.getType() == Boolean.class || f.getType() == boolean.class)
-                                    f.setBoolean(row, Boolean.getBoolean(csv_data[i]));
-                                else if(f.getType() == ArrayList.class)
-                                    logger.warn("not implemented: did not populate array type"); //TODO: Incomplete
-                                else
-                                    f.set(row, csv_data[i]);
-                            }
-                            catch(IllegalAccessException | NoSuchFieldException e) {
-                                e.printStackTrace();
-                            }
+                        String field_trimmed = field.substring(1, field.length() - 1);
+
+                        try {
+                            Field f = SeekAppliedJob.class.getField(field_trimmed);
+                            if(f.getType() == Boolean.class || f.getType() == boolean.class)
+                                f.setBoolean(row, Boolean.getBoolean(csv_data[i]));
+                            else if(f.getType() == ArrayList.class)
+                                logger.warn("not implemented: did not populate array type"); //TODO: Incomplete
+                            else
+                                f.set(row, csv_data[i]);
+                        }
+                        catch(IllegalAccessException | NoSuchFieldException e) {
+                            e.printStackTrace();
                         }
                     }
                     data.add(row);
