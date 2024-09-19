@@ -85,7 +85,7 @@ public class ArgParser
 
 
 
-        options.addRequiredOption("d", "document", true, "path to the dynamic document");
+        options.addOption("d", "document", true, "path to the dynamic document");
         options.addOption("h", "help", false, "print this message");
         options.addOption("o", "output", true, "output directory");
 
@@ -111,7 +111,6 @@ public class ArgParser
                                       .build();
 
         OptionGroup compare_input = new OptionGroup();
-        compare_input.setRequired(true);
 
         compare_input.addOption(compare_from_file);
         compare_input.addOption(compare_from_seek);
@@ -150,13 +149,9 @@ public class ArgParser
         try {
             CommandLine cmd = parser.parse(options, args);
 
-            if (!cmd.hasOption("sd") && !cmd.hasOption("s"))
-                throw new ParseException("Either -sd or -s must be provided");
+            parseCVGeneration(cmd);
+            //parseSeekProfileStats(cmd); 
 
-              handleDocumentFlags(cmd);
-              handleCompareFlags(cmd);
-              handleSectionFlags(cmd);
-              handleOutputFlags(cmd);
 
         } catch (ParseException e) {
             logger.error(e.getMessage());
@@ -165,6 +160,23 @@ public class ArgParser
             success = false;
         }
         return success;
+    }
+
+    private void parseCVGeneration(CommandLine cmd) throws ParseException
+    {
+        if (!cmd.hasOption("sd") && !cmd.hasOption("s"))
+            throw new ParseException("Either -sd or -s must be provided");
+
+        if (!cmd.hasOption("d"))
+            throw new ParseException("-d must be provided");
+
+        if (!cmd.hasOption("c") && !cmd.hasOption("cs") && !cmd.hasOption("ca") && !cmd.hasOption("cc"))
+            throw new ParseException("A compare flag must be provided (either -c, -cs, -ca, cc)");
+
+        handleDocumentFlags(cmd);
+        handleCompareFlags(cmd);
+        handleSectionFlags(cmd);
+        handleOutputFlags(cmd);
     }
 
     private void handleOutputFlags(CommandLine cmd)
