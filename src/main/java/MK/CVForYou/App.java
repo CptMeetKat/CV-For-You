@@ -24,7 +24,7 @@ public class App
         }
 
         ArgParser ap = new ArgParser();
-        if ( ap.parseArgs(args) )
+        if ( ap.parseArgs(args) == 1 )
             new App(ap);
     }
 

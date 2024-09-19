@@ -127,9 +127,9 @@ public class ArgParser
         return jd_source;
     }
 
-    public boolean parseArgs(String[] args) //TODO: Consider replaceing boolean with an enum Mode
+    public int parseArgs(String[] args) 
     {
-        boolean success = true;
+        int mode = 1;
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
 
@@ -140,7 +140,7 @@ public class ArgParser
             {
                 formatter.printHelp(BASIC_USAGE,
                                     options);
-                return false;
+                return 0;
             }
         }
         catch (ParseException e) {}
@@ -151,15 +151,13 @@ public class ArgParser
 
             parseCVGeneration(cmd);
             //parseSeekProfileStats(cmd); 
-
-
         } catch (ParseException e) {
             logger.error(e.getMessage());
             formatter.printHelp(BASIC_USAGE,
                                     options);
-            success = false;
+            mode = 0;
         }
-        return success;
+        return mode;
     }
 
     private void parseCVGeneration(CommandLine cmd) throws ParseException

@@ -26,8 +26,8 @@ public class ArgParserTest
                                      };
 
         ArgParser ap = new ArgParser();
-        boolean result = ap.parseArgs(args);
-        assertFalse(result);
+        int mode = ap.parseArgs(args);
+        assertEquals(mode, 0);
     }
 
     @Test
@@ -38,8 +38,8 @@ public class ArgParserTest
                                      };
 
         ArgParser ap = new ArgParser();
-        boolean result = ap.parseArgs(args);
-        assertFalse(result);
+        int mode = ap.parseArgs(args);
+        assertEquals(mode, 0);
     }
 
 
@@ -51,8 +51,8 @@ public class ArgParserTest
                                      };
 
         ArgParser ap = new ArgParser();
-        boolean result = ap.parseArgs(args);
-        assertFalse(result);
+        int mode = ap.parseArgs(args);
+        assertEquals(mode, 0);
     }
 
 
@@ -64,8 +64,8 @@ public class ArgParserTest
                                      };
 
         ArgParser ap = new ArgParser();
-        boolean result = ap.parseArgs(args);
-        assertFalse(result);
+        int mode = ap.parseArgs(args);
+        assertEquals(mode, 0);
     }
     
 
@@ -186,8 +186,8 @@ public class ArgParserTest
         String[] args = new String[]{};
 
         ArgParser ap = new ArgParser();
-        boolean result = ap.parseArgs(args);
-        assertFalse(result);
+        int mode = ap.parseArgs(args);
+        assertEquals(mode, 0);
     }
 
 
@@ -197,7 +197,7 @@ public class ArgParserTest
         String[] args = new String[]{"-h"};
 
         ArgParser ap = new ArgParser();
-        boolean result = ap.parseArgs(args);
-        assertFalse(result);
+        int mode = ap.parseArgs(args);
+        assertEquals(mode, 0);
     }
 }
