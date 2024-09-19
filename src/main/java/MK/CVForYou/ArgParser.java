@@ -129,7 +129,7 @@ public class ArgParser
 
     public int parseArgs(String[] args) 
     {
-        int mode = 1;
+        int mode = 0;
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
 
@@ -140,7 +140,7 @@ public class ArgParser
             {
                 formatter.printHelp(BASIC_USAGE,
                                     options);
-                return 0;
+                return mode;
             }
         }
         catch (ParseException e) {}
@@ -150,12 +150,12 @@ public class ArgParser
             CommandLine cmd = parser.parse(options, args);
 
             parseCVGeneration(cmd);
+            mode = 1;
             //parseSeekProfileStats(cmd); 
         } catch (ParseException e) {
             logger.error(e.getMessage());
             formatter.printHelp(BASIC_USAGE,
                                     options);
-            mode = 0;
         }
         return mode;
     }
