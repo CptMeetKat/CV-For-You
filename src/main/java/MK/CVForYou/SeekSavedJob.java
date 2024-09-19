@@ -35,9 +35,8 @@ public class SeekSavedJob
             location = location_object.optString("label");
 
         JSONObject advertiser = (JSONObject) job.optJSONObject("advertiser");
-        if(advertiser == null)
-            return; //TODO: This is valid but weird
-        company = advertiser.optString("name");
+        if(advertiser != null)
+            company = advertiser.optString("name");
 
 
         JSONObject salaryJson = job.optJSONObject("salary");
