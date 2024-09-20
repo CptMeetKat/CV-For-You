@@ -1,5 +1,7 @@
 package MK.CVForYou;
-
+//TODO: Replace apache commons
+//- No ordered help format pritns
+//- Forces hacks to make multi layer programs work
 import org.apache.commons.cli.*;
 
 import java.io.IOException;
@@ -25,7 +27,15 @@ public class ArgParser
 
     JobSource jd_source; 
 
+    int mode = 0;
+
+
+    CommandLineParser parser = new DefaultParser();
+    HelpFormatter formatter = new HelpFormatter(); //This should be global??
+
     private static final String BASIC_USAGE = "./CVForYou -d <document_path> -c <compare_path> -s <section_paths>";
+    private static final String TOP_LEVEL_USAGE = "./CVForYou -cv";
+    private static final String SEEK_STATS_USAGE = "./CVForYou -sa";
 
     static final Logger logger = LoggerFactory.getLogger(ArgParser.class);
 
@@ -39,7 +49,7 @@ public class ArgParser
     private static Options getHelpOption()
     {
         Options options = new Options();
-        
+
         options.addOption("h", "help", false, "print this message");
         return options;
     }
@@ -65,23 +75,82 @@ public class ArgParser
         return section_definition_paths;
     }
 
+    private static Options getBaseOptions()
+    {
+        Option cv_generator = Option.builder("cv")
+            .longOpt("cv-generator")
+            .desc("Generate a dynamic CV")
+            .build();
+
+        Option seek_profile_stats = Option.builder("sa")
+            .longOpt("seek-stats")
+            .desc("Aggregate stats from Seek")
+            .build();
+
+        Options options = new Options();
+        options.addOption("h", "help", false, "print this message");
+
+        options.addOption(cv_generator);
+        options.addOption(seek_profile_stats);
+        return options;
+
+    }
+
+    private static Options getSeekStatsOptions()
+    {
+        return getSeekStatsOptions(false);
+    }
+
+    private static Options getSeekStatsOptions(boolean helpFormatted)
+    {
+        Options options = new Options();
+
+        Option analysis = Option.builder("a")
+            .longOpt("analysis")
+            .desc("Aggregate stats from Seek")
+            .build();
+
+        if(!helpFormatted)
+        {
+            Option seek_profile_stats = Option.builder("sa")
+                .longOpt("seek-stats")
+                .desc("Aggregate stats from Seek")
+                .build();
+            options.addOption(seek_profile_stats);
+        }
+
+        options.addOption("h", "help", false, "print this message");
+        options.addOption(analysis);
+        return options;
+    }
 
     private static Options getDefaultOptions()
     {
+        return getDefaultOptions(false);
+    }
+
+    private static Options getDefaultOptions(boolean helpFormatted)
+    {
         Option option_section_files = Option.builder("s").hasArgs()
-                                      .longOpt("section")
-                                      .desc("path to section definition files")
-                                      .build();
+            .longOpt("section")
+            .desc("path to section definition files")
+            .build();
 
 
         Option option_section_directory = Option.builder("sd").hasArgs()
-                                      .longOpt("section directory") 
-                                      .desc("directory of section definition files")
-                                      .build();
+            .longOpt("section directory") 
+            .desc("directory of section definition files")
+            .build();
 
         Options options = new Options();
         options.addOption(option_section_files);
         options.addOption(option_section_directory);
+
+        if(!helpFormatted)
+        {
+            Option base_option = Option.builder("cv").build();
+            options.addOption(base_option);
+        }
 
 
 
@@ -90,25 +159,25 @@ public class ArgParser
         options.addOption("o", "output", true, "output directory");
 
         Option compare_from_file = Option.builder("c")
-                                      .longOpt("compare").hasArg()
-                                      .desc("file to compare keywords to")
-                                      .build();
+            .longOpt("compare").hasArg()
+            .desc("file to compare keywords to")
+            .build();
 
         Option compare_from_seek = Option.builder("cs")
-                                      .longOpt("compare-seek").hasArg()
-                                      .desc("pull JD from seek to compare")
-                                      .build();
+            .longOpt("compare-seek").hasArg()
+            .desc("pull JD from seek to compare")
+            .build();
 
         Option compare_from_all_seek = Option.builder("ca")
-                                      .longOpt("compare-seek-all")
-                                      .desc("compare from your seek saved job")
-                                      .build();
+            .longOpt("compare-seek-all")
+            .desc("compare from your seek saved job")
+            .build();
 
 
         Option compare_from_cache = Option.builder("cc")
-                                      .longOpt("compare-cache").hasArgs()
-                                      .desc("compare from a previous cached seek saved job")
-                                      .build();
+            .longOpt("compare-cache").hasArgs()
+            .desc("compare from a previous cached seek saved job")
+            .build();
 
         OptionGroup compare_input = new OptionGroup();
 
@@ -127,54 +196,106 @@ public class ArgParser
         return jd_source;
     }
 
-    public int parseArgs(String[] args) 
+    public int parseArgs(String[] args)
     {
-        int mode = 0;
-        CommandLineParser parser = new DefaultParser();
-        HelpFormatter formatter = new HelpFormatter();
-
         try
         {
-            CommandLine help_cmd = parser.parse(help_option, args, true);
-            if(help_cmd.hasOption("h"))
-            {
-                formatter.printHelp(BASIC_USAGE,
-                                    options);
-                return mode;
-            }
+            parseBase(args);
+            if(mode == 0)
+                formatter.printHelp(TOP_LEVEL_USAGE, getBaseOptions());
+            else if(mode == 1)
+                parseCVGeneration(args);
+            else if(mode == 2)
+                parseSeekStats(args);
+            else
+                throw new ParseException("No mode selected (-h, -cv, -sa)"); //TODO: Necessary?
         }
-        catch (ParseException e) {}
-
-
-        try {
-            CommandLine cmd = parser.parse(options, args);
-
-            parseCVGeneration(cmd);
-            mode = 1;
-            //parseSeekProfileStats(cmd); 
-        } catch (ParseException e) {
-            logger.error(e.getMessage());
-            formatter.printHelp(BASIC_USAGE,
-                                    options);
+        catch (ParseException e)
+        {
+            mode = -1;
         }
+
         return mode;
+    } 
+
+    public void parseBase(String[] args) throws ParseException
+    {
+        try
+        {
+            CommandLine cmd = parser.parse(getBaseOptions(), args, true);
+            mode = 0;
+            if(cmd.hasOption("cv"))
+                mode = 1;
+            else if(cmd.hasOption("sa"))
+                mode = 2;
+            else if(cmd.hasOption("h"))
+                mode = 0;
+            else
+                throw new ParseException("No args provided");
+        }
+        catch(ParseException e)
+        {
+            logger.error(e.getMessage());
+            formatter.printHelp(TOP_LEVEL_USAGE, getBaseOptions());
+            throw e;
+        }
     }
 
-    private void parseCVGeneration(CommandLine cmd) throws ParseException
+    private void parseSeekStats(String[] args) throws ParseException
     {
-        if (!cmd.hasOption("sd") && !cmd.hasOption("s"))
-            throw new ParseException("Either -sd or -s must be provided");
+        try
+        {
+            CommandLine cmd = parser.parse(getSeekStatsOptions(), args);
+            if(cmd.hasOption("h"))
+            {
+                formatter.printHelp(SEEK_STATS_USAGE, getSeekStatsOptions(true));
+                mode = -1;
+                return;
+            }
 
-        if (!cmd.hasOption("d"))
-            throw new ParseException("-d must be provided");
+            if (!cmd.hasOption("a"))
+                throw new ParseException("-a must be provided");
+        }
+        catch(ParseException e)
+        {
+            logger.error(e.getMessage());
+            formatter.printHelp(SEEK_STATS_USAGE, getSeekStatsOptions(true));
+            throw e;
+        }
+    }
 
-        if (!cmd.hasOption("c") && !cmd.hasOption("cs") && !cmd.hasOption("ca") && !cmd.hasOption("cc"))
-            throw new ParseException("A compare flag must be provided (either -c, -cs, -ca, cc)");
+    private void parseCVGeneration(String[] args) throws ParseException
+    {
+        try
+        {
+            CommandLine cmd = parser.parse(options, args);
+            if(cmd.hasOption("h"))
+            {
+                formatter.printHelp(BASIC_USAGE, getDefaultOptions(true));
+                mode = -1;
+                return;
+            }
 
-        handleDocumentFlags(cmd);
-        handleCompareFlags(cmd);
-        handleSectionFlags(cmd);
-        handleOutputFlags(cmd);
+            if (!cmd.hasOption("sd") && !cmd.hasOption("s"))
+                throw new ParseException("Either -sd or -s must be provided");
+
+            if (!cmd.hasOption("d"))
+                throw new ParseException("-d must be provided");
+
+            if (!cmd.hasOption("c") && !cmd.hasOption("cs") && !cmd.hasOption("ca") && !cmd.hasOption("cc"))
+                throw new ParseException("A compare flag must be provided (either -c, -cs, -ca, cc)");
+
+            handleDocumentFlags(cmd);
+            handleCompareFlags(cmd);
+            handleSectionFlags(cmd);
+            handleOutputFlags(cmd);
+        }
+        catch(ParseException e)
+        {
+            logger.error(e.getMessage());
+            formatter.printHelp(BASIC_USAGE, getDefaultOptions(true));
+            throw e;
+        }
     }
 
     private void handleOutputFlags(CommandLine cmd)
@@ -248,7 +369,7 @@ public class ArgParser
             }
         }
 
-       section_definition_paths = files.toArray(new Path[0]);
+        section_definition_paths = files.toArray(new Path[0]);
     }
 
     //TODO: Add unit test for this
@@ -261,17 +382,17 @@ public class ArgParser
             ArrayList<String> fileNames = new ArrayList<>();
 
             Files.list(directory)
-                 .filter(Files::isRegularFile)
-                 .filter(path -> path.getFileName().toString().endsWith(suffix)) 
-                 .forEach(path -> fileNames.add(path.getFileName().toString()));
+                .filter(Files::isRegularFile)
+                .filter(path -> path.getFileName().toString().endsWith(suffix)) 
+                .forEach(path -> fileNames.add(path.getFileName().toString()));
 
             fileArray = fileNames.toArray(new String[0]);
 
         } catch (NoSuchFileException e) {
             logger.warn("Unable to find files in %s\n", e.getMessage());
         } catch (IOException e) {
-			e.printStackTrace();
-		}
+            e.printStackTrace();
+        }
 
         return fileArray;
     }
