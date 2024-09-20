@@ -19,7 +19,7 @@ public class ArgParserTest
     @Test
     public void shouldNotHaveMoreThanOneCompareSources()
     {
-        String[] args = new String[]{"-d", "CV_template.html",
+        String[] args = new String[]{"-cv", "-d", "CV_template.html",
                                      "-cs", "https://www.seek.com.au/job/00000001",
                                      "-c", "compare_file.txt",
                                      "-s", "section1.json", "section2.json"
@@ -33,7 +33,7 @@ public class ArgParserTest
     @Test
     public void shouldReturnFalseWhenMissingCompareFlag()
     {
-        String[] args = new String[]{"-d", "CV_template.html",
+        String[] args = new String[]{"-cv", "-d", "CV_template.html",
                                      "-s", "section1.json", "section2.json",
                                      };
 
@@ -46,7 +46,7 @@ public class ArgParserTest
     @Test
     public void shouldReturnFalseWhenMissingDocumentFlag()
     {
-        String[] args = new String[]{"-c", "compare_file.txt",
+        String[] args = new String[]{"-cv", "-c", "compare_file.txt",
                                      "-s", "section1.json", "section2.json",
                                      };
 
@@ -59,7 +59,7 @@ public class ArgParserTest
     @Test
     public void shouldReturnFalseWhenMissingSectionFlag()
     {
-        String[] args = new String[]{"-d", "CV_template.html",
+        String[] args = new String[]{"-cv", "-d", "CV_template.html",
                                      "-c", "compare_file.txt",
                                      };
 
@@ -73,7 +73,7 @@ public class ArgParserTest
     @Test
     public void sectionFlagShouldReturnAFileWhenItExists()
     {
-        String[] args = new String[]{"-d", "CV_template.html",
+        String[] args = new String[]{"-cv", "-d", "CV_template.html",
                                      "-c", "compare_file.txt",
                                      "-s", "src/test/test_files/ArgParser/directory1/A.json",
                                      };
@@ -93,7 +93,7 @@ public class ArgParserTest
     @Test
     public void sectionDirectoryAndSectionFlagShouldReturnACombinedArrayOfJSONFiles()
     {
-        String[] args = new String[]{"-d", "CV_template.html",
+        String[] args = new String[]{"-cv", "-d", "CV_template.html",
                                      "-c", "compare_file.txt",
                                      "-s", "src/test/test_files/ArgParser/directory2/C.json",
                                      "-sd", "src/test/test_files/ArgParser/directory1/",
@@ -122,7 +122,7 @@ public class ArgParserTest
     @Test
     public void sectionDirectoryFlagShouldReturnNothingIfDirectoryDoesNotExist()
     {
-        String[] args = new String[]{"-d", "CV_template.html",
+        String[] args = new String[]{"-cv", "-d", "CV_template.html",
                                      "-c", "compare_file.txt",
                                      "-sd", "src/test/test_files/ArgParser/DOESNOTEXIST/",
                                      };
@@ -139,7 +139,7 @@ public class ArgParserTest
     @Test
     public void sectionDirectoryFlagShouldReturnAllJSONFilesInDirectory()
     {
-        String[] args = new String[]{"-d", "CV_template.html",
+        String[] args = new String[]{"-cv", "-d", "CV_template.html",
                                      "-c", "compare_file.txt",
                                      "-sd", "src/test/test_files/ArgParser/directory1/",
                                      };
@@ -159,7 +159,7 @@ public class ArgParserTest
     @Test
     public void sectionDirectoryFlagShouldReturnAllJSONFilesInMultipleDirectories()
     {
-        String[] args = new String[]{"-d", "CV_template.html",
+        String[] args = new String[]{"-cv", "-d", "CV_template.html",
                                      "-c", "compare_file.txt",
                                      "-sd", "src/test/test_files/ArgParser/directory1/",
                                             "src/test/test_files/ArgParser/directory2/",
@@ -182,7 +182,7 @@ public class ArgParserTest
 
     @Test
     public void parseArgsShouldReturnFalseWhenBadArgsAreProvided()
-    {
+    {//TODO: REVIEW
         String[] args = new String[]{};
 
         ArgParser ap = new ArgParser();
@@ -193,7 +193,7 @@ public class ArgParserTest
 
     @Test
     public void parseArgsShouldReturnFalseWhenHelpIsFlagged()
-    {
+    {//TODO:REVIEW
         String[] args = new String[]{"-h"};
 
         ArgParser ap = new ArgParser();

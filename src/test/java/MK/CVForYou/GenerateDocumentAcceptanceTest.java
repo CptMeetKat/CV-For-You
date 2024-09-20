@@ -39,6 +39,7 @@ public class GenerateDocumentAcceptanceTest
     throws IOException
     {
         String[] args = new String[]{
+                "-cv",
                 "-d", "src/test/test_files/AcceptanceTest/1/document.html",
                 "-c", "src/test/test_files/AcceptanceTest/1/description.txt",
                 "-sd", "src/test/test_files/AcceptanceTest/1/sections/", 
@@ -64,6 +65,7 @@ public class GenerateDocumentAcceptanceTest
     {
         String cache_id = "78678834";
         String[] args = new String[]{
+                "-cv",
                 "-d", "src/test/test_files/AcceptanceTest/2/document.html",
                 "-cc", "src/test/test_files/AcceptanceTest/2/cache/" + cache_id,
                 "-sd", "src/test/test_files/AcceptanceTest/2/sections/", 
