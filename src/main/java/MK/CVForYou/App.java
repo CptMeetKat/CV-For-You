@@ -13,19 +13,26 @@ public class App
     public static void main( String[] args )
     {
 
-        if(args.length == 0)
-            return;
-        else if(args[0].equals("-a"))
-        {
-            SeekAppliedJobsWrapper appliedJobWrapper = new SeekAppliedJobsWrapper();
-            ArrayList<SeekAppliedJob> applied = appliedJobWrapper.getAppliedJobsStats();
-            ApplicationAggregator.readData();
-            System.exit(0);
-        }
-
         ArgParser ap = new ArgParser();
-        if ( ap.parseArgs(args) == 1 )
+        int mode = ap.parseArgs(args);
+        if ( mode == 1 )
             new App(ap);
+        else if( mode == 2)
+            aggregateStats();
+    }
+
+    public static void aggregateStats()
+    {
+        SeekAppliedJobsWrapper appliedJobWrapper = new SeekAppliedJobsWrapper();
+        ArrayList<SeekAppliedJob> applied_jobs = appliedJobWrapper.getAppliedJobsStats();
+        String[] fields = {"job_id", "job_title", "active", "company_name", "company_id", "status", "status_times", "applied_at", "created_at", "applied_with_cover", "applied_with_cv"}; 
+        String result = CSVGenerator.makeCSV(fields, applied_jobs, SeekAppliedJob.class);
+        System.out.println(result);
+
+        ArrayList<SeekAppliedJob> data_from_file = ApplicationAggregator.readData();
+        for (SeekAppliedJob j : data_from_file) {
+            //System.out.println(j.job_title);
+        }
     }
 
     public App(ArgParser ap)
