@@ -11,7 +11,8 @@ import java.util.Set;
 
 import org.junit.Test;
 
-//TODO: it would better, if each test created the fielstructure it needed and then ran tests
+//TODO: Ideally a test should build its inputs and then run test
+//      Verifying a test is slower when we have to open & cross check relevant test files
 
 public class ArgParserTest 
 {
