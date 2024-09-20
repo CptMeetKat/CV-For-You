@@ -31,7 +31,7 @@ public class ArgParserTest
     }
 
     @Test
-    public void shouldReturnFalseWhenMissingCompareFlag()
+    public void shouldReturnExecuteNothingFlagWhenMissingCompareFlag()
     {
         String[] args = new String[]{"-cv", "-d", "CV_template.html",
                                      "-s", "section1.json", "section2.json",
@@ -44,7 +44,7 @@ public class ArgParserTest
 
 
     @Test
-    public void shouldReturnFalseWhenMissingDocumentFlag()
+    public void shouldReturnExecuteNothingFlagWhenMissingDocumentFlag()
     {
         String[] args = new String[]{"-cv", "-c", "compare_file.txt",
                                      "-s", "section1.json", "section2.json",
@@ -57,7 +57,7 @@ public class ArgParserTest
 
 
     @Test
-    public void shouldReturnFalseWhenMissingSectionFlag()
+    public void shouldReturnExecuteNothingFlagWhenMissingSectionFlag()
     {
         String[] args = new String[]{"-cv", "-d", "CV_template.html",
                                      "-c", "compare_file.txt",
@@ -181,8 +181,8 @@ public class ArgParserTest
     }
 
     @Test
-    public void parseArgsShouldReturnFalseWhenBadArgsAreProvided()
-    {//TODO: REVIEW
+    public void parseArgsShouldReturnExecuteNothingFlagWhenBadArgsAreProvided()
+    {
         String[] args = new String[]{};
 
         ArgParser ap = new ArgParser();
@@ -192,8 +192,8 @@ public class ArgParserTest
 
 
     @Test
-    public void parseArgsShouldReturnFalseWhenHelpIsFlagged()
-    {//TODO:REVIEW
+    public void parseArgsShouldReturnHelpFlagWhenHelpIsSelected()
+    {
         String[] args = new String[]{"-h"};
 
         ArgParser ap = new ArgParser();
