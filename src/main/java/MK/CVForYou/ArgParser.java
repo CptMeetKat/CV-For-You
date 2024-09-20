@@ -208,7 +208,7 @@ public class ArgParser
             else if(mode == 2)
                 parseSeekStats(args);
             else
-                throw new ParseException("No mode selected (-h, -cv, -sa)"); //TODO: Necessary?
+                logger.error("No mode selected");
         }
         catch (ParseException e)
         {
