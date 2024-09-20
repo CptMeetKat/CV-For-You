@@ -12,6 +12,8 @@ public class SeekAppliedJob
     public String job_title;
     public ArrayList<String> status;
     public ArrayList<String> status_times;
+    public String latest_status;
+    public String latest_status_time;
     public boolean active;
     public String company_name;
     public String company_id;
@@ -66,6 +68,7 @@ public class SeekAppliedJob
                 if(timestamps != null)
                     status_times.add(timestamps.optString("dateTimeUtc"));
             }
+            setLatestStatus();
         }
 
         JSONObject appliedJSON = (JSONObject) node.optQuery("/appliedAt");
@@ -73,6 +76,13 @@ public class SeekAppliedJob
         {
             applied_at = appliedJSON.optString("dateTimeUtc");
         }
+    }
+
+    private void setLatestStatus()
+    {
+        latest_status = status.get(status.size() - 1);
+        latest_status_time = status_times.get(status.size() - 1);
+
     }
 
 

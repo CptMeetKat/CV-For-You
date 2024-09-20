@@ -25,7 +25,7 @@ public class App
     {
         SeekAppliedJobsWrapper appliedJobWrapper = new SeekAppliedJobsWrapper();
         ArrayList<SeekAppliedJob> applied_jobs = appliedJobWrapper.getAppliedJobsStats();
-        String[] fields = {"job_id", "job_title", "active", "company_name", "company_id", "status", "status_times", "applied_at", "created_at", "applied_with_cover", "applied_with_cv"}; 
+        String[] fields = {"job_id", "job_title", "active", "company_name", "company_id", "status", "status_times", "latest_status", "latest_status_time", "applied_at", "created_at", "applied_with_cover", "applied_with_cv"}; 
         String result = CSVGenerator.makeCSV(fields, applied_jobs, SeekAppliedJob.class);
         System.out.println(result);
 
