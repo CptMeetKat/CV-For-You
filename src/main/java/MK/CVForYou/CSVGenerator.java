@@ -10,6 +10,7 @@ public class CSVGenerator
 {
     static final Logger logger = LoggerFactory.getLogger(CSVGenerator.class);
 
+    //TODO: this has potential to return a BIG string, maybe consider a buffered approach
     public static <T> String makeCSV(String columns[], List<T> items, Class<T> type)
     {
         StringBuilder sb = new StringBuilder();
