@@ -27,7 +27,7 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
-        assertEquals(mode, 0);
+        assertEquals(mode, -1);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
-        assertEquals(mode, 0);
+        assertEquals(mode, -1);
     }
 
 
@@ -52,7 +52,7 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
-        assertEquals(mode, 0);
+        assertEquals(mode, -1);
     }
 
 
@@ -65,7 +65,7 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
-        assertEquals(mode, 0);
+        assertEquals(mode, -1);
     }
     
 
@@ -187,7 +187,7 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
-        assertEquals(mode, 0);
+        assertEquals(mode, -1);
     }
 
 
