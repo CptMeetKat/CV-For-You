@@ -192,12 +192,34 @@ public class ArgParserTest
 
 
     @Test
-    public void parseArgsShouldReturnHelpFlagWhenHelpIsSelected()
+    public void parseArgsShouldReturnHelpFlagWhenTopLevelHelpIsSelected()
     {
         String[] args = new String[]{"-h"};
 
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
         assertEquals(mode, 0);
+    }
+
+
+    @Test
+    public void parseArgsShouldReturnHelpFlagWhenCVHelpIsSelected()
+    {
+        String[] args = new String[]{"-cv", "-h"};
+
+        ArgParser ap = new ArgParser();
+        int mode = ap.parseArgs(args);
+        assertEquals(0, mode);
+    }
+
+
+    @Test
+    public void parseArgsShouldReturnHelpFlagWhenSeekStatsHelpIsSelected()
+    {
+        String[] args = new String[]{"-sa", "-h"};
+
+        ArgParser ap = new ArgParser();
+        int mode = ap.parseArgs(args);
+        assertEquals(0, mode);
     }
 }

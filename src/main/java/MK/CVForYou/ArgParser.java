@@ -249,7 +249,7 @@ public class ArgParser
             if(cmd.hasOption("h"))
             {
                 formatter.printHelp(SEEK_STATS_USAGE, getSeekStatsOptions(true));
-                mode = -1;
+                mode = 0;
                 return;
             }
 
@@ -272,7 +272,7 @@ public class ArgParser
             if(cmd.hasOption("h"))
             {
                 formatter.printHelp(BASIC_USAGE, getDefaultOptions(true));
-                mode = -1;
+                mode = 0;
                 return;
             }
 
