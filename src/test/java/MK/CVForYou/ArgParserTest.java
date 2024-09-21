@@ -252,4 +252,14 @@ public class ArgParserTest
         int mode = ap.parseArgs(args);
         assertEquals(-1, mode);
     }
+
+    @Test
+    public void parseArgsShouldReturnSeekStatsFlagWhenSeekStatsSelected()
+    {
+        String[] args = new String[]{"-sa", "-a"};
+
+        ArgParser ap = new ArgParser();
+        int mode = ap.parseArgs(args);
+        assertEquals(2, mode);
+    }
 }
