@@ -222,4 +222,34 @@ public class ArgParserTest
         int mode = ap.parseArgs(args);
         assertEquals(0, mode);
     }
+
+    @Test
+    public void parseArgsShouldReturnFailFlagOnSeekStatsNotEnoughArgs()
+    {
+        String[] args = new String[]{"-sa"};
+
+        ArgParser ap = new ArgParser();
+        int mode = ap.parseArgs(args);
+        assertEquals(-1, mode);
+    }
+
+    @Test
+    public void parseArgsShouldReturnFailFlagOnCVGeneratorNotEnoughArgs()
+    {
+        String[] args = new String[]{"-cv"};
+
+        ArgParser ap = new ArgParser();
+        int mode = ap.parseArgs(args);
+        assertEquals(-1, mode);
+    }
+
+    @Test
+    public void parseArgsShouldReturnFailFlagOnTopLevelNotEnoughArgs()
+    {
+        String[] args = new String[]{""};
+
+        ArgParser ap = new ArgParser();
+        int mode = ap.parseArgs(args);
+        assertEquals(-1, mode);
+    }
 }
