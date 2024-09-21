@@ -21,21 +21,28 @@ public class CSVGenerator
         sb.append("\n");
 
         for (T item : items) {
-            for (String column : columns) {
+            for (int i = 0; i < columns.length; i++) {
+                String column = columns[i];
 
                 try {
                     Field field = type.getField(column);
                     String value = field.get(item).toString();
-                    sb.append(String.format("'%s',", value));
+                    sb.append(String.format("'%s'", value));
                 } catch (IllegalAccessException e) {
-                    sb.append("'null',");
+                    sb.append("'null'");
                     logger.warn("Unable to read field to generate CSV: {}", e.getMessage());
                 }
                 catch(NoSuchFieldException e)
                 {
-                    sb.append("'null',");
+                    sb.append("'null'");
                     logger.warn("Field to generate CSV does not exist: {}", e.getMessage());
                 }
+                if(i < columns.length-1) //if not last elt
+                    sb.append(",");
+                    
+
+
+                
             }
             sb.append("\n");
         }
