@@ -28,12 +28,12 @@ public class CSVGenerator
                     String value = field.get(item).toString();
                     sb.append(String.format("'%s',", value));
                 } catch (IllegalAccessException e) {
-                    sb.append("'null,'");
+                    sb.append("'null',");
                     logger.warn("Unable to read field to generate CSV: {}", e.getMessage());
                 }
                 catch(NoSuchFieldException e)
                 {
-                    sb.append("'null,'");
+                    sb.append("'null',");
                     logger.warn("Field to generate CSV does not exist: {}", e.getMessage());
                 }
             }
