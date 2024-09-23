@@ -8,11 +8,26 @@ import org.junit.Test;
 
 public class ApplicationAggregatorTest
 {
-    //read []
     //read ""
     //read true/false
     //read "test_value"
     //read just headers
+    //
+    @Test
+    public void shouldParseEmptyStringArrayIntoArrayList()
+    {
+        String csv = "'status'\n'[]'";
+        String[] expected = {};
+
+        List<SeekAppliedJob> result = ApplicationAggregator.readFromString(SeekAppliedJob.class, csv);
+
+        List<String> status = result.get(0).status;
+        
+        assertEquals(expected.length, status.size());
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(expected[i], status.get(i));
+        }
+    }
 
     @Test
     public void shouldParseStringArrayIntoArrayList()
