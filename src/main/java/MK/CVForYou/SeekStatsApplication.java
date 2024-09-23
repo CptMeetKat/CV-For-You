@@ -1,5 +1,6 @@
 package MK.CVForYou;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -60,10 +61,16 @@ public class SeekStatsApplication
 
     public static void aggregateStats()
     {
-        ArrayList<SeekAppliedJob> applied_jobs = new SeekAppliedJobsWrapper().getAppliedJobsStats();
-        List<SeekAppliedJob> history = ApplicationAggregator.readFromFile(SeekAppliedJob.class, "data.csv"); 
-        
-        List<SeekAppliedJob> latest_stats = updateHistoricalStats(history, applied_jobs);
+        ArrayList<SeekAppliedJob> current_applied_jobs = new SeekAppliedJobsWrapper().getAppliedJobsStats();
+        List<SeekAppliedJob> latest_stats = current_applied_jobs;
+
+        try {
+			List<SeekAppliedJob> history = ApplicationAggregator.readFromFile(SeekAppliedJob.class, "data.csv");
+            latest_stats = updateHistoricalStats(history, latest_stats);
+		} catch (IOException e) {
+            logger.warn("Unable to read historical Seek statistics file: {}", e.getMessage()); //TODO: may lose historical data, if there is read problem
+			e.printStackTrace();
+		} 
 
         String data = CSVGenerator.makeCSV(latest_stats, SeekAppliedJob.class);
         IOUtils.writeToFile(data, "data.csv");

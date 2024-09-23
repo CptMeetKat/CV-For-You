@@ -24,15 +24,12 @@ public class ApplicationAggregator
     static final Logger logger = LoggerFactory.getLogger(App.class);
 
 
-    public static <T> List<T> readFromFile(Class<T> type, String filePath) //throws IOException //for later
+    public static <T> List<T> readFromFile(Class<T> type, String filePath) throws IOException 
     {
         List<T> objects = null;
         try (Reader reader = Files.newBufferedReader(Paths.get(filePath))) {
             objects = parseData(type, reader);
 		} 
-        catch (IOException e) {
-			logger.error(e.getMessage()); 
-		}
         return objects;
     }
 
