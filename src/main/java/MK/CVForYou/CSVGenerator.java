@@ -18,6 +18,7 @@ public class CSVGenerator
         for (String column : columns) {
             sb.append(String.format("'%s',", column));
         }
+        sb.delete(sb.length()-1, sb.length()); //Remove trailing comma
         sb.append("\n");
 
         for (T item : items) {
@@ -39,10 +40,6 @@ public class CSVGenerator
                 }
                 if(i < columns.length-1) //if not last elt
                     sb.append(",");
-                    
-
-
-                
             }
             sb.append("\n");
         }
