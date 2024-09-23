@@ -28,7 +28,7 @@ public class ApplicationAggregator
     {
         List<T> objects = null;
         try (Reader reader = Files.newBufferedReader(Paths.get(filePath))) {
-            objects = readData(type, reader);
+            objects = parseData(type, reader);
 		} catch (IOException e) {
 			logger.error(e.getMessage()); 
 		}
@@ -39,11 +39,11 @@ public class ApplicationAggregator
     {
         List<T> objects = null;
         Reader reader = new BufferedReader(new StringReader(csv));
-        objects = readData(type, reader);
+        objects = parseData(type, reader);
         return objects;
     }
 
-    private static <T> List<T> readData(Class<T> type, Reader reader) //parseCSVData
+    private static <T> List<T> parseData(Class<T> type, Reader reader) 
     {
         ArrayList<T> applied_jobs = new ArrayList<T>();
 
