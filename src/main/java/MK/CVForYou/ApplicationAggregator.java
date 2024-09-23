@@ -58,7 +58,9 @@ public class ApplicationAggregator
             List<String> headers = csvParser.getHeaderNames();
 
             for (CSVRecord row : csvParser) {
-                applied_jobs.add(createRecord(row, headers, type));
+                T record = createRecord(row, headers, type);
+                if(record != null)
+                    applied_jobs.add(record);
             }
         } catch(IOException e) {
             logger.error(e.getMessage());
