@@ -24,6 +24,22 @@ public class ApplicationAggregatorTest
     }
 
     @Test
+    public void shouldParseEmptyStringArrayIntoArrayList()
+    {
+        String csv = "'status'\n'[]'";
+        String[] expected = {};
+
+        List<SeekAppliedJob> result = ApplicationAggregator.readFromString(SeekAppliedJob.class, csv);
+
+        List<String> status = result.get(0).status;
+        
+        assertEquals(expected.length, status.size());
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(expected[i], status.get(i));
+        }
+    }
+
+    @Test
     public void emptyStringCellShouldCreateObjectWithEmptyStringValue()
     {
         String csv = "'job_id'\n''";
@@ -46,21 +62,6 @@ public class ApplicationAggregatorTest
         assertEquals(expected, result.size());
     }
     
-    @Test
-    public void shouldParseEmptyStringArrayIntoArrayList()
-    {
-        String csv = "'status'\n'[]'";
-        String[] expected = {};
-
-        List<SeekAppliedJob> result = ApplicationAggregator.readFromString(SeekAppliedJob.class, csv);
-
-        List<String> status = result.get(0).status;
-        
-        assertEquals(expected.length, status.size());
-        for (int i = 0; i < expected.length; i++) {
-            assertEquals(expected[i], status.get(i));
-        }
-    }
 
     @Test
     public void shouldParseStringArrayIntoArrayList()
