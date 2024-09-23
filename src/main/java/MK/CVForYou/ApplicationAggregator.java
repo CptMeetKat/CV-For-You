@@ -23,7 +23,7 @@ public class ApplicationAggregator
     static final Logger logger = LoggerFactory.getLogger(App.class);
 
 
-    public static <T> List<T> readData_apache(Class<T> type)
+    public static <T> List<T> readData(Class<T> type)
     {
         String filePath = "data.csv";
 
