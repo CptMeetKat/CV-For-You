@@ -25,6 +25,9 @@ public class CSVGenerator
 
     public static <T> String makeCSV(List<T> items, Class<T> type, String[] columns)
     {
+        if(columns.length == 0)
+            return "";
+        
         StringBuilder sb = new StringBuilder();
 
         for (String column : columns) {

@@ -78,6 +78,21 @@ public class CSVGeneratorTest
         assertEquals(expected, csv);
     }
 
+
+    @Test
+    public void makeCSVWithNoFieldsReturnsNothing()
+    {
+        String expected = "";
+        String[] fields = {};
+        
+        ArrayList<BasicPublicObject> records = new ArrayList<BasicPublicObject>();
+        BasicPublicObject record = new BasicPublicObject();
+        records.add(record);
+
+        String csv = CSVGenerator.makeCSV(records, BasicPublicObject.class, fields);
+
+        assertEquals(expected, csv);
+    }
 }
 
 
