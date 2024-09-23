@@ -9,9 +9,19 @@ import org.junit.Test;
 public class ApplicationAggregatorTest
 {
     //read true/false
-    //read "test_value"
-    //read just headers
 
+    
+    @Test
+    public void shouldParseStringFromCSVIntoString()
+    {
+        String csv = "'job_id'\n'job_id_value'";
+        String expected = "job_id_value";
+
+        List<SeekAppliedJob> result = ApplicationAggregator.readFromString(SeekAppliedJob.class, csv);
+
+        String job_id = result.get(0).job_id;
+        assertEquals(expected, job_id);
+    }
 
     @Test
     public void emptyStringCellShouldCreateObjectWithEmptyStringValue()
@@ -22,8 +32,6 @@ public class ApplicationAggregatorTest
         List<SeekAppliedJob> result = ApplicationAggregator.readFromString(SeekAppliedJob.class, csv);
         SeekAppliedJob element = result.get(0);
 
-        
-        
         assertEquals(expected, element.job_id);
     }
     
