@@ -21,6 +21,8 @@ public class SeekAppliedJob
     public String created_at;
     public boolean applied_with_cv;
     public boolean applied_with_cover;
+
+    //TODO: add isExternal field
     
     public SeekAppliedJob(){}
 
