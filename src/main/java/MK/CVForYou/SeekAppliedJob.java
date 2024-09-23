@@ -25,6 +25,8 @@ public class SeekAppliedJob
     public boolean applied_with_cover;
     public boolean isExternal;
 
+    //TODO: Add SALARY!
+
     public SeekAppliedJob(){}
 
     public SeekAppliedJob(JSONObject node)
