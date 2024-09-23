@@ -1,5 +1,6 @@
 package MK.CVForYou;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -16,21 +17,37 @@ import org.apache.commons.csv.CSVRecord;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.Reader;
+import java.io.StringReader;
 
 public class ApplicationAggregator
 {
-    static String output = "data.csv";
     static final Logger logger = LoggerFactory.getLogger(App.class);
 
 
-    public static <T> List<T> readData(Class<T> type)
+    public static <T> List<T> readFromFile(Class<T> type, String filePath)
     {
-        String filePath = "data.csv";
+        List<T> objects = null;
+        try (Reader reader = Files.newBufferedReader(Paths.get(filePath))) {
+            objects = readData(type, reader);
+		} catch (IOException e) {
+			logger.error(e.getMessage()); 
+		}
+        return objects;
+    }
 
+    public static <T> List<T> readFromString(Class<T> type, String csv)
+    {
+        List<T> objects = null;
+        Reader reader = new BufferedReader(new StringReader(csv));
+        objects = readData(type, reader);
+        return objects;
+    }
+
+    private static <T> List<T> readData(Class<T> type, Reader reader) //parseCSVData
+    {
         ArrayList<T> applied_jobs = new ArrayList<T>();
 
         try (
-            Reader reader = Files.newBufferedReader(Paths.get(filePath));
             CSVParser csvParser = new CSVParser(reader, CSVFormat.Builder.create()
                                                 .setQuote('\'') 
                                                 .setIgnoreSurroundingSpaces(true) 
@@ -82,6 +99,7 @@ public class ApplicationAggregator
                 logger.error(e.getMessage());
             }
         }
+        //System.out.println(record);
 
         return record;
     }
