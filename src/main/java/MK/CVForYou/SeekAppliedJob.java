@@ -114,8 +114,8 @@ public class SeekAppliedJob
         sb.append(applied_at+", ");
         sb.append(created_at+", ");
         sb.append(applied_with_cv+", ");
-        sb.append(applied_with_cover);
-        sb.append(isExternal+", ");
+        sb.append(applied_with_cover+", ");
+        sb.append(isExternal);
 
         return sb.toString();
     }
