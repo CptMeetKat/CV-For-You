@@ -19,7 +19,7 @@ public class CSVGeneratorTest
 
     
     @Test
-    public void makeCSVWithNullRecordsShouldReturn_____()
+    public void makeCSVWithNullObjectsShouldReturnNullAsValues()
     {
         String expected = "'field1','items'\n'null','null'";
 
@@ -63,7 +63,7 @@ public class CSVGeneratorTest
 
 
     @Test
-    public void makeCSVWithFieldsOnlyReturnsSelectedFields()
+    public void makeCSVWithSelectedFieldsOnlyReturnsSelectedFields()
     {
         String expected = "'field1'\n'test_value'";
         String[] fields = {"field1"};
@@ -93,6 +93,9 @@ public class CSVGeneratorTest
 
         assertEquals(expected, csv);
     }
+
+    //obj with private fields
+    //obj with fields that dont exist
 }
 
 
