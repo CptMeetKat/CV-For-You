@@ -24,7 +24,7 @@ public class ApplicationAggregator
     static final Logger logger = LoggerFactory.getLogger(App.class);
 
 
-    public static void _readData_apache()
+    public static List<SeekAppliedJob> _readData_apache()
     {
         String filePath = "data.csv";
 
@@ -50,6 +50,8 @@ public class ApplicationAggregator
         {
             logger.error(e.getMessage());
         }
+
+        return applied_jobs;
     }
 
     private static SeekAppliedJob createRecord(CSVRecord row, List<String> headers)
