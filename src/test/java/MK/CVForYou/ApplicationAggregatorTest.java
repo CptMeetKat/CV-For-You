@@ -8,11 +8,24 @@ import org.junit.Test;
 
 public class ApplicationAggregatorTest
 {
-    //read ""
     //read true/false
     //read "test_value"
     //read just headers
-    //
+
+
+    @Test
+    public void emptyStringCellShouldCreateObjectWithEmptyStringValue()
+    {
+        String csv = "'job_id'\n''";
+        String expected = "";
+
+        List<SeekAppliedJob> result = ApplicationAggregator.readFromString(SeekAppliedJob.class, csv);
+        SeekAppliedJob element = result.get(0);
+
+        
+        
+        assertEquals(expected, element.job_id);
+    }
     
     @Test
     public void justHeadersShouldCreateEmptyObject()
