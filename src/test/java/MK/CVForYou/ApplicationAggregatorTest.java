@@ -1,6 +1,7 @@
 package MK.CVForYou;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -9,6 +10,28 @@ import org.junit.Test;
 
 public class ApplicationAggregatorTest
 {
+    @Test
+    public void shouldParseBooleanValueFromCSVIntoTrue()
+    {
+        String csv = "'active'\nfalse";
+
+        List<SeekAppliedJob> result = ApplicationAggregator.readFromString(SeekAppliedJob.class, csv);
+        boolean isActive = result.get(0).active;
+
+        assertFalse(isActive);
+    }
+
+    @Test
+    public void shouldParseBooleanValueFromCSVIntoFalse()
+    {
+        String csv = "'active'\ntrue";
+
+        List<SeekAppliedJob> result = ApplicationAggregator.readFromString(SeekAppliedJob.class, csv);
+        boolean isActive = result.get(0).active;
+
+        assertTrue(isActive);
+    }
+
     @Test
     public void shouldParseBooleanStringFromCSVIntoPrimitiveBoolean()
     {
