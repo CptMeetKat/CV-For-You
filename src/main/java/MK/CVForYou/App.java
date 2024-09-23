@@ -2,6 +2,7 @@ package MK.CVForYou;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,6 @@ public class App
     static final Logger logger = LoggerFactory.getLogger(App.class);
     public static void main( String[] args )
     {
-
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
         if ( mode == 1 )
@@ -25,14 +25,34 @@ public class App
     {
         SeekAppliedJobsWrapper appliedJobWrapper = new SeekAppliedJobsWrapper();
         ArrayList<SeekAppliedJob> applied_jobs = appliedJobWrapper.getAppliedJobsStats();
-        String[] fields = {"job_id", "job_title", "active", "company_name", "company_id", "status", "status_times", "latest_status", "latest_status_time", "applied_at", "created_at", "applied_with_cover", "applied_with_cv"}; 
-        String result = CSVGenerator.makeCSV(fields, applied_jobs, SeekAppliedJob.class);
-        System.out.println(result);
+        List<SeekAppliedJob> history = ApplicationAggregator.readFromFile(SeekAppliedJob.class, "data.csv"); 
 
-        ArrayList<SeekAppliedJob> data_from_file = ApplicationAggregator.readData();
-        for (SeekAppliedJob j : data_from_file) {
-            //System.out.println(j.job_title);
+        HashMap<String, SeekAppliedJob> history_map = new HashMap<String, SeekAppliedJob>();
+        for (SeekAppliedJob h : history) {
+            history_map.put(h.getIdentifer(), h);
         }
+
+        for (SeekAppliedJob fresh : applied_jobs) {
+            String id = fresh.getIdentifer();
+            if(history_map.containsKey(id))
+            {
+                SeekAppliedJob history_record = history_map.get(id);
+                if(!history_record.toString().equals(fresh.toString()))
+                    logger.info("Updating 1 with 2\n {} \n {}\n", history_record, fresh);
+            }
+            else
+            {
+                history_map.put(fresh.getIdentifer(), fresh);
+            }
+        }
+
+        ArrayList<SeekAppliedJob> new_history = new ArrayList<SeekAppliedJob>();
+        for (String key : history_map.keySet()) {
+            new_history.add(history_map.get(key));
+        }
+
+        String data = CSVGenerator.makeCSV(new_history, SeekAppliedJob.class);
+        IOUtils.writeToFile(data, "data.csv");
     }
 
     public App(ArgParser ap)

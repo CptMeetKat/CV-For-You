@@ -109,6 +109,11 @@ public class SeekAppliedJob
                this.applied_at.equals(other.applied_at);
     }
 
+    public String getIdentifer()
+    {
+        return job_id + "|" + created_at + "|" + applied_at;
+    }
+
     @Override
     public String toString()
     {
