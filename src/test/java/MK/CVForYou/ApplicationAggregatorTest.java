@@ -2,7 +2,6 @@ package MK.CVForYou;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -14,14 +13,6 @@ public class ApplicationAggregatorTest
     //read true/false
     //read "test_value"
     //read just headers
-
-    class PublicObject
-    {
-        public boolean isTest;
-        public String data;
-        public ArrayList<String> items;
-        public PublicObject(){}
-    }
 
     @Test
     public void shouldParseStringArrayIntoArrayList()
