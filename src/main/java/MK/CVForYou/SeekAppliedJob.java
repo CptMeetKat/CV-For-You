@@ -97,14 +97,10 @@ public class SeekAppliedJob
         return null;
     }
 
-    public boolean equals(Object obj) //TODO: This is a minimal comparison, however suits our purposes
+    public boolean isSameEntity(SeekAppliedJob other)
     {
-        if (this == obj)
+        if (this == other)
             return true;
-        if (obj == null || getClass() != obj.getClass())
-            return false;
-
-        SeekAppliedJob other = (SeekAppliedJob) obj;
 
         return this.job_id.equals(other.job_id) &&
                this.created_at.equals(other.created_at) &&
