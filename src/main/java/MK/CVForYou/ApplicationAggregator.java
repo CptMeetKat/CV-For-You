@@ -69,6 +69,7 @@ public class ApplicationAggregator
         return applied_jobs;
     }
 
+    //This does not support a lot of types
     private static <T> T createRecord(CSVRecord row, List<String> headers, Class<T> type)
     {
         T record; 
@@ -90,8 +91,8 @@ public class ApplicationAggregator
                 //logger.trace("Create record, writing field: {}\n", header);
                 Field f = SeekAppliedJob.class.getField(header);
 
-                if(f.getType() == Boolean.class || f.getType() == boolean.class)
-                    f.setBoolean(record, Boolean.getBoolean(cell));
+                if(f.getType() == Boolean.class || f.getType() == boolean.class) 
+                    f.setBoolean(record, Boolean.parseBoolean(cell));
                 else if(f.getType() == ArrayList.class)
                     f.set(record, cellToArrayList(cell));
                 else
