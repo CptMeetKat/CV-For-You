@@ -23,15 +23,15 @@ public class SeekAppliedJob
     public String created_at;
     public boolean applied_with_cv;
     public boolean applied_with_cover;
+    public boolean isExternal;
 
-    //TODO: add isExternal field
-    
     public SeekAppliedJob(){}
 
     public SeekAppliedJob(JSONObject node)
     {
         job_id = node.optString("id");
         active = node.optBoolean("isActive");
+        isExternal = node.optBoolean("isExternal");
         applied_with_cv = node.optBoolean("hasAppliedWithResume");
         applied_with_cover = node.optBoolean("hasAppliedWithCoverLetter");
 
@@ -115,6 +115,7 @@ public class SeekAppliedJob
         sb.append(created_at+", ");
         sb.append(applied_with_cv+", ");
         sb.append(applied_with_cover);
+        sb.append(isExternal+", ");
 
         return sb.toString();
     }
