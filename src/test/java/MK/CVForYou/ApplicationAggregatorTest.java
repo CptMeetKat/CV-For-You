@@ -24,7 +24,7 @@ public class ApplicationAggregatorTest
     @Test
     public void returnNothingWhenNoDefaultConstructor()
     {
-        String csv = "field1\ndata";
+        String csv = "'field1'\n'data'";
         List<NoConstructorObject> items = ApplicationAggregator.readFromString(NoConstructorObject.class, csv);
         
         assertEquals(0, items.size());
