@@ -44,10 +44,8 @@ public class SeekAppliedJobsWrapper implements Requestable
             .build(); 
         //NOTE: Seek API front-end limits to 100 records, however actual maximum is unknown
 
+            logger.info("Fetching applied jobs...");
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-
-            System.out.println(response.headers()); 
-            System.out.println(response.body()); 
 
             return new JSONObject(response.body());
     }
