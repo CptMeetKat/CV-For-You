@@ -17,6 +17,12 @@ public class CSVGeneratorTest
         public List<String> items;
     }
 
+    class BasicPrivateObject
+    {
+        @SuppressWarnings("unused")
+		private String field1;
+    }
+
     
     @Test
     public void makeCSVWithNullObjectsShouldReturnNullAsValues()
@@ -94,9 +100,34 @@ public class CSVGeneratorTest
         assertEquals(expected, csv);
     }
 
-    //obj with private fields
-    //obj with fields that dont exist
+
+    @Test
+    public void makeCSVOnPrivateFieldsWillInsertNull()
+    {
+        String expected = "'field1'\n'null'";
+        
+        String[] fields = {"field1"};
+        ArrayList<BasicPrivateObject> records = new ArrayList<BasicPrivateObject>();
+        records.add(new BasicPrivateObject());
+
+        String csv = CSVGenerator.makeCSV(records, BasicPrivateObject.class, fields);
+
+        assertEquals(expected, csv);
+    }
+
+
+    @Test
+    public void makeCSVOnNonExistantFieldWillInsertNull()
+    {
+        String expected = "'does_not_exist'\n'null'";
+        
+        String[] fields = {"does_not_exist"};
+        ArrayList<BasicPrivateObject> records = new ArrayList<BasicPrivateObject>();
+        records.add(new BasicPrivateObject());
+
+        String csv = CSVGenerator.makeCSV(records, BasicPrivateObject.class, fields);
+
+        assertEquals(expected, csv);
+    }
 }
-
-
 
