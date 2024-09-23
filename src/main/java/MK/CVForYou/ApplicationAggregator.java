@@ -98,7 +98,7 @@ public class ApplicationAggregator
                     f.set(record, cell);
             }
             catch(IllegalAccessException | NoSuchFieldException e) {
-                logger.error(e.getMessage());
+                logger.error("Unable to set field of record: {}", e.getMessage());
             }
         }
         //System.out.println(record);
