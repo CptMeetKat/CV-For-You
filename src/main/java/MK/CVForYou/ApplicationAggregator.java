@@ -2,6 +2,7 @@ package MK.CVForYou;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +16,6 @@ import org.apache.commons.csv.CSVRecord;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.Reader;
-import java.util.Map;
-
 
 public class ApplicationAggregator
 {
@@ -24,11 +23,11 @@ public class ApplicationAggregator
     static final Logger logger = LoggerFactory.getLogger(App.class);
 
 
-    public static List<SeekAppliedJob> readData_apache()
+    public static <T> List<T> readData_apache(Class<T> type)
     {
         String filePath = "data.csv";
 
-        ArrayList<SeekAppliedJob> applied_jobs = new ArrayList<SeekAppliedJob>();
+        ArrayList<T> applied_jobs = new ArrayList<T>();
 
         try (
             Reader reader = Files.newBufferedReader(Paths.get(filePath));
@@ -39,24 +38,29 @@ public class ApplicationAggregator
                                                 .setSkipHeaderRecord(true) 
                                                 .build())
         ) {
-            Map<String, Integer> headerMap = csvParser.getHeaderMap();
             List<String> headers = csvParser.getHeaderNames();
-            System.out.println("Headers: " + headerMap.keySet());
 
             for (CSVRecord row : csvParser) {
-                applied_jobs.add(createRecord(row, headers));
+                applied_jobs.add(createRecord(row, headers, type));
             }
-        } catch(IOException e)
-        {
+        } catch(IOException e) {
             logger.error(e.getMessage());
         }
 
         return applied_jobs;
     }
 
-    private static SeekAppliedJob createRecord(CSVRecord row, List<String> headers)
+    private static <T> T createRecord(CSVRecord row, List<String> headers, Class<T> type)
     {
-        SeekAppliedJob record = new SeekAppliedJob();
+        T record; 
+
+        try {
+            record = type.getDeclaredConstructor().newInstance();  
+        }
+        catch(InvocationTargetException | InstantiationException | NoSuchMethodException | IllegalAccessException | IllegalArgumentException e) {
+            logger.error("Cannot convert CSV row to class, no available default constructor: {}", e.getMessage());
+            return null;
+        }
 
         for (String header : headers) {
             String cell = row.get(header);
@@ -77,10 +81,8 @@ public class ApplicationAggregator
             catch(IllegalAccessException | NoSuchFieldException e) {
                 logger.error(e.getMessage());
             }
-
         }
 
-        System.out.println(record);
         return record;
     }
 
