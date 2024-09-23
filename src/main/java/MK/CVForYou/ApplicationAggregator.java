@@ -46,8 +46,6 @@ public class ApplicationAggregator
             for (CSVRecord row : csvParser) {
                 applied_jobs.add(createRecord(row, headers));
             }
-        } catch (java.nio.charset.MalformedInputException e) {
-            logger.error(e.getMessage());
         } catch(IOException e)
         {
             logger.error(e.getMessage());
