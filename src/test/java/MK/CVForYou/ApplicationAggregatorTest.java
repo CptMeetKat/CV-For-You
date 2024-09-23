@@ -13,6 +13,18 @@ public class ApplicationAggregatorTest
     //read "test_value"
     //read just headers
     //
+    
+    @Test
+    public void justHeadersShouldCreateEmptyObject()
+    {
+        String csv = "'job_id'\n";
+        int expected = 0;
+
+        List<SeekAppliedJob> result = ApplicationAggregator.readFromString(SeekAppliedJob.class, csv);
+        
+        assertEquals(expected, result.size());
+    }
+    
     @Test
     public void shouldParseEmptyStringArrayIntoArrayList()
     {
