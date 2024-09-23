@@ -93,4 +93,26 @@ public class SeekAppliedJob
         return null;
     }
 
+    @Override
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(job_id+", ");
+        sb.append(job_title+", ");
+        sb.append(status+", ");
+        sb.append(status_times+", ");
+        sb.append(latest_status+", ");
+        sb.append(latest_status_time+", ");
+        sb.append(active+", ");
+        sb.append(company_name+", ");
+        sb.append(company_id+", ");
+        sb.append(applied_at+", ");
+        sb.append(created_at+", ");
+        sb.append(applied_with_cv+", ");
+        sb.append(applied_with_cover);
+
+        return sb.toString();
+    }
+
 }
