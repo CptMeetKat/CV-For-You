@@ -58,7 +58,7 @@ public class ApplicationAggregator
             record = type.getDeclaredConstructor().newInstance();  
         }
         catch(InvocationTargetException | InstantiationException | NoSuchMethodException | IllegalAccessException | IllegalArgumentException e) {
-            logger.error("Cannot convert CSV row to class, no available default constructor: {}", e.getMessage());
+            logger.error("Cannot convert CSV row to class, no available default constructor: {}", e.getMessage()); //TODO: Investigate - TBH if this happens this should just exit
             return null;
         }
 
