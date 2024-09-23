@@ -15,32 +15,13 @@ public class SeekStatsApplication
         aggregateStats();
     }
 
-    private void updateHistoricalStats(List<SeekAppliedJob> historical_data, List<SeekAppliedJob> current_data)
+    private static List<SeekAppliedJob> updateHistoricalStats(List<SeekAppliedJob> historical_data, List<SeekAppliedJob> current_data)
     {
-
-    }
-
-    private static HashMap<String, SeekAppliedJob> recordsToMap(List<SeekAppliedJob> records)
-    {
-        HashMap<String, SeekAppliedJob> map = new HashMap<>();
-
-        for (SeekAppliedJob record : records) {
-            map.put(record.getIdentifer(), record);
-        }
-
-        return map;
-    }
-
-    public static void aggregateStats()
-    {
-        ArrayList<SeekAppliedJob> applied_jobs = new SeekAppliedJobsWrapper().getAppliedJobsStats();
-        List<SeekAppliedJob> history = ApplicationAggregator.readFromFile(SeekAppliedJob.class, "data.csv"); 
-
-        HashMap<String, SeekAppliedJob> history_map = recordsToMap(history);
+        HashMap<String, SeekAppliedJob> history_map = recordsToMap(historical_data);
 
         //TODO: if file dosent exist, then do not read from it
 
-        for (SeekAppliedJob fresh : applied_jobs) {
+        for (SeekAppliedJob fresh : current_data) {
             String id = fresh.getIdentifer();
             if(history_map.containsKey(id))
             {
@@ -54,13 +35,37 @@ public class SeekStatsApplication
                 history_map.put(fresh.getIdentifer(), fresh);
             }
         }
+        return mapToRecords(history_map);
+    }
 
-        ArrayList<SeekAppliedJob> new_history = new ArrayList<SeekAppliedJob>();
-        for (String key : history_map.keySet()) {
-            new_history.add(history_map.get(key));
+    private static HashMap<String, SeekAppliedJob> recordsToMap(List<SeekAppliedJob> records)
+    {
+        HashMap<String, SeekAppliedJob> map = new HashMap<>();
+
+        for (SeekAppliedJob record : records) {
+            map.put(record.getIdentifer(), record);
         }
 
-        String data = CSVGenerator.makeCSV(new_history, SeekAppliedJob.class);
+        return map;
+    }
+
+    private static List<SeekAppliedJob> mapToRecords(HashMap<String, SeekAppliedJob> map)
+    {
+        ArrayList<SeekAppliedJob> records = new ArrayList<SeekAppliedJob>();
+        for (String key : map.keySet()) {
+            records.add(map.get(key));
+        }
+        return records;
+    }
+
+    public static void aggregateStats()
+    {
+        ArrayList<SeekAppliedJob> applied_jobs = new SeekAppliedJobsWrapper().getAppliedJobsStats();
+        List<SeekAppliedJob> history = ApplicationAggregator.readFromFile(SeekAppliedJob.class, "data.csv"); 
+        
+        List<SeekAppliedJob> latest_stats = updateHistoricalStats(history, applied_jobs);
+
+        String data = CSVGenerator.makeCSV(latest_stats, SeekAppliedJob.class);
         IOUtils.writeToFile(data, "data.csv");
     }
 }
