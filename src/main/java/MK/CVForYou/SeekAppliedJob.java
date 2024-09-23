@@ -97,6 +97,20 @@ public class SeekAppliedJob
         return null;
     }
 
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+
+        SeekAppliedJob other = (SeekAppliedJob) obj;
+
+        return this.job_id.equals(other.job_id) &&
+               this.created_at.equals(other.created_at) &&
+               this.applied_at.equals(other.applied_at);
+    }
+
     @Override
     public String toString()
     {
