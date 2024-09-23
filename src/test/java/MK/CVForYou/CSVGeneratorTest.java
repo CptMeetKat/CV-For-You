@@ -43,6 +43,23 @@ public class CSVGeneratorTest
 
         assertEquals(expected, csv);
     }
+
+
+    @Test
+    public void makeCSVOnEmptyListReturnsSquareBrackets()
+    {
+        String expected = "'items'\n'[]'";
+        String[] fields = {"items"};
+        
+        ArrayList<BasicPublicObject> records = new ArrayList<BasicPublicObject>();
+        BasicPublicObject record = new BasicPublicObject();
+        record.items = new ArrayList<String>();
+        records.add(record);
+
+        String csv = CSVGenerator.makeCSV(records, BasicPublicObject.class, fields);
+
+        assertEquals(expected, csv);
+    }
 }
 
 
