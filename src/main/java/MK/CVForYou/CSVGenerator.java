@@ -11,7 +11,6 @@ public class CSVGenerator
     static final Logger logger = LoggerFactory.getLogger(CSVGenerator.class);
 
     //TODO: this has potential to return a BIG string, maybe consider a buffered approach
-    //
     public static <T> String makeCSV(List<T> items, Class<T> type)
     {
         Field[] headers = type.getFields();
@@ -40,8 +39,12 @@ public class CSVGenerator
 
                 try {
                     Field field = type.getField(column);
-                    String value = field.get(item).toString();
-                    sb.append(String.format("'%s'", value));
+                    Object value = field.get(item); 
+                    if(value == null)
+                        sb.append("'null'");
+                    else                                       
+                        sb.append(String.format("'%s'", value.toString()));
+
                 } catch (IllegalAccessException e) {
                     sb.append("'null'");
                     logger.warn("Unable to read field to generate CSV: {}", e.getMessage());
