@@ -97,7 +97,7 @@ public class SeekAppliedJob
         return null;
     }
 
-    public boolean equals(Object obj)
+    public boolean equals(Object obj) //TODO: This is a minimal comparison, however suits our purposes
     {
         if (this == obj)
             return true;
