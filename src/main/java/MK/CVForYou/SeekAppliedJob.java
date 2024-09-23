@@ -6,6 +6,8 @@ import java.util.Iterator;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+//TODO: add tests
+
 public class SeekAppliedJob
 {
     public String job_id;
