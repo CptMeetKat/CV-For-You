@@ -24,7 +24,7 @@ public class ApplicationAggregator
     static final Logger logger = LoggerFactory.getLogger(App.class);
 
 
-    public static List<SeekAppliedJob> _readData_apache()
+    public static List<SeekAppliedJob> readData_apache()
     {
         String filePath = "data.csv";
 
@@ -70,7 +70,7 @@ public class ApplicationAggregator
                 if(f.getType() == Boolean.class || f.getType() == boolean.class)
                     f.setBoolean(record, Boolean.getBoolean(cell));
                 else if(f.getType() == ArrayList.class)
-                    f.set(record, _cellToArrayList(cell));
+                    f.set(record, cellToArrayList(cell));
                 else
                     f.set(record, cell);
             }
@@ -85,7 +85,7 @@ public class ApplicationAggregator
     }
 
 //TODO: need to know if empty cell is null or "" or "null"
-    private static ArrayList<String> _cellToArrayList(String cell_data)
+    private static ArrayList<String> cellToArrayList(String cell_data)
     {
         ArrayList<String> result = new ArrayList<String>();
 
