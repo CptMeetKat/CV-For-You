@@ -60,6 +60,24 @@ public class CSVGeneratorTest
 
         assertEquals(expected, csv);
     }
+
+
+    @Test
+    public void makeCSVWithFieldsOnlyReturnsSelectedFields()
+    {
+        String expected = "'field1'\n'test_value'";
+        String[] fields = {"field1"};
+        
+        ArrayList<BasicPublicObject> records = new ArrayList<BasicPublicObject>();
+        BasicPublicObject record = new BasicPublicObject();
+        record.field1 = "test_value";
+        records.add(record);
+
+        String csv = CSVGenerator.makeCSV(records, BasicPublicObject.class, fields);
+
+        assertEquals(expected, csv);
+    }
+
 }
 
 
