@@ -15,15 +15,29 @@ public class SeekStatsApplication
         aggregateStats();
     }
 
+    private void updateHistoricalStats(List<SeekAppliedJob> historical_data, List<SeekAppliedJob> current_data)
+    {
+
+    }
+
+    private static HashMap<String, SeekAppliedJob> recordsToMap(List<SeekAppliedJob> records)
+    {
+        HashMap<String, SeekAppliedJob> map = new HashMap<>();
+
+        for (SeekAppliedJob record : records) {
+            map.put(record.getIdentifer(), record);
+        }
+
+        return map;
+    }
+
     public static void aggregateStats()
     {
         ArrayList<SeekAppliedJob> applied_jobs = new SeekAppliedJobsWrapper().getAppliedJobsStats();
         List<SeekAppliedJob> history = ApplicationAggregator.readFromFile(SeekAppliedJob.class, "data.csv"); 
 
-        HashMap<String, SeekAppliedJob> history_map = new HashMap<String, SeekAppliedJob>();
-        for (SeekAppliedJob h : history) {
-            history_map.put(h.getIdentifer(), h);
-        }
+        HashMap<String, SeekAppliedJob> history_map = recordsToMap(history);
+
         //TODO: if file dosent exist, then do not read from it
 
         for (SeekAppliedJob fresh : applied_jobs) {
