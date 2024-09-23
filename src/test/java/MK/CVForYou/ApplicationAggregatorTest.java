@@ -11,6 +11,21 @@ import org.junit.Test;
 public class ApplicationAggregatorTest
 {
     @Test
+    public void shouldParseMultipleRecordsFromCSVIntoList()
+    {
+        String csv = "job_id,job_title\n111,'title1'\n222,'title2'";
+        
+        List<SeekAppliedJob> result = ApplicationAggregator.readFromString(SeekAppliedJob.class, csv);
+        SeekAppliedJob record1 = result.get(0);
+        SeekAppliedJob record2 = result.get(1);
+
+        assertEquals(record1.job_id, "111");
+        assertEquals(record1.job_title, "title1");
+        assertEquals(record2.job_id, "222");
+        assertEquals(record2.job_title, "title2");
+    }
+    
+    @Test
     public void shouldParseBooleanValueFromCSVIntoTrue()
     {
         String csv = "'active'\nfalse";
