@@ -21,8 +21,6 @@ public class SeekStatsApplication
     {
         HashMap<String, SeekAppliedJob> history_map = recordsToMap(historical_data);
 
-        //TODO: if file dosent exist, then do not read from it
-
         for (SeekAppliedJob fresh : current_data) {
             String id = fresh.getIdentifer();
             if(history_map.containsKey(id))
