@@ -8,6 +8,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+//TODO: Write acceptance tests
 public class SeekStatsApplication
 {
     static final Logger logger = LoggerFactory.getLogger(SeekStatsApplication.class);
