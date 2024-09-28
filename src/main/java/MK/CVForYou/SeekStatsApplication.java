@@ -64,7 +64,7 @@ public class SeekStatsApplication
         List<SeekAppliedJob> latest_stats = current_applied_jobs;
 
         try {
-			List<SeekAppliedJob> history = ApplicationAggregator.readFromFile(SeekAppliedJob.class, "data.csv");
+			List<SeekAppliedJob> history = CSVReader.readFromFile(SeekAppliedJob.class, "data.csv");
             latest_stats = updateHistoricalStats(history, latest_stats);
 		} catch (IOException e) {
             logger.warn("Unable to read historical Seek statistics file: {}", e.getMessage()); //TODO: may lose historical data, if there is read problem

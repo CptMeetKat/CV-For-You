@@ -8,14 +8,14 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class ApplicationAggregatorTest
+public class CSVReaderTest
 {
     @Test
     public void shouldParseMultipleRecordsFromCSVIntoList()
     {
         String csv = "job_id,job_title\n111,'title1'\n222,'title2'";
         
-        List<SeekAppliedJob> result = ApplicationAggregator.readFromString(SeekAppliedJob.class, csv);
+        List<SeekAppliedJob> result = CSVReader.readFromString(SeekAppliedJob.class, csv);
         SeekAppliedJob record1 = result.get(0);
         SeekAppliedJob record2 = result.get(1);
 
@@ -30,7 +30,7 @@ public class ApplicationAggregatorTest
     {
         String csv = "'active'\nfalse";
 
-        List<SeekAppliedJob> result = ApplicationAggregator.readFromString(SeekAppliedJob.class, csv);
+        List<SeekAppliedJob> result = CSVReader.readFromString(SeekAppliedJob.class, csv);
         boolean isActive = result.get(0).active;
 
         assertFalse(isActive);
@@ -41,7 +41,7 @@ public class ApplicationAggregatorTest
     {
         String csv = "'active'\ntrue";
 
-        List<SeekAppliedJob> result = ApplicationAggregator.readFromString(SeekAppliedJob.class, csv);
+        List<SeekAppliedJob> result = CSVReader.readFromString(SeekAppliedJob.class, csv);
         boolean isActive = result.get(0).active;
 
         assertTrue(isActive);
@@ -52,7 +52,7 @@ public class ApplicationAggregatorTest
     {
         String csv = "'active'\n'true'";
 
-        List<SeekAppliedJob> result = ApplicationAggregator.readFromString(SeekAppliedJob.class, csv);
+        List<SeekAppliedJob> result = CSVReader.readFromString(SeekAppliedJob.class, csv);
         boolean isActive = result.get(0).active;
 
         assertTrue(isActive);
@@ -64,7 +64,7 @@ public class ApplicationAggregatorTest
         String csv = "'job_id'\n'job_id_value'";
         String expected = "job_id_value";
 
-        List<SeekAppliedJob> result = ApplicationAggregator.readFromString(SeekAppliedJob.class, csv);
+        List<SeekAppliedJob> result = CSVReader.readFromString(SeekAppliedJob.class, csv);
 
         String job_id = result.get(0).job_id;
         assertEquals(expected, job_id);
@@ -76,7 +76,7 @@ public class ApplicationAggregatorTest
         String csv = "'status'\n'[]'";
         String[] expected = {};
 
-        List<SeekAppliedJob> result = ApplicationAggregator.readFromString(SeekAppliedJob.class, csv);
+        List<SeekAppliedJob> result = CSVReader.readFromString(SeekAppliedJob.class, csv);
 
         List<String> status = result.get(0).status;
         
@@ -92,7 +92,7 @@ public class ApplicationAggregatorTest
         String csv = "'job_id'\n''";
         String expected = "";
 
-        List<SeekAppliedJob> result = ApplicationAggregator.readFromString(SeekAppliedJob.class, csv);
+        List<SeekAppliedJob> result = CSVReader.readFromString(SeekAppliedJob.class, csv);
         SeekAppliedJob element = result.get(0);
 
         assertEquals(expected, element.job_id);
@@ -104,7 +104,7 @@ public class ApplicationAggregatorTest
         String csv = "'job_id'\n";
         int expected = 0;
 
-        List<SeekAppliedJob> result = ApplicationAggregator.readFromString(SeekAppliedJob.class, csv);
+        List<SeekAppliedJob> result = CSVReader.readFromString(SeekAppliedJob.class, csv);
         
         assertEquals(expected, result.size());
     }
@@ -116,7 +116,7 @@ public class ApplicationAggregatorTest
         String csv = "'status'\n'[value1, value2]'";
         String[] expected = {"value1", "value2"};
 
-        List<SeekAppliedJob> result = ApplicationAggregator.readFromString(SeekAppliedJob.class, csv);
+        List<SeekAppliedJob> result = CSVReader.readFromString(SeekAppliedJob.class, csv);
 
         List<String> status = result.get(0).status;
         
@@ -135,7 +135,7 @@ public class ApplicationAggregatorTest
     public void returnNothingWhenNoDefaultConstructor()
     {
         String csv = "'field1'\n'data'";
-        List<NoConstructorObject> items = ApplicationAggregator.readFromString(NoConstructorObject.class, csv);
+        List<NoConstructorObject> items = CSVReader.readFromString(NoConstructorObject.class, csv);
         
         assertEquals(0, items.size());
     }

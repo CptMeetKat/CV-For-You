@@ -19,7 +19,7 @@ import java.nio.file.Paths;
 import java.io.Reader;
 import java.io.StringReader;
 
-public class ApplicationAggregator
+public class CSVReader
 {
     static final Logger logger = LoggerFactory.getLogger(App.class);
 
