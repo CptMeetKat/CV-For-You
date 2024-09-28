@@ -32,7 +32,7 @@ public class SeekAppliedJobInsightsWrapper implements Requestable
     {
         JSONObject data = session_manager.makeRequest(this);
         
-        JSONObject insights_node = (JSONObject) data.query("/data/jobDetails/insights");
+        JSONObject insights_node = (JSONObject) data.query("/data/jobDetails");
         SeekAppliedJobInsights insights = new SeekAppliedJobInsights(insights_node);
 
         return insights;
