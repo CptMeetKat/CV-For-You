@@ -28,15 +28,15 @@ public class SeekAppliedJobInsightsWrapper implements Requestable
         return fetchInsights(access_token);
 	}
 
-    //public ArrayList<SeekAppliedJobInsights> getInsights()
-    //{
-    //    JSONObject applied_data = session_manager.makeRequest(this);
-    //    
-    //    ArrayList<SeekAppliedJobInsights> applied_jobs = deserializeAppliedJobs(applied_data);
+    public SeekAppliedJobInsights getInsights()
+    {
+        JSONObject data = session_manager.makeRequest(this);
+        
+        JSONObject insights_node = (JSONObject) data.query("/data/jobDetails/insights");
+        SeekAppliedJobInsights insights = new SeekAppliedJobInsights(insights_node);
 
-    //    return applied_jobs;
-    //}
-
+        return insights;
+    }
 
     public JSONObject fetchInsights(String access_token) throws IOException, InterruptedException 
     {
