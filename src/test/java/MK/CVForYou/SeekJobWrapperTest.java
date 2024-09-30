@@ -18,15 +18,15 @@ public class SeekJobWrapperTest
         assertEquals(result, expected);
     }
 
-
     @Test
-    public void wrapperWithBadURLShouldReturnJobIDAsNull()
+    public void wrapperWithURLEndinginSlashShouldReturnJobID()
     {
-        String expected = null;
-        String url = "_bad_url_";
+        String expected = "77111111";
+        String url = "https://www.seek.com.au/job/77111111/";
         SeekJobWrapper wrapper = new SeekJobWrapper(url);
         String result = wrapper.getSeekJobID();
 
-        assertEquals(result, expected);
+        assertEquals(expected, result);
     }
+
 }

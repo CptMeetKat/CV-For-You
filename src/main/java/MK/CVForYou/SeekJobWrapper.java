@@ -30,14 +30,16 @@ public class SeekJobWrapper {
     }
 
     public String getSeekJobID() {
+        
+        String[] atoms = job_url.split("/");
 
-        int slash_position = job_url.lastIndexOf("/");
-        if(slash_position == -1)
+        if(atoms.length < 1)
         {
             logger.warn("Unable to extract ID from {}\n", job_url);
             return null;
         }
-        return job_url.substring(slash_position+1); //Unsafe if / is last character
+
+        return atoms[atoms.length-1];
     }
 
     private Document fetchJob(String job_id) //TODO: Unsafe function
