@@ -87,12 +87,14 @@ public class CSVReader
             try 
             {
                 //logger.trace("Create record, writing field: {}\n", header);
-                Field f = SeekAppliedJob.class.getField(header);
+                Field f = type.getField(header); 
 
                 if(f.getType() == Boolean.class || f.getType() == boolean.class) 
                     f.setBoolean(record, Boolean.parseBoolean(cell));
                 else if(f.getType() == ArrayList.class)
                     f.set(record, cellToArrayList(cell));
+                else if(f.getType() == int.class || f.getType() == Integer.class)
+                    f.setInt(record, Integer.parseInt(cell));
                 else
                     f.set(record, cell);
             }
