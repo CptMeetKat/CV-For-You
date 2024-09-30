@@ -30,6 +30,5 @@ public class SeekAppliedJobInsights
                 applicants_with_resume_percentage = stat.getInt("percentage");
 
         }
-        System.out.printf("stat: %d %d %d\n", applicant_count, applicants_with_cover_percentage, applicants_with_resume_percentage);
     }
 }
