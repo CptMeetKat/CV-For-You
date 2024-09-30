@@ -27,7 +27,10 @@ public class SeekStatsApplication
             {
                 SeekAppliedJob history_record = history_map.get(id);
                 if(!history_record.toString().equals(fresh.toString()))
+                {
                     logger.info("Updating 1 with 2\n {} \n {}\n", history_record, fresh);
+                    history_map.put(id, fresh);
+                }
             }
             else
             {
