@@ -17,7 +17,6 @@ public class SeekAppliedJobInsights
         JSONArray insights = (JSONArray) job_details.query("/insights");
 
         Iterator<Object> insights_itr = insights.iterator();
-        System.out.println("Printing some stats....");
         while(insights_itr.hasNext())
         {
             JSONObject stat = (JSONObject)insights_itr.next();
