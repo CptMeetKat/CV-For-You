@@ -99,6 +99,7 @@ public class SeekAppliedJob
         return null;
     }
 
+    //TODO: All unused below
     public boolean isSameEntity(SeekAppliedJob other)
     {
         if (this == other)

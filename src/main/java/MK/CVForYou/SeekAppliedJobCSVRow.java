@@ -23,6 +23,9 @@ public class SeekAppliedJobCSVRow
     public int applicants_with_resume_percentage;
     public int applicants_with_cover_percentage;
 
+
+    public SeekAppliedJobCSVRow() { }
+
     public SeekAppliedJobCSVRow(SeekAppliedJob job, SeekAppliedJobInsights insights)
     {
         job_id = job.job_id;
@@ -43,5 +46,39 @@ public class SeekAppliedJobCSVRow
         applicant_count = insights.applicant_count; 
         applicants_with_resume_percentage = insights.applicants_with_resume_percentage;
         applicants_with_cover_percentage = insights.applicants_with_cover_percentage;
+    }
+
+
+    public String getIdentifer()
+    {
+        return job_id + "|" + created_at + "|" + applied_at;
+    }
+
+
+    @Override
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(job_id+", ");
+        sb.append(job_title+", ");
+        sb.append(status+", ");
+        sb.append(status_times+", ");
+        sb.append(latest_status+", ");
+        sb.append(latest_status_time+", ");
+        sb.append(active+", ");
+        sb.append(company_name+", ");
+        sb.append(company_id+", ");
+        sb.append(applied_at+", ");
+        sb.append(created_at+", ");
+        sb.append(applied_with_cv+", ");
+        sb.append(applied_with_cover+", ");
+        sb.append(isExternal+", ");
+
+        sb.append(applicant_count+", ");
+        sb.append(applicants_with_resume_percentage+", ");
+        sb.append(applicants_with_cover_percentage);
+
+        return sb.toString();
     }
 }

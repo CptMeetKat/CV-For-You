@@ -17,18 +17,19 @@ public class SeekStatsApplication
         aggregateStats();
     }
 
-    private static List<SeekAppliedJob> updateHistoricalStats(List<SeekAppliedJob> historical_data, List<SeekAppliedJob> current_data)
+    private static List<SeekAppliedJobCSVRow> updateHistoricalStats(List<SeekAppliedJobCSVRow> historical_data, List<SeekAppliedJobCSVRow> current_data)
     {
-        HashMap<String, SeekAppliedJob> history_map = recordsToMap(historical_data);
+        HashMap<String, SeekAppliedJobCSVRow> history_map = recordsToMap(historical_data);
 
-        for (SeekAppliedJob fresh : current_data) {
+        for (SeekAppliedJobCSVRow fresh : current_data) {
             String id = fresh.getIdentifer();
             if(history_map.containsKey(id))
             {
-                SeekAppliedJob history_record = history_map.get(id);
+                SeekAppliedJobCSVRow history_record = history_map.get(id);
                 if(!history_record.toString().equals(fresh.toString()))
                 {
                     logger.info("Updating 1 with 2\n {} \n {}\n", history_record, fresh);
+
                     history_map.put(id, fresh);
                 }
             }
@@ -41,20 +42,20 @@ public class SeekStatsApplication
         return mapToRecords(history_map);
     }
 
-    private static HashMap<String, SeekAppliedJob> recordsToMap(List<SeekAppliedJob> records)
+    private static HashMap<String, SeekAppliedJobCSVRow> recordsToMap(List<SeekAppliedJobCSVRow> records)
     {
-        HashMap<String, SeekAppliedJob> map = new HashMap<>();
+        HashMap<String, SeekAppliedJobCSVRow> map = new HashMap<>();
 
-        for (SeekAppliedJob record : records) {
+        for (SeekAppliedJobCSVRow record : records) {
             map.put(record.getIdentifer(), record);
         }
 
         return map;
     }
 
-    private static List<SeekAppliedJob> mapToRecords(HashMap<String, SeekAppliedJob> map)
+    private static List<SeekAppliedJobCSVRow> mapToRecords(HashMap<String, SeekAppliedJobCSVRow> map)
     {
-        ArrayList<SeekAppliedJob> records = new ArrayList<SeekAppliedJob>();
+        ArrayList<SeekAppliedJobCSVRow> records = new ArrayList<SeekAppliedJobCSVRow>();
         for (String key : map.keySet()) {
             records.add(map.get(key));
         }
@@ -64,17 +65,27 @@ public class SeekStatsApplication
     public static void aggregateStats()
     {
         ArrayList<SeekAppliedJob> current_applied_jobs = new SeekAppliedJobsWrapper().getAppliedJobsStats();
-        List<SeekAppliedJob> latest_stats = current_applied_jobs;
+        ArrayList<SeekAppliedJobCSVRow> rows = new ArrayList<>();
 
+        for (SeekAppliedJob application : current_applied_jobs) {
+            SeekAppliedJobInsightsWrapper requester = new SeekAppliedJobInsightsWrapper(application.job_id);
+            SeekAppliedJobInsights insights = requester.getInsights(); //TODO if 0,0,0 stats are returned will overwrite the good stats
+            rows.add(new SeekAppliedJobCSVRow(application, insights));
+        }
+            
+        String filename = "data.csv";
+        List<SeekAppliedJobCSVRow> latest_stats = rows;
         try {
-			List<SeekAppliedJob> history = CSVReader.readFromFile(SeekAppliedJob.class, "data.csv");
-            latest_stats = updateHistoricalStats(history, latest_stats);
+			List<SeekAppliedJobCSVRow> history = CSVReader.readFromFile(SeekAppliedJobCSVRow.class, filename);
+            latest_stats = updateHistoricalStats(history, rows);
 		} catch (IOException e) {
             logger.warn("Unable to read historical Seek statistics file: {}", e.getMessage()); //TODO: may lose historical data, if there is read problem
 			e.printStackTrace();
-		} 
+		}
 
-        String data = CSVGenerator.makeCSV(latest_stats, SeekAppliedJob.class);
-        IOUtils.writeToFile(data, "data.csv");
+        String data = CSVGenerator.makeCSV(latest_stats, SeekAppliedJobCSVRow.class);
+
+        IOUtils.writeToFile(data, filename);
     }
 }
+
