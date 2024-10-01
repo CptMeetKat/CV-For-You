@@ -50,15 +50,11 @@ public class SeekAppliedJob
 
             JSONObject createdJSON = (JSONObject) job.optQuery("/createdAt"); //TODO: should be using optJSONObject? Case: field dosent exist, case: field is value {"created": null}
             if(createdJSON != null)
-            {
                 created_at = createdJSON.optString("dateTimeUtc");
-            }
 
             JSONObject salaryJSON = job.optJSONObject("salary");
             if(salaryJSON != null)
-            {
                 salary = salaryJSON.optString("label");
-            }
         }
 
 
