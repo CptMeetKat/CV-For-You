@@ -24,6 +24,7 @@ public class SeekAppliedJob
     public boolean applied_with_cv;
     public boolean applied_with_cover;
     public boolean isExternal;
+    public String salary;
 
     //TODO: Add SALARY!
 
@@ -52,6 +53,12 @@ public class SeekAppliedJob
             if(createdJSON != null)
             {
                 created_at = createdJSON.optString("dateTimeUtc");
+            }
+
+            JSONObject salaryJSON = job.optJSONObject("salary");
+            if(salaryJSON != null)
+            {
+                salary = salaryJSON.optString("label");
             }
         }
 
