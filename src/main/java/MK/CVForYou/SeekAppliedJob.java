@@ -49,8 +49,7 @@ public class SeekAppliedJob
         {
             job_title = job.optString("title");
             JSONObject advertiser = (JSONObject) job.optQuery("/advertiser"); //TODO: should be using optJSONObject?
-            if(advertiser != null)
-            {
+            if(advertiser != null) {
                 company_name = advertiser.optString("name");
                 company_id = advertiser.optString("id");
             }
@@ -86,16 +85,13 @@ public class SeekAppliedJob
 
         JSONObject appliedJSON = (JSONObject) node.optQuery("/appliedAt");
         if(appliedJSON != null)
-        {
             applied_at = appliedJSON.optString("dateTimeUtc");
-        }
     }
 
     private void setLatestStatus()
     {
         latest_status = status.get(status.size() - 1);
         latest_status_time = status_times.get(status.size() - 1);
-
     }
 
 
