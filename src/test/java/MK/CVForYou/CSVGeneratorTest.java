@@ -25,9 +25,9 @@ public class CSVGeneratorTest
 
     
     @Test
-    public void makeCSVWithNullObjectsShouldReturnNullAsValues()
+    public void makeCSVWithNullObjectsShouldReturnEmptyStringAsValues()
     {
-        String expected = "'field1','items'\n'null','null'";
+        String expected = "'field1','items'\n'',''";
 
         BasicPublicObject record = new BasicPublicObject();
         ArrayList<BasicPublicObject> records = new ArrayList<BasicPublicObject>();
