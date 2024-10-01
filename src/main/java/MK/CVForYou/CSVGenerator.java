@@ -44,7 +44,7 @@ public class CSVGenerator
                     Field field = type.getField(column);
                     Object value = field.get(item); 
                     if(value == null)
-                        sb.append("'null'");
+                        sb.append("''");
                     else                                       
                         sb.append(String.format("'%s'", value.toString()));
 
