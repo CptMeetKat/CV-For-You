@@ -36,18 +36,19 @@ public class SeekAppliedJob
         applied_with_cv = node.optBoolean("hasAppliedWithResume");
         applied_with_cover = node.optBoolean("hasAppliedWithCoverLetter");
 
+
         JSONObject job = (JSONObject) node.optQuery("/job");
         if(job != null)
         {
             job_title = job.optString("title");
-            JSONObject advertiser = (JSONObject) job.optQuery("/advertiser");
+            JSONObject advertiser = (JSONObject) job.optQuery("/advertiser"); //TODO: should be using optJSONObject?
             if(advertiser != null)
             {
                 company_name = advertiser.optString("name");
                 company_id = advertiser.optString("id");
             }
 
-            JSONObject createdJSON = (JSONObject) job.optQuery("/createdAt");
+            JSONObject createdJSON = (JSONObject) job.optQuery("/createdAt"); //TODO: should be using optJSONObject? Case: field dosent exist, case: field is value {"created": null}
             if(createdJSON != null)
             {
                 created_at = createdJSON.optString("dateTimeUtc");
