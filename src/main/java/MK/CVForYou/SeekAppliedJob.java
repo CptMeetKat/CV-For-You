@@ -28,8 +28,15 @@ public class SeekAppliedJob
 
     public SeekAppliedJob(){}
 
+    public void init()
+    {
+        status = new ArrayList<String>(3);
+        status_times = new ArrayList<String>(3);
+    }
+
     public SeekAppliedJob(JSONObject node)
     {
+        init();
         job_id = node.optString("id");
         active = node.optBoolean("isActive");
         isExternal = node.optBoolean("isExternal");
@@ -58,8 +65,6 @@ public class SeekAppliedJob
         }
 
 
-        status = new ArrayList<String>(3);
-        status_times = new ArrayList<String>(3);
         JSONArray events = (JSONArray) node.query("/events");
         if(events != null)
         {
