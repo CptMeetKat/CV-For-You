@@ -26,8 +26,6 @@ public class SeekAppliedJob
     public boolean isExternal;
     public String salary;
 
-    //TODO: Add SALARY!
-
     public SeekAppliedJob(){}
 
     public SeekAppliedJob(JSONObject node)
