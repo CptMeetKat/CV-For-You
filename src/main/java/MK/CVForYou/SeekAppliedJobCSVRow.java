@@ -27,23 +27,30 @@ public class SeekAppliedJobCSVRow
 
     public SeekAppliedJobCSVRow() { }
 
+    private static String nullToEmptyString(String text)
+    {
+        if(text == null)
+            return "";
+        return text;
+    }
+
     public SeekAppliedJobCSVRow(SeekAppliedJob job, SeekAppliedJobInsights insights)
     {
-        job_id = job.job_id;
-        job_title = job.job_title;
+        job_id = nullToEmptyString(job.job_id);
+        job_title = nullToEmptyString(job.job_title);
         status = job.status;
         status_times = job.status_times;
-        latest_status = job.latest_status;
+        latest_status = nullToEmptyString(job.latest_status);
         latest_status_time = job.latest_status_time;
         active = job.active;
-        company_name = job.company_name;
-        company_id = job.company_id;
-        applied_at = job.applied_at;
-        created_at = job.created_at;
+        company_name = nullToEmptyString(job.company_name);
+        company_id = nullToEmptyString(job.company_id);
+        applied_at = nullToEmptyString(job.applied_at);
+        created_at = nullToEmptyString(job.created_at);
         applied_with_cv = job.applied_with_cv;
         applied_with_cover = job.applied_with_cover;
         isExternal = job.isExternal;
-        salary = job.salary;
+        salary = nullToEmptyString(job.salary);
 
         applicant_count = insights.applicant_count; 
         applicants_with_resume_percentage = insights.applicants_with_resume_percentage;
