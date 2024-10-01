@@ -18,6 +18,7 @@ public class SeekAppliedJobCSVRow
     public boolean applied_with_cv;
     public boolean applied_with_cover;
     public boolean isExternal;
+    public String salary;
 
     public int applicant_count;
     public int applicants_with_resume_percentage;
@@ -42,6 +43,7 @@ public class SeekAppliedJobCSVRow
         applied_with_cv = job.applied_with_cv;
         applied_with_cover = job.applied_with_cover;
         isExternal = job.isExternal;
+        salary = job.salary;
 
         applicant_count = insights.applicant_count; 
         applicants_with_resume_percentage = insights.applicants_with_resume_percentage;
@@ -74,6 +76,7 @@ public class SeekAppliedJobCSVRow
         sb.append(applied_with_cv+", ");
         sb.append(applied_with_cover+", ");
         sb.append(isExternal+", ");
+        sb.append(salary+", ");
 
         sb.append(applicant_count+", ");
         sb.append(applicants_with_resume_percentage+", ");
