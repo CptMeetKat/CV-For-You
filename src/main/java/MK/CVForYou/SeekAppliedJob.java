@@ -104,44 +104,4 @@ public class SeekAppliedJob
             return status.get(status.size()-1);
         return null;
     }
-
-    //TODO: All unused below
-    public boolean isSameEntity(SeekAppliedJob other)
-    {
-        if (this == other)
-            return true;
-
-        return this.job_id.equals(other.job_id) &&
-               this.created_at.equals(other.created_at) &&
-               this.applied_at.equals(other.applied_at);
-    }
-
-    public String getIdentifer()
-    {
-        return job_id + "|" + created_at + "|" + applied_at;
-    }
-
-    @Override
-    public String toString()
-    {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(job_id+", ");
-        sb.append(job_title+", ");
-        sb.append(status+", ");
-        sb.append(status_times+", ");
-        sb.append(latest_status+", ");
-        sb.append(latest_status_time+", ");
-        sb.append(active+", ");
-        sb.append(company_name+", ");
-        sb.append(company_id+", ");
-        sb.append(applied_at+", ");
-        sb.append(created_at+", ");
-        sb.append(applied_with_cv+", ");
-        sb.append(applied_with_cover+", ");
-        sb.append(isExternal);
-
-        return sb.toString();
-    }
-
 }
