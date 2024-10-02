@@ -52,6 +52,16 @@ public class SeekAppliedJob
     }
 
 
+    private static String getString(JSONObject node, String field)
+    { 
+        String result = null;
+        if(node != null)
+            try {
+                result = node.getString(field);
+            } catch (JSONException e) {} 
+        return result;
+    }
+
     public SeekAppliedJob(String json)
     {
         this(new JSONObject(json));
@@ -68,15 +78,12 @@ public class SeekAppliedJob
 
 
         JSONObject job = node.optJSONObject("job");
-        if(job != null)
-        {
-            job_title = job.optString("title");
+        job_title = getString(job, "title");
 
-            company_name = getStringInObject(job, "advertiser", "name");
-            company_id = getStringInObject(job, "advertiser", "id");
-            created_at = getStringInObject(job, "createdAt", "dateTimeUtc");
-            salary = getStringInObject(job, "salary", "label");
-        }
+        company_name = getStringInObject(job, "advertiser", "name");
+        company_id = getStringInObject(job, "advertiser", "id");
+        created_at = getStringInObject(job, "createdAt", "dateTimeUtc");
+        salary = getStringInObject(job, "salary", "label");
 
 
         JSONArray events = (JSONArray) node.query("/events");
