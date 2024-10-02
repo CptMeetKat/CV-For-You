@@ -35,7 +35,7 @@ public class SeekStatsApplication
             }
             else
             {
-                logger.info("Add new record\n{}\n", fresh);
+                logger.info("Adding new record\n{}\n", fresh);
                 history_map.put(fresh.getIdentifer(), fresh);
             }
         }
