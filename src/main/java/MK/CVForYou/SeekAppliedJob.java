@@ -106,7 +106,6 @@ public class SeekAppliedJob
         latest_status_time = status_times.get(status.size() - 1);
     }
 
-
     public String getLastestStatus()
     {
         if(status.size() > 0)
