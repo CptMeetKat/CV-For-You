@@ -107,7 +107,6 @@ public class CSVReader
         return record;
     }
 
-//TODO: need to know if empty cell is null or "" or "null"
     private static ArrayList<String> cellToArrayList(String cell_data)
     {
         ArrayList<String> result = new ArrayList<String>();
