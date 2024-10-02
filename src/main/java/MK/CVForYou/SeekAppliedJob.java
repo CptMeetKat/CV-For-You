@@ -34,9 +34,14 @@ public class SeekAppliedJob
         status = new ArrayList<String>(3);
         status_times = new ArrayList<String>(3);
     }
+    
 
+    /**   
+     * @return JSON field value if field is accessible, otherwise null if field cannot
+     * be accessed or dosen't exist be accessed
+     */
     private static String getStringInObject(JSONObject node, String sub_object, String field)
-    {
+    { 
         String result = null;
         if(node != null)
             try {
@@ -45,6 +50,7 @@ public class SeekAppliedJob
             } catch (JSONException e) {} 
         return result;
     }
+
 
     public SeekAppliedJob(String json)
     {
