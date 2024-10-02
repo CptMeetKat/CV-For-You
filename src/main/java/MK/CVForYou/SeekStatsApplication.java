@@ -69,7 +69,7 @@ public class SeekStatsApplication
 
         for (SeekAppliedJob application : current_applied_jobs) {
             SeekAppliedJobInsightsWrapper requester = new SeekAppliedJobInsightsWrapper(application.job_id);
-            SeekAppliedJobInsights insights = requester.getInsights(); //TODO if 0,0,0 stats are returned will overwrite the good stats
+            SeekAppliedJobInsights insights = requester.getInsights();
             rows.add(new SeekAppliedJobCSVRow(application, insights));
         }
             
