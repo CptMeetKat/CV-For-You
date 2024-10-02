@@ -93,14 +93,9 @@ public class SeekAppliedJob
             while(events_itr.hasNext())
             {
                 JSONObject event = (JSONObject)events_itr.next();
-                String status_value = event.optString("status");
-                if(status_value != null)
-                    status.add( status_value  );
 
-
-                JSONObject timestamps = (JSONObject) event.query("/timestamp");
-                if(timestamps != null)
-                    status_times.add(timestamps.optString("dateTimeUtc"));
+                status.add(getString(event, "status"));
+                status_times.add(getStringInObject(event, "timestamp", "dateTimeUtc"));
             }
             updateLatestStatus();
         }
