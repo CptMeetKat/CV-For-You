@@ -85,6 +85,8 @@ public class SeekAppliedJob
         created_at = getStringInObject(job, "createdAt", "dateTimeUtc");
         salary = getStringInObject(job, "salary", "label");
 
+        applied_at = getStringInObject(node, "appliedAt", "dateTimeUtc");
+
 
         JSONArray events = (JSONArray) node.query("/events");
         if(events != null)
@@ -99,7 +101,6 @@ public class SeekAppliedJob
             }
             updateLatestStatus();
         }
-        applied_at = getStringInObject(node, "appliedAt", "dateTimeUtc");
     }
 
     private void updateLatestStatus()
