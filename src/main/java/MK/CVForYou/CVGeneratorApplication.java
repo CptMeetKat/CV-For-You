@@ -14,7 +14,7 @@ public class CVGeneratorApplication
             DocumentGenerator generator = new DocumentGenerator(ap.getInputDocument(),
                                     ap.getSections(),
                                     ap.getOutputFolder());
-            generator.generateDocument(job_descriptions.get(job_id), job_id); //TODO: UGLY! FIX!
+            generator.generateDocument(job_descriptions.get(job_id), job_id);
             ExecuteChromePDFGenerator.run(job_id, ap.getOutputFolder());
         }
     }
