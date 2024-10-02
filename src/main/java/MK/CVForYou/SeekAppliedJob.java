@@ -97,10 +97,7 @@ public class SeekAppliedJob
             }
             setLatestStatus();
         }
-
-        JSONObject appliedJSON = (JSONObject) node.optQuery("/appliedAt");
-        if(appliedJSON != null)
-            applied_at = appliedJSON.optString("dateTimeUtc");
+        applied_at = getStringInObject(node, "appliedAt", "dateTimeUtc");
     }
 
     private void setLatestStatus()
