@@ -50,7 +50,6 @@ public class SeekAppliedJobInsightsWrapper implements Requestable
             .method("POST", HttpRequest.BodyPublishers.ofString(body))
             .build(); 
 
-            logger.info("Fetching insights for applied jobs...");
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
             sleep(); //Avoid flagging SEEK systems
