@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 //TODO: add tests
@@ -32,6 +33,16 @@ public class SeekAppliedJob
     {
         status = new ArrayList<String>(3);
         status_times = new ArrayList<String>(3);
+    }
+
+    private static String getStringInObject(JSONObject node, String sub_object, String field)
+    {
+        String result = null;
+        try {
+            JSONObject json = node.getJSONObject(sub_object);
+            result = json.getString(field);
+        } catch (JSONException e) {} 
+        return result;
     }
 
     public SeekAppliedJob(String json)
