@@ -102,12 +102,12 @@ public class SeekAppliedJob
                 if(timestamps != null)
                     status_times.add(timestamps.optString("dateTimeUtc"));
             }
-            setLatestStatus();
+            updateLatestStatus();
         }
         applied_at = getStringInObject(node, "appliedAt", "dateTimeUtc");
     }
 
-    private void setLatestStatus()
+    private void updateLatestStatus()
     {
         latest_status = status.get(status.size() - 1);
         latest_status_time = status_times.get(status.size() - 1);
