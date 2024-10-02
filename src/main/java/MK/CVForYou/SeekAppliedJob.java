@@ -64,9 +64,9 @@ public class SeekAppliedJob
         if(job != null)
         {
             job_title = job.optString("title");
-            JSONObject advertiser = (JSONObject) job.optQuery("/advertiser"); //TODO: should be using optJSONObject?
+            company_name = getStringInObject(job, "advertiser", "name");
+            JSONObject advertiser =  job.optJSONObject("advertiser");
             if(advertiser != null) {
-                company_name = advertiser.optString("name");
                 company_id = advertiser.optString("id");
             }
 
