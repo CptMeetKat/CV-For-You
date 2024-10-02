@@ -17,7 +17,7 @@ import org.junit.rules.TestName;
 
 public class GenerateDocumentAcceptanceTest 
 {
-    private static final String BASE_DIR = "./target/test-artefacts/";
+    private static final String BASE_DIR = "./target/test-artefacts/GenerateDocumentAcceptanceTest/";
     private File testDirectory;
 
     @Rule
