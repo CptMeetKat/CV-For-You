@@ -38,10 +38,11 @@ public class SeekAppliedJob
     private static String getStringInObject(JSONObject node, String sub_object, String field)
     {
         String result = null;
-        try {
-            JSONObject json = node.getJSONObject(sub_object);
-            result = json.getString(field);
-        } catch (JSONException e) {} 
+        if(node != null)
+            try {
+                JSONObject json = node.getJSONObject(sub_object);
+                result = json.getString(field);
+            } catch (JSONException e) {} 
         return result;
     }
 
