@@ -86,7 +86,7 @@ public class SeekAppliedJob
     public SeekAppliedJob(JSONObject node)
     {
         init();
-        job_id = node.optString("id");
+        job_id = getString(node, "id");
         active = node.optBoolean("isActive");
         isExternal = node.optBoolean("isExternal");
         applied_with_cv = node.optBoolean("hasAppliedWithResume");
