@@ -91,7 +91,7 @@ public class SeekSessionManager
         try {
             HttpResponse<String> response;
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-            logger.debug(response.body());
+            logger.trace(response.body());
             
             JSONObject auth = new JSONObject(response.body());
             String access_token = auth.optString("access_token");
@@ -102,7 +102,7 @@ public class SeekSessionManager
                 setRefreshToken(refresh_token);
             writeAuthToFile();
         } catch (IOException | InterruptedException e) {
-            // TODO Auto-generated catch block
+            logger.error("An error occured while trying to refresh token: {}", e.getMessage());
             e.printStackTrace();
         }
     }
