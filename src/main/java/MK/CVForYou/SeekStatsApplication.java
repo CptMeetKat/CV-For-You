@@ -69,11 +69,12 @@ public class SeekStatsApplication
 
         if(current_applied_jobs.size() > 0)
             logger.info("Requesting information for {} insight records...", current_applied_jobs.size());
+
         for (SeekAppliedJob application : current_applied_jobs) {
             logger.info("Fetching insights for '{}' ({})", application.job_title, application.job_id);
+
             SeekAppliedJobInsightsWrapper requester = new SeekAppliedJobInsightsWrapper(application.job_id);
-            SeekAppliedJobInsights insights = requester.getInsights();
-            rows.add(new SeekAppliedJobCSVRow(application, insights));
+            rows.add(new SeekAppliedJobCSVRow(application, requester.getInsights()));
         }
             
         String filename = "data.csv";
