@@ -34,6 +34,11 @@ public class SeekAppliedJob
         status_times = new ArrayList<String>(3);
     }
 
+    public SeekAppliedJob(String json)
+    {
+        this(new JSONObject(json));
+    }
+
     public SeekAppliedJob(JSONObject node)
     {
         init();
