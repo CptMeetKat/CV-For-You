@@ -67,6 +67,22 @@ public class SeekAppliedJob
         this(new JSONObject(json));
     }
 
+    private void parseEvents(JSONArray events)
+    {
+        if(events != null)
+        {
+            Iterator<Object> events_itr = events.iterator();
+            while(events_itr.hasNext())
+            {
+                JSONObject event = (JSONObject)events_itr.next();
+
+                status.add(getString(event, "status"));
+                status_times.add(getStringInObject(event, "timestamp", "dateTimeUtc"));
+            }
+            updateLatestStatus();
+        }
+    }
+
     public SeekAppliedJob(JSONObject node)
     {
         init();
@@ -87,20 +103,8 @@ public class SeekAppliedJob
 
         applied_at = getStringInObject(node, "appliedAt", "dateTimeUtc");
 
-
         JSONArray events = (JSONArray) node.query("/events");
-        if(events != null)
-        {
-            Iterator<Object> events_itr = events.iterator();
-            while(events_itr.hasNext())
-            {
-                JSONObject event = (JSONObject)events_itr.next();
-
-                status.add(getString(event, "status"));
-                status_times.add(getStringInObject(event, "timestamp", "dateTimeUtc"));
-            }
-            updateLatestStatus();
-        }
+        parseEvents(events);
     }
 
     private void updateLatestStatus()
