@@ -67,7 +67,7 @@ public class SeekAppliedJob
         applied_with_cover = node.optBoolean("hasAppliedWithCoverLetter");
 
 
-        JSONObject job = (JSONObject) node.optQuery("/job");
+        JSONObject job = node.optJSONObject("job");
         if(job != null)
         {
             job_title = job.optString("title");
