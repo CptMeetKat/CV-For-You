@@ -12,7 +12,13 @@ import org.slf4j.LoggerFactory;
 public class SeekStatsApplication implements Application
 {
     static final Logger logger = LoggerFactory.getLogger(SeekStatsApplication.class);
-    public SeekStatsApplication() {}
+    SeekAppliedJobSource applied_job_source;
+    
+
+    public SeekStatsApplication()
+    {
+        applied_job_source = new SeekAppliedJobsWrapper();//TODO: use setDependency here"
+    }
 
     private static List<SeekAppliedJobCSVRow> updateHistoricalStats(List<SeekAppliedJobCSVRow> historical_data, List<SeekAppliedJobCSVRow> current_data)
     {
@@ -57,9 +63,9 @@ public class SeekStatsApplication implements Application
         return records;
     }
 
-    public static void aggregateStats()
+    public void aggregateStats()
     {
-        ArrayList<SeekAppliedJob> current_applied_jobs = new SeekAppliedJobsWrapper().getAppliedJobsStats();
+        ArrayList<SeekAppliedJob> current_applied_jobs = applied_job_source.getAppliedJobsStats();
         ArrayList<SeekAppliedJobCSVRow> rows = new ArrayList<>();
 
         if(current_applied_jobs.size() > 0) 
@@ -95,12 +101,14 @@ public class SeekStatsApplication implements Application
 
     @Override
 	public <T> void setDependency(T service, Class<T> serviceType) {
+        if(serviceType == SeekAppliedJobSource.class)
+            applied_job_source = (SeekAppliedJobSource) service;
         //if(serviceType == String.class)
         //{
         //    Integer x = (Integer) serviceType.cast(service);
         //}
         //SeekAppliedJobSource
-        //SeekAppliedJobInsights
+        //SeekAppliedJobInsightsSource
     }
 }
 

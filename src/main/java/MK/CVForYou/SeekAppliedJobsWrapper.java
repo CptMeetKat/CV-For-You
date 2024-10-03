@@ -17,7 +17,7 @@ import org.json.JSONPointerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SeekAppliedJobsWrapper implements Requestable
+public class SeekAppliedJobsWrapper implements Requestable, SeekAppliedJobSource
 {
 
     static final Logger logger = LoggerFactory.getLogger(SeekAppliedJobsWrapper.class);
