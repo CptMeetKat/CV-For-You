@@ -108,11 +108,7 @@ public class SeekStatsApplication implements Application
         else if(serviceType == SeekAppliedJobInsightsSource.class)
             applied_job_insights_source = (SeekAppliedJobInsightsSource) service;
         else
-        {
             logger.warn("SeekStatsApplication dependency not set for {}", serviceType.toString());
-        }
-
-
     }
 }
 
