@@ -12,8 +12,13 @@ public class App
     public static void main( String[] args ) {
         new App(args);
     }
-
+    
     public App(String[] args)
+    {
+        this(args, true);
+    }
+
+    public App(String[] args, boolean execute)
     {
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
@@ -21,7 +26,9 @@ public class App
             application = new CVGeneratorApplication(ap);
         else if( mode == 2)
             application = new SeekStatsApplication();
-        run();
+
+        if(execute)
+            run();
     }
 
 
