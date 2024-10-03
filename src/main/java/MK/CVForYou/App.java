@@ -9,6 +9,11 @@ public class App
 
     public static void main( String[] args )
     {
+        new App(args);
+    }
+
+    public App(String[] args)
+    {
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
         if ( mode == 1 )
