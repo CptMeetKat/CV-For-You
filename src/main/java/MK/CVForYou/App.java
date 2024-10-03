@@ -19,7 +19,7 @@ public class App
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
         if ( mode == 1 )
-            new CVGeneratorApplication(ap);
+            application = new CVGeneratorApplication(ap);
         else if( mode == 2)
             application = new SeekStatsApplication();
         run();
