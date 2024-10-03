@@ -9,8 +9,7 @@ public class App
 
     Application application;
 
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         new App(args);
     }
 
@@ -26,8 +25,7 @@ public class App
     }
 
 
-    public Application getApplication()
-    {
+    public Application getApplication() {
         return application;
     }
 
