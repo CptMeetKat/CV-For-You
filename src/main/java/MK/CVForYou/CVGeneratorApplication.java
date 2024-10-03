@@ -46,5 +46,8 @@ public class CVGeneratorApplication implements Application
 	}
 
 	@Override
-	public <T> void setDependency(String service_name, T service) {}
+	public <T> void setDependency(T service, Class<T> serviceType) {
+		throw new UnsupportedOperationException("Unimplemented method 'setDependency'");
+	}
+
 }

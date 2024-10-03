@@ -92,10 +92,15 @@ public class SeekStatsApplication implements Application
         aggregateStats();
 	}
 
-	@Override
-	public <T> void setDependency(String service_name, T service) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'setDependency'");
-	}
+
+    @Override
+	public <T> void setDependency(T service, Class<T> serviceType) {
+        //if(serviceType == String.class)
+        //{
+        //    Integer x = (Integer) serviceType.cast(service);
+        //}
+        //SeekAppliedJobSource
+        //SeekAppliedJobInsights
+    }
 }
 
