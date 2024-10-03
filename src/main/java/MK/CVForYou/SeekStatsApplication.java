@@ -13,11 +13,13 @@ public class SeekStatsApplication implements Application
 {
     static final Logger logger = LoggerFactory.getLogger(SeekStatsApplication.class);
     SeekAppliedJobSource applied_job_source;
+    SeekAppliedJobInsightsSource applied_job_insights_source;
     
 
     public SeekStatsApplication()
     {
         applied_job_source = new SeekAppliedJobsWrapper();//TODO: use setDependency here"
+        applied_job_insights_source = new SeekAppliedJobInsightsWrapper();//TODO: use setDependency here"
     }
 
     private static List<SeekAppliedJobCSVRow> updateHistoricalStats(List<SeekAppliedJobCSVRow> historical_data, List<SeekAppliedJobCSVRow> current_data)
@@ -74,8 +76,8 @@ public class SeekStatsApplication implements Application
         for (SeekAppliedJob application : current_applied_jobs) {
             logger.info("  {} ({})", application.job_title, application.job_id);
 
-            SeekAppliedJobInsightsWrapper requester = new SeekAppliedJobInsightsWrapper(application.job_id);
-            rows.add(new SeekAppliedJobCSVRow(application, requester.getInsights()));
+            applied_job_insights_source.setTargetJob(application.job_id);
+            rows.add(new SeekAppliedJobCSVRow(application, applied_job_insights_source.getInsights()));
         }
             
         String filename = "data.csv";
@@ -103,12 +105,14 @@ public class SeekStatsApplication implements Application
 	public <T> void setDependency(T service, Class<T> serviceType) {
         if(serviceType == SeekAppliedJobSource.class)
             applied_job_source = (SeekAppliedJobSource) service;
-        //if(serviceType == String.class)
-        //{
-        //    Integer x = (Integer) serviceType.cast(service);
-        //}
-        //SeekAppliedJobSource
-        //SeekAppliedJobInsightsSource
+        else if(serviceType == SeekAppliedJobInsightsSource.class)
+            applied_job_insights_source = (SeekAppliedJobInsightsSource) service;
+        else
+        {
+            logger.warn("SeekStatsApplication dependency not set for {}", serviceType.toString());
+        }
+
+
     }
 }
 
