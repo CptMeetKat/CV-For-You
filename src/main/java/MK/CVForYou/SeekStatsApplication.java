@@ -9,13 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 //TODO: Write acceptance tests
-public class SeekStatsApplication
+public class SeekStatsApplication implements Application
 {
     static final Logger logger = LoggerFactory.getLogger(SeekStatsApplication.class);
-    public SeekStatsApplication()
-    {
-        aggregateStats();
-    }
+    public SeekStatsApplication() {}
 
     private static List<SeekAppliedJobCSVRow> updateHistoricalStats(List<SeekAppliedJobCSVRow> historical_data, List<SeekAppliedJobCSVRow> current_data)
     {
@@ -89,5 +86,16 @@ public class SeekStatsApplication
 
         IOUtils.writeToFile(data, filename);
     }
+
+	@Override
+	public void run() {
+        aggregateStats();
+	}
+
+	@Override
+	public <T> void setDependency(String service_name, T service) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'setDependency'");
+	}
 }
 
