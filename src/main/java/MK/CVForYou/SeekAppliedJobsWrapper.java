@@ -55,7 +55,7 @@ public class SeekAppliedJobsWrapper implements Requestable, SeekAppliedJobSource
         JSONObject applied_data = session_manager.makeRequest(this);
         
         ArrayList<SeekAppliedJob> applied_jobs = deserializeAppliedJobs(applied_data);
-
+        logger.info("Fetched {} applied jobs...", applied_jobs.size());
         return applied_jobs;
     }
 
