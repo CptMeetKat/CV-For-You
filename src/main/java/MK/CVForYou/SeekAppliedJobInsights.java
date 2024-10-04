@@ -21,7 +21,9 @@ public class SeekAppliedJobInsights
     public SeekAppliedJobInsights(JSONObject job_details) throws JSONException
     {
         JSONArray insights = (JSONArray) job_details.query("/insights");
-
+        if(insights == null)
+            return;
+            
         Iterator<Object> insights_itr = insights.iterator();
         while(insights_itr.hasNext())
         {
