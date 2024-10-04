@@ -12,6 +12,12 @@ public class SeekAppliedJobInsights
     public int applicants_with_resume_percentage;
     public int applicants_with_cover_percentage;
 
+    public SeekAppliedJobInsights(String job_details) throws JSONException
+    {
+        this(new JSONObject(job_details));
+    }
+
+
     public SeekAppliedJobInsights(JSONObject job_details) throws JSONException
     {
         JSONArray insights = (JSONArray) job_details.query("/insights");
