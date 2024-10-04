@@ -1,6 +1,7 @@
 package MK.CVForYou;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import org.junit.Test;
 
@@ -26,16 +27,54 @@ public class SeekStatsAcceptanceTest
         }
     }
 
-    //Should generate CSV from mock server
-    //Should generate CSV from mock server and merge with historical
+    class SeekAppliedJobWrapperMock implements SeekAppliedJobSource
+    {
+        public SeekAppliedJobWrapperMock(String toReturn)
+        {
+
+        }
+
+		@Override
+		public ArrayList<SeekAppliedJob> getAppliedJobsStats() {
+			// TODO Auto-generated method stub
+			throw new UnsupportedOperationException("Unimplemented method 'getAppliedJobsStats'");
+		}
+    }
+
+
+    class SeekAppliedJobInsightsWrapperMock implements SeekAppliedJobInsightsSource
+    {
+        public SeekAppliedJobInsightsWrapperMock(String toReturn)
+        {
+
+        }
+
+		@Override
+		public SeekAppliedJobInsights getInsights() {
+			// TODO Auto-generated method stub
+			throw new UnsupportedOperationException("Unimplemented method 'getInsights'");
+		}
+
+		@Override
+		public void setTargetJob(String job_id) {
+			// TODO Auto-generated method stub
+			throw new UnsupportedOperationException("Unimplemented method 'setTargetJob'");
+		}
+    }
+    
+    @Test
+    public void shouldGenerateNewCSVFromMockedData()
+    {
+        String[] args = {"--seek-stats", "-a"};
+        App app = new App(args);
+        Application program = app.getApplication();
+        //program.setDependency(service, serviceType);
+        //program.setDependency(service, serviceType);
+    }
+
 
     @Test
-    public void shouldGeneratePDFWithDynamicSectionsWhenSourceIsFile()
+    public void shouldMergeDataWithAlreadyExistingCSV()
     {
-        //String[] args = new String[]{
-        //        "--seek-stats",
-        //        "-a"
-        //};
-        //App.main(args);
     }
 }
