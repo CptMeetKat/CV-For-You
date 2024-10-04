@@ -1,6 +1,11 @@
 package MK.CVForYou;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import org.junit.Test;
@@ -60,45 +65,42 @@ public class SeekStatsAcceptanceTest
     }
     
     @Test
-    public void shouldGenerateNewCSVFromMockedData()
+    public void shouldGenerateNewCSVFromMockedData() throws IOException
     {
-        String[] args = {"--seek-stats", "-a"};
+        File file = new File(testDirectory.toString(), "data.csv");
+        String[] args = {"--seek-stats", "-a", "-o", file.toString()};
         App app = new App(args, false);
         Application program = app.getApplication();
 
-
         ArrayList<SeekAppliedJob> applied_jobs = new ArrayList<>();
         SeekAppliedJobWrapperMock applied_jobs_mock = new SeekAppliedJobWrapperMock(applied_jobs);
+        SeekAppliedJob application = new SeekAppliedJob(); //TODO: End to end test is more valuable if I utilise the JSONObject constructor
+        application.job_id = "1111";
+        application.created_at = "2024-08-23T05:46:20.186Z";
+        application.applied_at = "2024-08-23T10:58:11.322Z";
+        applied_jobs.add(application);
+	
 
-        SeekAppliedJobInsights insights = new SeekAppliedJobInsights("{}");
+        SeekAppliedJobInsights insights = new SeekAppliedJobInsights(); //TODO: End to end test is more valuable if I utilise the JSONObject constructor
+        insights.applicant_count = 55;
+        insights.applicants_with_cover_percentage = 54;
+        insights.applicants_with_resume_percentage = 55;
         SeekAppliedJobInsightsWrapperMock insights_mock = new SeekAppliedJobInsightsWrapperMock(insights);
         
         program.setDependency(applied_jobs_mock, SeekAppliedJobSource.class);
         program.setDependency(insights_mock, SeekAppliedJobInsightsSource.class);
 
-        //program.run();
-        //TODO// VERIFY GENERATED CSV
+        program.run();
+
+        String written = Files.readString(Paths.get(file.toString()));
+
+        String expected = "'job_id','job_title','status','status_times','latest_status','latest_status_time','active','company_name','company_id','applied_at','created_at','applied_with_cv','applied_with_cover','isExternal','salary','applicant_count','applicants_with_resume_percentage','applicants_with_cover_percentage'\n'1111','','','','','','false','','','2024-08-23T10:58:11.322Z','2024-08-23T05:46:20.186Z','false','false','false','','55','55','54'";
+        assertEquals(expected, written);
     }
 
 
     @Test
     public void shouldMergeDataWithAlreadyExistingCSV()
     {
-        String[] args = {"--seek-stats", "-a"};
-        App app = new App(args, false);
-        Application program = app.getApplication();
-
-
-        ArrayList<SeekAppliedJob> applied_jobs = new ArrayList<>();
-        SeekAppliedJobWrapperMock applied_jobs_mock = new SeekAppliedJobWrapperMock(applied_jobs);
-
-        SeekAppliedJobInsights insights = new SeekAppliedJobInsights("{}");
-        SeekAppliedJobInsightsWrapperMock insights_mock = new SeekAppliedJobInsightsWrapperMock(insights);
-        
-        program.setDependency(applied_jobs_mock, SeekAppliedJobSource.class);
-        program.setDependency(insights_mock, SeekAppliedJobInsightsSource.class);
-
-        //program.run();
-        //TODO// VERIFY GENERATED CSV
     }
 }
