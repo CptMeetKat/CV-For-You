@@ -29,37 +29,34 @@ public class SeekStatsAcceptanceTest
 
     class SeekAppliedJobWrapperMock implements SeekAppliedJobSource
     {
-        public SeekAppliedJobWrapperMock(String toReturn)
-        {
-
+        ArrayList<SeekAppliedJob> toReturn;
+        public SeekAppliedJobWrapperMock(ArrayList<SeekAppliedJob> toReturn) {
+            this.toReturn = toReturn;
         }
 
 		@Override
 		public ArrayList<SeekAppliedJob> getAppliedJobsStats() {
-			// TODO Auto-generated method stub
-			throw new UnsupportedOperationException("Unimplemented method 'getAppliedJobsStats'");
+            return toReturn;
 		}
     }
 
 
     class SeekAppliedJobInsightsWrapperMock implements SeekAppliedJobInsightsSource
     {
-        public SeekAppliedJobInsightsWrapperMock(String toReturn)
+        String job_id;
+        SeekAppliedJobInsights toReturn;
+        public SeekAppliedJobInsightsWrapperMock(SeekAppliedJobInsights toReturn)
         {
-
+            this.toReturn = toReturn;
         }
 
 		@Override
 		public SeekAppliedJobInsights getInsights() {
-			// TODO Auto-generated method stub
-			throw new UnsupportedOperationException("Unimplemented method 'getInsights'");
+            return toReturn;
 		}
 
 		@Override
-		public void setTargetJob(String job_id) {
-			// TODO Auto-generated method stub
-			throw new UnsupportedOperationException("Unimplemented method 'setTargetJob'");
-		}
+		public void setTargetJob(String job_id) {}
     }
     
     @Test
@@ -68,13 +65,40 @@ public class SeekStatsAcceptanceTest
         String[] args = {"--seek-stats", "-a"};
         App app = new App(args);
         Application program = app.getApplication();
-        //program.setDependency(service, serviceType);
-        //program.setDependency(service, serviceType);
+
+
+        ArrayList<SeekAppliedJob> applied_jobs = new ArrayList<>();
+        SeekAppliedJobWrapperMock applied_jobs_mock = new SeekAppliedJobWrapperMock(applied_jobs);
+
+        SeekAppliedJobInsights insights = new SeekAppliedJobInsights("{}");
+        SeekAppliedJobInsightsWrapperMock insights_mock = new SeekAppliedJobInsightsWrapperMock(insights);
+        
+        program.setDependency(applied_jobs_mock, SeekAppliedJobSource.class);
+        program.setDependency(insights_mock, SeekAppliedJobInsightsSource.class);
+
+        //program.run();
+        //TODO// VERIFY GENERATED CSV
     }
 
 
     @Test
     public void shouldMergeDataWithAlreadyExistingCSV()
     {
+        String[] args = {"--seek-stats", "-a"};
+        App app = new App(args);
+        Application program = app.getApplication();
+
+
+        ArrayList<SeekAppliedJob> applied_jobs = new ArrayList<>();
+        SeekAppliedJobWrapperMock applied_jobs_mock = new SeekAppliedJobWrapperMock(applied_jobs);
+
+        SeekAppliedJobInsights insights = new SeekAppliedJobInsights("{}");
+        SeekAppliedJobInsightsWrapperMock insights_mock = new SeekAppliedJobInsightsWrapperMock(insights);
+        
+        program.setDependency(applied_jobs_mock, SeekAppliedJobSource.class);
+        program.setDependency(insights_mock, SeekAppliedJobInsightsSource.class);
+
+        //program.run();
+        //TODO// VERIFY GENERATED CSV
     }
 }
