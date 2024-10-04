@@ -18,8 +18,8 @@ public class SeekStatsApplication implements Application
 
     public SeekStatsApplication()
     {
-        applied_job_source = new SeekAppliedJobsWrapper();//TODO: use setDependency here"
-        applied_job_insights_source = new SeekAppliedJobInsightsWrapper();//TODO: use setDependency here"
+        setDependency(new SeekAppliedJobsWrapper(), SeekAppliedJobSource.class);
+        setDependency(new SeekAppliedJobInsightsWrapper(), SeekAppliedJobInsightsSource.class);
     }
 
     private static List<SeekAppliedJobCSVRow> updateHistoricalStats(List<SeekAppliedJobCSVRow> historical_data, List<SeekAppliedJobCSVRow> current_data)
