@@ -78,14 +78,13 @@ public class SeekStatsApplication implements Application
             rows.add(new SeekAppliedJobCSVRow(application, applied_job_insights_source.getInsights()));
         }
             
-        String filename = "data.csv";
+        String filename = output_location.toString();
         List<SeekAppliedJobCSVRow> latest_stats = rows;
         try {
 			List<SeekAppliedJobCSVRow> history = CSVReader.readFromFile(SeekAppliedJobCSVRow.class, filename);
             latest_stats = updateHistoricalStats(history, rows);
 		} catch (IOException e) {
             logger.warn("Unable to read historical Seek statistics file: {}", e.getMessage()); //TODO: may lose historical data, if there is read problem
-			e.printStackTrace();
 		}
 
         String data = CSVGenerator.makeCSV(latest_stats, SeekAppliedJobCSVRow.class);
