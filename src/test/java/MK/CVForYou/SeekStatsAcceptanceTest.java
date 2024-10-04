@@ -63,7 +63,7 @@ public class SeekStatsAcceptanceTest
     public void shouldGenerateNewCSVFromMockedData()
     {
         String[] args = {"--seek-stats", "-a"};
-        App app = new App(args);
+        App app = new App(args, false);
         Application program = app.getApplication();
 
 
@@ -85,7 +85,7 @@ public class SeekStatsAcceptanceTest
     public void shouldMergeDataWithAlreadyExistingCSV()
     {
         String[] args = {"--seek-stats", "-a"};
-        App app = new App(args);
+        App app = new App(args, false);
         Application program = app.getApplication();
 
 
