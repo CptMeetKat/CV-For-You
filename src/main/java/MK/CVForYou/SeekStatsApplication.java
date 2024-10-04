@@ -1,6 +1,7 @@
 package MK.CVForYou;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,9 +14,12 @@ public class SeekStatsApplication implements Application
     static final Logger logger = LoggerFactory.getLogger(SeekStatsApplication.class);
     SeekAppliedJobSource applied_job_source;
     SeekAppliedJobInsightsSource applied_job_insights_source;
+
+    Path output_location;
     
-    public SeekStatsApplication()
+    public SeekStatsApplication(ArgParser ap)
     {
+        output_location = ap.getSeekStatsOutput();
         setDependency(new SeekAppliedJobsWrapper(), SeekAppliedJobSource.class);
         setDependency(new SeekAppliedJobInsightsWrapper(), SeekAppliedJobInsightsSource.class);
     }

@@ -25,7 +25,7 @@ public class App
         if ( mode == 1 )
             application = new CVGeneratorApplication(ap);
         else if( mode == 2)
-            application = new SeekStatsApplication();
+            application = new SeekStatsApplication(ap);
 
         if(execute)
             run();

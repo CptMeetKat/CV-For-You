@@ -29,6 +29,8 @@ public class ArgParser
 
     int mode = 0;
 
+    Path seek_stats_output = Paths.get("data.csv");
+
 
     CommandLineParser parser = new DefaultParser();
     HelpFormatter formatter = new HelpFormatter(); //This should be global??
@@ -52,6 +54,11 @@ public class ArgParser
 
         options.addOption("h", "help", false, "print this message");
         return options;
+    }
+
+    public Path getSeekStatsOutput()
+    {
+        return seek_stats_output;
     }
 
     public Path getInputDocument()
@@ -110,6 +117,12 @@ public class ArgParser
             .desc("Aggregate stats from Seek")
             .build();
 
+
+        Option output = Option.builder("o").hasArg()
+            .longOpt("output")
+            .desc("CSV output location")
+            .build();
+
         if(!helpFormatted)
         {
             Option seek_profile_stats = Option.builder("sa")
@@ -121,6 +134,7 @@ public class ArgParser
 
         options.addOption("h", "help", false, "print this message");
         options.addOption(analysis);
+        options.addOption(output);
         return options;
     }
 
@@ -255,6 +269,9 @@ public class ArgParser
 
             if (!cmd.hasOption("a"))
                 throw new ParseException("-a must be provided");
+
+            if (cmd.hasOption("o"))
+                seek_stats_output = Paths.get(cmd.getOptionValue("o"));
         }
         catch(ParseException e)
         {
