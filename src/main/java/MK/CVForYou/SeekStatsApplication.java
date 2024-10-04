@@ -8,14 +8,12 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//TODO: Write acceptance tests
 public class SeekStatsApplication implements Application
 {
     static final Logger logger = LoggerFactory.getLogger(SeekStatsApplication.class);
     SeekAppliedJobSource applied_job_source;
     SeekAppliedJobInsightsSource applied_job_insights_source;
     
-
     public SeekStatsApplication()
     {
         setDependency(new SeekAppliedJobsWrapper(), SeekAppliedJobSource.class);
