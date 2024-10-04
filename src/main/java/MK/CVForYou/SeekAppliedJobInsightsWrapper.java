@@ -17,11 +17,6 @@ public class SeekAppliedJobInsightsWrapper implements Requestable, SeekAppliedJo
     SeekSessionManager session_manager;
     
     String job_id;
-    //public SeekAppliedJobInsightsWrapper(String job_id)
-    //{
-    //    this.job_id = job_id;
-    //    this.session_manager = SeekSessionManager.getManager();
-    //}
 
     public SeekAppliedJobInsightsWrapper()
     {
