@@ -17,6 +17,8 @@ public class SeekAppliedJobInsights
         this(new JSONObject(job_details));
     }
 
+    public SeekAppliedJobInsights(){}
+
 
     public SeekAppliedJobInsights(JSONObject job_details) throws JSONException
     {
