@@ -46,7 +46,7 @@ public class CSVGenerator
                     if(value == null)
                         sb.append("''");
                     else                                       
-                        sb.append(String.format("'%s'", value.toString()));
+                        sb.append(String.format("'%s'", value.toString().replaceAll("'", "")));
 
                 } catch (IllegalAccessException e) {
                     sb.append("'null'");
