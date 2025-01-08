@@ -16,10 +16,12 @@ public class SeekStatsApplication implements Application
     SeekAppliedJobInsightsSource applied_job_insights_source;
 
     Path output_location;
+    Path input_location;
+    int mode = 0;
     
     public SeekStatsApplication(SeekStatsArgs ap)
     {
-        int mode = ap.getMode();
+        mode = ap.getMode();
         
         if(mode == 1)
         {
@@ -29,10 +31,10 @@ public class SeekStatsApplication implements Application
         }
         else if(mode == 2)
         {
-            logger.trace("Doing Summarise....");
-            System.exit(1);
+            input_location = ap.getInput();
         }
     }
+
 
     private static List<SeekAppliedJobCSVRow> updateHistoricalStats(List<SeekAppliedJobCSVRow> historical_data, List<SeekAppliedJobCSVRow> current_data)
     {
@@ -108,8 +110,16 @@ public class SeekStatsApplication implements Application
 
 	@Override
 	public void run() {
-        aggregateStats();
+        if(mode == 1)
+            aggregateStats();
+        else if(mode == 2)
+            summariseStats();
 	}
+
+    public void summariseStats()
+    {
+        logger.trace("Doing Summarise....");
+    }
 
 
     @Override
