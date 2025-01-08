@@ -30,6 +30,7 @@ public class SeekStatsApplication implements Application
         else if(mode == 2)
         {
             logger.trace("Doing Summarise....");
+            System.exit(1);
         }
     }
 
