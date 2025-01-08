@@ -123,10 +123,10 @@ public class ArgParser
             .build();
 
         if(!helpFormatted)
+        if(!helpFormatted) //When we display help menu, we want these items to not be displayed
         {
             Option seek_profile_stats = Option.builder("sa")
                 .longOpt("seek-stats")
-                .desc("Aggregate stats from Seek")
                 .build();
             options.addOption(seek_profile_stats);
         }
