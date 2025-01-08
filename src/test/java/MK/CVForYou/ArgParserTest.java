@@ -254,12 +254,26 @@ public class ArgParserTest
     }
 
     @Test
-    public void parseArgsShouldReturnSeekStatsFlagWhenSeekStatsSelected()
+    public void parseArgsShouldReturnSeekStatsAnalyseFlagWhenSeekStatsSelected()
     {
         String[] args = new String[]{"-sa", "-a"};
 
         ArgParser ap = new ArgParser();
-        int mode = ap.parseArgs(args);
-        assertEquals(2, mode);
+        int base_mode = ap.parseArgs(args);
+        int seek_stats_mode = ap.getSeekStatsArgs().getMode();
+        assertEquals(2, base_mode);
+        assertEquals(1, seek_stats_mode);
+    }
+
+    @Test
+    public void parseArgsShouldReturnSeekStatsSummaryFlagWhenSummariseSelected()
+    {
+        String[] args = new String[]{"-sa", "-s"};
+
+        ArgParser ap = new ArgParser();
+        int base_mode = ap.parseArgs(args);
+        int seek_stats_mode = ap.getSeekStatsArgs().getMode();
+        assertEquals(2, base_mode);
+        assertEquals(2, seek_stats_mode);
     }
 }
