@@ -17,9 +17,9 @@ public class SeekStatsApplication implements Application
 
     Path output_location;
     
-    public SeekStatsApplication(ArgParser ap)
+    public SeekStatsApplication(SeekStatsArgs ap)
     {
-        output_location = ap.getSeekStatsOutput();
+        output_location = ap.getOutput();
         setDependency(new SeekAppliedJobsWrapper(), SeekAppliedJobSource.class);
         setDependency(new SeekAppliedJobInsightsWrapper(), SeekAppliedJobInsightsSource.class);
     }

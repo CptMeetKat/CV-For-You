@@ -29,8 +29,7 @@ public class ArgParser
 
     int mode = 0;
 
-    Path seek_stats_output = Paths.get("data.csv");
-
+    SeekStatsArgs seek_stats_args = new SeekStatsArgs();
 
     CommandLineParser parser = new DefaultParser();
     HelpFormatter formatter = new HelpFormatter(); //This should be global??
@@ -56,9 +55,9 @@ public class ArgParser
         return options;
     }
 
-    public Path getSeekStatsOutput()
+    public SeekStatsArgs getSeekStatsArgs()
     {
-        return seek_stats_output;
+        return seek_stats_args;
     }
 
     public Path getInputDocument()
@@ -271,7 +270,7 @@ public class ArgParser
                 throw new ParseException("-a must be provided");
 
             if (cmd.hasOption("o"))
-                seek_stats_output = Paths.get(cmd.getOptionValue("o"));
+                seek_stats_args.setOutput(cmd.getOptionValue("o"));
         }
         catch(ParseException e)
         {
