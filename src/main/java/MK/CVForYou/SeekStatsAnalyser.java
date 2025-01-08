@@ -1,6 +1,7 @@
 package MK.CVForYou;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SeekStatsAnalyser
@@ -22,6 +23,7 @@ public class SeekStatsAnalyser
     double total_viewed_percentage;
     double total_rejected_percentage;
 
+    HashMap<String, Integer> internal_application_frequencies;
 
     public SeekStatsAnalyser(List<SeekAppliedJobCSVRow> applied_jobs)
     {
@@ -53,6 +55,25 @@ public class SeekStatsAnalyser
         total_opened_percentage = (double) total_opened / total_applications;
         total_viewed_percentage = (double) total_viewed / total_applications;
         total_rejected_percentage = (double) total_rejected / total_applications;
+
+        internal_application_frequencies = getApplicationFrequencies(internal_applications);
+    }
+
+    private HashMap<String, Integer> getApplicationFrequencies(List<SeekAppliedJobCSVRow> applications)
+    {
+        HashMap<String, Integer> frequencies = new HashMap<String, Integer>(); 
+        for(SeekAppliedJobCSVRow application : applications) 
+        {
+            String id = application.company_id;
+            if(frequencies.containsKey(id))
+            {
+                int frequency = frequencies.get(application.company_id);
+                frequencies.put(id, frequency+1);
+            }
+            else
+                frequencies.put(application.company_id, 1);
+        }
+        return frequencies;
     }
 
     public void printStats() //TODO: should this use logger or just system.out?
@@ -69,5 +90,14 @@ public class SeekStatsAnalyser
         System.out.printf("\tOpened: %d / %d (%d%%)%n", total_opened, total_applications, (int)(total_opened_percentage*100));
         System.out.printf("\tViewed: %d / %d (%d%%)%n", total_viewed, total_applications, (int)(total_viewed_percentage*100));
         System.out.printf("\tRejected: %d / %d (%d%%)%n", total_rejected, total_applications, (int)(total_rejected_percentage*100));
+
+        System.out.printf("%n****Muliple Application****%n");
+
+        for(String id : internal_application_frequencies.keySet())
+        {
+            int freq = internal_application_frequencies.get(id);
+            if( freq > 1 )
+                System.out.printf("\t%s - %d\n", id, freq);
+        }
     }
 }
