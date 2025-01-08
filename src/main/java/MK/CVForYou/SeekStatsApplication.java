@@ -19,9 +19,18 @@ public class SeekStatsApplication implements Application
     
     public SeekStatsApplication(SeekStatsArgs ap)
     {
-        output_location = ap.getOutput();
-        setDependency(new SeekAppliedJobsWrapper(), SeekAppliedJobSource.class);
-        setDependency(new SeekAppliedJobInsightsWrapper(), SeekAppliedJobInsightsSource.class);
+        int mode = ap.getMode();
+        
+        if(mode == 1)
+        {
+            output_location = ap.getOutput();
+            setDependency(new SeekAppliedJobsWrapper(), SeekAppliedJobSource.class);
+            setDependency(new SeekAppliedJobInsightsWrapper(), SeekAppliedJobInsightsSource.class);
+        }
+        else if(mode == 2)
+        {
+            logger.trace("Doing Summarise....");
+        }
     }
 
     private static List<SeekAppliedJobCSVRow> updateHistoricalStats(List<SeekAppliedJobCSVRow> historical_data, List<SeekAppliedJobCSVRow> current_data)

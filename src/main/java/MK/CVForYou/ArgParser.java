@@ -116,13 +116,16 @@ public class ArgParser
             .desc("Aggregate stats from Seek")
             .build();
 
-
         Option output = Option.builder("o").hasArg()
             .longOpt("output")
             .desc("CSV output location")
             .build();
 
-        if(!helpFormatted)
+        Option seek_summary = Option.builder("s")
+            .longOpt("seek-summary")
+            .desc("Summarise stats from Seek")
+            .build();
+
         if(!helpFormatted) //When we display help menu, we want these items to not be displayed
         {
             Option seek_profile_stats = Option.builder("sa")
@@ -132,6 +135,7 @@ public class ArgParser
         }
 
         options.addOption("h", "help", false, "print this message");
+        options.addOption(seek_summary);
         options.addOption(analysis);
         options.addOption(output);
         return options;
@@ -266,8 +270,12 @@ public class ArgParser
                 return;
             }
 
-            if (!cmd.hasOption("a"))
-                throw new ParseException("-a must be provided");
+            if (!cmd.hasOption("a") && !cmd.hasOption("s"))
+                throw new ParseException("Either -a or -s must be provided");
+            else if ( cmd.hasOption("a") )
+                seek_stats_args.setMode(1);
+            else if ( cmd.hasOption("s") )
+                seek_stats_args.setMode(2);
 
             if (cmd.hasOption("o"))
                 seek_stats_args.setOutput(cmd.getOptionValue("o"));
