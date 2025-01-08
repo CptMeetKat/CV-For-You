@@ -53,8 +53,8 @@ public class SeekStatsAnalyser
         System.out.printf("%n****Internal Stats****%n");
         System.out.printf("\tPending Applications: %d / %d%n", total_open_applications, total_applications);
 
-        System.out.printf("\tUnopened: %d%n", total_unopened);
-        System.out.printf("\tViewed: %d%n", total_viewed);
-        System.out.printf("\tRejected: %d%n", total_rejected);
+        System.out.printf("\tUnopened: %d / %d%n", total_unopened, total_applications);
+        System.out.printf("\tViewed: %d / %d%n", total_viewed, total_applications);
+        System.out.printf("\tRejected: %d / %d%n", total_rejected, total_applications);
     }
 }
