@@ -50,13 +50,13 @@ public class SeekStatsAnalyser
         total_unopened = applications.stream().filter(row -> row.latest_status.equals("Applied") == true).count();
         total_viewed = applications.stream().filter(row -> row.latest_status.equals("Viewed") == true).count();
         total_rejected = applications.stream().filter(row -> row.latest_status.equals("NotSuitable") == true).count();
-        total_opened = total_applications - total_unopened;
+        total_opened = total_internal_applications - total_unopened;
 
-        total_unopened_percentage = (double) total_unopened / total_applications;
+        total_unopened_percentage = (double) total_unopened / total_internal_applications;
 
-        total_opened_percentage = (double) total_opened / total_applications;
-        total_viewed_percentage = (double) total_viewed / total_applications;
-        total_rejected_percentage = (double) total_rejected / total_applications;
+        total_opened_percentage = (double) total_opened / total_internal_applications;
+        total_viewed_percentage = (double) total_viewed / total_internal_applications;
+        total_rejected_percentage = (double) total_rejected / total_internal_applications;
 
         internal_application_frequencies = getApplicationFrequencies(internal_applications);
 
@@ -92,17 +92,17 @@ public class SeekStatsAnalyser
     public void printStats() //TODO: should this use logger or just system.out?
     {
         System.out.println("\n****Seek Job Application Stats****");
-        System.out.printf("\tTotal Application: %d%n", total_applications);
+        System.out.printf("\tTotal Applications: %d%n", total_applications);
         System.out.printf("\tInternal Applications: %d%n", total_internal_applications);
         System.out.printf("\tExternal Applications: %d%n", total_external_application);
 
         System.out.printf("%n****Internal Stats****%n");
-        System.out.printf("\tPending Applications: %d / %d%n", total_open_applications, total_applications);
+        System.out.printf("\tPending Applications: %d / %d%n", total_open_applications, total_internal_applications);
 
-        System.out.printf("\tUnopened: %d / %d (%d%%)%n", total_unopened, total_applications, (int)(total_unopened_percentage*100));
-        System.out.printf("\tOpened: %d / %d (%d%%)%n", total_opened, total_applications, (int)(total_opened_percentage*100));
-        System.out.printf("\tViewed: %d / %d (%d%%)%n", total_viewed, total_applications, (int)(total_viewed_percentage*100));
-        System.out.printf("\tRejected: %d / %d (%d%%)%n", total_rejected, total_applications, (int)(total_rejected_percentage*100));
+        System.out.printf("\tUnopened: %d / %d (%d%%)%n", total_unopened, total_internal_applications, (int)(total_unopened_percentage*100));
+        System.out.printf("\tOpened: %d / %d (%d%%)%n", total_opened, total_internal_applications, (int)(total_opened_percentage*100));
+        System.out.printf("\tViewed: %d / %d (%d%%)%n", total_viewed, total_internal_applications, (int)(total_viewed_percentage*100));
+        System.out.printf("\tRejected: %d / %d (%d%%)%n", total_rejected, total_internal_applications, (int)(total_rejected_percentage*100));
 
         System.out.printf("%n****Muliple Application****%n");
 
