@@ -119,6 +119,20 @@ public class SeekStatsApplication implements Application
     public void summariseStats()
     {
         logger.trace("Doing Summarise....");
+        String filename = input_location.toString();
+		try {
+			List<SeekAppliedJobCSVRow> history = CSVReader.readFromFile(SeekAppliedJobCSVRow.class, filename);
+        
+
+            for(SeekAppliedJobCSVRow row : history)
+            {
+                System.out.println(row.job_title);
+            }
+
+		} catch (IOException e) {
+            logger.warn("Unable to read existing Seek statistics file: {}", e.getMessage());
+			e.printStackTrace();
+		}
     }
 
 
