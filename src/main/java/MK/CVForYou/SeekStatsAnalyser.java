@@ -50,8 +50,8 @@ public class SeekStatsAnalyser
         System.out.printf("\tInternal Applications: %d%n", total_internal_applications);
         System.out.printf("\tExternal Applications: %d%n", total_external_application);
 
-        System.out.printf("%n**Internal Stats**%n");
-        System.out.printf("\tOpen Applications: %d / %d%n", total_open_applications, total_applications);
+        System.out.printf("%n****Internal Stats****%n");
+        System.out.printf("\tPending Applications: %d / %d%n", total_open_applications, total_applications);
 
         System.out.printf("\tUnopened: %d%n", total_unopened);
         System.out.printf("\tViewed: %d%n", total_viewed);
