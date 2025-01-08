@@ -118,7 +118,6 @@ public class SeekStatsApplication implements Application
 
     public void summariseStats()
     {
-        logger.trace("Doing Summarise....");
         String filename = input_location.toString();
 		try {
 			List<SeekAppliedJobCSVRow> applied_jobs = CSVReader.readFromFile(SeekAppliedJobCSVRow.class, filename);
