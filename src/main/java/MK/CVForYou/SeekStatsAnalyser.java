@@ -11,6 +11,9 @@ public class SeekStatsAnalyser
     int total_internal_applications;
     int total_external_application;
 
+    long total_open_applications;
+
+
     public SeekStatsAnalyser(List<SeekAppliedJobCSVRow> applied_jobs)
     {
         applications = applied_jobs;
@@ -30,15 +33,19 @@ public class SeekStatsAnalyser
         total_internal_applications = internal_applications.size();
         total_external_application = total_applications - total_internal_applications;
 
-        //long count = applications.stream().filter(row -> row.field == 1).count();
+        total_open_applications = applications.stream().filter(row -> row.active == true).count();
     }
 
     public void printStats() //TODO: should this use logger or just system.out?
     {
-        System.out.println("****Seek Job Application Stats****");
-        System.out.printf("Total Application: %d%n", total_applications);
-        System.out.printf("Internal Applications: %d%n", total_internal_applications);
-        System.out.printf("External Applications: %d%n", total_external_application);
+        System.out.println("\n****Seek Job Application Stats****");
+        System.out.printf("\tTotal Application: %d%n", total_applications);
+        System.out.printf("\tInternal Applications: %d%n", total_internal_applications);
+        System.out.printf("\tExternal Applications: %d%n", total_external_application);
+
+        System.out.printf("%n**Internal Stats**%n");
+        System.out.printf("\tOpen Applications: %d / %d%n", total_open_applications, total_applications);
+        
 
     }
 }
