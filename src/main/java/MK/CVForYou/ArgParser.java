@@ -126,6 +126,12 @@ public class ArgParser
             .desc("Summarise stats from Seek")
             .build();
 
+
+        Option input = Option.builder("i").hasArg()
+            .longOpt("input")
+            .desc("CSV input location")
+            .build();
+
         if(!helpFormatted) //When we display help menu, we want these items to not be displayed
         {
             Option seek_profile_stats = Option.builder("sa")
@@ -138,6 +144,7 @@ public class ArgParser
         options.addOption(seek_summary);
         options.addOption(analysis);
         options.addOption(output);
+        options.addOption(input);
         return options;
     }
 
@@ -279,6 +286,9 @@ public class ArgParser
 
             if (cmd.hasOption("o"))
                 seek_stats_args.setOutput(cmd.getOptionValue("o"));
+
+            if (cmd.hasOption("i"))
+                seek_stats_args.setInput(cmd.getOptionValue("i"));
         }
         catch(ParseException e)
         {
