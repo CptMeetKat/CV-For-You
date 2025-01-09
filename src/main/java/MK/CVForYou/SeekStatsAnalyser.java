@@ -24,12 +24,10 @@ public class SeekStatsAnalyser
     double total_rejected_percentage;
 
     HashMap<String, Integer> internal_application_frequencies;
-    HashMap<String, String> company_id_to_name;
 
     public SeekStatsAnalyser(List<SeekAppliedJobCSVRow> applied_jobs)
     {
         applications = applied_jobs;
-        company_id_to_name = mapCompanyIdToName();
         generateStats();
     }
 
@@ -105,7 +103,9 @@ public class SeekStatsAnalyser
         System.out.printf("\tRejected: %d / %d (%d%%)%n", total_rejected, total_internal_applications, (int)(total_rejected_percentage*100));
 
         System.out.printf("%n****Muliple Application****%n");
+        
 
+        HashMap<String, String> company_id_to_name = mapCompanyIdToName();
         for(String id : internal_application_frequencies.keySet())
         {
             int freq = internal_application_frequencies.get(id);
