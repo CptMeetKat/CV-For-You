@@ -31,19 +31,19 @@ public class SeekStatsAnalyser
     double mean_total_applicants;
 
     int day_since_start;
-
-    HashMap<String, Integer> internal_application_frequencies;
+    
+    ArrayList<SeekAppliedJobCSVRow> internal_applications; //shallow copy
 
     public SeekStatsAnalyser(List<SeekAppliedJobCSVRow> applied_jobs)
     {
         applications = applied_jobs;
+        internal_applications = new ArrayList<SeekAppliedJobCSVRow>();
         generateStats();
     }
 
     public void generateStats()
     {
         total_applications = applications.size();
-        ArrayList<SeekAppliedJobCSVRow> internal_applications = new ArrayList<SeekAppliedJobCSVRow>();
 
         for(SeekAppliedJobCSVRow row : applications) {
             if(!row.isExternal)
@@ -65,12 +65,13 @@ public class SeekStatsAnalyser
         total_viewed_percentage = (double) total_viewed / total_internal_applications;
         total_rejected_percentage = (double) total_rejected / total_internal_applications;
 
-        internal_application_frequencies = getApplicationFrequencies(internal_applications);
 
         day_since_start = getDaysSinceFirstApplication(applications);
         mean_cover_letter_percentage = getMeanCoverPercentage(internal_applications);
         mean_cv_percentage = getMeanCVPercentage(internal_applications);
         mean_total_applicants = getMeanTotalApplicants(internal_applications);
+
+        
     }
 
     private double getMeanTotalApplicants(List<SeekAppliedJobCSVRow> applications)
@@ -216,12 +217,13 @@ public class SeekStatsAnalyser
 
         System.out.printf("%n****Muliple Application****%n");
         
-
+        HashMap<String, Integer> internal_application_frequencies = getApplicationFrequencies(internal_applications);
         List<ApplicationFrequency> top_applied_companies = findMostAppliedToCompanies(internal_application_frequencies);
         HashMap<String, String> company_id_to_name = mapCompanyIdToName();
         for(ApplicationFrequency row : top_applied_companies) {
             if ( row.frequency > 1 )
                 System.out.printf("\t%s - %d\n", company_id_to_name.get(row.id), row.frequency);
         }
+
     }
 }
