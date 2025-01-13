@@ -11,7 +11,8 @@ import java.time.temporal.ChronoUnit;
 public class SeekStatsAnalyser
 {
     List<SeekAppliedJobCSVRow> applications; 
-
+    List<SeekAppliedJobCSVRow> internal_applications; //shallow copy
+                                                           
     int total_applications;
     int total_internal_applications;
     int total_external_application;
@@ -33,7 +34,6 @@ public class SeekStatsAnalyser
 
     int day_since_start;
     
-    ArrayList<SeekAppliedJobCSVRow> internal_applications; //shallow copy
 
     public SeekStatsAnalyser(List<SeekAppliedJobCSVRow> applied_jobs)
     {
@@ -71,8 +71,6 @@ public class SeekStatsAnalyser
         mean_cover_letter_percentage = getMeanCoverPercentage(internal_applications);
         mean_cv_percentage = getMeanCVPercentage(internal_applications);
         mean_total_applicants = getMeanTotalApplicants(internal_applications);
-
-        
     }
 
     private double getMeanTotalApplicants(List<SeekAppliedJobCSVRow> applications)
