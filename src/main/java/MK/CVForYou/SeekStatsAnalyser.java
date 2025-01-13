@@ -26,6 +26,9 @@ public class SeekStatsAnalyser
     double total_viewed_percentage;
     double total_rejected_percentage;
 
+    double mean_cover_letter_percentage;
+    double mean_cv_percentage;
+
     int day_since_start;
 
     HashMap<String, Integer> internal_application_frequencies;
@@ -64,7 +67,22 @@ public class SeekStatsAnalyser
         internal_application_frequencies = getApplicationFrequencies(internal_applications);
 
         day_since_start = getDaysSinceFirstApplication(applications);
+        mean_cover_letter_percentage = getMeanCoverPercentage(internal_applications);
     }
+
+    private double getMeanCoverPercentage(List<SeekAppliedJobCSVRow> applications)
+    {
+        if (applications.size() == 0)
+            return 0;
+            
+        int cover_percentage_total = 0;
+        for (SeekAppliedJobCSVRow application : applications) {
+            cover_percentage_total += application.applicants_with_cover_percentage;
+        }
+
+        return (double)cover_percentage_total / applications.size();
+    }
+
 
     private int getDaysSinceFirstApplication(List<SeekAppliedJobCSVRow> applications)
     {
@@ -159,6 +177,11 @@ public class SeekStatsAnalyser
         System.out.printf("\tOpened: %d / %d (%d%%)%n", total_opened, total_internal_applications, (int)(total_opened_percentage*100));
         System.out.printf("\tViewed: %d / %d (%d%%)%n", total_viewed, total_internal_applications, (int)(total_viewed_percentage*100));
         System.out.printf("\tRejected: %d / %d (%d%%)%n", total_rejected, total_internal_applications, (int)(total_rejected_percentage*100));
+
+
+        System.out.printf("%n****All Applicants****%n");
+        System.out.printf("\tAverage Cover Letters: %.2f%% %n",  mean_cover_letter_percentage);
+
 
         System.out.printf("%n****Muliple Application****%n");
         
