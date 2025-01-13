@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 
 public class SeekStatsAnalyser
 {
@@ -23,6 +25,8 @@ public class SeekStatsAnalyser
     double total_unopened_percentage;
     double total_viewed_percentage;
     double total_rejected_percentage;
+
+    int day_since_start;
 
     HashMap<String, Integer> internal_application_frequencies;
 
@@ -59,6 +63,26 @@ public class SeekStatsAnalyser
 
         internal_application_frequencies = getApplicationFrequencies(internal_applications);
 
+        day_since_start = getDaysSinceFirstApplication(applications);
+    }
+
+    private int getDaysSinceFirstApplication(List<SeekAppliedJobCSVRow> applications)
+    {
+        if (applications.isEmpty())
+            return 0;
+        
+        Instant best = Instant.parse(applications.get(0).applied_at);
+        for (SeekAppliedJobCSVRow application : applications) {
+
+            Instant temp = Instant.parse(application.applied_at);
+            if(best.compareTo(temp) > 0)
+                best = temp;
+        }
+
+        Instant now = Instant.now();
+        long daysSince = ChronoUnit.DAYS.between(best, now);
+
+        return (int) daysSince;
     }
 
     private HashMap<String,String> mapCompanyIdToName()
@@ -123,6 +147,7 @@ public class SeekStatsAnalyser
     public void printStats() //TODO: should this use logger or just system.out?
     {
         System.out.println("\n****Seek Job Application Stats****");
+        System.out.printf("\tDays Elapsed: %d%n", day_since_start);
         System.out.printf("\tTotal Applications: %d%n", total_applications);
         System.out.printf("\tInternal Applications: %d%n", total_internal_applications);
         System.out.printf("\tExternal Applications: %d%n", total_external_application);
