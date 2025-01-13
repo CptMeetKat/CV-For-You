@@ -194,7 +194,7 @@ public class SeekStatsAnalyser
         System.out.printf("\tRejected: %d / %d (%d%%)%n", total_rejected, total_internal_applications, (int)(total_rejected_percentage*100));
 
 
-        System.out.printf("%n****All Applicants****%n");
+        System.out.printf("%n****All Internal Applicants****%n");
         System.out.printf("\tAverage Cover Letters: %.2f%% %n",  mean_cover_letter_percentage);
         System.out.printf("\tAverage CV's: %.2f%% %n",  mean_cv_percentage);
 
