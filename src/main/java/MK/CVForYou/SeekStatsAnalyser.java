@@ -145,7 +145,6 @@ public class SeekStatsAnalyser
         {
             if ( row.frequency > 1 )
                 System.out.printf("\t%s - %d\n", company_id_to_name.get(row.id), row.frequency);
-            
         }
     }
 }
