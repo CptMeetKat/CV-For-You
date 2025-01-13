@@ -179,7 +179,7 @@ public class SeekStatsAnalyser
 		}
     }
 
-    private List<ApplicationFrequency> findMostAppliedToCompanies(HashMap<String, Integer> applications)
+    private List<ApplicationFrequency> findMostAppliedToCompaniesByMe(HashMap<String, Integer> applications)
     {
         ArrayList<ApplicationFrequency> most_applied = new ArrayList<ApplicationFrequency>();
         for(String key : applications.keySet()) {
@@ -218,7 +218,7 @@ public class SeekStatsAnalyser
         System.out.printf("%n****Muliple Application****%n");
         
         HashMap<String, Integer> internal_application_frequencies = getApplicationFrequencies(internal_applications);
-        List<ApplicationFrequency> top_applied_companies = findMostAppliedToCompanies(internal_application_frequencies);
+        List<ApplicationFrequency> top_applied_companies = findMostAppliedToCompaniesByMe(internal_application_frequencies);
         HashMap<String, String> company_id_to_name = mapCompanyIdToName();
         for(ApplicationFrequency row : top_applied_companies) {
             if ( row.frequency > 1 )
