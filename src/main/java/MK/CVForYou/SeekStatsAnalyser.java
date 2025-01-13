@@ -1,6 +1,7 @@
 package MK.CVForYou;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -87,6 +88,39 @@ public class SeekStatsAnalyser
         return frequencies;
     }
 
+    private class ApplicationFrequency implements Comparable<ApplicationFrequency>
+    {
+        public String id;
+        public int frequency;
+        public ApplicationFrequency(String id, int frequency)
+        {
+            this.id = id;
+            this.frequency = frequency;
+        }
+		@Override
+		public int compareTo(ApplicationFrequency other) {
+            if (this.frequency < other.frequency)
+                return -1;
+            else if (this.frequency > other.frequency)
+                return 1;
+            else
+                return 0;
+		}
+    }
+
+    private List<ApplicationFrequency> findMostAppliedToCompanies(HashMap<String, Integer> applications)
+    {
+        ArrayList<ApplicationFrequency> most_applied = new ArrayList<ApplicationFrequency>();
+        for(String key : applications.keySet()) {
+            most_applied.add(new ApplicationFrequency(key, applications.get(key)));
+        }
+
+        Collections.sort(most_applied);
+        Collections.reverse(most_applied);
+
+        return most_applied;
+    }
+
     public void printStats() //TODO: should this use logger or just system.out?
     {
         System.out.println("\n****Seek Job Application Stats****");
@@ -105,12 +139,13 @@ public class SeekStatsAnalyser
         System.out.printf("%n****Muliple Application****%n");
         
 
+        List<ApplicationFrequency> top_applied_companies = findMostAppliedToCompanies(internal_application_frequencies);
         HashMap<String, String> company_id_to_name = mapCompanyIdToName();
-        for(String id : internal_application_frequencies.keySet())
+        for(ApplicationFrequency row : top_applied_companies)
         {
-            int freq = internal_application_frequencies.get(id);
-            if( freq > 1 )
-                System.out.printf("\t%s - %d\n", company_id_to_name.get(id), freq);
+            if ( row.frequency > 1 )
+                System.out.printf("\t%s - %d\n", company_id_to_name.get(row.id), row.frequency);
+            
         }
     }
 }
