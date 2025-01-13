@@ -68,6 +68,21 @@ public class SeekStatsAnalyser
 
         day_since_start = getDaysSinceFirstApplication(applications);
         mean_cover_letter_percentage = getMeanCoverPercentage(internal_applications);
+        mean_cv_percentage = getMeanCVPercentage(internal_applications);
+
+    }
+
+    private double getMeanCVPercentage(List<SeekAppliedJobCSVRow> applications)
+    {
+        if (applications.size() == 0)
+            return 0;
+            
+        int cv_percentage_total = 0;
+        for (SeekAppliedJobCSVRow application : applications) {
+            cv_percentage_total += application.applicants_with_resume_percentage;
+        }
+
+        return (double)cv_percentage_total / applications.size();
     }
 
     private double getMeanCoverPercentage(List<SeekAppliedJobCSVRow> applications)
@@ -181,6 +196,7 @@ public class SeekStatsAnalyser
 
         System.out.printf("%n****All Applicants****%n");
         System.out.printf("\tAverage Cover Letters: %.2f%% %n",  mean_cover_letter_percentage);
+        System.out.printf("\tAverage CV's: %.2f%% %n",  mean_cv_percentage);
 
 
         System.out.printf("%n****Muliple Application****%n");
