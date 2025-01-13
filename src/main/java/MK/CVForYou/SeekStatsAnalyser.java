@@ -257,7 +257,7 @@ public class SeekStatsAnalyser
         List<SeekAppliedJobCSVRow> roles_with_most_applicants = findRolesWithMostApplicants(internal_applications);
         int count = 0;
         for(SeekAppliedJobCSVRow row : roles_with_most_applicants) {
-            System.out.printf("\t%s %d%n", row.job_title, row.applicant_count);
+            System.out.printf("\t%d %s%n", row.applicant_count, row.job_title);
             if( ++count >= 10 )
                 break;
         }
