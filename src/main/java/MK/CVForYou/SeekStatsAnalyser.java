@@ -64,8 +64,7 @@ public class SeekStatsAnalyser
     private HashMap<String,String> mapCompanyIdToName()
     {
         HashMap<String, String> id_to_name = new HashMap<String,String>();
-        for (SeekAppliedJobCSVRow application : applications)
-        {
+        for (SeekAppliedJobCSVRow application : applications) {
             id_to_name.put(application.company_id, application.company_name);
         }
         return id_to_name;
