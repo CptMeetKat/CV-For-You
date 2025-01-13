@@ -2,6 +2,7 @@ package MK.CVForYou;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.time.Instant;
@@ -192,6 +193,34 @@ public class SeekStatsAnalyser
         return most_applied;
     }
 
+    private static Comparator<SeekAppliedJobCSVRow> orderByApplicantCountCompartor()
+    {
+        return new Comparator<SeekAppliedJobCSVRow>() {
+            @Override
+            public int compare(SeekAppliedJobCSVRow s1, SeekAppliedJobCSVRow s2) {
+
+                if (s1.applicant_count < s2.applicant_count)
+                    return -1;
+                else if (s1.applicant_count > s2.applicant_count)
+                    return 1;
+                else
+                    return 0;
+            }
+        };
+    }
+
+    private List<SeekAppliedJobCSVRow> findRolesWithMostApplicants(List<SeekAppliedJobCSVRow> applications)
+    {
+        List<SeekAppliedJobCSVRow> ordered_by_applicant_count = new ArrayList<SeekAppliedJobCSVRow>();
+        for(SeekAppliedJobCSVRow row : applications) {
+            ordered_by_applicant_count.add(row);
+        }
+        Collections.sort(ordered_by_applicant_count, orderByApplicantCountCompartor());
+        Collections.reverse(ordered_by_applicant_count);
+        return ordered_by_applicant_count; 
+    }
+
+
     public void printStats() //TODO: should this use logger or just system.out?
     {
         System.out.println("\n****Seek Job Application Stats****");
@@ -223,6 +252,16 @@ public class SeekStatsAnalyser
         for(ApplicationFrequency row : top_applied_companies) {
             if ( row.frequency > 1 )
                 System.out.printf("\t%s - %d\n", company_id_to_name.get(row.id), row.frequency);
+        }
+
+
+        System.out.printf("%n****Highest Applicants****%n");
+        List<SeekAppliedJobCSVRow> roles_with_most_applicants = findRolesWithMostApplicants(internal_applications);
+        int count = 0;
+        for(SeekAppliedJobCSVRow row : roles_with_most_applicants) {
+            System.out.printf("\t%s %d%n", row.job_title, row.applicant_count);
+            if( ++count >= 10 )
+                break;
         }
 
     }
