@@ -249,7 +249,7 @@ public class SeekStatsAnalyser
         HashMap<String, String> company_id_to_name = mapCompanyIdToName();
         for(ApplicationFrequency row : top_applied_companies) {
             if ( row.frequency > 1 )
-                System.out.printf("\t%s - %d\n", company_id_to_name.get(row.id), row.frequency);
+                System.out.printf("\t%d %s\n", row.frequency, company_id_to_name.get(row.id));
         }
 
 
