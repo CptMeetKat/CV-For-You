@@ -8,8 +8,12 @@ import java.net.http.HttpResponse;
 
 import org.json.JSONObject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class SeekCVUploader implements Requestable
 {
+    static final Logger logger = LoggerFactory.getLogger(SeekCVUploader.class);
     SeekSessionManager session_manager;
     public SeekCVUploader() 
     {
@@ -42,7 +46,7 @@ public class SeekCVUploader implements Requestable
             .method("POST", HttpRequest.BodyPublishers.ofString("[{\"operationName\":\"GetDocumentUploadData\",\"variables\":{\"id\":\"245c61b3-9ea9-4013-bd28-929c7542b520\"},\"query\":\"query GetDocumentUploadData($id: UUID\u0021) {\\n  viewer {\\n    documentUploadFormData(id: $id) {\\n      link\\n      key\\n      formFields {\\n        key\\n        value\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\"}]"))
             .build(); 
 
-            //logger.info("Fetching upload params...");
+            logger.info("Fetching upload params...");
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
             
             return new JSONObject("{'body':" + response.body() + "}"); //Force array in a JSONObject... bit awkward
