@@ -39,9 +39,19 @@ public class SeekCVUploaderParamsWrapper implements Requestable
         .getJSONObject("documentUploadFormData");
 
         //Fail if 403?
-        
+        SeekDocumentUploadFormData params = new SeekDocumentUploadFormData(document_upload_form_data);
         try {
-			uploadFile(new SeekDocumentUploadFormData(document_upload_form_data));
+            
+			uploadFile(params);
+            SeekApplyProcessUploadedResume apply_process = new SeekApplyProcessUploadedResume(params.key);
+            try {
+                logger.info("Sleeping for 5 seconds....");
+                Thread.sleep(5000); // Sleep for 1000 milliseconds (1 second)
+                apply_process.run();
+            } catch (InterruptedException e) {
+                logger.info("Thread was interrupted");
+            }
+            
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
