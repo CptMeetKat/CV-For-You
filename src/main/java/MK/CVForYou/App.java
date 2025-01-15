@@ -22,10 +22,13 @@ public class App
     {
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
+
         if ( mode == 1 )
             application = new CVGeneratorApplication(ap);
         else if( mode == 2)
             application = new SeekStatsApplication(ap.getSeekStatsArgs());
+        else if ( mode == 3 )
+            application = new SeekCVUploader();
 
         if(execute)
             run();
