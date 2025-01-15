@@ -17,13 +17,13 @@ public class SeekCVUploader implements Requestable, Application
     SeekSessionManager session_manager;
     public SeekCVUploader() 
     {
-        //this.session_manager = SeekSessionManager.getManager();
-        //getUploadParams();
+        this.session_manager = SeekSessionManager.getManager();
     }
 
 	@Override
 	public void run() {
         logger.info("Running Seek uploader...");
+        getUploadParams();
 	}
 
 
