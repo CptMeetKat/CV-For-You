@@ -11,29 +11,14 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SeekCVUploader implements Requestable, Application
+public class SeekCVUploaderParamsWrapper implements Requestable
 {
-    static final Logger logger = LoggerFactory.getLogger(SeekCVUploader.class);
     SeekSessionManager session_manager;
-    public SeekCVUploader() 
+    static final Logger logger = LoggerFactory.getLogger(SeekCVUploaderParamsWrapper.class);
+
+    public SeekCVUploaderParamsWrapper()
     {
         this.session_manager = SeekSessionManager.getManager();
-    }
-
-	@Override
-	public void run() {
-        logger.info("Running Seek uploader...");
-        getUploadParams();
-	}
-
-
-	@Override
-	public <T> void setDependency(T service, Class<T> serviceType) {
-		throw new UnsupportedOperationException("Unimplemented method 'setDependency'");
-	}
-
-    public void uploadFile(String file)
-    {
     }
 
     public SeekDocumentUploadFormData getUploadParams()
@@ -66,6 +51,4 @@ public class SeekCVUploader implements Requestable, Application
 	public JSONObject request(String access_token) throws IOException, InterruptedException {
         return fetchDocumentUploadParams(access_token);
 	}
-
-
 }
