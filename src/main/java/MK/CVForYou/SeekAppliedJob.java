@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 //TODO: add tests
@@ -35,33 +34,6 @@ public class SeekAppliedJob
         status_times = new ArrayList<String>(3);
     }
     
-
-    /**   
-     * @return JSON field value if field is accessible, otherwise null if field cannot
-     * be accessed or dosen't exist be accessed
-     */
-    private static String getStringInObject(JSONObject node, String sub_object, String field)
-    { 
-        String result = null;
-        if(node != null)
-            try {
-                JSONObject json = node.getJSONObject(sub_object);
-                result = json.getString(field);
-            } catch (JSONException e) {} 
-        return result;
-    }
-
-
-    private static String getString(JSONObject node, String field)
-    { 
-        String result = null;
-        if(node != null)
-            try {
-                result = node.getString(field);
-            } catch (JSONException e) {} 
-        return result;
-    }
-
     public SeekAppliedJob(String json)
     {
         this(new JSONObject(json));
@@ -76,8 +48,8 @@ public class SeekAppliedJob
             {
                 JSONObject event = (JSONObject)events_itr.next();
 
-                status.add(getString(event, "status"));
-                status_times.add(getStringInObject(event, "timestamp", "dateTimeUtc"));
+                status.add(JSONHelpers.getString(event, "status"));
+                status_times.add(JSONHelpers.getStringInObject(event, "timestamp", "dateTimeUtc"));
             }
             updateLatestStatus();
         }
@@ -86,7 +58,7 @@ public class SeekAppliedJob
     public SeekAppliedJob(JSONObject node)
     {
         init();
-        job_id = getString(node, "id");
+        job_id = JSONHelpers.getString(node, "id");
         active = node.optBoolean("isActive");
         isExternal = node.optBoolean("isExternal");
         applied_with_cv = node.optBoolean("hasAppliedWithResume");
@@ -94,14 +66,14 @@ public class SeekAppliedJob
 
 
         JSONObject job = node.optJSONObject("job");
-        job_title = getString(job, "title");
+        job_title = JSONHelpers.getString(job, "title");
 
-        company_name = getStringInObject(job, "advertiser", "name");
-        company_id = getStringInObject(job, "advertiser", "id");
-        created_at = getStringInObject(job, "createdAt", "dateTimeUtc");
-        salary = getStringInObject(job, "salary", "label");
+        company_name = JSONHelpers.getStringInObject(job, "advertiser", "name");
+        company_id = JSONHelpers.getStringInObject(job, "advertiser", "id");
+        created_at = JSONHelpers.getStringInObject(job, "createdAt", "dateTimeUtc");
+        salary = JSONHelpers.getStringInObject(job, "salary", "label");
 
-        applied_at = getStringInObject(node, "appliedAt", "dateTimeUtc");
+        applied_at = JSONHelpers.getStringInObject(node, "appliedAt", "dateTimeUtc");
 
         JSONArray events = (JSONArray) node.query("/events");
         parseEvents(events);
