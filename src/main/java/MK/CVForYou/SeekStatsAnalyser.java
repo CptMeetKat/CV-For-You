@@ -238,7 +238,7 @@ public class SeekStatsAnalyser
 
         System.out.printf("%n****All Internal Applicants****%n");
         System.out.printf("\tMean Cover Letters: %.2f%%%n",  mean_cover_letter_percentage);
-        System.out.printf("\tMean CV's: %.2f%%%n",  mean_cv_percentage);
+        System.out.printf("\tMean CVs: %.2f%%%n",  mean_cv_percentage);
         System.out.printf("\tMean applicants: %.2f%n",  mean_total_applicants);
 
 
