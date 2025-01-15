@@ -29,7 +29,6 @@ public class SeekCVUploader implements Requestable, Application
 
 	@Override
 	public <T> void setDependency(T service, Class<T> serviceType) {
-		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'setDependency'");
 	}
 
