@@ -93,11 +93,17 @@ public class ArgParser
             .desc("Aggregate stats from Seek")
             .build();
 
+        Option seek_auto_uploader = Option.builder("au")
+            .longOpt("auto-upload")
+            .desc("Upload CV directly to SEEK")
+            .build();
+
         Options options = new Options();
         options.addOption("h", "help", false, "print this message");
 
         options.addOption(cv_generator);
         options.addOption(seek_profile_stats);
+        options.addOption(seek_auto_uploader);
         return options;
 
     }
@@ -231,6 +237,10 @@ public class ArgParser
                 parseCVGeneration(args);
             else if(mode == 2)
                 parseSeekStats(args);
+            else if(mode == 3) 
+            {
+                //no args just yet
+            }
             else
                 logger.error("No mode selected");
         }
@@ -252,6 +262,8 @@ public class ArgParser
                 mode = 1;
             else if(cmd.hasOption("sa"))
                 mode = 2;
+            else if(cmd.hasOption("au"))
+                mode = 3;
             else if(cmd.hasOption("h"))
                 mode = 0;
             else
