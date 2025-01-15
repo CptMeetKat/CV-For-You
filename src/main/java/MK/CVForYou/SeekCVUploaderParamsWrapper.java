@@ -23,11 +23,16 @@ public class SeekCVUploaderParamsWrapper implements Requestable
 
     public SeekDocumentUploadFormData getUploadParams()
     {
-        JSONObject upload_params = session_manager.makeRequest(this);
-        System.out.println(upload_params);
+        JSONObject upload_params = session_manager.makeRequest(this); //TODO: Not refreshing token if it needs to refresh, request returns a different sort of error
+
+        JSONObject document_upload_form_data = upload_params.getJSONArray("body") //TODO: This may not be very null protected
+        .getJSONObject(0)
+        .getJSONObject("data")
+        .getJSONObject("viewer")
+        .getJSONObject("documentUploadFormData");
+
         //Fail if 403?
-        return new SeekDocumentUploadFormData();
-        //return new SeekDocumentUploadFormData(upload_params);
+        return new SeekDocumentUploadFormData(document_upload_form_data);
     }
 
     public JSONObject fetchDocumentUploadParams(String access_token) throws IOException, InterruptedException
