@@ -109,7 +109,7 @@ public class SeekCVUploaderParamsWrapper implements Requestable
             writeTextFormField(writer, "X-Amz-Security-Token", form_data.x_amz_security_token);
             writeTextFormField(writer, "Policy", form_data.policy);
             writeTextFormField(writer, "X-Amz-Signature", form_data.x_amz_signature);
-            writeTextFormField(writer, "x-amz-meta-filename", form_data.x_amz_meta_filename); //TODO: Check if this is the file name or just some placeholder?
+            writeTextFormField(writer, "x-amz-meta-filename", form_data.x_amz_meta_filename);
             writeTextFormField(writer, "x-amz-meta-candidateId", form_data.x_amz_meta_candidateid);
 
             
