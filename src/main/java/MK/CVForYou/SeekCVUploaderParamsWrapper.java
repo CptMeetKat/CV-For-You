@@ -61,6 +61,7 @@ public class SeekCVUploaderParamsWrapper implements Requestable
             .header("authorization", "Bearer " + access_token)
             .header("content-type", "application/json")
             .method("POST", HttpRequest.BodyPublishers.ofString("[{\"operationName\":\"GetDocumentUploadData\",\"variables\":{\"id\":\"" + uuid.toString() + "\"},\"query\":\"query GetDocumentUploadData($id: UUID\u0021) {\\n  viewer {\\n    documentUploadFormData(id: $id) {\\n      link\\n      key\\n      formFields {\\n        key\\n        value\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\"}]"))
+            //TODO: move this long string into a single variable body
             .build(); 
 
             logger.info("Fetching upload params...");
