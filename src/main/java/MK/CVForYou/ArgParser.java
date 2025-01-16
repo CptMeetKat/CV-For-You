@@ -254,6 +254,28 @@ public class ArgParser
     } 
 
     public void parseBase(String[] args) throws ParseException
+    private static Options getCVUploaderOptions(boolean helpFormatted)
+    {
+        Options options = new Options();
+
+        Option input = Option.builder("i").hasArgs()
+            .longOpt("input")
+            .desc("CV files to upload")
+            .build();
+
+        if(!helpFormatted) //When we display help menu, we want these items to not be displayed
+        {
+            Option seek_auto_uploader = Option.builder("au")
+                .longOpt("auto-upload")
+                .build();
+            options.addOption(seek_auto_uploader);
+        }
+
+        options.addOption("h", "help", false, "print this message");
+        options.addOption(input);
+        return options;
+    }
+
     {
         try
         {
