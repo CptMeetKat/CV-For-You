@@ -32,8 +32,7 @@ public class SeekCVUploaderParamsWrapper implements Requestable
     {
         JSONObject upload_params = session_manager.makeRequest(this); //TODO: Not refreshing token if it needs to refresh, request returns a different sort of error
 
-        JSONObject document_upload_form_data = upload_params.getJSONArray("body") //TODO: This may not be very null protected
-        .getJSONObject(0)
+        JSONObject document_upload_form_data = upload_params.getJSONObject("body") //TODO: This may not be very null protected
         .getJSONObject("data")
         .getJSONObject("viewer")
         .getJSONObject("documentUploadFormData");
@@ -64,7 +63,7 @@ public class SeekCVUploaderParamsWrapper implements Requestable
     {
         UUID uuid = UUID.randomUUID();
         
-        String body = "[{\"operationName\":\"GetDocumentUploadData\",\"variables\":{\"id\":\"" + uuid.toString() + "\"},\"query\":\"query GetDocumentUploadData($id: UUID\u0021) {\\n  viewer {\\n    documentUploadFormData(id: $id) {\\n      link\\n      key\\n      formFields {\\n        key\\n        value\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\"}]";
+        String body = "{\"operationName\":\"GetDocumentUploadData\",\"variables\":{\"id\":\"" + uuid.toString() + "\"},\"query\":\"query GetDocumentUploadData($id: UUID\u0021) {\\n  viewer {\\n    documentUploadFormData(id: $id) {\\n      link\\n      key\\n      formFields {\\n        key\\n        value\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\"}";
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create("https://www.seek.com.au/graphql"))
             .header("accept", "*/*")
@@ -76,8 +75,7 @@ public class SeekCVUploaderParamsWrapper implements Requestable
 
             logger.info("Fetching upload params...");
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-            
-            return new JSONObject("{'body':" + response.body() + "}"); //Force array in a JSONObject... bit awkward
+            return new JSONObject(response.body());
     }
 
 	@Override
