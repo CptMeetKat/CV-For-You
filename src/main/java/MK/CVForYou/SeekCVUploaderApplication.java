@@ -27,7 +27,7 @@ public class SeekCVUploaderApplication implements Application
 	public void run() { //TODO: Set the file to upload
         logger.info("Running Seek uploader...");
         if(mode == 1)
-            uploadFile();
+            uploadFiles();
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class SeekCVUploaderApplication implements Application
 		throw new UnsupportedOperationException("Unimplemented method 'setDependency'");
 	}
 
-    public void uploadFile()
+    public void uploadFiles()
     {
         SeekDocumentUploadFormData params = new SeekCVUploaderParamsWrapper().getUploadParams(); 
 
