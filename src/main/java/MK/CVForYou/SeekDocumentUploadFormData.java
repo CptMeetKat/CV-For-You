@@ -33,8 +33,6 @@ public class SeekDocumentUploadFormData
             String value = item.getString("value");
             setField(key,value);
         }
-
-        System.out.println(this);
     }
     
     @Override
