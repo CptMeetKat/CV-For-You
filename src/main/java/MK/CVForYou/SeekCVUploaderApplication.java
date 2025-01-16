@@ -9,7 +9,7 @@ public class SeekCVUploaderApplication implements Application
 {
     static final Logger logger = LoggerFactory.getLogger(SeekCVUploaderApplication.class);
     SeekSessionManager session_manager;
-    public SeekCVUploaderApplication() 
+    public SeekCVUploaderApplication(CVUploaderArgs args) 
     {
         this.session_manager = SeekSessionManager.getManager();
     }
