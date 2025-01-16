@@ -38,6 +38,7 @@ public class ArgParser
     private static final String BASIC_USAGE = "./CVForYou -d <document_path> -c <compare_path> -s <section_paths>";
     private static final String TOP_LEVEL_USAGE = "./CVForYou -cv";
     private static final String SEEK_STATS_USAGE = "./CVForYou -sa";
+    private static final String CV_UPLOADER_USAGE = "./CVForYou -au";
 
     static final Logger logger = LoggerFactory.getLogger(ArgParser.class);
 
@@ -239,9 +240,7 @@ public class ArgParser
             else if(mode == 2)
                 parseSeekStats(args);
             else if(mode == 3) 
-            {
-                //no args just yet
-            }
+                parseCVUploader(args);
             else
                 logger.error("No mode selected");
         }
@@ -253,7 +252,37 @@ public class ArgParser
         return mode;
     } 
 
-    public void parseBase(String[] args) throws ParseException
+    private void parseCVUploader(String[] args) throws ParseException 
+    {
+        try
+        {
+            CommandLine cmd = parser.parse(getCVUploaderOptions(), args);
+            if(cmd.hasOption("h"))
+            {
+                formatter.printHelp(CV_UPLOADER_USAGE,  getCVUploaderOptions(true));
+                mode = 0;
+                return;
+            }
+
+            if (!cmd.hasOption("i"))
+                throw new ParseException("-i must be provided");
+            else if ( cmd.hasOption("i") )
+            {
+                cv_uploader_args.setMode(1);
+                //TODO: set i
+            }
+
+        }
+        catch(ParseException e)
+        {
+            logger.error(e.getMessage());
+            formatter.printHelp(CV_UPLOADER_USAGE, getCVUploaderOptions(true));
+            throw e;
+        }
+
+	}
+
+
     private static Options getCVUploaderOptions()
     {
         return getCVUploaderOptions(false);
@@ -281,6 +310,7 @@ public class ArgParser
         return options;
     }
 
+	public void parseBase(String[] args) throws ParseException
     {
         try
         {
