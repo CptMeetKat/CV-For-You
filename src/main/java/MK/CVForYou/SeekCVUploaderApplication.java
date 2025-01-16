@@ -19,7 +19,7 @@ public class SeekCVUploaderApplication implements Application
     public SeekCVUploaderApplication(CVUploaderArgs args) 
     {
         this.session_manager = SeekSessionManager.getManager();
-        mode = args.mode;
+        mode = args.getMode();
         files = args.files;
     }
 
