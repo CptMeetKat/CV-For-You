@@ -42,7 +42,7 @@ public class SeekCVUploaderParamsWrapper implements Requestable
             logger.error("Unable to parse the parameters required to upload CV to seek: {}", e.getMessage());
         }
 
-        if(document_upload_form_data == null) //TODO: clean this
+        if(document_upload_form_data == null) //TODO: clean this //TODO move all below this into one step on stack higher
             return;
 
 
