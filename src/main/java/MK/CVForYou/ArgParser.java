@@ -269,7 +269,7 @@ public class ArgParser
             else if ( cmd.hasOption("i") )
             {
                 cv_uploader_args.setMode(1);
-                //TODO: set i
+                cv_uploader_args.addFiles(cmd.getOptionValues("i"));
             }
 
         }
