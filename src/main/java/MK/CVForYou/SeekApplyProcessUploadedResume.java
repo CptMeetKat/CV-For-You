@@ -32,8 +32,7 @@ public class SeekApplyProcessUploadedResume implements Requestable
 	@Override
 	public JSONObject request(String access_token) throws IOException, InterruptedException {
         
-        processUploadedCV(access_token);
-        return new JSONObject("{}"); //TODO: Improve returned value
+        return processUploadedCV(access_token);
 	}
 
 
