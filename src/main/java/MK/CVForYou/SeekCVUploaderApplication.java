@@ -32,14 +32,7 @@ public class SeekCVUploaderApplication implements Application
         try {
 			SeekUploadFileWrapper.uploadFile(params);
             SeekApplyProcessUploadedResume apply_process = new SeekApplyProcessUploadedResume(params.key); //TODO: this class name is not great
-            try {
-                logger.info("Sleeping for 5 seconds....");
-                Thread.sleep(5000); // Sleep for 1000 milliseconds (1 second)
                 apply_process.run();
-            } catch (InterruptedException e) {
-                logger.info("Thread was interrupted");
-            }
-            
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
