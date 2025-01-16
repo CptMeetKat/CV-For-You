@@ -30,6 +30,7 @@ public class ArgParser
     int mode = 0;
 
     SeekStatsArgs seek_stats_args = new SeekStatsArgs();
+    CVUploaderArgs cv_uploader_args = new CVUploaderArgs();
 
     CommandLineParser parser = new DefaultParser();
     HelpFormatter formatter = new HelpFormatter(); //This should be global??
@@ -444,6 +445,6 @@ public class ArgParser
     }
 
 	public CVUploaderArgs getCVUploaderArgs() {
-        return null;
+        return cv_uploader_args;
 	}
 }
