@@ -1,6 +1,8 @@
 package MK.CVForYou;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +11,16 @@ public class SeekCVUploaderApplication implements Application
 {
     static final Logger logger = LoggerFactory.getLogger(SeekCVUploaderApplication.class);
     SeekSessionManager session_manager;
+
+    int mode;
+    ArrayList<File> files;
+
+
     public SeekCVUploaderApplication(CVUploaderArgs args) 
     {
         this.session_manager = SeekSessionManager.getManager();
+        mode = args.mode;
+        files = args.files;
     }
 
 	@Override
