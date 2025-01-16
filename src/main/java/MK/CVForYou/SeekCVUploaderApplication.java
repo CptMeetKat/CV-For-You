@@ -49,7 +49,7 @@ public class SeekCVUploaderApplication implements Application
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            Utils.sleep(5);
+            Utils.sleep(5); //TODO: Only sleep if items left?
         }
     }
 }
