@@ -442,4 +442,8 @@ public class ArgParser
 
         return fileArray;
     }
+
+	public CVUploaderArgs getCVUploaderArgs() {
+        return null;
+	}
 }
