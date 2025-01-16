@@ -254,6 +254,11 @@ public class ArgParser
     } 
 
     public void parseBase(String[] args) throws ParseException
+    private static Options getCVUploaderOptions()
+    {
+        return getCVUploaderOptions(false);
+    }
+
     private static Options getCVUploaderOptions(boolean helpFormatted)
     {
         Options options = new Options();
