@@ -28,7 +28,7 @@ public class App
         else if( mode == 2)
             application = new SeekStatsApplication(ap.getSeekStatsArgs());
         else if ( mode == 3 )
-            application = new SeekCVUploaderApplication(ap.getCVUploaderArgs());
+            application = new SeekCVUploaderApplication(ap.getCVUploaderArgs()); //TODO: write tests for uploader args
 
         if(execute)
             run();
