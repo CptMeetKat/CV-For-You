@@ -52,8 +52,9 @@ public class SeekApplyProcessUploadedResume implements Requestable
             .method("POST", HttpRequest.BodyPublishers.ofString(body))
             .build(); 
 
+            logger.info("processUploadedCV...");
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-            return new JSONObject(response.body());
+            return new JSONObject("{'body':" + response.body() + "}");
     }
     
 }
