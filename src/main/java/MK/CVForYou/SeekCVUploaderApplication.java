@@ -26,7 +26,8 @@ public class SeekCVUploaderApplication implements Application
 	@Override
 	public void run() { //TODO: Set the file to upload
         logger.info("Running Seek uploader...");
-        uploadFile();
+        if(mode == 1)
+            uploadFile();
 	}
 
 	@Override
