@@ -14,7 +14,11 @@ public class CVUploaderArgs
         this.mode = mode;
     }
 
-    public void addFile(String filepath)
+    public void addFile(String path)
+    {
+        files.add(new File(path));
+    }
+
     {
         files.add(new File(filepath));
     }
