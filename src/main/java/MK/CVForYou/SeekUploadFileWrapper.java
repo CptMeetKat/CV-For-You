@@ -43,11 +43,11 @@ public class SeekUploadFileWrapper
         
         
                     writer.writeBytes(twoHyphens + boundary + lineEnd);
-                    writer.writeBytes("Content-Disposition: form-data; name=\"file\"; filename=\"example.pdf\"" + lineEnd);
+                    writer.writeBytes("Content-Disposition: form-data; name=\"file\"; filename=\"example.pdf\"" + lineEnd); //TODO: Use actual file name
                     writer.writeBytes("Content-Type: application/pdf" + lineEnd);
                     writer.writeBytes(lineEnd);
         
-                    File file = new File("example.pdf");
+                    File file = new File("example.pdf"); //TODO: use non-hardcoded file
                     try (FileInputStream fileInputStream = new FileInputStream(file)) {
                         byte[] buffer = new byte[4096];
                         int bytesRead;
