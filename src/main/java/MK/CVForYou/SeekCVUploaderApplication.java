@@ -17,11 +17,21 @@ public class SeekCVUploaderApplication implements Application
 	@Override
 	public void run() { //TODO: Set the file to upload
         logger.info("Running Seek uploader...");
+        uploadFile();
+	}
+
+	@Override
+	public <T> void setDependency(T service, Class<T> serviceType) {
+		throw new UnsupportedOperationException("Unimplemented method 'setDependency'");
+	}
+
+    public void uploadFile()
+    {
         SeekDocumentUploadFormData params = new SeekCVUploaderParamsWrapper().getUploadParams(); 
 
         try {
 			SeekUploadFileWrapper.uploadFile(params);
-            SeekApplyProcessUploadedResume apply_process = new SeekApplyProcessUploadedResume(params.key);
+            SeekApplyProcessUploadedResume apply_process = new SeekApplyProcessUploadedResume(params.key); //TODO: this class name is not great
             try {
                 logger.info("Sleeping for 5 seconds....");
                 Thread.sleep(5000); // Sleep for 1000 milliseconds (1 second)
@@ -34,14 +44,5 @@ public class SeekCVUploaderApplication implements Application
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	public <T> void setDependency(T service, Class<T> serviceType) {
-		throw new UnsupportedOperationException("Unimplemented method 'setDependency'");
-	}
-
-    public void uploadFile(String file)
-    {
     }
 }
