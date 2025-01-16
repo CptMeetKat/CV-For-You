@@ -289,4 +289,16 @@ public class ArgParserTest
         assertEquals(1, cv_uploader_mode);
     }
 
+    @Test
+    public void parseArgsShouldReturnFailWhenCVUploaderHasNoInputs()
+    {
+        String[] args = new String[]{"--auto-upload", "-i"};
+
+        ArgParser ap = new ArgParser();
+        int base_mode = ap.parseArgs(args);
+        int cv_uploader_mode = ap.getCVUploaderArgs().getMode();
+        assertEquals(-1, base_mode);
+        assertEquals(0, cv_uploader_mode);
+    }
+
 }
