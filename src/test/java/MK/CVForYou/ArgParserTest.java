@@ -276,4 +276,17 @@ public class ArgParserTest
         assertEquals(2, base_mode);
         assertEquals(2, seek_stats_mode);
     }
+
+    @Test
+    public void parseArgsShouldReturnCVUploaderFlagWhenAutoUploaderSelected()
+    {
+        String[] args = new String[]{"--auto-upload", "-i", "example.pdf"};
+
+        ArgParser ap = new ArgParser();
+        int base_mode = ap.parseArgs(args);
+        int cv_uploader_mode = ap.getCVUploaderArgs().getMode();
+        assertEquals(3, base_mode);
+        assertEquals(1, cv_uploader_mode);
+    }
+
 }
