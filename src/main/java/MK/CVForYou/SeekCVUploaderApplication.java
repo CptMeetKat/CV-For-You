@@ -39,7 +39,7 @@ public class SeekCVUploaderApplication implements Application
     {
         for(File file : files)
         {
-            logger.info("Uploading file {}", file.getName());
+            logger.info("Uploading file '{}'", file.getName());
 
             SeekDocumentUploadFormData params = new SeekCVUploaderParamsWrapper().getUploadParams(); 
             try {
