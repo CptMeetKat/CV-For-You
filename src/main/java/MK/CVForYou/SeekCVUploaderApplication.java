@@ -15,7 +15,7 @@ public class SeekCVUploaderApplication implements Application
     }
 
 	@Override
-	public void run() {
+	public void run() { //TODO: Set the file to upload
         logger.info("Running Seek uploader...");
         SeekDocumentUploadFormData params = new SeekCVUploaderParamsWrapper().getUploadParams(); 
 
