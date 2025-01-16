@@ -29,7 +29,7 @@ public class SeekDocumentUploadFormData
         {
             JSONObject item = (JSONObject)form_itr.next();
 
-            String key = item.getString("key");
+            String key = item.getString("key"); //TODO: Protect this
             String value = item.getString("value");
             setField(key,value);
         }
