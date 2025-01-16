@@ -30,6 +30,7 @@ public class ArgParser
     int mode = 0;
 
     SeekStatsArgs seek_stats_args = new SeekStatsArgs();
+    CVUploaderArgs cv_uploader_args = new CVUploaderArgs();
 
     CommandLineParser parser = new DefaultParser();
     HelpFormatter formatter = new HelpFormatter(); //This should be global??
@@ -37,6 +38,7 @@ public class ArgParser
     private static final String BASIC_USAGE = "./CVForYou -d <document_path> -c <compare_path> -s <section_paths>";
     private static final String TOP_LEVEL_USAGE = "./CVForYou -cv";
     private static final String SEEK_STATS_USAGE = "./CVForYou -sa";
+    private static final String CV_UPLOADER_USAGE = "./CVForYou -au";
 
     static final Logger logger = LoggerFactory.getLogger(ArgParser.class);
 
@@ -93,11 +95,17 @@ public class ArgParser
             .desc("Aggregate stats from Seek")
             .build();
 
+        Option seek_auto_uploader = Option.builder("au")
+            .longOpt("auto-upload")
+            .desc("Upload CV directly to SEEK")
+            .build();
+
         Options options = new Options();
         options.addOption("h", "help", false, "print this message");
 
         options.addOption(cv_generator);
         options.addOption(seek_profile_stats);
+        options.addOption(seek_auto_uploader);
         return options;
 
     }
@@ -231,6 +239,8 @@ public class ArgParser
                 parseCVGeneration(args);
             else if(mode == 2)
                 parseSeekStats(args);
+            else if(mode == 3) 
+                parseCVUploader(args);
             else
                 logger.error("No mode selected");
         }
@@ -242,7 +252,65 @@ public class ArgParser
         return mode;
     } 
 
-    public void parseBase(String[] args) throws ParseException
+    private void parseCVUploader(String[] args) throws ParseException 
+    {
+        try
+        {
+            CommandLine cmd = parser.parse(getCVUploaderOptions(), args);
+            if(cmd.hasOption("h"))
+            {
+                formatter.printHelp(CV_UPLOADER_USAGE,  getCVUploaderOptions(true));
+                mode = 0;
+                return;
+            }
+
+            if (!cmd.hasOption("i"))
+                throw new ParseException("-i must be provided");
+            else if ( cmd.hasOption("i") )
+            {
+                cv_uploader_args.setMode(1);
+                cv_uploader_args.addFiles(cmd.getOptionValues("i"));
+            }
+
+        }
+        catch(ParseException e)
+        {
+            logger.error(e.getMessage());
+            formatter.printHelp(CV_UPLOADER_USAGE, getCVUploaderOptions(true));
+            throw e;
+        }
+
+	}
+
+
+    private static Options getCVUploaderOptions()
+    {
+        return getCVUploaderOptions(false);
+    }
+
+    private static Options getCVUploaderOptions(boolean helpFormatted)
+    {
+        Options options = new Options();
+
+        Option input = Option.builder("i").hasArgs()
+            .longOpt("input")
+            .desc("CV files to upload")
+            .build();
+
+        if(!helpFormatted) //When we display help menu, we want these items to not be displayed
+        {
+            Option seek_auto_uploader = Option.builder("au")
+                .longOpt("auto-upload")
+                .build();
+            options.addOption(seek_auto_uploader);
+        }
+
+        options.addOption("h", "help", false, "print this message");
+        options.addOption(input);
+        return options;
+    }
+
+	public void parseBase(String[] args) throws ParseException
     {
         try
         {
@@ -252,6 +320,8 @@ public class ArgParser
                 mode = 1;
             else if(cmd.hasOption("sa"))
                 mode = 2;
+            else if(cmd.hasOption("au"))
+                mode = 3;
             else if(cmd.hasOption("h"))
                 mode = 0;
             else
@@ -430,4 +500,8 @@ public class ArgParser
 
         return fileArray;
     }
+
+	public CVUploaderArgs getCVUploaderArgs() {
+        return cv_uploader_args;
+	}
 }
