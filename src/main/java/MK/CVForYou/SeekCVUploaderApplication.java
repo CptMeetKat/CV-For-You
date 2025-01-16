@@ -24,7 +24,7 @@ public class SeekCVUploaderApplication implements Application
     }
 
 	@Override
-	public void run() { //TODO: Set the file to upload
+	public void run() {
         logger.info("Running Seek uploader...");
         if(mode == 1)
             uploadFiles();
@@ -39,7 +39,7 @@ public class SeekCVUploaderApplication implements Application
     {
         for(File file : files)
         {
-            logger.info("Uploading file '{}'", file.getName());
+            logger.info("Uploading CV file '{}' to Seek", file.getName());
 
             SeekDocumentUploadFormData params = new SeekCVUploaderParamsWrapper().getUploadParams(); 
             try {
