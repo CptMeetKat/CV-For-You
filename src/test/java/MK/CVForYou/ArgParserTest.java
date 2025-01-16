@@ -301,4 +301,22 @@ public class ArgParserTest
         assertEquals(0, cv_uploader_mode);
     }
 
+    @Test
+    public void parseArgsShouldReturnFailFlagOnCVUploaderNotEnoughArgs()
+    {
+        String[] args = new String[]{"--auto-upload"};
+
+        ArgParser ap = new ArgParser();
+        int mode = ap.parseArgs(args);
+        int cv_uploader_mode = ap.getCVUploaderArgs().getMode();
+        assertEquals(-1, mode);
+        assertEquals(0, cv_uploader_mode);
+    }
+
+    //@Test
+    //public void parseArgsShouldReturnSeekStatsSummaryFlagWhenSummariseSelected()
+    //{}
+    //
+    //
+    //todo: test muliple inputs
 }
