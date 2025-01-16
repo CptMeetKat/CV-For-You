@@ -56,7 +56,6 @@ public class SeekCVUploaderParamsWrapper implements Requestable
             .method("POST", HttpRequest.BodyPublishers.ofString(body))
             .build(); 
 
-            logger.info("Fetching upload params...");
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
             return new JSONObject(response.body());
     }
