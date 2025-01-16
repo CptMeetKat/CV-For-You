@@ -64,14 +64,14 @@ public class SeekCVUploaderParamsWrapper implements Requestable
     {
         UUID uuid = UUID.randomUUID();
         
+        String body = "[{\"operationName\":\"GetDocumentUploadData\",\"variables\":{\"id\":\"" + uuid.toString() + "\"},\"query\":\"query GetDocumentUploadData($id: UUID\u0021) {\\n  viewer {\\n    documentUploadFormData(id: $id) {\\n      link\\n      key\\n      formFields {\\n        key\\n        value\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\"}]";
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create("https://www.seek.com.au/graphql"))
             .header("accept", "*/*")
             .header("accept-language", "en-GB,en-US;q=0.9,en;q=0.8")
             .header("authorization", "Bearer " + access_token)
             .header("content-type", "application/json")
-            .method("POST", HttpRequest.BodyPublishers.ofString("[{\"operationName\":\"GetDocumentUploadData\",\"variables\":{\"id\":\"" + uuid.toString() + "\"},\"query\":\"query GetDocumentUploadData($id: UUID\u0021) {\\n  viewer {\\n    documentUploadFormData(id: $id) {\\n      link\\n      key\\n      formFields {\\n        key\\n        value\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\"}]"))
-            //TODO: move this long string into a single variable body
+            .method("POST", HttpRequest.BodyPublishers.ofString(body))
             .build(); 
 
             logger.info("Fetching upload params...");
