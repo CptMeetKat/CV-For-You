@@ -37,16 +37,20 @@ public class SeekCVUploaderApplication implements Application
 
     public void uploadFiles()
     {
-        SeekDocumentUploadFormData params = new SeekCVUploaderParamsWrapper().getUploadParams(); 
+        for(File file : files)
+        {
+            logger.info("Uploading file {}", file.getName());
 
-        try {
-			SeekUploadFileWrapper.uploadFile(params);
-            SeekApplyProcessUploadedResume apply_process = new SeekApplyProcessUploadedResume(params.key); //TODO: this class name is not great
+            SeekDocumentUploadFormData params = new SeekCVUploaderParamsWrapper().getUploadParams(); 
+            try {
+                SeekUploadFileWrapper.uploadFile(params, file);
+                SeekApplyProcessUploadedResume apply_process = new SeekApplyProcessUploadedResume(params.key); //TODO: this class name is not great
                 apply_process.run();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        Utils.sleep(1);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            Utils.sleep(5);
+        }
     }
 }
