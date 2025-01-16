@@ -31,33 +31,33 @@ public class SeekUploadFileWrapper
         try (OutputStream outputStream = connection.getOutputStream();
                 DataOutputStream writer = new DataOutputStream(outputStream)) {
 
-            writeTextFormField(writer, "key", form_data.key);
-            writeTextFormField(writer, "X-Amz-Algorithm", form_data.x_amz_algorithm);
-            writeTextFormField(writer, "X-Amz-Credential", form_data.x_amz_credential);
-            writeTextFormField(writer, "X-Amz-Date", form_data.x_amz_date);
-            writeTextFormField(writer, "X-Amz-Security-Token", form_data.x_amz_security_token);
-            writeTextFormField(writer, "Policy", form_data.policy);
-            writeTextFormField(writer, "X-Amz-Signature", form_data.x_amz_signature);
-            writeTextFormField(writer, "x-amz-meta-filename", form_data.x_amz_meta_filename);
-            writeTextFormField(writer, "x-amz-meta-candidateId", form_data.x_amz_meta_candidateid);
-
-            
-            writer.writeBytes(twoHyphens + boundary + lineEnd);
-            writer.writeBytes("Content-Disposition: form-data; name=\"file\"; filename=\"example.pdf\"" + lineEnd);
-            writer.writeBytes("Content-Type: application/pdf" + lineEnd);
-            writer.writeBytes(lineEnd);
-
-            File file = new File("example.pdf");
-            try (FileInputStream fileInputStream = new FileInputStream(file)) {
-                byte[] buffer = new byte[4096];
-                int bytesRead;
-                while ((bytesRead = fileInputStream.read(buffer)) != -1) {
-                    writer.write(buffer, 0, bytesRead);
-                }
-            }
-            writer.writeBytes(lineEnd);
-
-            writer.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+                    writeTextFormField(writer, "key", form_data.key);
+                    writeTextFormField(writer, "X-Amz-Algorithm", form_data.x_amz_algorithm);
+                    writeTextFormField(writer, "X-Amz-Credential", form_data.x_amz_credential);
+                    writeTextFormField(writer, "X-Amz-Date", form_data.x_amz_date);
+                    writeTextFormField(writer, "X-Amz-Security-Token", form_data.x_amz_security_token);
+                    writeTextFormField(writer, "Policy", form_data.policy);
+                    writeTextFormField(writer, "X-Amz-Signature", form_data.x_amz_signature);
+                    writeTextFormField(writer, "x-amz-meta-filename", form_data.x_amz_meta_filename);
+                    writeTextFormField(writer, "x-amz-meta-candidateId", form_data.x_amz_meta_candidateid);
+        
+        
+                    writer.writeBytes(twoHyphens + boundary + lineEnd);
+                    writer.writeBytes("Content-Disposition: form-data; name=\"file\"; filename=\"example.pdf\"" + lineEnd);
+                    writer.writeBytes("Content-Type: application/pdf" + lineEnd);
+                    writer.writeBytes(lineEnd);
+        
+                    File file = new File("example.pdf");
+                    try (FileInputStream fileInputStream = new FileInputStream(file)) {
+                        byte[] buffer = new byte[4096];
+                        int bytesRead;
+                        while ((bytesRead = fileInputStream.read(buffer)) != -1) {
+                            writer.write(buffer, 0, bytesRead);
+                        }
+                    }
+                    writer.writeBytes(lineEnd);
+        
+                    writer.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
                 }
 
         int responseCode = connection.getResponseCode();
