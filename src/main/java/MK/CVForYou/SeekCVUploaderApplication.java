@@ -1,5 +1,7 @@
 package MK.CVForYou;
 
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +17,23 @@ public class SeekCVUploaderApplication implements Application
 	@Override
 	public void run() {
         logger.info("Running Seek uploader...");
-        new SeekCVUploaderParamsWrapper().getUploadParams(); 
+        SeekDocumentUploadFormData params = new SeekCVUploaderParamsWrapper().getUploadParams(); 
+
+        try {
+			SeekUploadFileWrapper.uploadFile(params);
+            SeekApplyProcessUploadedResume apply_process = new SeekApplyProcessUploadedResume(params.key);
+            try {
+                logger.info("Sleeping for 5 seconds....");
+                Thread.sleep(5000); // Sleep for 1000 milliseconds (1 second)
+                apply_process.run();
+            } catch (InterruptedException e) {
+                logger.info("Thread was interrupted");
+            }
+            
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
