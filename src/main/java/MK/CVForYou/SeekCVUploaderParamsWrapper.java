@@ -6,6 +6,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import org.slf4j.Logger;
@@ -28,15 +29,23 @@ public class SeekCVUploaderParamsWrapper implements Requestable
         this.session_manager = SeekSessionManager.getManager();
     }
 
-    public SeekDocumentUploadFormData getUploadParams()
+    public void getUploadParams()
     {
         JSONObject upload_params = session_manager.makeRequest(this); //TODO: Not refreshing token if it needs to refresh, request returns a different sort of error
+        
+        JSONObject document_upload_form_data = null;
+        try {
+            document_upload_form_data = upload_params.getJSONObject("data")
+                .getJSONObject("viewer")
+                .getJSONObject("documentUploadFormData");
+        } catch (JSONException e) {
+            logger.error("Unable to parse the parameters required to upload CV to seek: {}", e.getMessage());
+        }
 
-        JSONObject document_upload_form_data = upload_params.getJSONObject("data") //TODO: This may not be very null protected
-        .getJSONObject("viewer")
-        .getJSONObject("documentUploadFormData");
+        if(document_upload_form_data == null)
+            return;
 
-        //Fail if 403?
+
         SeekDocumentUploadFormData params = new SeekDocumentUploadFormData(document_upload_form_data);
         try {
             
@@ -54,8 +63,6 @@ public class SeekCVUploaderParamsWrapper implements Requestable
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
-        return new SeekDocumentUploadFormData(document_upload_form_data);
     }
 
     public JSONObject fetchDocumentUploadParams(String access_token) throws IOException, InterruptedException
