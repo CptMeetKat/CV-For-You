@@ -7,11 +7,11 @@ import java.io.*;
 
 public class SeekUploadFileWrapper
 {
+    static final String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW"; // Define a unique boundary TODO: may be appropriate to change between uploads
+    static final String lineEnd = "\r\n";
+    static final String twoHyphens = "--";
     private static void writeTextFormField(DataOutputStream writer, String field_name, String value) throws IOException
     {
-        String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW"; // Define a unique boundary
-        String lineEnd = "\r\n";
-        String twoHyphens = "--";
         writer.writeBytes(twoHyphens + boundary + lineEnd);
         writer.writeBytes("Content-Disposition: form-data; name=\"" + field_name + "\"" + lineEnd);
         writer.writeBytes(lineEnd);
@@ -19,9 +19,6 @@ public class SeekUploadFileWrapper
     }
 
     public static void uploadFile(SeekDocumentUploadFormData form_data) throws IOException {
-        String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW"; // Define a unique boundary
-        String lineEnd = "\r\n";
-        String twoHyphens = "--";
 
         URL url = new URL(form_data.link);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
