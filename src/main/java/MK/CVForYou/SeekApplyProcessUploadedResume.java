@@ -24,9 +24,9 @@ public class SeekApplyProcessUploadedResume implements Requestable
         this.uuid = uuid;
     }
 
-    public void run() //TODO Return somthing valuable here
+    public JSONObject run() //TODO Return parsed response instead of JSONObject
     {
-        session_manager.makeRequest(this); //TODO: Check token refreshes correctly
+        return session_manager.makeRequest(this);
     }
 
 	@Override
@@ -56,5 +56,4 @@ public class SeekApplyProcessUploadedResume implements Requestable
             System.out.println(response.body());
             return new JSONObject(response.body());
     }
-    
 }
