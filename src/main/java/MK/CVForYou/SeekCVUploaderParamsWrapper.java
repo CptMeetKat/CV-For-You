@@ -31,7 +31,7 @@ public class SeekCVUploaderParamsWrapper implements Requestable
 
     public void getUploadParams()
     {
-        JSONObject upload_params = session_manager.makeRequest(this); //TODO: Not refreshing token if it needs to refresh, request returns a different sort of error
+        JSONObject upload_params = session_manager.makeRequest(this);
         
         JSONObject document_upload_form_data = null;
         try {
