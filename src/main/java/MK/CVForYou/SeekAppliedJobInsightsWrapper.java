@@ -57,18 +57,8 @@ public class SeekAppliedJobInsightsWrapper implements Requestable, SeekAppliedJo
 
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
-            sleep(); //Avoid flagging SEEK systems
+            Utils.sleep(1); //Avoid flagging SEEK systems
 
             return new JSONObject(response.body());
-    }
-
-
-    private static void sleep()
-    {
-        try {
-            Thread.sleep(1000); // Sleep for 1000 milliseconds (1 second)
-        } catch (InterruptedException e) {
-            logger.info("Thread was interrupted");
-        }
     }
 }

@@ -7,11 +7,16 @@ import java.util.ArrayList;
 public class CVUploaderArgs
 {
     public ArrayList<File> files = new ArrayList<File>();
-    public int mode;
+    int mode;
 
     public void setMode(int mode)
     {
         this.mode = mode;
+    }
+
+    public int getMode()
+    {
+        return mode;
     }
 
     public void addFile(String path)
