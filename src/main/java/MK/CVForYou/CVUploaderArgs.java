@@ -19,7 +19,9 @@ public class CVUploaderArgs
         files.add(new File(path));
     }
 
+    public void addFiles(String paths[])
     {
-        files.add(new File(filepath));
+        for(String p : paths)
+            files.add(new File(p));
     }
 }
