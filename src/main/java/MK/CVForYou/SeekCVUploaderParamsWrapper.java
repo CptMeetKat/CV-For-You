@@ -29,18 +29,15 @@ public class SeekCVUploaderParamsWrapper implements Requestable
     {
         JSONObject upload_params = session_manager.makeRequest(this);
         
-        JSONObject document_upload_form_data = null;
+        SeekDocumentUploadFormData params = null;
         try {
-            document_upload_form_data = upload_params.getJSONObject("data")
+            JSONObject document_upload_form_data = upload_params.getJSONObject("data")
                 .getJSONObject("viewer")
                 .getJSONObject("documentUploadFormData");
+            params = new SeekDocumentUploadFormData(document_upload_form_data);
         } catch (JSONException e) {
             logger.error("Unable to parse the parameters required to upload CV to seek: {}", e.getMessage());
         }
-
-        if(document_upload_form_data == null) //TODO: clean this //TODO move all below this into one step on stack higher
-            return null; //TODO: handle or remove null?
-        SeekDocumentUploadFormData params = new SeekDocumentUploadFormData(document_upload_form_data);
 
         return params;
     }
