@@ -18,7 +18,7 @@ public class SeekUploadFileWrapper
         writer.writeBytes(value + lineEnd);
     }
 
-    public static void uploadFile(SeekDocumentUploadFormData form_data, File file) throws IOException {
+    public static int uploadFile(SeekDocumentUploadFormData form_data, File file) throws IOException {
 
         URL url = new URL(form_data.link);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -55,17 +55,9 @@ public class SeekUploadFileWrapper
                         }
                     }
                     writer.writeBytes(lineEnd);
-        
                     writer.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
                 }
 
-        int responseCode = connection.getResponseCode();
-        System.out.println("Response Code: " + responseCode);
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-            }
-        }
+        return connection.getResponseCode();
     }
 }
