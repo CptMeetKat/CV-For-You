@@ -39,7 +39,7 @@ public class SeekResumeWrapper implements Requestable
             logger.info("Fetching seek resumes...");
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
-            System.out.println(response.body());
+            logger.trace("({} {} {}) {}", response.request().method(), response.uri(), "GetResumes", response.statusCode());
 
             return new JSONObject(response.body());
     }
