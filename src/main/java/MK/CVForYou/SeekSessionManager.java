@@ -43,6 +43,7 @@ public class SeekSessionManager
         try
         {
             response = requestable.request(access_token);
+            //TODO: When I migrate to the new Requestable that returns HTTPResponse, can log trace here of the state of request
             if( SeekSessionManager.responseHasAuthError(response)) 
             {
                 logger.info("Access token invalid, trying to refresh token...");
