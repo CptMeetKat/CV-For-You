@@ -49,7 +49,9 @@ public class SeekCVUploaderApplication implements Application
 
                 logger.info("{} Uploaded Resumes", uploaded.size());
                 for(SeekResumesResponse resume : uploaded)
-                    logger.info("\t{} {} {}", resume.name, resume.size, resume.created);
+                    logger.info("\t{} {} {}", String.format("%-20s", resume.name),
+                                            String.format("%-8s", resume.size),
+                                            resume.created);
 
 
             } catch (IOException e) {
