@@ -39,8 +39,8 @@ public class SeekApplyProcessUploadedResume implements Requestable
     public JSONObject processUploadedCV(String access_token) throws IOException, InterruptedException
     {
         UUID parsing_context_uuid = UUID.randomUUID();
-
-        String body = "{\"operationName\":\"ApplyProcessUploadedResume\",\"variables\":{\"input\":{\"id\":\"" + uuid + "\",\"isDefault\":false,\"parsingContext\":{\"id\":\"" + parsing_context_uuid + "\"},\"zone\":\"anz-1\"}},\"query\":\"mutation ApplyProcessUploadedResume($input: ProcessUploadedResumeInput\u0021) {\\n  processUploadedResume(input: $input) {\\n    resume {\\n      ...resume\\n      __typename\\n    }\\n    viewer {\\n      _id\\n      resumes {\\n        ...resume\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\\nfragment resume on Resume {\\n  id\\n  createdDateUtc\\n  isDefault\\n  fileMetadata {\\n    name\\n    size\\n    virusScanStatus\\n    sensitiveDataInfo {\\n      isDetected\\n      __typename\\n    }\\n    uri\\n    __typename\\n  }\\n  origin {\\n    type\\n    __typename\\n  }\\n  __typename\\n}\"}";
+        String operation = "ApplyProcessUploadedResume";
+        String body = "{\"operationName\":\"" + operation + "\",\"variables\":{\"input\":{\"id\":\"" + uuid + "\",\"isDefault\":false,\"parsingContext\":{\"id\":\"" + parsing_context_uuid + "\"},\"zone\":\"anz-1\"}},\"query\":\"mutation ApplyProcessUploadedResume($input: ProcessUploadedResumeInput\u0021) {\\n  processUploadedResume(input: $input) {\\n    resume {\\n      ...resume\\n      __typename\\n    }\\n    viewer {\\n      _id\\n      resumes {\\n        ...resume\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\\nfragment resume on Resume {\\n  id\\n  createdDateUtc\\n  isDefault\\n  fileMetadata {\\n    name\\n    size\\n    virusScanStatus\\n    sensitiveDataInfo {\\n      isDetected\\n      __typename\\n    }\\n    uri\\n    __typename\\n  }\\n  origin {\\n    type\\n    __typename\\n  }\\n  __typename\\n}\"}";
 
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create("https://www.seek.com.au/graphql"))
@@ -52,7 +52,7 @@ public class SeekApplyProcessUploadedResume implements Requestable
             .build(); 
 
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.body());
+            logger.debug("({} {} {}) {}", response.request().method(), response.uri(), operation, response.statusCode());
             return new JSONObject(response.body());
     }
 }
