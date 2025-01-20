@@ -60,6 +60,5 @@ public class SeekCVUploaderApplication implements Application
             }
             Utils.sleep(5); //TODO: Only sleep if items left?
         }
-        //TODO: Display list of all uploaded files
     }
 }
