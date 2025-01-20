@@ -5,7 +5,11 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Iterator;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +24,22 @@ public class SeekResumeWrapper implements Requestable
         this.session_manager = SeekSessionManager.getManager();
     }
 
-    public JSONObject getSeekResumes()
-    {
-        return session_manager.makeRequest(this);
+    public ArrayList<SeekResumesResponse> getSeekResumes()
+    {//TODO: should throw if unobtainable
+
+        JSONObject response = session_manager.makeRequest(this);
+        JSONArray resumes = (JSONArray) response.query("/data/viewer/resumes");
+
+        Iterator<Object> resume_itr = resumes.iterator();
+
+        ArrayList<SeekResumesResponse> arr = new ArrayList<SeekResumesResponse>();
+        while(resume_itr.hasNext())
+        {
+            JSONObject job = (JSONObject)resume_itr.next();
+            arr.add(new SeekResumesResponse(job));
+        }
+
+        return arr;
     }
 
     public JSONObject fetchSeekResumes(String access_token) throws IOException, InterruptedException
