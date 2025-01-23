@@ -26,8 +26,8 @@ public class SeekResumeWrapper implements Requestable
     public ArrayList<SeekResumesResponse> getSeekResumes()
     {//TODO: should throw if unobtainable
 
-        JSONObject response = session_manager.makeRequest(this);
-        JSONArray resumes = (JSONArray) response.query("/data/viewer/resumes");
+        JSONObject response = session_manager.makeRequest(this); //TODO: this could return null and crash
+        JSONArray resumes = (JSONArray) response.query("/data/viewer/resumes"); //TODO: this could return null and crash
 
         Iterator<Object> resume_itr = resumes.iterator();
 
