@@ -45,21 +45,24 @@ public class SeekCVUploaderApplication implements Application
                 SeekUploadFileWrapper.uploadFile(params, file);
                 SeekApplyProcessUploadedResume apply_process = new SeekApplyProcessUploadedResume(params.key); //TODO: this class name is not great
                 apply_process.run();
-                ArrayList<SeekResumesResponse> uploaded = new SeekResumeWrapper().getSeekResumes();
-
-                logger.info("{} Uploaded Resumes", uploaded.size());
-                for(SeekResumesResponse resume : uploaded)
-                    logger.info("\t{} {} {}", String.format("%-20s", resume.name),
-                                            String.format("%-8s", resume.size),
-                                            resume.created);
-
+                printUploadedResumes();
 
             } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
-            Utils.sleep(5); //TODO: Only sleep if items left?
+            Utils.sleep(3);
         }
-        //TODO: Display list of all uploaded files
     }
+
+    private void printUploadedResumes()
+    {
+        ArrayList<SeekResumesResponse> uploaded = new SeekResumeWrapper().getSeekResumes();
+
+        logger.info("{} Uploaded Resumes", uploaded.size());
+        for(SeekResumesResponse resume : uploaded)
+            logger.info("\t{} {} {}", String.format("%-20s", resume.name),
+                    String.format("%-8s", resume.size),
+                    resume.created);
+    }
+
 }
