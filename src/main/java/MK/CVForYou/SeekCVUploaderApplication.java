@@ -50,7 +50,7 @@ public class SeekCVUploaderApplication implements Application
             } catch (IOException e) {
                 logger.error(e.getMessage());
             }
-            Utils.sleep(5); //TODO: Only sleep if items left?
+            Utils.sleep(3);
         }
     }
 
