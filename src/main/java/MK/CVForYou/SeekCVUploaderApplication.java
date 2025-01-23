@@ -48,8 +48,7 @@ public class SeekCVUploaderApplication implements Application
                 printUploadedResumes();
 
             } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
             Utils.sleep(5); //TODO: Only sleep if items left?
         }
