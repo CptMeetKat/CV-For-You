@@ -96,7 +96,7 @@ public class ArgParser
             .build();
 
         Option seek_auto_uploader = Option.builder("au")
-            .longOpt("auto-upload")
+            .longOpt("auto-upload") //TODO: This menu will be changed to seek-resumes
             .desc("Upload CV directly to SEEK")
             .build();
 
