@@ -16,16 +16,10 @@ public class ArgParser
     Options options;
     Options help_option;
 
-    //Path input_document; 
-    //Path[] section_definition_paths;
-    //Path output_directory;
-
     Path compare_document_path;
     String seek_url; 
 
     String[] compare_cache_paths;
-
-    //JobSource jd_source; 
 
     int mode = 0;
 
