@@ -17,7 +17,7 @@ public class ArgParser
     Options help_option;
 
     //Path input_document; 
-    Path[] section_definition_paths;
+    //Path[] section_definition_paths;
     Path output_directory;
 
     Path compare_document_path;
@@ -81,7 +81,7 @@ public class ArgParser
     }
 
     public Path[] getSections() {
-        return section_definition_paths;
+        return cv_generation_args.section_definition_paths;
     }
 
     private static Options getBaseOptions()
@@ -477,7 +477,7 @@ public class ArgParser
             }
         }
 
-        section_definition_paths = files.toArray(new Path[0]);
+        cv_generation_args.section_definition_paths = files.toArray(new Path[0]);
     }
 
     //TODO: Add unit test for this
