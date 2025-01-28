@@ -280,7 +280,7 @@ public class ArgParserTest
     @Test
     public void parseArgsShouldReturnCVUploaderFlagWhenAutoUploaderSelected()
     {
-        String[] args = new String[]{"--auto-upload", "-i", "example.pdf"};
+        String[] args = new String[]{"--seek-resumes", "-i", "example.pdf"};
 
         ArgParser ap = new ArgParser();
         int base_mode = ap.parseArgs(args);
@@ -292,7 +292,7 @@ public class ArgParserTest
     @Test
     public void parseArgsShouldReturnFailWhenCVUploaderHasNoInputs()
     {
-        String[] args = new String[]{"--auto-upload", "-i"};
+        String[] args = new String[]{"--seek-resumes", "-i"};
 
         ArgParser ap = new ArgParser();
         int base_mode = ap.parseArgs(args);
@@ -304,7 +304,7 @@ public class ArgParserTest
     @Test
     public void parseArgsShouldReturnFailFlagOnCVUploaderNotEnoughArgs()
     {
-        String[] args = new String[]{"--auto-upload"};
+        String[] args = new String[]{"--seek-resumes"};
 
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
@@ -313,11 +313,10 @@ public class ArgParserTest
         assertEquals(0, cv_uploader_mode);
     }
 
-
     @Test
     public void parseArgsShouldReturnCVUploaderFlagWhenMultpleInputsProvided()
     {
-        String[] args = new String[]{"--auto-upload", "-i", "example.pdf", "example2.pdf"};
+        String[] args = new String[]{"--seek-resumes", "-i", "example.pdf", "example2.pdf"};
 
         ArgParser ap = new ArgParser();
         int base_mode = ap.parseArgs(args);

@@ -38,7 +38,7 @@ public class ArgParser
     private static final String BASIC_USAGE = "./CVForYou -d <document_path> -c <compare_path> -s <section_paths>";
     private static final String TOP_LEVEL_USAGE = "./CVForYou -cv";
     private static final String SEEK_STATS_USAGE = "./CVForYou -sa";
-    private static final String CV_UPLOADER_USAGE = "./CVForYou -au";
+    private static final String CV_UPLOADER_USAGE = "./CVForYou -sr";
 
     static final Logger logger = LoggerFactory.getLogger(ArgParser.class);
 
@@ -95,8 +95,8 @@ public class ArgParser
             .desc("Aggregate stats from Seek")
             .build();
 
-        Option seek_auto_uploader = Option.builder("au")
-            .longOpt("auto-upload") //TODO: This menu will be changed to seek-resumes
+        Option seek_auto_uploader = Option.builder("sr")
+            .longOpt("seek-resumes")
             .desc("Upload CV directly to SEEK")
             .build();
 
@@ -259,6 +259,7 @@ public class ArgParser
         try
         {
             CommandLine cmd = parser.parse(getCVUploaderOptions(), args);
+            //parseSubCommands(); stops if it finds a correct one
             if(cmd.hasOption("h"))
             {
                 formatter.printHelp(CV_UPLOADER_USAGE,  getCVUploaderOptions(true));
@@ -301,8 +302,8 @@ public class ArgParser
 
         if(!helpFormatted) //When we display help menu, we want these items to not be displayed
         {
-            Option seek_auto_uploader = Option.builder("au")
-                .longOpt("auto-upload")
+            Option seek_auto_uploader = Option.builder("sr")
+                .longOpt("seek-resumes")
                 .build();
             options.addOption(seek_auto_uploader);
         }
@@ -322,7 +323,7 @@ public class ArgParser
                 mode = 1;
             else if(cmd.hasOption("sa"))
                 mode = 2;
-            else if(cmd.hasOption("au"))
+            else if(cmd.hasOption("sr"))
                 mode = 3;
             else if(cmd.hasOption("h"))
                 mode = 0;
