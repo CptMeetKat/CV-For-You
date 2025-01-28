@@ -314,6 +314,7 @@ public class ArgParserTest
     }
 
 
+    @Test
     public void parseArgsShouldReturnCVUploaderFlagWhenMultpleInputsProvided()
     {
         String[] args = new String[]{"--auto-upload", "-i", "example.pdf", "example2.pdf"};
