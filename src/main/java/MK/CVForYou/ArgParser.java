@@ -18,7 +18,7 @@ public class ArgParser
 
     //Path input_document; 
     //Path[] section_definition_paths;
-    Path output_directory;
+    //Path output_directory;
 
     Path compare_document_path;
     String seek_url; 
@@ -47,7 +47,7 @@ public class ArgParser
     {
         options = getDefaultOptions();
         help_option = getHelpOption();
-        output_directory = Paths.get("./");
+        cv_generation_args.output_directory = Paths.get("./");
     }
 
     private static Options getHelpOption()
@@ -73,11 +73,11 @@ public class ArgParser
     }
 
     public Path getOutputFolder() {
-        return output_directory;
+        return cv_generation_args.output_directory;
     }
 
     public void setOutputFolder(String path) {
-        output_directory = Paths.get(path);
+        cv_generation_args.output_directory = Paths.get(path);
     }
 
     public Path[] getSections() {

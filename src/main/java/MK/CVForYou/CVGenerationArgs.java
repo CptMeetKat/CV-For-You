@@ -9,7 +9,7 @@ public class CVGenerationArgs
     public JobSource jd_source; 
     public Path input_document; 
     public Path[] section_definition_paths;
-    Path output_directory;
+    public Path output_directory;
 
     public JobSource getJDSource()
     {
