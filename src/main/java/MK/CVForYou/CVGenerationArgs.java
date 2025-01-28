@@ -6,7 +6,7 @@ import java.nio.file.*;
 public class CVGenerationArgs
 {
 
-    JobSource jd_source; 
+    public JobSource jd_source; 
     Path input_document; 
     Path[] section_definition_paths;
     Path output_directory;

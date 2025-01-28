@@ -25,12 +25,13 @@ public class ArgParser
 
     String[] compare_cache_paths;
 
-    JobSource jd_source; 
+    //JobSource jd_source; 
 
     int mode = 0;
 
     SeekStatsArgs seek_stats_args = new SeekStatsArgs();
     CVUploaderArgs cv_uploader_args = new CVUploaderArgs();
+    CVGenerationArgs cv_generation_args = new CVGenerationArgs();
 
     CommandLineParser parser = new DefaultParser();
     HelpFormatter formatter = new HelpFormatter(); //This should be global??
@@ -227,7 +228,7 @@ public class ArgParser
 
     public JobSource getJDSource()
     {
-        return jd_source;
+        return cv_generation_args.jd_source;
     }
 
     public int parseArgs(String[] args)
@@ -421,14 +422,14 @@ public class ArgParser
     {
         if (cmd.hasOption("c")) {
             compare_document_path = Paths.get(cmd.getOptionValue("c"));
-            jd_source = new JobFromFile(compare_document_path);
+            cv_generation_args.jd_source = new JobFromFile(compare_document_path);
         }
         if (cmd.hasOption("cs")) {
             seek_url = cmd.getOptionValue("cs");
-            jd_source = new JobFromSeekJob(seek_url);
+            cv_generation_args.jd_source = new JobFromSeekJob(seek_url);
         }
         if (cmd.hasOption("ca")) 
-            jd_source = new JobFromSeekSaved();
+            cv_generation_args.jd_source = new JobFromSeekSaved();
 
         if (cmd.hasOption("cc")) 
         {
@@ -448,7 +449,7 @@ public class ArgParser
                     paths.add(path);
                 }
             }
-            jd_source = new JobFromCache(paths);
+            cv_generation_args.jd_source = new JobFromCache(paths);
         }
     }
 
