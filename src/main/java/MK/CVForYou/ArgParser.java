@@ -16,7 +16,7 @@ public class ArgParser
     Options options;
     Options help_option;
 
-    Path input_document; 
+    //Path input_document; 
     Path[] section_definition_paths;
     Path output_directory;
 
@@ -65,7 +65,7 @@ public class ArgParser
 
     public Path getInputDocument()
     {
-        return input_document;
+        return cv_generation_args.input_document;
     }
 
     public Options getOptions() {
@@ -415,7 +415,7 @@ public class ArgParser
     private void handleDocumentFlags(CommandLine cmd)
     {
         if (cmd.hasOption("d"))
-            input_document = Paths.get(cmd.getOptionValue("d"));
+            cv_generation_args.input_document = Paths.get(cmd.getOptionValue("d"));
     }
 
     private void handleCompareFlags(CommandLine cmd)
