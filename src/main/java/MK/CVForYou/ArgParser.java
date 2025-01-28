@@ -180,7 +180,9 @@ public class ArgParser
 
         if(!helpFormatted)
         {
-            Option base_option = Option.builder("cv").build();
+            Option base_option = Option.builder("cv")
+                .longOpt("cv-generator")
+                    .build();
             options.addOption(base_option);
         }
 
