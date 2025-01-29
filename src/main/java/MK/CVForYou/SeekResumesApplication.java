@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SeekCVUploaderApplication implements Application
+public class SeekResumesApplication implements Application
 {
-    static final Logger logger = LoggerFactory.getLogger(SeekCVUploaderApplication.class);
+    static final Logger logger = LoggerFactory.getLogger(SeekResumesApplication.class);
     SeekSessionManager session_manager;
 
     int mode;
     ArrayList<File> files;
 
 
-    public SeekCVUploaderApplication(CVUploaderArgs args) 
+    public SeekResumesApplication(CVUploaderArgs args) 
     {
         this.session_manager = SeekSessionManager.getManager();
         mode = args.getMode();

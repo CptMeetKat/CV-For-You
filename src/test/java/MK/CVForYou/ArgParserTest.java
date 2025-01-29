@@ -278,7 +278,7 @@ public class ArgParserTest
     }
 
     @Test
-    public void parseArgsShouldReturnCVUploaderApplicationFlagWhenSEEKUploadIsSelected()
+    public void parseArgsShouldReturnSeekResumesApplicationFlagWhenSEEKUploadIsSelected()
     {
         String[] args = new String[]{"--seek-resumes", "--upload", "-i", "example.pdf"};
 
@@ -288,11 +288,11 @@ public class ArgParserTest
         String application_name = ap.getApplication().getClass().getSimpleName();
 
         assertEquals(3, base_mode);
-        assertEquals("SeekCVUploaderApplication", application_name);
+        assertEquals("SeekResumesApplication", application_name);
     }
 
     @Test
-    public void parseArgsShouldReturnNullApplicationWhenCVUploaderHasNoInputs()
+    public void parseArgsShouldReturnNullApplicationWhenSeekResumesHasNoInputs()
     {
         String[] args = new String[]{"--seek-resumes", "--upload", "-i"};
 
@@ -306,7 +306,7 @@ public class ArgParserTest
 
 
     @Test
-    public void parseArgsShouldReturnNullApplicationWhenCVUploaderHasUploadFlagWithNoArgs()
+    public void parseArgsShouldReturnNullApplicationWhenSeekResumesHasUploadFlagWithNoArgs()
     {
         String[] args = new String[]{"--seek-resumes", "--upload"};
 
@@ -320,7 +320,7 @@ public class ArgParserTest
 
 
     @Test
-    public void parseArgsShouldReturnNullApplicationWhenCVUploaderHasShortenedUploadFlagWithNoArgs()
+    public void parseArgsShouldReturnNullApplicationWhenSeekResumesHasShortenedUploadFlagWithNoArgs()
     {
         String[] args = new String[]{"--seek-resumes", "-u"};
 
@@ -334,7 +334,7 @@ public class ArgParserTest
 
 
     @Test
-    public void parseArgsShouldReturnNullApplicationCVUploaderMenu()
+    public void parseArgsShouldReturnNullApplicationOnSeekResumesMenu()
     {
         String[] args = new String[]{"--seek-resumes"};
 
@@ -347,7 +347,7 @@ public class ArgParserTest
     }
 
     @Test
-    public void parseArgsShouldReturnCVUploaderApplicationWhenMultpleInputsProvided()
+    public void parseArgsShouldReturnSeekResumesApplicationWhenMultpleInputsProvided()
     {
         String[] args = new String[]{"--seek-resumes", "--upload", "-i", "example.pdf", "example2.pdf"};
 
@@ -355,6 +355,6 @@ public class ArgParserTest
         int base_mode = ap.parseArgs(args);
         String application_name = ap.getApplication().getClass().getSimpleName();
         assertEquals(3, base_mode);
-        assertEquals("SeekCVUploaderApplication", application_name);
+        assertEquals("SeekResumesApplication", application_name);
     }
 }

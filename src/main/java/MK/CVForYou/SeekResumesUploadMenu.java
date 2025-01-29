@@ -47,7 +47,7 @@ public class SeekResumesUploadMenu implements Menu
         }
 
 
-        return new SeekCVUploaderApplication(cv_uploader_args);
+        return new SeekResumesApplication(cv_uploader_args);
 	}
 
     private static Options getCVUploaderOptions()
