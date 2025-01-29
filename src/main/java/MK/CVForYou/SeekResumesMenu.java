@@ -28,8 +28,7 @@ public class SeekResumesMenu implements Menu
         try
         {
             CommandLine cmd = parser.parse(getOptions(), args, true);
-            if(args.length == 0)
-            {
+            if(args.length == 0) {
                 formatter.printHelp(CV_UPLOADER_USAGE, getOptions());
                 return null;
             }
@@ -46,8 +45,7 @@ public class SeekResumesMenu implements Menu
                 throw new ParseException("Unrecognised options: " + String.join(" ", cmd.getArgs()));
             }
         }
-        catch(ParseException e)
-        {
+        catch(ParseException e) {
             logger.error(e.getMessage());
             formatter.printHelp(CV_UPLOADER_USAGE, getOptions());
         }
