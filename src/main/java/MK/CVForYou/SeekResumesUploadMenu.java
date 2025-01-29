@@ -13,20 +13,21 @@ public class SeekResumesUploadMenu implements Menu
 	@Override
 	public Application parse(String[] args) throws ParseException {
 
+
         CVUploaderArgs cv_uploader_args = new CVUploaderArgs();
 
         if(args.length == 0)
         {
-            formatter.printHelp("CV_UPLOADER_USAGE",  getCVUploaderOptions(true));
+            formatter.printHelp("CV_UPLOADER_USAGE",  getOptions(true));
             return null;
         }
 
         try
         {
-            CommandLine cmd = parser.parse(getCVUploaderOptions(), args);
+            CommandLine cmd = parser.parse(getOptions(), args);
             if(cmd.hasOption("h"))
             {
-                formatter.printHelp("CV_UPLOADER_USAGE",  getCVUploaderOptions(true));
+                formatter.printHelp("CV_UPLOADER_USAGE",  getOptions(true));
                 return null;
             }
 
@@ -42,7 +43,7 @@ public class SeekResumesUploadMenu implements Menu
         catch(ParseException e)
         {
             logger.error(e.getMessage());
-            formatter.printHelp("CV_UPLOADER_USAGE", getCVUploaderOptions(true));
+            formatter.printHelp("CV_UPLOADER_USAGE", getOptions(true));
             throw e;
         }
 
@@ -50,12 +51,12 @@ public class SeekResumesUploadMenu implements Menu
         return new SeekResumesApplication(cv_uploader_args);
 	}
 
-    private static Options getCVUploaderOptions()
+    private static Options getOptions()
     {
-        return getCVUploaderOptions(false);
+        return getOptions(false);
     }
 
-    private static Options getCVUploaderOptions(boolean helpFormatted)
+    private static Options getOptions(boolean helpFormatted)
     {
         Options options = new Options();
 
