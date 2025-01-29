@@ -27,8 +27,7 @@ public class SeekResumesUploadMenu implements Menu
             if(cmd.hasOption("h"))
             {
                 formatter.printHelp("CV_UPLOADER_USAGE",  getCVUploaderOptions(true));
-            //    mode = 0;//???
-                return null; //TODO: CHECK
+                return null;
             }
 
             if (!cmd.hasOption("i"))
