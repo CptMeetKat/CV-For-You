@@ -64,14 +64,6 @@ public class SeekResumesUploadMenu implements Menu
             .desc("CV files to upload")
             .build();
 
-        if(!helpFormatted) //When we display help menu, we want these items to not be displayed
-        {
-            Option seek_auto_uploader = Option.builder("sr")
-                .longOpt("seek-resumes") 
-                .build();
-            options.addOption(seek_auto_uploader);
-        }
-
         options.addOption("h", "help", false, "print this message");
         options.addOption(input);
         return options;
