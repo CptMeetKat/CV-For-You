@@ -28,12 +28,7 @@ public class SeekResumesMenu implements Menu
         try
         {
             CommandLine cmd = parser.parse(getOptions(), args, true);
-            if(args.length == 0) {
-                formatter.printHelp(CV_UPLOADER_USAGE, getOptions());
-                return null;
-            }
-
-            if (cmd.hasOption("help"))
+            if(args.length == 0 || cmd.hasOption("help"))
             {
                 formatter.printHelp(CV_UPLOADER_USAGE, getOptions());
                 return null;
