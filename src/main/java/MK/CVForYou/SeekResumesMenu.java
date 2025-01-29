@@ -35,8 +35,6 @@ public class SeekResumesMenu implements Menu
             }
 
             String top_level_entry = args[0];
-
-
             if (menus.containsKey(top_level_entry)) {
                 Menu m = menus.get(top_level_entry);
                 return m.parse(ArrayUtils.popCopy(args));
