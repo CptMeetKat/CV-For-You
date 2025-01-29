@@ -11,7 +11,7 @@ public class CVGeneratorApplication implements Application
     Path[] sections;
     Path output_folder;
 
-    public CVGeneratorApplication(ArgParser ap)
+    public CVGeneratorApplication(CVGenerationArgs ap)
     {
         job_source = ap.getJDSource();
         input_document = ap.getInputDocument();

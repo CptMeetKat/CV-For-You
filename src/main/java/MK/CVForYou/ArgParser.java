@@ -502,4 +502,8 @@ public class ArgParser
 	public CVUploaderArgs getCVUploaderArgs() {
         return cv_uploader_args;
 	}
+
+    public CVGenerationArgs getCVGenerationArgs() {
+        return cv_generation_args;
+    }
 }

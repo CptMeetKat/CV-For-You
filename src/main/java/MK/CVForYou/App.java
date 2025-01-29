@@ -24,7 +24,7 @@ public class App
         int mode = ap.parseArgs(args);
 
         if ( mode == 1 )
-            application = new CVGeneratorApplication(ap);
+            application = new CVGeneratorApplication(ap.getCVGenerationArgs());
         else if( mode == 2)
             application = new SeekStatsApplication(ap.getSeekStatsArgs());
         else if ( mode == 3 )
