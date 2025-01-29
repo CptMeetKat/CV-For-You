@@ -12,9 +12,6 @@ public class SeekResumesUploadMenu implements Menu
 
 	@Override
 	public Application parse(String[] args) throws ParseException {
-
-
-        CVUploaderArgs cv_uploader_args = new CVUploaderArgs();
         try
         {
             CommandLine cmd = parser.parse(getOptions(), args);
@@ -28,6 +25,7 @@ public class SeekResumesUploadMenu implements Menu
                 throw new ParseException("-i must be provided");
             else if ( cmd.hasOption("i") )
             {
+                CVUploaderArgs cv_uploader_args = new CVUploaderArgs();
                 cv_uploader_args.setMode(1);
                 cv_uploader_args.addFiles(cmd.getOptionValues("i"));
                 return new SeekResumesApplication(cv_uploader_args);
