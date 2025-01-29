@@ -78,7 +78,7 @@ public class SeekResumesMenu implements Menu
             .build();
 
         Option remove = Option.builder("d")
-            .longOpt("remove")
+            .longOpt("delete")
             .desc("Delete CV from SEEK")
             .build();
 
