@@ -61,10 +61,6 @@ public class ArgParser
         return options;
     }
 
-    public Path[] getSections() {
-        return cv_generation_args.section_definition_paths;
-    }
-
     private static Options getBaseOptions()
     {
         Option cv_generator = Option.builder("cv")

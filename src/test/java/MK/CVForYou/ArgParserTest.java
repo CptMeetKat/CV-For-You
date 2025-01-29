@@ -84,7 +84,7 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         ap.parseArgs(args);
-        Path[] result = ap.getSections();
+        Path[] result = ap.getCVGenerationArgs().getSections();
         assertEquals(result.length, 1);
         assertEquals(expected, result[0].toString());
 
@@ -109,7 +109,7 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         ap.parseArgs(args);
-        Path[] result = ap.getSections();
+        Path[] result = ap.getCVGenerationArgs().getSections();
 
         if(expected.size() != result.length)
             fail("Expected <" + expected.size() + "> and result <" + result.length + "> differ in total files");
@@ -129,7 +129,7 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         ap.parseArgs(args);
-        Path[] result = ap.getSections();
+        Path[] result = ap.getCVGenerationArgs().getSections();
         
         assertEquals(result.length, 0);
     }
@@ -147,7 +147,7 @@ public class ArgParserTest
                                          "src/test/test_files/ArgParser/directory1/B.json"};
         ArgParser ap = new ArgParser();
         ap.parseArgs(args);
-        Path[] result = ap.getSections();
+        Path[] result = ap.getCVGenerationArgs().getSections();
         
         if(expected.length != result.length)
             fail("Expected <" + expected.length + "> and result <" + result.length + "> differ in total files");
@@ -172,7 +172,7 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         ap.parseArgs(args);
-        Path[] result = ap.getSections();
+        Path[] result = ap.getCVGenerationArgs().getSections();
         
         if(expected.length != result.length)
             fail("Expected <" + expected.length + "> and result <" + result.length + "> differ in total files");
