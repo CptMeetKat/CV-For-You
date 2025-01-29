@@ -31,8 +31,7 @@ public class SeekResumesUploadMenu implements Menu
                 return new SeekResumesApplication(cv_uploader_args);
             }
         }
-        catch(ParseException e)
-        {
+        catch(ParseException e) {
             logger.error(e.getMessage());
             formatter.printHelp("CV_UPLOADER_USAGE", getOptions());
         }
