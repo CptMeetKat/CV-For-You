@@ -16,9 +16,8 @@ public class ArgParser
     Options options;
     Options help_option;
 
-    Path compare_document_path;
+    Path compare_document_path; //TODO: Move these 3 out of this class 
     String seek_url; 
-
     String[] compare_cache_paths;
 
     int mode = 0;
