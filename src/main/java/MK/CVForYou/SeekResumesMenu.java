@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 public class SeekResumesMenu implements Menu
 {
     private String example_command_prefix;
-    private static final String SEEK_RESUMES_USAGE = "--upload <file>";
+    private static final String SEEK_RESUMES_USAGE = "--upload -i <file>";
 
     private HashMap<String, Menu> menus = new HashMap<String,Menu>();
     private HelpFormatter formatter = new HelpFormatter();
@@ -61,8 +61,8 @@ public class SeekResumesMenu implements Menu
 
     private void registerMenus()
     {
-        menus.put("--upload", new SeekResumesUploadMenu());
-        menus.put("-u", new SeekResumesUploadMenu());
+        menus.put("--upload", new SeekResumesUploadMenu(example_command_prefix + " --upload"));
+        menus.put("-u", new SeekResumesUploadMenu(example_command_prefix + " --upload"));
         menus.put("--delete", null); //TODO WARNING NULLL
         menus.put("-d", null); //TODO WARNING NULLL
     }

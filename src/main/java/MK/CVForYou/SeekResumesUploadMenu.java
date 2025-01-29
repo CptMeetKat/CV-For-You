@@ -6,9 +6,17 @@ import org.slf4j.LoggerFactory;
 
 public class SeekResumesUploadMenu implements Menu
 {
+    private String example_command_prefix;
+    private static final String SEEK_RESUMES_UPLOAD_USAGE = "-i <file>";
+
     private HelpFormatter formatter = new HelpFormatter();
     private CommandLineParser parser = new DefaultParser();
     private static final Logger logger = LoggerFactory.getLogger(SeekResumesUploadMenu.class);
+    
+    public SeekResumesUploadMenu(String example_command_prefix)
+    {
+        this.example_command_prefix = example_command_prefix;
+    }
 
 	@Override
 	public Application parse(String[] args) throws ParseException {
@@ -16,7 +24,7 @@ public class SeekResumesUploadMenu implements Menu
         {
             CommandLine cmd = parser.parse(getOptions(), args);
             if(cmd.hasOption("h") || args.length == 0) {
-                formatter.printHelp("CV_UPLOADER_USAGE",  getOptions());
+                printExampleCommand();
                 return null;
             }
 
@@ -32,7 +40,7 @@ public class SeekResumesUploadMenu implements Menu
         }
         catch(ParseException e) {
             logger.error(e.getMessage());
-            formatter.printHelp("CV_UPLOADER_USAGE", getOptions());
+            printExampleCommand();
         }
 
         return null;
@@ -50,5 +58,11 @@ public class SeekResumesUploadMenu implements Menu
         options.addOption("h", "help", false, "print this message");
         options.addOption(input);
         return options;
+    }
+
+
+    private void printExampleCommand()
+    {
+        formatter.printHelp(example_command_prefix + " " + SEEK_RESUMES_UPLOAD_USAGE, getOptions());
     }
 }
