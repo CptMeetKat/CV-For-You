@@ -204,7 +204,7 @@ public class ArgParser
         return options;
     }
 
-    public int parseArgs(String[] args)
+    public int parseArgs(String[] args) //TODO: Replace with return Application
     {
         try
         {
