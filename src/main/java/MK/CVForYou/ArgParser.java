@@ -17,7 +17,6 @@ public class ArgParser
     Options help_option;
 
     //TODO: Move these 3 out of this class 
-    String seek_url; 
     String[] compare_cache_paths;
 
     int mode = 0;
@@ -396,7 +395,7 @@ public class ArgParser
             cv_generation_args.jd_source = new JobFromFile(compare_document_path);
         }
         if (cmd.hasOption("cs")) {
-            seek_url = cmd.getOptionValue("cs");
+            String seek_url = cmd.getOptionValue("cs");
             cv_generation_args.jd_source = new JobFromSeekJob(seek_url);
         }
         if (cmd.hasOption("ca")) 
