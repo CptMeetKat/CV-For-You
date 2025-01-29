@@ -87,15 +87,6 @@ public class SeekResumesMenu implements Menu
             .desc("Delete CV from SEEK")
             .build();
 
-
-        if(!helpFormatted) 
-        {
-            Option seek_auto_uploader = Option.builder("sr")
-                .longOpt("seek-resumes")
-                .build();
-            options.addOption(seek_auto_uploader);
-        }
-
         options.addOption("h", "help", false, "print this message");
         options.addOption(upload);
         options.addOption(remove);
