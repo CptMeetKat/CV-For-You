@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 public class SeekResumeDeleteRequest implements Requestable
 {
-    static final Logger logger = LoggerFactory.getLogger(SeekResumeWrapper.class);
+    static final Logger logger = LoggerFactory.getLogger(SeekResumeDeleteRequest.class);
     SeekSessionManager session_manager;
 
     String resume_id;

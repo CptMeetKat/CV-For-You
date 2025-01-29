@@ -21,7 +21,7 @@ import java.io.StringReader;
 
 public class CSVReader
 {
-    static final Logger logger = LoggerFactory.getLogger(App.class);
+    static final Logger logger = LoggerFactory.getLogger(CSVReader.class);
 
 
     public static <T> List<T> readFromFile(Class<T> type, String filePath) throws IOException 
