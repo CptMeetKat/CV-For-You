@@ -16,7 +16,7 @@ public class ArgParser
     Options options;
     Options help_option;
 
-    Path compare_document_path; //TODO: Move these 3 out of this class 
+    //TODO: Move these 3 out of this class 
     String seek_url; 
     String[] compare_cache_paths;
 
@@ -392,7 +392,7 @@ public class ArgParser
     private void handleCompareFlags(CommandLine cmd)
     {
         if (cmd.hasOption("c")) {
-            compare_document_path = Paths.get(cmd.getOptionValue("c"));
+            Path compare_document_path = Paths.get(cmd.getOptionValue("c"));
             cv_generation_args.jd_source = new JobFromFile(compare_document_path);
         }
         if (cmd.hasOption("cs")) {
