@@ -64,8 +64,8 @@ public class SeekResumesMenu implements Menu
     {
         menus.put("--upload", new SeekResumesUploadMenu());
         menus.put("-u", new SeekResumesUploadMenu());
-        menus.put("--remove", null); //TODO WARNING NULLL
-        menus.put("-r", null); //TODO WARNING NULLL
+        menus.put("--delete", null); //TODO WARNING NULLL
+        menus.put("-d", null); //TODO WARNING NULLL
     }
 
     private static Options getOptions()
