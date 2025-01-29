@@ -278,50 +278,69 @@ public class ArgParserTest
     }
 
     @Test
-    public void parseArgsShouldReturnCVUploaderFlagWhenAutoUploaderSelected()
+    public void parseArgsShouldReturnCVUploaderApplicationFlagWhenSEEKUploadIsSelected()
     {
-        String[] args = new String[]{"--seek-resumes", "-i", "example.pdf"};
+        String[] args = new String[]{"--seek-resumes", "--upload", "-i", "example.pdf"};
 
         ArgParser ap = new ArgParser();
         int base_mode = ap.parseArgs(args);
-        int cv_uploader_mode = ap.getCVUploaderArgs().getMode();
+
+        String application_name = ap.getApplication().getClass().getSimpleName();
+
         assertEquals(3, base_mode);
-        assertEquals(1, cv_uploader_mode);
+        assertEquals("SeekCVUploaderApplication", application_name);
     }
 
     @Test
-    public void parseArgsShouldReturnFailWhenCVUploaderHasNoInputs()
+    public void parseArgsShouldReturnNullApplicationWhenCVUploaderHasNoInputs()
     {
-        String[] args = new String[]{"--seek-resumes", "-i"};
+        String[] args = new String[]{"--seek-resumes", "--upload", "-i"};
 
         ArgParser ap = new ArgParser();
         int base_mode = ap.parseArgs(args);
-        int cv_uploader_mode = ap.getCVUploaderArgs().getMode();
-        assertEquals(-1, base_mode);
-        assertEquals(0, cv_uploader_mode);
+        Application application = ap.getApplication();
+
+        assertEquals(3, base_mode);
+        assertEquals(null, application);
     }
 
+
     @Test
-    public void parseArgsShouldReturnFailFlagOnCVUploaderNotEnoughArgs()
+    public void parseArgsShouldReturnNullApplicationWhenCVUploaderHasUploadFlagWithNoArgs()
+    {
+        String[] args = new String[]{"--seek-resumes", "--upload"};
+
+        ArgParser ap = new ArgParser();
+        int base_mode = ap.parseArgs(args);
+        Application application = ap.getApplication();
+
+        assertEquals(3, base_mode);
+        assertEquals(null, application);
+    }
+
+
+    @Test
+    public void parseArgsShouldReturnNullApplicationCVUploaderMenu()
     {
         String[] args = new String[]{"--seek-resumes"};
 
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
-        int cv_uploader_mode = ap.getCVUploaderArgs().getMode();
-        assertEquals(-1, mode);
-        assertEquals(0, cv_uploader_mode);
+        Application application = ap.getApplication();
+
+        assertEquals(3, mode);
+        assertEquals(null, application);
     }
 
     @Test
-    public void parseArgsShouldReturnCVUploaderFlagWhenMultpleInputsProvided()
+    public void parseArgsShouldReturnCVUploaderApplicationWhenMultpleInputsProvided()
     {
-        String[] args = new String[]{"--seek-resumes", "-i", "example.pdf", "example2.pdf"};
+        String[] args = new String[]{"--seek-resumes", "--upload", "-i", "example.pdf", "example2.pdf"};
 
         ArgParser ap = new ArgParser();
         int base_mode = ap.parseArgs(args);
-        int cv_uploader_mode = ap.getCVUploaderArgs().getMode();
+        String application_name = ap.getApplication().getClass().getSimpleName();
         assertEquals(3, base_mode);
-        assertEquals(1, cv_uploader_mode);
+        assertEquals("SeekCVUploaderApplication", application_name);
     }
 }

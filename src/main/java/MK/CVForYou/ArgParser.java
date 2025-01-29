@@ -19,7 +19,7 @@ public class ArgParser
     int mode = 0;
 
     SeekStatsArgs seek_stats_args = new SeekStatsArgs();
-    CVUploaderArgs cv_uploader_args = new CVUploaderArgs();
+    //CVUploaderArgs cv_uploader_args = new CVUploaderArgs();
     CVGenerationArgs cv_generation_args = new CVGenerationArgs();
 
     CommandLineParser parser = new DefaultParser();
@@ -30,7 +30,7 @@ public class ArgParser
     private static final String BASIC_USAGE = "./CVForYou -d <document_path> -c <compare_path> -s <section_paths>";
     private static final String TOP_LEVEL_USAGE = "./CVForYou -cv";
     private static final String SEEK_STATS_USAGE = "./CVForYou -sa";
-    private static final String CV_UPLOADER_USAGE = "./CVForYou -sr";
+    //private static final String CV_UPLOADER_USAGE = "./CVForYou -sr";
 
     static final Logger logger = LoggerFactory.getLogger(ArgParser.class);
 
@@ -218,8 +218,9 @@ public class ArgParser
                 parseSeekStats(args);
             else if(mode == 3) 
             {
-                parseCVUploader(args);
-                application = new SeekCVUploaderApplication(cv_uploader_args);
+                Menu seek_resumes_menu = new CVUploaderMenu();
+                String[] reduced_args = ArrayUtils.popCopy(args);
+                application = seek_resumes_menu.parse(reduced_args);
             }
             else
                 logger.error("No mode selected");
@@ -232,63 +233,63 @@ public class ArgParser
         return mode;
     } 
 
-    private void parseCVUploader(String[] args) throws ParseException 
-    {
-        try
-        {
-            CommandLine cmd = parser.parse(getCVUploaderOptions(), args);
-            if(cmd.hasOption("h"))
-            {
-                formatter.printHelp(CV_UPLOADER_USAGE,  getCVUploaderOptions(true));
-                mode = 0;
-                return;
-            }
+    //private void parseCVUploader(String[] args) throws ParseException 
+    //{
+    //    try
+    //    {
+    //        CommandLine cmd = parser.parse(getCVUploaderOptions(), args);
+    //        if(cmd.hasOption("h"))
+    //        {
+    //            formatter.printHelp(CV_UPLOADER_USAGE,  getCVUploaderOptions(true));
+    //            mode = 0;
+    //            return;
+    //        }
 
-            if (!cmd.hasOption("i"))
-                throw new ParseException("-i must be provided");
-            else if ( cmd.hasOption("i") )
-            {
-                cv_uploader_args.setMode(1);
-                cv_uploader_args.addFiles(cmd.getOptionValues("i"));
-            }
+    //        if (!cmd.hasOption("i"))
+    //            throw new ParseException("-i must be provided");
+    //        else if ( cmd.hasOption("i") )
+    //        {
+    //            cv_uploader_args.setMode(1);
+    //            cv_uploader_args.addFiles(cmd.getOptionValues("i"));
+    //        }
 
-        }
-        catch(ParseException e)
-        {
-            logger.error(e.getMessage());
-            formatter.printHelp(CV_UPLOADER_USAGE, getCVUploaderOptions(true));
-            throw e;
-        }
+    //    }
+    //    catch(ParseException e)
+    //    {
+    //        logger.error(e.getMessage());
+    //        formatter.printHelp(CV_UPLOADER_USAGE, getCVUploaderOptions(true));
+    //        throw e;
+    //    }
 
-	}
+	//}
 
 
-    private static Options getCVUploaderOptions()
-    {
-        return getCVUploaderOptions(false);
-    }
+    //private static Options getCVUploaderOptions()
+    //{
+    //    return getCVUploaderOptions(false);
+    //}
 
-    private static Options getCVUploaderOptions(boolean helpFormatted)
-    {
-        Options options = new Options();
+    //private static Options getCVUploaderOptions(boolean helpFormatted)
+    //{
+    //    Options options = new Options();
 
-        Option input = Option.builder("i").hasArgs()
-            .longOpt("input")
-            .desc("CV files to upload")
-            .build();
+    //    Option input = Option.builder("i").hasArgs()
+    //        .longOpt("input")
+    //        .desc("CV files to upload")
+    //        .build();
 
-        if(!helpFormatted) //When we display help menu, we want these items to not be displayed
-        {
-            Option seek_auto_uploader = Option.builder("sr")
-                .longOpt("seek-resumes")
-                .build();
-            options.addOption(seek_auto_uploader);
-        }
+    //    if(!helpFormatted) //When we display help menu, we want these items to not be displayed
+    //    {
+    //        Option seek_auto_uploader = Option.builder("sr")
+    //            .longOpt("seek-resumes")
+    //            .build();
+    //        options.addOption(seek_auto_uploader);
+    //    }
 
-        options.addOption("h", "help", false, "print this message");
-        options.addOption(input);
-        return options;
-    }
+    //    options.addOption("h", "help", false, "print this message");
+    //    options.addOption(input);
+    //    return options;
+    //}
 
 	public void parseBase(String[] args) throws ParseException
     {
@@ -481,9 +482,9 @@ public class ArgParser
         return fileArray;
     }
 
-	public CVUploaderArgs getCVUploaderArgs() {
-        return cv_uploader_args;
-	}
+	//public CVUploaderArgs getCVUploaderArgs() {
+    //    return cv_uploader_args;
+	//}
 
     public CVGenerationArgs getCVGenerationArgs() {
         return cv_generation_args;
