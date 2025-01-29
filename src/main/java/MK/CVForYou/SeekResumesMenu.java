@@ -9,17 +9,23 @@ import org.slf4j.LoggerFactory;
 
 public class SeekResumesMenu implements Menu
 {
-    String help_string_prefix;
+    String example_command_prefix;
 
     HashMap<String, Menu> menus = new HashMap<String,Menu>();
     HelpFormatter formatter = new HelpFormatter();
-    private static final String CV_UPLOADER_USAGE = "./CVForYou -sr (-u | -d) <arg>";
+    private static final String SEEK_RESUMES_USAGE = "--upload <file>";
     CommandLineParser parser = new DefaultParser();
     static final Logger logger = LoggerFactory.getLogger(SeekResumesMenu.class);
 
-    public SeekResumesMenu()
+    public SeekResumesMenu(String example_command_prefix)
     {
+        this.example_command_prefix = example_command_prefix;
         registerMenus();
+    }
+
+    private void printExampleCommand()
+    {
+        formatter.printHelp(example_command_prefix + " " + SEEK_RESUMES_USAGE, getOptions());
     }
 
     @Override
@@ -29,7 +35,7 @@ public class SeekResumesMenu implements Menu
         {
             CommandLine cmd = parser.parse(getOptions(), args, true);
             if(args.length == 0) {
-                formatter.printHelp(CV_UPLOADER_USAGE, getOptions());
+                printExampleCommand();
                 return null;
             }
 
@@ -39,7 +45,7 @@ public class SeekResumesMenu implements Menu
                 return m.parse(ArrayUtils.popCopy(args));
             }
             else if(cmd.hasOption("help")) {
-                formatter.printHelp(CV_UPLOADER_USAGE, getOptions());
+                printExampleCommand();
             }
             else {
                 throw new ParseException("Unrecognised options: " + String.join(" ", cmd.getArgs()));
@@ -47,7 +53,7 @@ public class SeekResumesMenu implements Menu
         }
         catch(ParseException e) {
             logger.error(e.getMessage());
-            formatter.printHelp(CV_UPLOADER_USAGE, getOptions());
+            printExampleCommand();
         }
 
         return null;

@@ -217,7 +217,7 @@ public class ArgParser
                 parseSeekStats(args);
             else if(mode == 3) 
             {
-                Menu seek_resumes_menu = new SeekResumesMenu();
+                Menu seek_resumes_menu = new SeekResumesMenu("./CVForYou --seek-resumes");
                 String[] reduced_args = ArrayUtils.popCopy(args);
                 application = seek_resumes_menu.parse(reduced_args);
             }
