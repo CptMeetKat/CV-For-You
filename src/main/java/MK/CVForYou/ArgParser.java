@@ -25,12 +25,19 @@ public class ArgParser
     CommandLineParser parser = new DefaultParser();
     HelpFormatter formatter = new HelpFormatter(); //This should be global??
 
+    Application application;
+
     private static final String BASIC_USAGE = "./CVForYou -d <document_path> -c <compare_path> -s <section_paths>";
     private static final String TOP_LEVEL_USAGE = "./CVForYou -cv";
     private static final String SEEK_STATS_USAGE = "./CVForYou -sa";
     private static final String CV_UPLOADER_USAGE = "./CVForYou -sr";
 
     static final Logger logger = LoggerFactory.getLogger(ArgParser.class);
+
+    public Application getApplication()
+    {
+        return application;
+    }
 
     public ArgParser()
     {
@@ -210,7 +217,10 @@ public class ArgParser
             else if(mode == 2)
                 parseSeekStats(args);
             else if(mode == 3) 
+            {
                 parseCVUploader(args);
+                application = new SeekCVUploaderApplication(cv_uploader_args);
+            }
             else
                 logger.error("No mode selected");
         }
