@@ -30,6 +30,7 @@ public class SeekResumesUploadMenu implements Menu
             {
                 cv_uploader_args.setMode(1);
                 cv_uploader_args.addFiles(cmd.getOptionValues("i"));
+                return new SeekResumesApplication(cv_uploader_args);
             }
         }
         catch(ParseException e)
@@ -38,8 +39,7 @@ public class SeekResumesUploadMenu implements Menu
             formatter.printHelp("CV_UPLOADER_USAGE", getOptions());
         }
 
-
-        return new SeekResumesApplication(cv_uploader_args);
+        return null;
 	}
 
     private static Options getOptions()
