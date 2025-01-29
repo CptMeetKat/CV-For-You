@@ -29,13 +29,13 @@ public class SeekResumesMenu implements Menu
         {
             CommandLine cmd = parser.parse(getOptions(), args, true);
             if(args.length == 0) {
-                formatter.printHelp(CV_UPLOADER_USAGE, getOptions(true));
+                formatter.printHelp(CV_UPLOADER_USAGE, getOptions());
                 return null;
             }
 
             if (cmd.hasOption("help"))
             {
-                formatter.printHelp(CV_UPLOADER_USAGE, getOptions(true));
+                formatter.printHelp(CV_UPLOADER_USAGE, getOptions());
                 return null;
             }
 
@@ -54,15 +54,10 @@ public class SeekResumesMenu implements Menu
         catch(ParseException e)
         {
             logger.error(e.getMessage());
-            formatter.printHelp(CV_UPLOADER_USAGE, getOptions(true));
+            formatter.printHelp(CV_UPLOADER_USAGE, getOptions());
         }
 
         return null;
-    }
-
-    private static Options getOptions()
-    {
-        return getOptions(false);
     }
 
     private void registerMenus()
@@ -73,7 +68,7 @@ public class SeekResumesMenu implements Menu
         menus.put("-r", null); //TODO WARNING NULLL
     }
 
-    private static Options getOptions(boolean helpFormatted)
+    private static Options getOptions()
     {
         Options options = new Options();
 
