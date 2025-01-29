@@ -15,7 +15,7 @@ public class CVUploaderMenu implements Menu
     HelpFormatter formatter = new HelpFormatter();
     private static final String CV_UPLOADER_USAGE = "./CVForYou -sr (-u | -d) <arg>";
     CommandLineParser parser = new DefaultParser();
-    static final Logger logger = LoggerFactory.getLogger(ArgParser.class);
+    static final Logger logger = LoggerFactory.getLogger(CVUploaderMenu.class);
 
     public CVUploaderMenu()
     {
