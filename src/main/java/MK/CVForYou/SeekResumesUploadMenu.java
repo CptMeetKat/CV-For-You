@@ -6,9 +6,9 @@ import org.slf4j.LoggerFactory;
 
 public class SeekResumesUploadMenu implements Menu
 {
-    HelpFormatter formatter = new HelpFormatter();
-    CommandLineParser parser = new DefaultParser();
-    static final Logger logger = LoggerFactory.getLogger(SeekResumesUploadMenu.class);
+    private HelpFormatter formatter = new HelpFormatter();
+    private CommandLineParser parser = new DefaultParser();
+    private static final Logger logger = LoggerFactory.getLogger(SeekResumesUploadMenu.class);
 
 	@Override
 	public Application parse(String[] args) throws ParseException {
