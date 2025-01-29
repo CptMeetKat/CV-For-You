@@ -16,9 +16,6 @@ public class ArgParser
     Options options;
     Options help_option;
 
-    //TODO: Move these 3 out of this class 
-    String[] compare_cache_paths;
-
     int mode = 0;
 
     SeekStatsArgs seek_stats_args = new SeekStatsArgs();
@@ -403,7 +400,7 @@ public class ArgParser
 
         if (cmd.hasOption("cc")) 
         {
-            compare_cache_paths = cmd.getOptionValues("cc");
+            String[] compare_cache_paths = cmd.getOptionValues("cc");
             ArrayList<Path> paths = new ArrayList<>();
             for(String cache : compare_cache_paths)
             {
