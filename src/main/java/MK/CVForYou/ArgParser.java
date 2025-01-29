@@ -237,7 +237,6 @@ public class ArgParser
         try
         {
             CommandLine cmd = parser.parse(getCVUploaderOptions(), args);
-            //parseSubCommands(); stops if it finds a correct one
             if(cmd.hasOption("h"))
             {
                 formatter.printHelp(CV_UPLOADER_USAGE,  getCVUploaderOptions(true));
