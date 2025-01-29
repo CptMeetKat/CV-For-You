@@ -36,7 +36,6 @@ public class SeekResumesUploadMenu implements Menu
         {
             logger.error(e.getMessage());
             formatter.printHelp("CV_UPLOADER_USAGE", getOptions());
-            throw e;
         }
 
 
