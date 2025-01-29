@@ -57,17 +57,8 @@ public class ArgParser
         return seek_stats_args;
     }
 
-    public Path getInputDocument()
-    {
-        return cv_generation_args.input_document;
-    }
-
     public Options getOptions() {
         return options;
-    }
-
-    public Path getOutputFolder() {
-        return cv_generation_args.output_directory;
     }
 
     public void setOutputFolder(String path) {
@@ -218,11 +209,6 @@ public class ArgParser
         options.addOptionGroup(compare_input);
 
         return options;
-    }
-
-    public JobSource getJDSource()
-    {
-        return cv_generation_args.jd_source;
     }
 
     public int parseArgs(String[] args)
