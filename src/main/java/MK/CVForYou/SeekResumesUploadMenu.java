@@ -15,17 +15,10 @@ public class SeekResumesUploadMenu implements Menu
 
 
         CVUploaderArgs cv_uploader_args = new CVUploaderArgs();
-
-        if(args.length == 0)
-        {
-            formatter.printHelp("CV_UPLOADER_USAGE",  getOptions());
-            return null;
-        }
-
         try
         {
             CommandLine cmd = parser.parse(getOptions(), args);
-            if(cmd.hasOption("h"))
+            if(cmd.hasOption("h") || args.length == 0)
             {
                 formatter.printHelp("CV_UPLOADER_USAGE",  getOptions());
                 return null;
@@ -38,7 +31,6 @@ public class SeekResumesUploadMenu implements Menu
                 cv_uploader_args.setMode(1);
                 cv_uploader_args.addFiles(cmd.getOptionValues("i"));
             }
-
         }
         catch(ParseException e)
         {
