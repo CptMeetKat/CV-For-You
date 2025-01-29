@@ -61,10 +61,6 @@ public class ArgParser
         return options;
     }
 
-    public void setOutputFolder(String path) {
-        cv_generation_args.output_directory = Paths.get(path);
-    }
-
     public Path[] getSections() {
         return cv_generation_args.section_definition_paths;
     }
@@ -389,7 +385,7 @@ public class ArgParser
     private void handleOutputFlags(CommandLine cmd)
     {
         if (cmd.hasOption("o"))
-            setOutputFolder(cmd.getOptionValue("o"));
+            cv_generation_args.setOutputFolder(cmd.getOptionValue("o"));
     }
 
     private void handleDocumentFlags(CommandLine cmd)

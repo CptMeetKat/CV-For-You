@@ -28,4 +28,8 @@ public class CVGenerationArgs
     public Path getOutputFolder() {
         return output_directory;
     }
+
+    public void setOutputFolder(String path) {
+        output_directory = Paths.get(path);
+    }
 }
