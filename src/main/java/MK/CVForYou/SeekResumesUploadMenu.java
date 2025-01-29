@@ -15,8 +15,7 @@ public class SeekResumesUploadMenu implements Menu
         try
         {
             CommandLine cmd = parser.parse(getOptions(), args);
-            if(cmd.hasOption("h") || args.length == 0)
-            {
+            if(cmd.hasOption("h") || args.length == 0) {
                 formatter.printHelp("CV_UPLOADER_USAGE",  getOptions());
                 return null;
             }
