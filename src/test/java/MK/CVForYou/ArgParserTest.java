@@ -320,6 +320,20 @@ public class ArgParserTest
 
 
     @Test
+    public void parseArgsShouldReturnNullApplicationWhenCVUploaderHasShortenedUploadFlagWithNoArgs()
+    {
+        String[] args = new String[]{"--seek-resumes", "-u"};
+
+        ArgParser ap = new ArgParser();
+        int base_mode = ap.parseArgs(args);
+        Application application = ap.getApplication();
+
+        assertEquals(3, base_mode);
+        assertEquals(null, application);
+    }
+
+
+    @Test
     public void parseArgsShouldReturnNullApplicationCVUploaderMenu()
     {
         String[] args = new String[]{"--seek-resumes"};

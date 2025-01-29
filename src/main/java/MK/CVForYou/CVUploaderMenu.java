@@ -68,7 +68,9 @@ public class CVUploaderMenu implements Menu
     private void registerMenus()
     {
         menus.put("--upload", new SeekResumesUploadMenu());
+        menus.put("-u", new SeekResumesUploadMenu());
         menus.put("--remove", null); //TODO WARNING NULLL
+        menus.put("-r", null); //TODO WARNING NULLL
     }
 
     private static Options getOptions(boolean helpFormatted)
