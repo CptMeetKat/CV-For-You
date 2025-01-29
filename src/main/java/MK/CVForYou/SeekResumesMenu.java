@@ -7,7 +7,7 @@ import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CVUploaderMenu implements Menu
+public class SeekResumesMenu implements Menu
 {
     String help_string_prefix;
 
@@ -15,9 +15,9 @@ public class CVUploaderMenu implements Menu
     HelpFormatter formatter = new HelpFormatter();
     private static final String CV_UPLOADER_USAGE = "./CVForYou -sr (-u | -d) <arg>";
     CommandLineParser parser = new DefaultParser();
-    static final Logger logger = LoggerFactory.getLogger(CVUploaderMenu.class);
+    static final Logger logger = LoggerFactory.getLogger(SeekResumesMenu.class);
 
-    public CVUploaderMenu()
+    public SeekResumesMenu()
     {
         registerMenus();
     }
