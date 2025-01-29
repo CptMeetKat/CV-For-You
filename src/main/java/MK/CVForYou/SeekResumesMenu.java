@@ -40,8 +40,7 @@ public class SeekResumesMenu implements Menu
                 return m.parse(ArrayUtils.popCopy(args));
             }
             else {
-                String err = "Unrecognised options: " + String.join(" ", cmd.getArgs());
-                throw new ParseException(err);
+                throw new ParseException("Unrecognised options: " + String.join(" ", cmd.getArgs()));
             }
         }
         catch(ParseException e)
