@@ -10,9 +10,10 @@ import org.slf4j.LoggerFactory;
 public class SeekResumesMenu implements Menu
 {
     private String example_command_prefix;
+    private static final String SEEK_RESUMES_USAGE = "--upload <file>";
+
     private HashMap<String, Menu> menus = new HashMap<String,Menu>();
     private HelpFormatter formatter = new HelpFormatter();
-    private static final String SEEK_RESUMES_USAGE = "--upload <file>";
     private CommandLineParser parser = new DefaultParser();
     private static final Logger logger = LoggerFactory.getLogger(SeekResumesMenu.class);
 
