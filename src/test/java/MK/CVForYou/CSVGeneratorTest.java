@@ -129,5 +129,21 @@ public class CSVGeneratorTest
 
         assertEquals(expected, csv);
     }
+
+    @Test
+    public void makeCSVWithStringThatContainsQuoteShouldWriteNull()
+    {
+        String expected = "'field1','items'\n'null',''";
+
+        BasicPublicObject record = new BasicPublicObject();
+        record.field1 = "I contain a quote (')";
+        ArrayList<BasicPublicObject> records = new ArrayList<BasicPublicObject>();
+        records.add(record);
+        
+        String csv = CSVGenerator.makeCSV(records, BasicPublicObject.class);
+
+        assertEquals(expected, csv);
+    }
+
 }
 

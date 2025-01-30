@@ -29,9 +29,9 @@ public class SeekAppliedJobCSVRow
 
     private static String nullToEmptyString(String text)
     {
-        if(text == null)
-            return "";
-        return text;
+        if(text == null) //Sanitization for CSV - display null fields as empty cell
+            return "";                  
+        return text.replaceAll("'", ""); //Sanitization for CSV - remove quotes
     }
 
     public SeekAppliedJobCSVRow(SeekAppliedJob job, SeekAppliedJobInsights insights)

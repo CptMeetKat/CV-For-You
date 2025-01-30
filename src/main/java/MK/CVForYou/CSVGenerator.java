@@ -45,8 +45,18 @@ public class CSVGenerator
                     Object value = field.get(item); 
                     if(value == null)
                         sb.append("''");
-                    else                                       
-                        sb.append(String.format("'%s'", value.toString().replaceAll("'", "")));
+                    else
+                    {
+                        if(value.toString().contains("'")) //TODO: Add blacklist characters to constructor
+                        {
+                            logger.warn("Column '{}' contains an illegal quote character in '{}', the value is replaced with 'null'", column, value.toString());
+                            sb.append("'null'");
+                        }
+                        else
+                        {
+                            sb.append(String.format("'%s'", value.toString()));
+                        }
+                    }
 
                 } catch (IllegalAccessException e) {
                     sb.append("'null'");
