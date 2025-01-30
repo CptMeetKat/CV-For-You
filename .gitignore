@@ -12,3 +12,5 @@ all_saved.json
 run_seek.sh
 run_seek2.sh
 startup.sh
+*.csv
+*.pdf
