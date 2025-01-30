@@ -27,7 +27,7 @@ public class SeekAppliedJobCSVRow
 
     public SeekAppliedJobCSVRow() { }
 
-    private static String nullToEmptyString(String text)
+    private static String nullToEmptyString(String text) //TODO: Label this function better
     {
         if(text == null) //Sanitization for CSV - display null fields as empty cell
             return "";                  
