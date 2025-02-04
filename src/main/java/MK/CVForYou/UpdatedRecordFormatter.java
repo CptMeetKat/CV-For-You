@@ -23,7 +23,7 @@ public class UpdatedRecordFormatter
                 String b = field.get(updated).toString();
 
                 if(!a.equals(b))
-                    sb.append(String.format(" %-35s %-6s -> %s\n", field.getName(), a, b));
+                    sb.append(String.format(" %-35s %6s -> %s\n", field.getName(), a, b));
 
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				e.printStackTrace();
