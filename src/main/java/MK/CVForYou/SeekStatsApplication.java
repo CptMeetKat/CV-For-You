@@ -66,9 +66,9 @@ public class SeekStatsApplication implements Application
             logger.info("No updates required\n");
         else
             if(new_records > 0)
-                logger.info("{} records added\n", new_records);
+                logger.info("{} {} added\n", new_records, new_records == 1 ? "record" : "records");
             if(updated_records > 0)
-                logger.info("{} records updated\n", updated_records);
+                logger.info("{} {} updated\n", updated_records, updated_records == 1 ? "record": "records");
 
 
         return mapToRecords(history_map);
