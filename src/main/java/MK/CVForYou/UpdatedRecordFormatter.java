@@ -13,7 +13,8 @@ public class UpdatedRecordFormatter
         StringBuilder sb = new StringBuilder();
         sb.append(String.format(" %-10s %s\n", "job_id", updated.job_id));
         sb.append(String.format(" %-10s %s\n", "title", updated.job_title));
-        sb.append(String.format(" %-10s %s\n\n", "company", updated.company_name));
+        sb.append(String.format(" %-10s %s\n", "company", updated.company_name));
+        sb.append(String.format(" %-10s %s\n\n", "state", updated.latest_status));
  
 
         for (Field field : SeekAppliedJobCSVRow.class.getDeclaredFields()) {
