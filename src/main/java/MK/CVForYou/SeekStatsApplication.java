@@ -62,7 +62,7 @@ public class SeekStatsApplication implements Application
             }
         }
 
-        if(new_records == 0 && updated_records == 0)
+        if(new_records == 0 && updated_records == 0) //TODO: Hide all this log
             logger.info("No updates required\n");
         else
             if(new_records > 0)
