@@ -40,7 +40,6 @@ public class SeekStatsApplication implements Application
     {
         HashMap<String, SeekAppliedJobCSVRow> history_map = recordsToMap(historical_data);
 
-        boolean isUpdated = false;
         int new_records = 0;
         int updated_records = 0;
 
@@ -53,7 +52,6 @@ public class SeekStatsApplication implements Application
                     logger.info("Updating 1 with 2\n {} \n {}\n", history_record, fresh); //TODO: Change wording...
                     history_map.put(id, fresh);
                     updated_records++;
-                    isUpdated = true;
                 }
             }
             else
@@ -61,11 +59,10 @@ public class SeekStatsApplication implements Application
                 logger.info("Adding new record\n{}\n", fresh);
                 history_map.put(fresh.getIdentifer(), fresh);
                 new_records++;
-                isUpdated = true;
             }
         }
-        
-        if(!isUpdated)
+
+        if(new_records == 0 && updated_records == 0)
             logger.info("No updates required\n");
         else
             logger.info("{} records added, {} records updated\n", new_records, updated_records);
