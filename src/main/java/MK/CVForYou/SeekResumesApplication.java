@@ -75,7 +75,7 @@ public class SeekResumesApplication implements Application
     {
         ArrayList<SeekResumesResponse> uploaded = new SeekResumeWrapper().getSeekResumes();
 
-        logger.info("{} Uploaded Resumes", uploaded.size());
+        logger.info("{} Resumes on SEEK", uploaded.size());
         for(SeekResumesResponse resume : uploaded)
             logger.info("\t{}\t {} {} {}", resume.id, String.format("%-20s", resume.name),
                     String.format("%-8s", resume.size),
