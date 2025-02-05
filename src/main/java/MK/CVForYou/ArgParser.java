@@ -26,7 +26,6 @@ public class ArgParser
     private static final String BASIC_USAGE = "./CVForYou -d <document_path> -c <compare_path> -s <section_paths>";
     private static final String TOP_LEVEL_USAGE = "./CVForYou -cv";
     private static final String SEEK_STATS_USAGE = "./CVForYou -sa";
-    //private static final String CV_UPLOADER_USAGE = "./CVForYou -sr";
 
     static final Logger logger = LoggerFactory.getLogger(ArgParser.class);
 
