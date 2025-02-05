@@ -13,8 +13,6 @@ public class SeekResumesMenu implements Menu
     private static final String SEEK_RESUMES_USAGE = "--upload -i <file>";
 
     private HashMap<String, Menu> menus = new HashMap<String,Menu>();
-    private HelpFormatter formatter = new HelpFormatter();
-    private CommandLineParser parser = new DefaultParser();
     private static final Logger logger = LoggerFactory.getLogger(SeekResumesMenu.class);
 
     public SeekResumesMenu(String example_command_prefix)
@@ -25,6 +23,7 @@ public class SeekResumesMenu implements Menu
 
     private void printExampleCommand()
     {
+        HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp(example_command_prefix + " " + SEEK_RESUMES_USAGE, getOptions());
     }
 
@@ -33,6 +32,8 @@ public class SeekResumesMenu implements Menu
     {
         try
         {
+            CommandLineParser parser = new DefaultParser();
+            parser.parse(getOptions(), args, true);
             CommandLine cmd = parser.parse(getOptions(), args, true);
             if(args.length == 0) {
                 printExampleCommand();
