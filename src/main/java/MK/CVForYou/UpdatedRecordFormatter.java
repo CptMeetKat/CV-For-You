@@ -21,14 +21,10 @@ public class UpdatedRecordFormatter
         long daysSince = getDaysSince(updated.applied_at);
         sb.append(String.format(" %-10s %d %s ago\n\n", "applied", daysSince, daysSince != 1L ? "days": "day"));
 
-
- 
-
         for (Field field : SeekAppliedJobCSVRow.class.getDeclaredFields()) {
 			try {
-				String a = field.get(former).toString();
-                String b = field.get(updated).toString();
-
+				String a = getFieldValue(field, former);
+				String b = getFieldValue(field, updated);
                 if(!a.equals(b))
                     sb.append(String.format(" %-35s %6s -> %s\n", field.getName(), a, b));
 
@@ -40,6 +36,14 @@ public class UpdatedRecordFormatter
         return sb.toString();
     }
 
+    public static String getFieldValue(Field field, SeekAppliedJobCSVRow target) throws IllegalArgumentException, IllegalAccessException
+    {
+        Object former_field = field.get(target);
+
+        if(former_field == null)
+            return "";
+        return former_field.toString();
+    }
 
     private static long getDaysSince(String date)
     {
