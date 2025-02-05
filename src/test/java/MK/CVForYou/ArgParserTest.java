@@ -357,4 +357,43 @@ public class ArgParserTest
         assertEquals(3, base_mode);
         assertEquals("SeekResumesApplication", application_name);
     }
+
+//
+    @Test
+    public void parseArgsShouldReturnNoApplicationWhenCommandIsUsedWithIncorrectArgs()
+    {
+        String[] args = new String[]{"--seek-resumes", "--delete"};
+
+        ArgParser ap = new ArgParser();
+        int base_mode = ap.parseArgs(args);
+        Application application = ap.getApplication();
+        assertEquals(3, base_mode);
+        assertEquals(null, application);
+    }
+
+
+    @Test
+    public void parseArgsShouldReturnSeekResumesApplicationWhenDeleteIsUsed()
+    {
+        String[] args = new String[]{"--seek-resumes", "--delete", "--id", "id1"};
+
+        ArgParser ap = new ArgParser();
+        int base_mode = ap.parseArgs(args);
+        String application_name = ap.getApplication().getClass().getSimpleName();
+        assertEquals(3, base_mode);
+        assertEquals("SeekResumesApplication", application_name);
+    }
+
+
+    @Test
+    public void parseArgsShouldReturnSeekResumesApplicationWhenDeleteIsUsedWithMultipleArgs()
+    {
+        String[] args = new String[]{"--seek-resumes", "--delete", "--id", "id1", "id2"};
+
+        ArgParser ap = new ArgParser();
+        int base_mode = ap.parseArgs(args);
+        String application_name = ap.getApplication().getClass().getSimpleName();
+        assertEquals(3, base_mode);
+        assertEquals("SeekResumesApplication", application_name);
+    }
 }
