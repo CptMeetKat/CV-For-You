@@ -76,12 +76,14 @@ public class SeekResumesMenu implements Menu
 
         Option upload = Option.builder("u")
             .longOpt("upload")
-            .desc("Upload CV to SEEK")
+            .desc("Upload CVs to SEEK")
             .build();
 
         Option remove = Option.builder("d")
             .longOpt("delete")
-            .desc("Delete CV from SEEK")
+            .desc("Delete CVs from SEEK")
+            .build();
+
             .build();
 
         options.addOption("h", "help", false, "print this message");
