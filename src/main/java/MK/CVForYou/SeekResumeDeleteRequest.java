@@ -26,8 +26,8 @@ public class SeekResumeDeleteRequest implements Requestable
 
     public ArrayList<SeekResumesResponse> deleteSeekResume()
     {
-        session_manager.makeRequest(this);
-        return null;
+        session_manager.makeRequest(this); 
+        return null; //TODO: this returns null????
     }
 
     public JSONObject deleteSeekResumes(String access_token) throws IOException, InterruptedException
