@@ -68,6 +68,10 @@ public class SeekResumesMenu implements Menu
         Menu delete_menu = new SeekResumesDeleteMenu(example_command_prefix + " --delete"); //TODO Maybe make this two args instead of one joined monstorsity
         menus.put("--delete", delete_menu);
         menus.put("-d", delete_menu);
+
+        Menu view_menu = new SeekResumesViewMenu(example_command_prefix + " --view");
+        menus.put("--view", view_menu);
+        menus.put("-v", view_menu);
     }
 
     private static Options getOptions()
@@ -84,11 +88,15 @@ public class SeekResumesMenu implements Menu
             .desc("Delete CVs from SEEK")
             .build();
 
+        Option view = Option.builder("v")
+            .longOpt("view")
+            .desc("View CVs uploaded on SEEK")
             .build();
 
         options.addOption("h", "help", false, "print this message");
         options.addOption(upload);
         options.addOption(remove);
+        options.addOption(view);
 
         return options;
     }

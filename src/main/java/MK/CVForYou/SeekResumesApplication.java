@@ -31,6 +31,8 @@ public class SeekResumesApplication implements Application
             uploadFiles();
         else if(mode == 2)
             deleteCVs();
+        else if(mode == 3)
+            printUploadedResumes();
 	}
 
     public void deleteCVs()
