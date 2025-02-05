@@ -9,8 +9,6 @@ public class SeekResumesUploadMenu implements Menu
     private String example_command_prefix;
     private static final String SEEK_RESUMES_UPLOAD_USAGE = "-i <file>";
 
-    private HelpFormatter formatter = new HelpFormatter();
-    private CommandLineParser parser = new DefaultParser();
     private static final Logger logger = LoggerFactory.getLogger(SeekResumesUploadMenu.class);
     
     public SeekResumesUploadMenu(String example_command_prefix)
@@ -22,6 +20,7 @@ public class SeekResumesUploadMenu implements Menu
 	public Application parse(String[] args) throws ParseException {
         try
         {
+            CommandLineParser parser = new DefaultParser();
             CommandLine cmd = parser.parse(getOptions(), args);
             if(cmd.hasOption("h") || args.length == 0) {
                 printExampleCommand();
@@ -63,6 +62,7 @@ public class SeekResumesUploadMenu implements Menu
 
     private void printExampleCommand()
     {
+        HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp(example_command_prefix + " " + SEEK_RESUMES_UPLOAD_USAGE, getOptions());
     }
 }
