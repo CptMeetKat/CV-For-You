@@ -35,7 +35,6 @@ public class SeekResumesApplication implements Application
 
     public void deleteCVs()
     {
-        System.out.println("HELLO WORLD");
         for(String id : ids)
         {
             logger.info("Deleteing CV file '{}' from Seek", id);
