@@ -32,7 +32,7 @@ public class SeekResumesDeleteMenu implements Menu
                 throw new ParseException("-id must be provided");
             else if ( cmd.hasOption("id") )
             {
-                SeekResumesArgs seek_resumes_args = new SeekResumesArgs(); //TODO: this class needs to be renamed
+                SeekResumesArgs seek_resumes_args = new SeekResumesArgs();
                 seek_resumes_args.setMode(2);
                 seek_resumes_args.addIDs(cmd.getOptionValues("id"));
                 return new SeekResumesApplication(seek_resumes_args);
