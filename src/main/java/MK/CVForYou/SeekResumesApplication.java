@@ -17,7 +17,7 @@ public class SeekResumesApplication implements Application
     ArrayList<String> ids;
 
 
-    public SeekResumesApplication(CVUploaderArgs args) 
+    public SeekResumesApplication(SeekResumesArgs args) 
     {
         this.session_manager = SeekSessionManager.getManager();
         mode = args.getMode();

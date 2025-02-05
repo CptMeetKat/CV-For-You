@@ -4,7 +4,7 @@ package MK.CVForYou;
 import java.io.File;
 import java.util.ArrayList;
 
-public class CVUploaderArgs
+public class SeekResumesArgs
 {
     public ArrayList<File> files = new ArrayList<File>();
     public ArrayList<String> ids = new ArrayList<String>();
