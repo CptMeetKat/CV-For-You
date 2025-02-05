@@ -14,6 +14,7 @@ public class SeekResumesApplication implements Application
 
     int mode;
     ArrayList<File> files;
+    ArrayList<String> ids;
 
 
     public SeekResumesApplication(CVUploaderArgs args) 
@@ -21,13 +22,29 @@ public class SeekResumesApplication implements Application
         this.session_manager = SeekSessionManager.getManager();
         mode = args.getMode();
         files = args.files;
+        ids = args.ids;
     }
 
 	@Override
 	public void run() {
         if(mode == 1)
             uploadFiles();
+        else if(mode == 2)
+            deleteCVs();
 	}
+
+    public void deleteCVs()
+    {
+        System.out.println("HELLO WORLD");
+        for(String id : ids)
+        {
+            logger.info("Deleteing CV file '{}' from Seek", id);
+            SeekResumeDeleteRequest request = new SeekResumeDeleteRequest(id);
+            request.deleteSeekResume();
+            printUploadedResumes();
+            Utils.sleep(3);
+        }
+    }
 
 	@Override
 	public <T> void setDependency(T service, Class<T> serviceType) {
@@ -60,7 +77,7 @@ public class SeekResumesApplication implements Application
 
         logger.info("{} Uploaded Resumes", uploaded.size());
         for(SeekResumesResponse resume : uploaded)
-            logger.info("\t{} {} {}", String.format("%-20s", resume.name),
+            logger.info("\t{}\t {} {} {}", resume.id, String.format("%-20s", resume.name),
                     String.format("%-8s", resume.size),
                     resume.created);
     }

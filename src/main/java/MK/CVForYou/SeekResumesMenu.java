@@ -64,8 +64,10 @@ public class SeekResumesMenu implements Menu
         Menu upload_menu = new SeekResumesUploadMenu(example_command_prefix + " --upload");
         menus.put("--upload", upload_menu);
         menus.put("-u", upload_menu);
-        menus.put("--delete", null); //TODO WARNING NULLL
-        menus.put("-d", null); //TODO WARNING NULLL
+
+        Menu delete_menu = new SeekResumesDeleteMenu(example_command_prefix + " --delete"); //TODO Maybe make this two args instead of one joined monstorsity
+        menus.put("--delete", delete_menu);
+        menus.put("-d", delete_menu);
     }
 
     private static Options getOptions()

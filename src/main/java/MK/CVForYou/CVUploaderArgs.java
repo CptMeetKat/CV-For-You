@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class CVUploaderArgs
 {
     public ArrayList<File> files = new ArrayList<File>();
+    public ArrayList<String> ids = new ArrayList<String>();
     int mode;
 
     public void setMode(int mode)
@@ -28,5 +29,11 @@ public class CVUploaderArgs
     {
         for(String p : paths)
             files.add(new File(p));
+    }
+
+    public void addIDs(String ids[])
+    {
+        for(String id : ids)
+            this.ids.add(id);
     }
 }
