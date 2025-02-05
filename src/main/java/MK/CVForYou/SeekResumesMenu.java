@@ -61,8 +61,9 @@ public class SeekResumesMenu implements Menu
 
     private void registerMenus()
     {
-        menus.put("--upload", new SeekResumesUploadMenu(example_command_prefix + " --upload"));
-        menus.put("-u", new SeekResumesUploadMenu(example_command_prefix + " --upload"));
+        Menu upload_menu = new SeekResumesUploadMenu(example_command_prefix + " --upload");
+        menus.put("--upload", upload_menu);
+        menus.put("-u", upload_menu);
         menus.put("--delete", null); //TODO WARNING NULLL
         menus.put("-d", null); //TODO WARNING NULLL
     }
