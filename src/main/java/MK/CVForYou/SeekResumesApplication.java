@@ -40,9 +40,9 @@ public class SeekResumesApplication implements Application
             logger.info("Deleteing CV file '{}' from Seek", id);
             SeekResumeDeleteRequest request = new SeekResumeDeleteRequest(id);
             request.deleteSeekResume();
-            printUploadedResumes();
             Utils.sleep(3);
         }
+        printUploadedResumes();
     }
 
 	@Override
