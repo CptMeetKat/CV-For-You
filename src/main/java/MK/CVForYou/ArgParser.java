@@ -95,7 +95,7 @@ public class ArgParser
         Options options = new Options();
 
         Option analysis = Option.builder("a")
-            .longOpt("analysis")
+            .longOpt("analysis") //TODO: rename analyse
             .desc("Aggregate stats from Seek")
             .build();
 
