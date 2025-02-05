@@ -77,9 +77,10 @@ public class SeekResumesApplication implements Application
 
         logger.info("{} Resumes on SEEK", uploaded.size());
         for(SeekResumesResponse resume : uploaded)
-            logger.info("\t{}\t {} {} {}", resume.id, String.format("%-20s", resume.name),
+            logger.info("\t{} {} {} {}", String.format("%-20s", resume.name),
                     String.format("%-8s", resume.size),
-                    resume.created);
+                    resume.created,
+                    String.format("%39s", resume.id));
     }
 
 }
