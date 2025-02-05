@@ -1,7 +1,4 @@
 package MK.CVForYou;
-//TODO: Replace apache commons
-//- No ordered help format pritns
-//- Forces hacks to make multi layer programs work
 import org.apache.commons.cli.*;
 
 import java.io.IOException;
