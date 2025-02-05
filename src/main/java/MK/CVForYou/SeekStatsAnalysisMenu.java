@@ -24,11 +24,15 @@ public class SeekStatsAnalysisMenu implements Menu
             CommandLine cmd = parser.parse(getOptions(), args);
             
 
-
-//TODO missing help
             SeekStatsArgs seek_stats_args = new SeekStatsArgs();
             seek_stats_args.setMode(1);
-            if(args.length == 0)
+            
+            if( cmd.hasOption("help") )
+            {
+                printExampleCommand();
+                return null;
+            }
+            else if(args.length == 0)
                 return new SeekStatsApplication(seek_stats_args);
             else if ( cmd.hasOption("o") )
                 seek_stats_args.setOutput(cmd.getOptionValue("o"));
