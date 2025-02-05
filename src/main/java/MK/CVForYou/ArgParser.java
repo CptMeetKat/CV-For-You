@@ -210,7 +210,12 @@ public class ArgParser
             else if(mode == 1)
                 parseCVGeneration(args);
             else if(mode == 2)
-                parseSeekStats(args);
+            {
+                Menu seek_stats_menu = new SeekStatsMenu("./CVForYou --seek-stats");
+                String[] reduced_args = ArrayUtils.popCopy(args);
+                application = seek_stats_menu.parse(reduced_args);
+                //parseSeekStats(args);
+            }
             else if(mode == 3) 
             {
                 Menu seek_resumes_menu = new SeekResumesMenu("./CVForYou --seek-resumes");
