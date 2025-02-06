@@ -21,9 +21,7 @@ public class App
     public App(String[] args, boolean execute)
     {
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-
-        application = ap.getApplication();
+        application = ap.parseArgs(args);
             
         if(execute)
             run();

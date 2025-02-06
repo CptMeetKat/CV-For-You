@@ -27,8 +27,7 @@ public class ArgParserTest
                                      };
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        Application application = ap.getApplication();
+        Application application = ap.parseArgs(args);
 
         assertNull(application);
     }
@@ -41,8 +40,7 @@ public class ArgParserTest
                                      };
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        Application application = ap.getApplication();
+        Application application = ap.parseArgs(args);
         assertNull(application);
     }
 
@@ -55,8 +53,7 @@ public class ArgParserTest
                                      };
 
         ArgParser ap = new ArgParser();
-        Application application = ap.getApplication();
-        ap.parseArgs(args);
+        Application application = ap.parseArgs(args);
         assertNull(application);
     }
 
@@ -69,8 +66,7 @@ public class ArgParserTest
                                      };
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        Application application = ap.getApplication();
+        Application application = ap.parseArgs(args);
         assertNull(application);
     }
     
@@ -89,8 +85,10 @@ public class ArgParserTest
 
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        CVGeneratorApplication application = (CVGeneratorApplication) ap.getApplication();
+
+        CVGeneratorApplication application = (CVGeneratorApplication) ap.parseArgs(args);
+
+
         Path[] result = application.getCVGenerationArgs().getSections();
         assertEquals(result.length, 1);
         assertEquals(expected, result[0].toString());
@@ -115,9 +113,8 @@ public class ArgParserTest
 
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
         
-        CVGeneratorApplication application = (CVGeneratorApplication) ap.getApplication();
+        CVGeneratorApplication application = (CVGeneratorApplication) ap.parseArgs(args);
         Path[] result = application.getCVGenerationArgs().getSections();
 
         if(expected.size() != result.length)
@@ -137,8 +134,7 @@ public class ArgParserTest
                                      };
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        CVGeneratorApplication application = (CVGeneratorApplication) ap.getApplication();
+        CVGeneratorApplication application = (CVGeneratorApplication) ap.parseArgs(args);
         Path[] result = application.getCVGenerationArgs().getSections();
         
         assertEquals(result.length, 0);
@@ -156,8 +152,7 @@ public class ArgParserTest
         String[] expected = new String[]{"src/test/test_files/ArgParser/directory1/A.json",
                                          "src/test/test_files/ArgParser/directory1/B.json"};
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        CVGeneratorApplication application = (CVGeneratorApplication) ap.getApplication();
+        CVGeneratorApplication application = (CVGeneratorApplication) ap.parseArgs(args);
         Path[] result = application.getCVGenerationArgs().getSections();
         
         if(expected.length != result.length)
@@ -182,9 +177,8 @@ public class ArgParserTest
         };
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
 
-        CVGeneratorApplication application = (CVGeneratorApplication) ap.getApplication();
+        CVGeneratorApplication application = (CVGeneratorApplication) ap.parseArgs(args);
         Path[] result = application.getCVGenerationArgs().getSections();
         
         if(expected.length != result.length)
@@ -200,8 +194,7 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
          
-        ap.parseArgs(args);
-        Application application = ap.getApplication();
+        Application application = ap.parseArgs(args);
         assertNull(application);
     }
 
@@ -212,8 +205,7 @@ public class ArgParserTest
         String[] args = new String[]{"-h"};
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        Application application = ap.getApplication();
+        Application application = ap.parseArgs(args);
         assertNull(application);
     }
 
@@ -224,8 +216,7 @@ public class ArgParserTest
         String[] args = new String[]{"-cv", "-h"};
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        Application application = ap.getApplication();
+        Application application = ap.parseArgs(args);
         assertNull(application);
     }
 
@@ -236,8 +227,7 @@ public class ArgParserTest
         String[] args = new String[]{"-ss", "-h"};
 
         ArgParser ap = new ArgParser();
-        Application application = ap.getApplication();
-        ap.parseArgs(args);
+        Application application = ap.parseArgs(args);
         assertNull(application);
     }
 
@@ -247,8 +237,7 @@ public class ArgParserTest
         String[] args = new String[]{"-ss"};
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        Application application = ap.getApplication();
+        Application application = ap.parseArgs(args);
         assertNull(application);
     }
 
@@ -260,8 +249,7 @@ public class ArgParserTest
         String[] args = new String[]{"-cv"};
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        Application application = ap.getApplication();
+        Application application = ap.parseArgs(args);
         assertNull(application);
     }
 
@@ -271,8 +259,7 @@ public class ArgParserTest
         String[] args = new String[]{""};
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        Application application = ap.getApplication();
+        Application application = ap.parseArgs(args);
         assertNull(application);
     }
 
@@ -282,8 +269,7 @@ public class ArgParserTest
         String[] args = new String[]{"-ss", "-a"};
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        SeekStatsApplication stats_application = (SeekStatsApplication) ap.getApplication();
+        SeekStatsApplication stats_application = (SeekStatsApplication) ap.parseArgs(args);
         int seek_stats_mode = stats_application.getMode();
         assertEquals(1, seek_stats_mode);
     }
@@ -294,8 +280,7 @@ public class ArgParserTest
         String[] args = new String[]{"-ss", "-s"};
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        SeekStatsApplication stats_application = (SeekStatsApplication) ap.getApplication();
+        SeekStatsApplication stats_application = (SeekStatsApplication) ap.parseArgs(args);
         int seek_stats_mode = stats_application.getMode();
         assertEquals(2, seek_stats_mode);
     }
@@ -306,9 +291,9 @@ public class ArgParserTest
         String[] args = new String[]{"--seek-resumes", "--upload", "-i", "example.pdf"};
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
+        Application application = ap.parseArgs(args);
 
-        String application_name = ap.getApplication().getClass().getSimpleName();
+        String application_name = application.getClass().getSimpleName();
         assertEquals("SeekResumesApplication", application_name);
     }
 
@@ -318,8 +303,7 @@ public class ArgParserTest
         String[] args = new String[]{"--seek-resumes", "--upload", "-i"};
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        Application application = ap.getApplication();
+        Application application = ap.parseArgs(args);
 
         assertEquals(null, application);
     }
@@ -331,8 +315,7 @@ public class ArgParserTest
         String[] args = new String[]{"--seek-resumes", "--upload"};
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        Application application = ap.getApplication();
+        Application application = ap.parseArgs(args);
 
         assertEquals(null, application);
     }
@@ -344,8 +327,7 @@ public class ArgParserTest
         String[] args = new String[]{"--seek-resumes", "-u"};
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        Application application = ap.getApplication();
+        Application application = ap.parseArgs(args);
 
         assertEquals(null, application);
     }
@@ -357,8 +339,7 @@ public class ArgParserTest
         String[] args = new String[]{"--seek-resumes"};
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        Application application = ap.getApplication();
+        Application application = ap.parseArgs(args);
 
         assertEquals(null, application);
     }
@@ -369,8 +350,8 @@ public class ArgParserTest
         String[] args = new String[]{"--seek-resumes", "--upload", "-i", "example.pdf", "example2.pdf"};
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        String application_name = ap.getApplication().getClass().getSimpleName();
+        Application application = ap.parseArgs(args);
+        String application_name = application.getClass().getSimpleName();
         assertEquals("SeekResumesApplication", application_name);
     }
 
@@ -380,8 +361,7 @@ public class ArgParserTest
         String[] args = new String[]{"--seek-resumes", "--delete"};
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        Application application = ap.getApplication();
+        Application application = ap.parseArgs(args);
         assertEquals(null, application);
     }
 
@@ -392,8 +372,8 @@ public class ArgParserTest
         String[] args = new String[]{"--seek-resumes", "--delete", "--id", "id1"};
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        String application_name = ap.getApplication().getClass().getSimpleName();
+        Application application = ap.parseArgs(args);
+        String application_name = application.getClass().getSimpleName();
         assertEquals("SeekResumesApplication", application_name);
     }
 
@@ -404,8 +384,8 @@ public class ArgParserTest
         String[] args = new String[]{"--seek-resumes", "--delete", "--id", "id1", "id2"};
 
         ArgParser ap = new ArgParser();
-        ap.parseArgs(args);
-        String application_name = ap.getApplication().getClass().getSimpleName();
+        Application application = ap.parseArgs(args);
+        String application_name = application.getClass().getSimpleName();
         assertEquals("SeekResumesApplication", application_name);
     }
 }
