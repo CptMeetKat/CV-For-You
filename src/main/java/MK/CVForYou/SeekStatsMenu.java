@@ -67,7 +67,7 @@ public class SeekStatsMenu implements Menu
         menus.put("--analysis", analysis_menu);
         menus.put("-a", analysis_menu);
 
-        Menu summary_menu = new SeekStatsAnalysisMenu(example_command_prefix + " --seek-summary"); //TODO: change this to summary
+        Menu summary_menu = new SeekStatsSummaryMenu(example_command_prefix + " --seek-summary"); //TODO: change this to summary
         menus.put("--seek-summary", summary_menu);
         menus.put("-s", summary_menu);
     }
