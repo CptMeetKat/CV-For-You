@@ -59,7 +59,7 @@ public class ArgParser
             .desc("Generate a dynamic CV")
             .build();
 
-        Option seek_profile_stats = Option.builder("sa") //TODO: sa but seek-stats is -ss
+        Option seek_profile_stats = Option.builder("ss")
             .longOpt("seek-stats")
             .desc("Aggregate stats from Seek")
             .build();
@@ -190,7 +190,7 @@ public class ArgParser
             mode = 0;
             if(cmd.hasOption("cv"))
                 mode = 1;
-            else if(cmd.hasOption("sa"))
+            else if(cmd.hasOption("ss"))
                 mode = 2;
             else if(cmd.hasOption("sr"))
                 mode = 3;

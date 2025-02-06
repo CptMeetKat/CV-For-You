@@ -217,7 +217,7 @@ public class ArgParserTest
     @Test
     public void parseArgsShouldReturnSeekStatsFlagWhenSeekStatsHelpIsSelected()
     {
-        String[] args = new String[]{"-sa", "-h"};
+        String[] args = new String[]{"-ss", "-h"};
 
         ArgParser ap = new ArgParser();
         Application application = ap.getApplication();
@@ -229,7 +229,7 @@ public class ArgParserTest
     @Test
     public void parseArgsShouldReturnSeekStatsFlagOnSeekStatsMenu()
     {
-        String[] args = new String[]{"-sa"};
+        String[] args = new String[]{"-ss"};
 
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
@@ -263,7 +263,7 @@ public class ArgParserTest
     @Test
     public void parseArgsShouldReturnSeekStatsAnalyseFlagWhenSeekStatsSelected()
     {
-        String[] args = new String[]{"-sa", "-a"};
+        String[] args = new String[]{"-ss", "-a"};
 
         ArgParser ap = new ArgParser();
         int base_mode = ap.parseArgs(args);
@@ -276,7 +276,7 @@ public class ArgParserTest
     @Test
     public void parseArgsShouldReturnSeekStatsSummaryFlagWhenSummariseSelected()
     {
-        String[] args = new String[]{"-sa", "-s"};
+        String[] args = new String[]{"-ss", "-s"};
 
         ArgParser ap = new ArgParser();
         int base_mode = ap.parseArgs(args);
