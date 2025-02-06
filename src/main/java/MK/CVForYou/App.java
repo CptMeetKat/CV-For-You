@@ -26,7 +26,6 @@ public class App
         if ( mode == 1 )
             application = new CVGeneratorApplication(ap.getCVGenerationArgs());
         else if( mode == 2)
-            //application = new SeekStatsApplication(ap.getSeekStatsArgs());
             application = ap.getApplication();
         else if ( mode == 3 )
             application = ap.getApplication();
