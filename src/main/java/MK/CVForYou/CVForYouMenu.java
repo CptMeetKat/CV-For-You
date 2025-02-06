@@ -36,34 +36,6 @@ public class CVForYouMenu implements Menu
     @Override
     public Application parse(String args[]) throws ParseException
     {
-        //try
-        //{
-        //    CommandLineParser parser = new DefaultParser();
-        //    parser.parse(getOptions(), args, true);
-        //    CommandLine cmd = parser.parse(getOptions(), args, true);
-        //    if(args.length == 0) {
-        //        printExampleCommand();
-        //        return null;
-        //    }
-
-        //    String top_level_entry = args[0];
-        //    if (menus.containsKey(top_level_entry)) {
-        //        Menu m = menus.get(top_level_entry);
-        //        return m.parse(ArrayUtils.popCopy(args));
-        //    }
-        //    else if(cmd.hasOption("help")) {
-        //        printExampleCommand();
-        //    }
-        //    else {
-        //        throw new ParseException("Unrecognised options: " + String.join(" ", cmd.getArgs()));
-        //    }
-        //}
-        //catch(ParseException e) {
-        //    logger.error(e.getMessage());
-        //    printExampleCommand();
-        //}
-        //
-    
         try
         {
             CommandLineParser parser = new DefaultParser();
