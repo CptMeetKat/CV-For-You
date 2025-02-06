@@ -28,7 +28,7 @@ public class CVGeneratorMenu implements Menu
         {
             CommandLineParser parser = new DefaultParser();
             CommandLine cmd = parser.parse(getOptions(), args);
-            if(cmd.hasOption("h"))
+            if(cmd.hasOption("h") || args.length == 0)
             {
                 printExampleCommand();
                 return null;
