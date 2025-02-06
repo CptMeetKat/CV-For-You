@@ -8,8 +8,6 @@ public class SeekResumesViewMenu implements Menu
 {
     private String example_command_prefix;
 
-    private HelpFormatter formatter = new HelpFormatter();
-    private CommandLineParser parser = new DefaultParser();
     private static final Logger logger = LoggerFactory.getLogger(SeekResumesViewMenu.class);
     
     public SeekResumesViewMenu(String example_command_prefix)
@@ -21,6 +19,7 @@ public class SeekResumesViewMenu implements Menu
 	public Application parse(String[] args) throws ParseException {
         try
         {
+            CommandLineParser parser = new DefaultParser();
             CommandLine cmd = parser.parse(getOptions(), args);
             if(cmd.hasOption("h")) {
                 printExampleCommand();
@@ -50,6 +49,7 @@ public class SeekResumesViewMenu implements Menu
 
     private void printExampleCommand()
     {
+        HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp(example_command_prefix, getOptions());
     }
 }
