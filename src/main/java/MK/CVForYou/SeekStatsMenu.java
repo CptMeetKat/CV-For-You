@@ -81,27 +81,14 @@ public class SeekStatsMenu implements Menu
             .desc("Aggregate stats from Seek")
             .build();
 
-        Option output = Option.builder("o").hasArg()
-            .longOpt("output")
-            .desc("CSV output location")
-            .build();
-
         Option seek_summary = Option.builder("s")
             .longOpt("seek-summary")
             .desc("Summarise stats from Seek")
             .build();
 
-
-        Option input = Option.builder("i").hasArg()
-            .longOpt("input")
-            .desc("CSV input location")
-            .build();
-
         options.addOption("h", "help", false, "print this message");
         options.addOption(seek_summary);
         options.addOption(analysis);
-        options.addOption(output);
-        options.addOption(input);
         return options;
     }
 }
