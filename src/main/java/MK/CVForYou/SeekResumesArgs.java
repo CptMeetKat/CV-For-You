@@ -8,6 +8,7 @@ public class SeekResumesArgs
 {
     public ArrayList<File> files = new ArrayList<File>();
     public ArrayList<String> ids = new ArrayList<String>();
+    public boolean deleteAll = false;
     int mode;
 
     public void setMode(int mode)

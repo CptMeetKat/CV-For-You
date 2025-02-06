@@ -27,15 +27,21 @@ public class SeekResumesDeleteMenu implements Menu
                 return null;
             }
 
-            if (!cmd.hasOption("id"))
-                throw new ParseException("-id must be provided");
-            else if ( cmd.hasOption("id") )
-            {
-                SeekResumesArgs seek_resumes_args = new SeekResumesArgs();
-                seek_resumes_args.setMode(2);
+            SeekResumesArgs seek_resumes_args = new SeekResumesArgs();
+
+            if (!cmd.hasOption("id") && !cmd.hasOption("all"))
+                throw new ParseException("-id, or all must be provided");
+
+
+            seek_resumes_args.setMode(2);
+            if(cmd.hasOption("all"))
+                seek_resumes_args.deleteAll = true;
+
+            if ( cmd.hasOption("id") )
                 seek_resumes_args.addIDs(cmd.getOptionValues("id"));
-                return new SeekResumesApplication(seek_resumes_args);
-            }
+
+
+            return new SeekResumesApplication(seek_resumes_args);
         }
         catch(ParseException e) {
             logger.error(e.getMessage());
@@ -54,8 +60,15 @@ public class SeekResumesDeleteMenu implements Menu
             .desc("ID of CVs to delete")
             .build();
 
+        Option delete_all = Option.builder("all")
+            .longOpt("all")
+            .desc("delete all (exclude whitelist)")
+            .build();
+
+
         options.addOption("h", "help", false, "print this message");
         options.addOption(resumes);
+        options.addOption(delete_all);
         return options;
     }
 }
