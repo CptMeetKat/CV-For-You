@@ -8,11 +8,7 @@ public class ArgParser
 {
     static final Logger logger = LoggerFactory.getLogger(ArgParser.class);
 
-    public ArgParser()
-    {
-    }
-
-    public Application parseArgs(String[] args)
+    public Application parseArgs(String[] args) //TODO: make this static
     {
         Application application = null;
         try
