@@ -2,8 +2,12 @@ package MK.CVForYou;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.nio.file.Files;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +21,7 @@ public class SeekResumesApplication implements Application
     ArrayList<File> files;
     ArrayList<String> ids;
     boolean deleteAll;
+    private static Path whitelist_path = Paths.get("whitelist");
 
 
     public SeekResumesApplication(SeekResumesArgs args) 
@@ -38,32 +43,49 @@ public class SeekResumesApplication implements Application
             printUploadedResumes();
 	}
 
-    private HashSet<String> getExcluded()
+    private HashSet<String> getExcludedNames() throws IOException
     {
-        return new HashSet<String>();//TODO: should read from whitelist.file
+        HashSet<String> set = new HashSet<>();
+        List<String> lines = Files.readAllLines(whitelist_path);
+        for(String l : lines)
+        {
+            set.add(l);
+        }
+
+        return set;
     }
 
-    private ArrayList<String> fetchIDsToDelete()
+    private ArrayList<String> fetchIDsToDelete() throws IOException
     {
         ArrayList<SeekResumesResponse> seek_resumes = fetchAllResumes();
-        HashSet<String> excluded = getExcluded();
+        HashSet<String> excluded = getExcludedNames();
         ArrayList<String> ids_to_delete = new ArrayList<>();
         for(SeekResumesResponse resume : seek_resumes)
         {
-            if(!excluded.contains(resume.id))
+            if(!excluded.contains(resume.name)) 
                 ids_to_delete.add(resume.id);
+            else
+                logger.info("Excluding {} ({}) from delete", resume.name, resume.id);
         }
 
         return ids_to_delete;
     }
 
+    private void deleteAll()
+    {
+        ArrayList<String> ids_to_delete;
+		try {
+			ids_to_delete = fetchIDsToDelete();
+            deleteByIds(ids_to_delete);
+		} catch (IOException e) {
+			logger.error("Cannot retrieve the keep list", e.toString());
+		}
+    }
+
     public void deleteCVs()
     {
         if(deleteAll)
-        {
-            ArrayList<String> ids_to_delete = fetchIDsToDelete();
-            deleteByIds(ids_to_delete);
-        }
+            deleteAll();
         else
             deleteByIds(ids);
         printUploadedResumes();
