@@ -74,29 +74,31 @@ public class ArgParser
     {
         try
         {
-            parseBase(args);
-            if(mode == 0)
-                formatter.printHelp(TOP_LEVEL_USAGE, getBaseOptions());
-            else if(mode == 1)
-            {
-                Menu cv_generator_menu = new CVGeneratorMenu("./CVForYou --cv-generator");
-                String[] reduced_args = ArrayUtils.popCopy(args);
-                application = cv_generator_menu.parse(reduced_args);
-            }
-            else if(mode == 2)
-            {
-                Menu seek_stats_menu = new SeekStatsMenu("./CVForYou --seek-stats");
-                String[] reduced_args = ArrayUtils.popCopy(args);
-                application = seek_stats_menu.parse(reduced_args);
-            }
-            else if(mode == 3) 
-            {
-                Menu seek_resumes_menu = new SeekResumesMenu("./CVForYou --seek-resumes");
-                String[] reduced_args = ArrayUtils.popCopy(args);
-                application = seek_resumes_menu.parse(reduced_args);
-            }
-            else
-                logger.error("No mode selected");
+            Menu root_menu = new CVForYouMenu("");
+            application = root_menu.parse(args);
+            //parseBase(args);
+            //if(mode == 0)
+            //    formatter.printHelp(TOP_LEVEL_USAGE, getBaseOptions());
+            //else if(mode == 1)
+            //{
+            //    Menu cv_generator_menu = new CVGeneratorMenu("./CVForYou --cv-generator");
+            //    String[] reduced_args = ArrayUtils.popCopy(args);
+            //    application = cv_generator_menu.parse(reduced_args);
+            //}
+            //else if(mode == 2)
+            //{
+            //    Menu seek_stats_menu = new SeekStatsMenu("./CVForYou --seek-stats");
+            //    String[] reduced_args = ArrayUtils.popCopy(args);
+            //    application = seek_stats_menu.parse(reduced_args);
+            //}
+            //else if(mode == 3) 
+            //{
+            //    Menu seek_resumes_menu = new SeekResumesMenu("./CVForYou --seek-resumes");
+            //    String[] reduced_args = ArrayUtils.popCopy(args);
+            //    application = seek_resumes_menu.parse(reduced_args);
+            //}
+            //else
+            //    logger.error("No mode selected");
         }
         catch (ParseException e){}
 

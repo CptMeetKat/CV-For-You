@@ -18,7 +18,7 @@ import org.junit.Test;
 public class ArgParserTest 
 {
     @Test
-    public void shouldNotHaveMoreThanOneCompareSources()
+    public void shouldReturnNullApplicationWhenHasMoreThanOneCompareSources()
     {
         String[] args = new String[]{"-cv", "-d", "CV_template.html",
                                      "-cs", "https://www.seek.com.au/job/00000001",
@@ -27,10 +27,9 @@ public class ArgParserTest
                                      };
 
         ArgParser ap = new ArgParser();
-        int mode = ap.parseArgs(args);
+        ap.parseArgs(args);
         Application application = ap.getApplication();
 
-        assertEquals(mode, 1);
         assertNull(application);
     }
 
@@ -42,9 +41,8 @@ public class ArgParserTest
                                      };
 
         ArgParser ap = new ArgParser();
-        int mode = ap.parseArgs(args);
+        ap.parseArgs(args);
         Application application = ap.getApplication();
-        assertEquals(1, mode);
         assertNull(application);
     }
 
@@ -58,22 +56,20 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         Application application = ap.getApplication();
-        int mode = ap.parseArgs(args);
-        assertEquals(1, mode);
+        ap.parseArgs(args);
         assertNull(application);
     }
 
 
     @Test
-    public void shouldReturnExecuteNothingFlagWhenMissingSectionFlag()
+    public void shouldReturnNullApplicationWhenMissingSectionFlag()
     {
         String[] args = new String[]{"-cv", "-d", "CV_template.html",
                                      "-c", "compare_file.txt",
                                      };
 
         ArgParser ap = new ArgParser();
-        int mode = ap.parseArgs(args);
-        assertEquals(1, mode);
+        ap.parseArgs(args);
         Application application = ap.getApplication();
         assertNull(application);
     }
@@ -227,34 +223,31 @@ public class ArgParserTest
         String[] args = new String[]{"-cv", "-h"};
 
         ArgParser ap = new ArgParser();
-        int mode = ap.parseArgs(args);
+        ap.parseArgs(args);
         Application application = ap.getApplication();
-        assertEquals(1, mode);
         assertNull(application);
     }
 
 
     @Test
-    public void parseArgsShouldReturnSeekStatsFlagWhenSeekStatsHelpIsSelected()
+    public void parseArgsShouldReturnNoApplicationWhenSeekStatsMenuHelpIsSelected()
     {
         String[] args = new String[]{"-ss", "-h"};
 
         ArgParser ap = new ArgParser();
         Application application = ap.getApplication();
-        int mode = ap.parseArgs(args);
-        assertEquals(2, mode);
+        ap.parseArgs(args);
         assertNull(application);
     }
 
     @Test
-    public void parseArgsShouldReturnSeekStatsFlagOnSeekStatsMenu()
+    public void parseArgsShouldReturNoApplicationOnSeekStatsMenu()
     {
         String[] args = new String[]{"-ss"};
 
         ArgParser ap = new ArgParser();
-        int mode = ap.parseArgs(args);
+        ap.parseArgs(args);
         Application application = ap.getApplication();
-        assertEquals(2, mode);
         assertNull(application);
     }
 
@@ -266,9 +259,8 @@ public class ArgParserTest
         String[] args = new String[]{"-cv"};
 
         ArgParser ap = new ArgParser();
-        int mode = ap.parseArgs(args);
+        ap.parseArgs(args);
         Application application = ap.getApplication();
-        assertEquals(1, mode);
         assertNull(application);
     }
 
@@ -290,10 +282,9 @@ public class ArgParserTest
         String[] args = new String[]{"-ss", "-a"};
 
         ArgParser ap = new ArgParser();
-        int base_mode = ap.parseArgs(args);
+        ap.parseArgs(args);
         SeekStatsApplication stats_application = (SeekStatsApplication) ap.getApplication();
         int seek_stats_mode = stats_application.getMode();
-        assertEquals(2, base_mode);
         assertEquals(1, seek_stats_mode);
     }
 
@@ -303,10 +294,9 @@ public class ArgParserTest
         String[] args = new String[]{"-ss", "-s"};
 
         ArgParser ap = new ArgParser();
-        int base_mode = ap.parseArgs(args);
+        ap.parseArgs(args);
         SeekStatsApplication stats_application = (SeekStatsApplication) ap.getApplication();
         int seek_stats_mode = stats_application.getMode();
-        assertEquals(2, base_mode);
         assertEquals(2, seek_stats_mode);
     }
 
@@ -316,11 +306,9 @@ public class ArgParserTest
         String[] args = new String[]{"--seek-resumes", "--upload", "-i", "example.pdf"};
 
         ArgParser ap = new ArgParser();
-        int base_mode = ap.parseArgs(args);
+        ap.parseArgs(args);
 
         String application_name = ap.getApplication().getClass().getSimpleName();
-
-        assertEquals(3, base_mode);
         assertEquals("SeekResumesApplication", application_name);
     }
 
@@ -330,10 +318,9 @@ public class ArgParserTest
         String[] args = new String[]{"--seek-resumes", "--upload", "-i"};
 
         ArgParser ap = new ArgParser();
-        int base_mode = ap.parseArgs(args);
+        ap.parseArgs(args);
         Application application = ap.getApplication();
 
-        assertEquals(3, base_mode);
         assertEquals(null, application);
     }
 
@@ -344,10 +331,9 @@ public class ArgParserTest
         String[] args = new String[]{"--seek-resumes", "--upload"};
 
         ArgParser ap = new ArgParser();
-        int base_mode = ap.parseArgs(args);
+        ap.parseArgs(args);
         Application application = ap.getApplication();
 
-        assertEquals(3, base_mode);
         assertEquals(null, application);
     }
 
@@ -358,10 +344,9 @@ public class ArgParserTest
         String[] args = new String[]{"--seek-resumes", "-u"};
 
         ArgParser ap = new ArgParser();
-        int base_mode = ap.parseArgs(args);
+        ap.parseArgs(args);
         Application application = ap.getApplication();
 
-        assertEquals(3, base_mode);
         assertEquals(null, application);
     }
 
@@ -372,10 +357,9 @@ public class ArgParserTest
         String[] args = new String[]{"--seek-resumes"};
 
         ArgParser ap = new ArgParser();
-        int mode = ap.parseArgs(args);
+        ap.parseArgs(args);
         Application application = ap.getApplication();
 
-        assertEquals(3, mode);
         assertEquals(null, application);
     }
 
@@ -385,22 +369,19 @@ public class ArgParserTest
         String[] args = new String[]{"--seek-resumes", "--upload", "-i", "example.pdf", "example2.pdf"};
 
         ArgParser ap = new ArgParser();
-        int base_mode = ap.parseArgs(args);
+        ap.parseArgs(args);
         String application_name = ap.getApplication().getClass().getSimpleName();
-        assertEquals(3, base_mode);
         assertEquals("SeekResumesApplication", application_name);
     }
 
-//
     @Test
     public void parseArgsShouldReturnNoApplicationWhenCommandIsUsedWithIncorrectArgs()
     {
         String[] args = new String[]{"--seek-resumes", "--delete"};
 
         ArgParser ap = new ArgParser();
-        int base_mode = ap.parseArgs(args);
+        ap.parseArgs(args);
         Application application = ap.getApplication();
-        assertEquals(3, base_mode);
         assertEquals(null, application);
     }
 
@@ -411,9 +392,8 @@ public class ArgParserTest
         String[] args = new String[]{"--seek-resumes", "--delete", "--id", "id1"};
 
         ArgParser ap = new ArgParser();
-        int base_mode = ap.parseArgs(args);
+        ap.parseArgs(args);
         String application_name = ap.getApplication().getClass().getSimpleName();
-        assertEquals(3, base_mode);
         assertEquals("SeekResumesApplication", application_name);
     }
 
@@ -424,9 +404,8 @@ public class ArgParserTest
         String[] args = new String[]{"--seek-resumes", "--delete", "--id", "id1", "id2"};
 
         ArgParser ap = new ArgParser();
-        int base_mode = ap.parseArgs(args);
+        ap.parseArgs(args);
         String application_name = ap.getApplication().getClass().getSimpleName();
-        assertEquals(3, base_mode);
         assertEquals("SeekResumesApplication", application_name);
     }
 }
