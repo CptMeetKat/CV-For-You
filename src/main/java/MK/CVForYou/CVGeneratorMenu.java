@@ -24,35 +24,6 @@ public class CVGeneratorMenu implements Menu
 
 	@Override
 	public Application parse(String[] args) throws ParseException {
-        //try
-        //{
-        //    CommandLineParser parser = new DefaultParser();
-        //    CommandLine cmd = parser.parse(getOptions(), args);
-        //    
-
-        //    SeekStatsArgs seek_stats_args = new SeekStatsArgs();
-        //    seek_stats_args.setMode(1);
-        //    
-        //    if( cmd.hasOption("help") )
-        //    {
-        //        printExampleCommand();
-        //        return null;
-        //    }
-        //    else if(args.length == 0)
-        //        return new SeekStatsApplication(seek_stats_args);
-        //    else if ( cmd.hasOption("o") )
-        //        seek_stats_args.setOutput(cmd.getOptionValue("o"));
-
-        //    return new SeekStatsApplication(seek_stats_args);
-        //}
-        //catch(ParseException e) {
-        //    logger.error(e.getMessage());
-        //    printExampleCommand();
-        //}
-
-        //return null;
-        //
-        //
         try
         {
             CommandLineParser parser = new DefaultParser();
