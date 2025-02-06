@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 public class SeekStatsAnalysisMenu implements Menu
 {
     private String example_command_prefix;
-    private static final String EXAMPLE_USAGE = "-i <file>";
+    private static final String EXAMPLE_USAGE = "-o <file>";
 
     private static final Logger logger = LoggerFactory.getLogger(SeekStatsAnalysisMenu.class);
     
