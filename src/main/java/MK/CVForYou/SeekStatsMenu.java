@@ -63,12 +63,11 @@ public class SeekStatsMenu implements Menu
 
     private void registerMenus()
     {
-        String command_prefix = example_command_prefix + " --seek-stats";
-        Menu analysis_menu = new SeekStatsAnalysisMenu(command_prefix);
+        Menu analysis_menu = new SeekStatsAnalysisMenu(example_command_prefix + " --analysis");
         menus.put("--analysis", analysis_menu);
         menus.put("-a", analysis_menu);
 
-        Menu summary_menu = new SeekStatsSummaryMenu(command_prefix);
+        Menu summary_menu = new SeekStatsAnalysisMenu(example_command_prefix + " --seek-summary"); //TODO: change this to summary
         menus.put("--seek-summary", summary_menu);
         menus.put("-s", summary_menu);
     }
