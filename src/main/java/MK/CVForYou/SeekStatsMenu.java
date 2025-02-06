@@ -12,7 +12,7 @@ public class SeekStatsMenu implements Menu
     private String example_command_prefix;
     private HashMap<String, Menu> menus = new HashMap<String,Menu>();
 
-    private static final String SEEK_STATS_USAGE = "--upload -i <file>";
+    private static final String EXAMPLE_USAGE = "--upload -i <file>";
     private static final Logger logger = LoggerFactory.getLogger(SeekStatsMenu.class);
 
     public SeekStatsMenu(String example_command_prefix)
@@ -24,7 +24,7 @@ public class SeekStatsMenu implements Menu
     private void printExampleCommand()
     {
         HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp(example_command_prefix + " " + SEEK_STATS_USAGE, getOptions());
+        formatter.printHelp(example_command_prefix + " " + EXAMPLE_USAGE, getOptions());
     }
 
     @Override
