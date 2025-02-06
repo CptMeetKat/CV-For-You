@@ -65,7 +65,10 @@ public class SeekResumesApplication implements Application
             if(!excluded.contains(resume.name)) 
                 ids_to_delete.add(resume.id);
             else
-                logger.info("Excluding {} ({}) from delete", resume.name, resume.id);
+                logger.info("Excluded from delete: {} {} ({})",
+                            String.format("%-5s", ""),
+                            String.format("%-20s", resume.name),
+                            resume.id);
         }
 
         return ids_to_delete;
