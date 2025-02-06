@@ -1,6 +1,7 @@
 package MK.CVForYou;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -214,24 +215,30 @@ public class ArgParserTest
 
 
     @Test
-    public void parseArgsShouldReturnHelpFlagWhenSeekStatsHelpIsSelected()
+    public void parseArgsShouldReturnSeekStatsFlagWhenSeekStatsHelpIsSelected()
     {
         String[] args = new String[]{"-sa", "-h"};
 
         ArgParser ap = new ArgParser();
+        Application application = ap.getApplication();
         int mode = ap.parseArgs(args);
-        assertEquals(0, mode);
+        assertEquals(2, mode);
+        assertNull(application);
     }
 
     @Test
-    public void parseArgsShouldReturnFailFlagOnSeekStatsNotEnoughArgs()
+    public void parseArgsShouldReturnSeekStatsFlagOnSeekStatsMenu()
     {
         String[] args = new String[]{"-sa"};
 
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
-        assertEquals(-1, mode);
+        Application application = ap.getApplication();
+        assertEquals(2, mode);
+        assertNull(application);
     }
+
+
 
     @Test
     public void parseArgsShouldReturnFailFlagOnCVGeneratorNotEnoughArgs()
@@ -260,7 +267,8 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         int base_mode = ap.parseArgs(args);
-        int seek_stats_mode = ap.getSeekStatsArgs().getMode();
+        SeekStatsApplication stats_application = (SeekStatsApplication) ap.getApplication();
+        int seek_stats_mode = stats_application.getMode();
         assertEquals(2, base_mode);
         assertEquals(1, seek_stats_mode);
     }
@@ -272,7 +280,8 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         int base_mode = ap.parseArgs(args);
-        int seek_stats_mode = ap.getSeekStatsArgs().getMode();
+        SeekStatsApplication stats_application = (SeekStatsApplication) ap.getApplication();
+        int seek_stats_mode = stats_application.getMode();
         assertEquals(2, base_mode);
         assertEquals(2, seek_stats_mode);
     }

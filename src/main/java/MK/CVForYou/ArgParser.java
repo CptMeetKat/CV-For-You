@@ -25,7 +25,7 @@ public class ArgParser
 
     private static final String BASIC_USAGE = "./CVForYou -d <document_path> -c <compare_path> -s <section_paths>";
     private static final String TOP_LEVEL_USAGE = "./CVForYou -cv";
-    private static final String SEEK_STATS_USAGE = "./CVForYou -sa";
+    //private static final String SEEK_STATS_USAGE = "./CVForYou -sa";
 
     static final Logger logger = LoggerFactory.getLogger(ArgParser.class);
 
@@ -49,10 +49,10 @@ public class ArgParser
         return options;
     }
 
-    public SeekStatsArgs getSeekStatsArgs()
-    {
-        return seek_stats_args;
-    }
+    //public SeekStatsArgs getSeekStatsArgs()
+    //{
+    //    return seek_stats_args;
+    //}
 
     public Options getOptions() {
         return options;
@@ -85,51 +85,51 @@ public class ArgParser
 
     }
 
-    private static Options getSeekStatsOptions()
-    {
-        return getSeekStatsOptions(false);
-    }
+    //private static Options getSeekStatsOptions()
+    //{
+    //    return getSeekStatsOptions(false);
+    //}
 
-    private static Options getSeekStatsOptions(boolean helpFormatted)
-    {
-        Options options = new Options();
+    //private static Options getSeekStatsOptions(boolean helpFormatted)
+    //{
+    //    Options options = new Options();
 
-        Option analysis = Option.builder("a")
-            .longOpt("analysis") //TODO: rename analyse
-            .desc("Aggregate stats from Seek")
-            .build();
+    //    Option analysis = Option.builder("a")
+    //        .longOpt("analysis") //TODO: rename analyse
+    //        .desc("Aggregate stats from Seek")
+    //        .build();
 
-        Option output = Option.builder("o").hasArg()
-            .longOpt("output")
-            .desc("CSV output location")
-            .build();
+    //    Option output = Option.builder("o").hasArg()
+    //        .longOpt("output")
+    //        .desc("CSV output location")
+    //        .build();
 
-        Option seek_summary = Option.builder("s")
-            .longOpt("seek-summary")
-            .desc("Summarise stats from Seek")
-            .build();
+    //    Option seek_summary = Option.builder("s")
+    //        .longOpt("seek-summary")
+    //        .desc("Summarise stats from Seek")
+    //        .build();
 
 
-        Option input = Option.builder("i").hasArg()
-            .longOpt("input")
-            .desc("CSV input location")
-            .build();
+    //    Option input = Option.builder("i").hasArg()
+    //        .longOpt("input")
+    //        .desc("CSV input location")
+    //        .build();
 
-        if(!helpFormatted) //When we display help menu, we want these items to not be displayed
-        {
-            Option seek_profile_stats = Option.builder("sa")
-                .longOpt("seek-stats")
-                .build();
-            options.addOption(seek_profile_stats);
-        }
+    //    if(!helpFormatted) //When we display help menu, we want these items to not be displayed
+    //    {
+    //        Option seek_profile_stats = Option.builder("sa")
+    //            .longOpt("seek-stats")
+    //            .build();
+    //        options.addOption(seek_profile_stats);
+    //    }
 
-        options.addOption("h", "help", false, "print this message");
-        options.addOption(seek_summary);
-        options.addOption(analysis);
-        options.addOption(output);
-        options.addOption(input);
-        return options;
-    }
+    //    options.addOption("h", "help", false, "print this message");
+    //    options.addOption(seek_summary);
+    //    options.addOption(analysis);
+    //    options.addOption(output);
+    //    options.addOption(input);
+    //    return options;
+    //}
 
     private static Options getDefaultOptions()
     {
@@ -259,38 +259,38 @@ public class ArgParser
         }
     }
 
-    private void parseSeekStats(String[] args) throws ParseException
-    {
-        try
-        {
-            CommandLine cmd = parser.parse(getSeekStatsOptions(), args);
-            if(cmd.hasOption("h"))
-            {
-                formatter.printHelp(SEEK_STATS_USAGE, getSeekStatsOptions(true));
-                mode = 0;
-                return;
-            }
+    //private void parseSeekStats(String[] args) throws ParseException
+    //{
+    //    try
+    //    {
+    //        CommandLine cmd = parser.parse(getSeekStatsOptions(), args);
+    //        if(cmd.hasOption("h"))
+    //        {
+    //            formatter.printHelp(SEEK_STATS_USAGE, getSeekStatsOptions(true));
+    //            mode = 0;
+    //            return;
+    //        }
 
-            if (!cmd.hasOption("a") && !cmd.hasOption("s"))
-                throw new ParseException("Either -a or -s must be provided");
-            else if ( cmd.hasOption("a") )
-                seek_stats_args.setMode(1);
-            else if ( cmd.hasOption("s") )
-                seek_stats_args.setMode(2);
+    //        if (!cmd.hasOption("a") && !cmd.hasOption("s"))
+    //            throw new ParseException("Either -a or -s must be provided");
+    //        else if ( cmd.hasOption("a") )
+    //            seek_stats_args.setMode(1);
+    //        else if ( cmd.hasOption("s") )
+    //            seek_stats_args.setMode(2);
 
-            if (cmd.hasOption("o"))
-                seek_stats_args.setOutput(cmd.getOptionValue("o"));
+    //        if (cmd.hasOption("o"))
+    //            seek_stats_args.setOutput(cmd.getOptionValue("o"));
 
-            if (cmd.hasOption("i"))
-                seek_stats_args.setInput(cmd.getOptionValue("i"));
-        }
-        catch(ParseException e)
-        {
-            logger.error(e.getMessage());
-            formatter.printHelp(SEEK_STATS_USAGE, getSeekStatsOptions(true));
-            throw e;
-        }
-    }
+    //        if (cmd.hasOption("i"))
+    //            seek_stats_args.setInput(cmd.getOptionValue("i"));
+    //    }
+    //    catch(ParseException e)
+    //    {
+    //        logger.error(e.getMessage());
+    //        formatter.printHelp(SEEK_STATS_USAGE, getSeekStatsOptions(true));
+    //        throw e;
+    //    }
+    //}
 
     private void parseCVGeneration(String[] args) throws ParseException
     {
