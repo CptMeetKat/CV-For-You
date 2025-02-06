@@ -98,10 +98,7 @@ public class ArgParser
             else
                 logger.error("No mode selected");
         }
-        catch (ParseException e)
-        {
-            mode = -1;
-        }
+        catch (ParseException e){}
 
         return mode;
     } 

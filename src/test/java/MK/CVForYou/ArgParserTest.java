@@ -198,13 +198,15 @@ public class ArgParserTest
     }
 
     @Test
-    public void parseArgsShouldReturnExecuteNothingFlagWhenBadArgsAreProvided()
+    public void parseArgsShouldReturnNullApplicationWhenBadArgsAreProvided()
     {
         String[] args = new String[]{};
 
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
-        assertEquals(mode, -1);
+        Application application = ap.getApplication();
+        assertEquals(0, mode);
+        assertNull(application);
     }
 
 
@@ -277,7 +279,9 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
-        assertEquals(-1, mode);
+        Application application = ap.getApplication();
+        assertEquals(0, mode);
+        assertNull(application);
     }
 
     @Test
