@@ -35,6 +35,11 @@ public class SeekStatsApplication implements Application
         }
     }
 
+    public int getMode()
+    {
+        return mode;
+    }
+
 
     private static List<SeekAppliedJobCSVRow> updateHistoricalStats(List<SeekAppliedJobCSVRow> historical_data, List<SeekAppliedJobCSVRow> current_data)
     {
