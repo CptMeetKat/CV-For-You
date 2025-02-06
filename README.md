@@ -23,14 +23,26 @@ Automatically create the most effective version of your resume, ensuring your sk
 
 ## How to use?
 ```
-usage: ./CVForYou -d <document_path> -c <compare_path> -s <section_paths>
- -c,--compare <arg>         file to compare keywords to
- -ca,--compare-seek-all     compare from your seek saved job
- -cs,--compare-seek <arg>   pull JD from seek to compare
- -d,--document <arg>        path to the dynamic document
- -h,--help                  print this message
- -o,--output <arg>          path of output
- -s,--section <arg>         path to section definition files
+usage: ./CVForYou --seek-stats -a
+ -cv,--cv-generator   Generate a dynamic CV
+ -h,--help            print this message
+ -sr,--seek-resumes   Upload CV directly to SEEK
+ -ss,--seek-stats     Aggregate stats from Seek
+```
+
+```
+usage: ./CVForYou --cv_generator -d <document_path> -c <compare_path> -s
+                  <section_paths>
+ -c,--compare <arg>              file to compare keywords to
+ -ca,--compare-seek-all          compare from your seek saved job
+ -cc,--compare-cache <arg>       compare from a previous cached seek saved
+                                 job
+ -cs,--compare-seek <arg>        pull JD from seek to compare
+ -d,--document <arg>             path to the dynamic document
+ -h,--help                       print this message
+ -o,--output <arg>               output directory
+ -s,--section <arg>              path to section definition files
+ -sd,--section directory <arg>   directory of section definition files
 ```
 
 # Basic Usage
