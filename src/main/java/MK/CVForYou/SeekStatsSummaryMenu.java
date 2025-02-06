@@ -29,7 +29,7 @@ public class SeekStatsSummaryMenu implements Menu
             
             if( cmd.hasOption("help") )
             {
-                printExampleCommand();
+                MenuUtils.printExampleCommand(example_command_prefix + " " + EXAMPLE_USAGE, getOptions());
                 return null;
             }
             else if(args.length == 0)
@@ -41,7 +41,7 @@ public class SeekStatsSummaryMenu implements Menu
         }
         catch(ParseException e) {
             logger.error(e.getMessage());
-            printExampleCommand();
+            MenuUtils.printExampleCommand(example_command_prefix + " " + EXAMPLE_USAGE, getOptions());
         }
 
         return null;
@@ -59,12 +59,5 @@ public class SeekStatsSummaryMenu implements Menu
         options.addOption("h", "help", false, "print this message");
         options.addOption(input);
         return options;
-    }
-
-
-    private void printExampleCommand()
-    {
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp(example_command_prefix + " " + EXAMPLE_USAGE, getOptions());
     }
 }

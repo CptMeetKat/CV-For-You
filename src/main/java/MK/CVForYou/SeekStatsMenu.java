@@ -21,12 +21,6 @@ public class SeekStatsMenu implements Menu
         registerMenus();
     }
 
-    private void printExampleCommand()
-    {
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp(example_command_prefix + " " + EXAMPLE_USAGE, getOptions());
-    }
-
     @Override
     public Application parse(String args[]) throws ParseException
     {
@@ -36,7 +30,7 @@ public class SeekStatsMenu implements Menu
             CommandLine cmd = parser.parse(getOptions(), args, true);
 
             if(args.length == 0) {
-                printExampleCommand();
+                MenuUtils.printExampleCommand(example_command_prefix + " " + EXAMPLE_USAGE, getOptions());
                 return null;
             }
 
@@ -46,7 +40,7 @@ public class SeekStatsMenu implements Menu
                 return m.parse(ArrayUtils.popCopy(args));
             }
             else if(cmd.hasOption("help")) {
-                printExampleCommand();
+                MenuUtils.printExampleCommand(example_command_prefix + " " + EXAMPLE_USAGE, getOptions());
             }
             else {
                 throw new ParseException("Unrecognised options: " + String.join(" ", cmd.getArgs()));
@@ -55,7 +49,7 @@ public class SeekStatsMenu implements Menu
         catch(ParseException e)
         {
             logger.error(e.getMessage());
-            printExampleCommand();
+            MenuUtils.printExampleCommand(example_command_prefix + " " + EXAMPLE_USAGE, getOptions());
         }
 
         return null;

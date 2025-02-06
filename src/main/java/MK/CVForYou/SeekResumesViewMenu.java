@@ -22,7 +22,7 @@ public class SeekResumesViewMenu implements Menu
             CommandLineParser parser = new DefaultParser();
             CommandLine cmd = parser.parse(getOptions(), args);
             if(cmd.hasOption("h")) {
-                printExampleCommand();
+                MenuUtils.printExampleCommand(example_command_prefix, getOptions());
                 return null;
             }
 
@@ -32,7 +32,7 @@ public class SeekResumesViewMenu implements Menu
         }
         catch(ParseException e) {
             logger.error(e.getMessage());
-            printExampleCommand();
+            MenuUtils.printExampleCommand(example_command_prefix, getOptions());
         }
 
         return null;
@@ -44,12 +44,5 @@ public class SeekResumesViewMenu implements Menu
 
         options.addOption("h", "help", false, "print this message");
         return options;
-    }
-
-
-    private void printExampleCommand()
-    {
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp(example_command_prefix, getOptions());
     }
 }

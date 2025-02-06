@@ -23,7 +23,7 @@ public class SeekResumesUploadMenu implements Menu
             CommandLineParser parser = new DefaultParser();
             CommandLine cmd = parser.parse(getOptions(), args);
             if(cmd.hasOption("h") || args.length == 0) {
-                printExampleCommand();
+                MenuUtils.printExampleCommand(example_command_prefix + " " + EXAMPLE_USAGE, getOptions());
                 return null;
             }
 
@@ -39,7 +39,7 @@ public class SeekResumesUploadMenu implements Menu
         }
         catch(ParseException e) {
             logger.error(e.getMessage());
-            printExampleCommand();
+            MenuUtils.printExampleCommand(example_command_prefix + " " + EXAMPLE_USAGE, getOptions());
         }
 
         return null;
@@ -57,12 +57,5 @@ public class SeekResumesUploadMenu implements Menu
         options.addOption("h", "help", false, "print this message");
         options.addOption(input);
         return options;
-    }
-
-
-    private void printExampleCommand()
-    {
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp(example_command_prefix + " " + EXAMPLE_USAGE, getOptions());
     }
 }

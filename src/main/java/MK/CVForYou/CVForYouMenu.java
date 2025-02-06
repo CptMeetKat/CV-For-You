@@ -12,19 +12,13 @@ public class CVForYouMenu implements Menu
     private String example_command_prefix;
     private HashMap<String, Menu> menus = new HashMap<String,Menu>();
 
-    private static final String EXAMPLE_USAGE = "./CVForYou -cv";
+    private static final String EXAMPLE_USAGE = "--seek-stats -a";
     private static final Logger logger = LoggerFactory.getLogger(CVForYouMenu.class);
 
     public CVForYouMenu(String example_command_prefix)
     {
         this.example_command_prefix = example_command_prefix;
         registerMenus();
-    }
-
-    private void printExampleCommand()
-    {
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp(example_command_prefix, getOptions());
     }
 
     @Override
@@ -36,7 +30,7 @@ public class CVForYouMenu implements Menu
             CommandLine cmd = parser.parse(getOptions(), args, true);
 
             if(args.length == 0) {
-                printExampleCommand();
+                MenuUtils.printExampleCommand(example_command_prefix + " " + EXAMPLE_USAGE, getOptions());
                 return null;
             }
 
@@ -46,7 +40,7 @@ public class CVForYouMenu implements Menu
                 return m.parse(ArrayUtils.popCopy(args));
             }
             else if(cmd.hasOption("help")) {
-                printExampleCommand();
+                MenuUtils.printExampleCommand(example_command_prefix + " " + EXAMPLE_USAGE, getOptions());
             }
             else
                 throw new ParseException("No args provided");
@@ -54,7 +48,7 @@ public class CVForYouMenu implements Menu
         catch(ParseException e)
         {
             logger.error(e.getMessage());
-            printExampleCommand();
+            MenuUtils.printExampleCommand(example_command_prefix + " " + EXAMPLE_USAGE, getOptions());
         }
 
         return null;

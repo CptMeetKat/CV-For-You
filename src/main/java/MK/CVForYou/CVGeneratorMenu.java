@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class CVGeneratorMenu implements Menu
 {
     private String example_command_prefix;
-    private static final String EXAMPLE_USAGE = "-o <file>";
+    private static final String EXAMPLE_USAGE = "-o <file>"; //TODO: wrong
 
     private static final Logger logger = LoggerFactory.getLogger(CVGeneratorMenu.class);
 
@@ -30,7 +30,7 @@ public class CVGeneratorMenu implements Menu
             CommandLine cmd = parser.parse(getOptions(), args);
             if(cmd.hasOption("h") || args.length == 0)
             {
-                printExampleCommand();
+                MenuUtils.printExampleCommand(example_command_prefix + " " + EXAMPLE_USAGE, getOptions());
                 return null;
             }
 
@@ -52,7 +52,7 @@ public class CVGeneratorMenu implements Menu
         catch(ParseException e)
         {
             logger.error(e.getMessage());
-            printExampleCommand();
+            MenuUtils.printExampleCommand(example_command_prefix + " " + EXAMPLE_USAGE, getOptions());
         }
         return null;
 	}
@@ -110,13 +110,6 @@ public class CVGeneratorMenu implements Menu
         options.addOptionGroup(compare_input);
 
         return options;
-    }
-
-
-    private void printExampleCommand()
-    {
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp(example_command_prefix + " " + EXAMPLE_USAGE, getOptions());
     }
 
 
