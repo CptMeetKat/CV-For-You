@@ -65,7 +65,7 @@ public class ArgParser
             .desc("Generate a dynamic CV")
             .build();
 
-        Option seek_profile_stats = Option.builder("sa")
+        Option seek_profile_stats = Option.builder("sa") //TODO: sa but seek-stats is -ss
             .longOpt("seek-stats")
             .desc("Aggregate stats from Seek")
             .build();
