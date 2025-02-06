@@ -9,9 +9,6 @@ public class UpdatedRecordFormatter
 
     public static String format(SeekAppliedJobCSVRow former, SeekAppliedJobCSVRow updated)
     {
-        //Class<?> clazz = SeekAppliedJobCSVRow.class;
-        
-        //TODO: Alphabetical order
         StringBuilder sb = new StringBuilder();
         sb.append(String.format(" %-10s %s\n", "job_id", updated.job_id));
         sb.append(String.format(" %-10s %s\n", "title", updated.job_title));
