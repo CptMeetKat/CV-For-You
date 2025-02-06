@@ -79,7 +79,6 @@ public class ArgParser
                 formatter.printHelp(TOP_LEVEL_USAGE, getBaseOptions());
             else if(mode == 1)
             {
-                //parseCVGeneration(args);
                 Menu cv_generator_menu = new CVGeneratorMenu("./CVForYou --cv-generator");
                 String[] reduced_args = ArrayUtils.popCopy(args);
                 application = cv_generator_menu.parse(reduced_args);
