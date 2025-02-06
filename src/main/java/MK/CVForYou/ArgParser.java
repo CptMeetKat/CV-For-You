@@ -70,7 +70,7 @@ public class ArgParser
 
     }
 
-    public int parseArgs(String[] args) //TODO: Replace with return Application
+    public void parseArgs(String[] args) //TODO: Replace with return Application
     {
         try
         {
@@ -101,8 +101,6 @@ public class ArgParser
             //    logger.error("No mode selected");
         }
         catch (ParseException e){}
-
-        return mode;
     } 
 
 

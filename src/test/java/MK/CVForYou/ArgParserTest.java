@@ -199,21 +199,22 @@ public class ArgParserTest
         String[] args = new String[]{};
 
         ArgParser ap = new ArgParser();
-        int mode = ap.parseArgs(args);
+         
+        ap.parseArgs(args);
         Application application = ap.getApplication();
-        assertEquals(0, mode);
         assertNull(application);
     }
 
 
     @Test
-    public void parseArgsShouldReturnHelpFlagWhenTopLevelHelpIsSelected()
+    public void parseArgsShouldReturnNoApplicationWhenTopLevelHelpIsSelected()
     {
         String[] args = new String[]{"-h"};
 
         ArgParser ap = new ArgParser();
-        int mode = ap.parseArgs(args);
-        assertEquals(mode, 0);
+        ap.parseArgs(args);
+        Application application = ap.getApplication();
+        assertNull(application);
     }
 
 
@@ -265,14 +266,13 @@ public class ArgParserTest
     }
 
     @Test
-    public void parseArgsShouldReturnFailFlagOnTopLevelNotEnoughArgs()
+    public void parseArgsShouldReturnNoApplicationOnTopLevelNotEnoughArgs()
     {
         String[] args = new String[]{""};
 
         ArgParser ap = new ArgParser();
-        int mode = ap.parseArgs(args);
+        ap.parseArgs(args);
         Application application = ap.getApplication();
-        assertEquals(0, mode);
         assertNull(application);
     }
 
