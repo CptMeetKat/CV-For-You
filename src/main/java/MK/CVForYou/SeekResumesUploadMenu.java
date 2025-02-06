@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 public class SeekResumesUploadMenu implements Menu
 {
     private String example_command_prefix;
-    private static final String SEEK_RESUMES_UPLOAD_USAGE = "-i <file>";
+    private static final String EXAMPLE_USAGE = "-i <file>";
 
     private static final Logger logger = LoggerFactory.getLogger(SeekResumesUploadMenu.class);
     
@@ -63,6 +63,6 @@ public class SeekResumesUploadMenu implements Menu
     private void printExampleCommand()
     {
         HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp(example_command_prefix + " " + SEEK_RESUMES_UPLOAD_USAGE, getOptions());
+        formatter.printHelp(example_command_prefix + " " + EXAMPLE_USAGE, getOptions());
     }
 }
