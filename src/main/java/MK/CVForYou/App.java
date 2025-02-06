@@ -21,14 +21,9 @@ public class App
     public App(String[] args, boolean execute)
     {
         ArgParser ap = new ArgParser();
-        int mode = ap.parseArgs(args);
+        ap.parseArgs(args);
 
-        if ( mode == 1 )
-            application = ap.getApplication();
-        else if( mode == 2)
-            application = ap.getApplication();
-        else if ( mode == 3 )
-            application = ap.getApplication();
+        application = ap.getApplication();
             
         if(execute)
             run();
