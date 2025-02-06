@@ -13,14 +13,14 @@ public class CVGeneratorApplication implements Application
 
     CVGenerationArgs args;
 
-    public CVGeneratorApplication(CVGenerationArgs ap) //TODO: ap?
+    public CVGeneratorApplication(CVGenerationArgs args)
     {
-        job_source = ap.getJDSource();
-        input_document = ap.getInputDocument();
-        sections = ap.getSections();
-        output_folder = ap.getOutputFolder();
+        job_source = args.getJDSource();
+        input_document = args.getInputDocument();
+        sections = args.getSections();
+        output_folder = args.getOutputFolder();
         
-        args = ap;
+        this.args = args;
     }
 
     public CVGenerationArgs getCVGenerationArgs()
