@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class CVGeneratorMenu implements Menu
 {
     private String example_command_prefix;
-    private static final String EXAMPLE_USAGE = "-o <file>"; //TODO: wrong
+    private static final String EXAMPLE_USAGE = "-d <document_path> -c <compare_path> -s <section_paths>";
 
     private static final Logger logger = LoggerFactory.getLogger(CVGeneratorMenu.class);
 
