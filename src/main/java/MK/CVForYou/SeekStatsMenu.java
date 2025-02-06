@@ -67,8 +67,8 @@ public class SeekStatsMenu implements Menu
         menus.put("--analysis", analysis_menu);
         menus.put("-a", analysis_menu);
 
-        Menu summary_menu = new SeekStatsSummaryMenu(example_command_prefix + " --seek-summary"); //TODO: change this to summary
-        menus.put("--seek-summary", summary_menu);
+        Menu summary_menu = new SeekStatsSummaryMenu(example_command_prefix + " --summary"); 
+        menus.put("--summary", summary_menu);
         menus.put("-s", summary_menu);
     }
 
@@ -82,7 +82,7 @@ public class SeekStatsMenu implements Menu
             .build();
 
         Option seek_summary = Option.builder("s")
-            .longOpt("seek-summary")
+            .longOpt("summary")
             .desc("Summarise stats from Seek")
             .build();
 
