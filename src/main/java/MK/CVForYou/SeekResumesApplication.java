@@ -3,6 +3,7 @@ package MK.CVForYou;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ public class SeekResumesApplication implements Application
     int mode;
     ArrayList<File> files;
     ArrayList<String> ids;
+    boolean deleteAll;
 
 
     public SeekResumesApplication(SeekResumesArgs args) 
@@ -23,6 +25,7 @@ public class SeekResumesApplication implements Application
         mode = args.getMode();
         files = args.files;
         ids = args.ids;
+        deleteAll = args.deleteAll;
     }
 
 	@Override
@@ -35,7 +38,38 @@ public class SeekResumesApplication implements Application
             printUploadedResumes();
 	}
 
+    private HashSet<String> getExcluded()
+    {
+        return new HashSet<String>();//TODO: should read from whitelist.file
+    }
+
+    private ArrayList<String> fetchIDsToDelete()
+    {
+        ArrayList<SeekResumesResponse> seek_resumes = fetchAllResumes();
+        HashSet<String> excluded = getExcluded();
+        ArrayList<String> ids_to_delete = new ArrayList<>();
+        for(SeekResumesResponse resume : seek_resumes)
+        {
+            if(!excluded.contains(resume.id))
+                ids_to_delete.add(resume.id);
+        }
+
+        return ids_to_delete;
+    }
+
     public void deleteCVs()
+    {
+        if(deleteAll)
+        {
+            ArrayList<String> ids_to_delete = fetchIDsToDelete();
+            deleteByIds(ids_to_delete);
+        }
+        else
+            deleteByIds(ids);
+        printUploadedResumes();
+    }
+
+    private static void deleteByIds(ArrayList<String> ids)
     {
         for(String id : ids)
         {
@@ -44,7 +78,6 @@ public class SeekResumesApplication implements Application
             request.deleteSeekResume();
             Utils.sleep(3);
         }
-        printUploadedResumes();
     }
 
 	@Override
@@ -74,7 +107,7 @@ public class SeekResumesApplication implements Application
 
     private void printUploadedResumes()
     {
-        ArrayList<SeekResumesResponse> uploaded = new SeekResumeWrapper().getSeekResumes();
+        ArrayList<SeekResumesResponse> uploaded = fetchAllResumes();
 
         logger.info("{} Resumes on SEEK", uploaded.size());
         for(SeekResumesResponse resume : uploaded)
@@ -82,6 +115,11 @@ public class SeekResumesApplication implements Application
                     String.format("%-8s", resume.size),
                     resume.created,
                     String.format("%39s", resume.id));
+    }
+
+    private ArrayList<SeekResumesResponse> fetchAllResumes()
+    {
+        return new SeekResumeWrapper().getSeekResumes();
     }
 
 }
