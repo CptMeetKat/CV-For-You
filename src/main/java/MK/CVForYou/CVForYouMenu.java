@@ -21,16 +21,10 @@ public class CVForYouMenu implements Menu
         registerMenus();
     }
 
-    public CVForYouMenu()
-    {
-        this.example_command_prefix = "";
-        registerMenus();
-    }
-
     private void printExampleCommand()
     {
         HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp(example_command_prefix + " " + EXAMPLE_USAGE, getOptions());
+        formatter.printHelp(example_command_prefix, getOptions());
     }
 
     @Override

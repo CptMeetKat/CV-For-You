@@ -13,7 +13,7 @@ public class ArgParser
         Application application = null;
         try
         {
-            Menu root_menu = new CVForYouMenu();
+            Menu root_menu = new CVForYouMenu("./CVForYou");
             application = root_menu.parse(args);
         }
         catch (ParseException e){}
