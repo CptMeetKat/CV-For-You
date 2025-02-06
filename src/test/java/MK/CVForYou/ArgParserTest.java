@@ -28,11 +28,14 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
-        assertEquals(mode, -1);
+        Application application = ap.getApplication();
+
+        assertEquals(mode, 1);
+        assertNull(application);
     }
 
     @Test
-    public void shouldReturnExecuteNothingFlagWhenMissingCompareFlag()
+    public void shouldReturnNullApplicationWhenMissingCompareFlag()
     {
         String[] args = new String[]{"-cv", "-d", "CV_template.html",
                                      "-s", "section1.json", "section2.json",
@@ -40,20 +43,24 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
-        assertEquals(mode, -1);
+        Application application = ap.getApplication();
+        assertEquals(1, mode);
+        assertNull(application);
     }
 
 
     @Test
-    public void shouldReturnExecuteNothingFlagWhenMissingDocumentFlag()
+    public void shouldReturnNullApplicationWhenMissingDocumentFlag()
     {
         String[] args = new String[]{"-cv", "-c", "compare_file.txt",
                                      "-s", "section1.json", "section2.json",
                                      };
 
         ArgParser ap = new ArgParser();
+        Application application = ap.getApplication();
         int mode = ap.parseArgs(args);
-        assertEquals(mode, -1);
+        assertEquals(1, mode);
+        assertNull(application);
     }
 
 
@@ -66,7 +73,9 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
-        assertEquals(mode, -1);
+        assertEquals(1, mode);
+        Application application = ap.getApplication();
+        assertNull(application);
     }
     
 
@@ -85,7 +94,8 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         ap.parseArgs(args);
-        Path[] result = ap.getCVGenerationArgs().getSections();
+        CVGeneratorApplication application = (CVGeneratorApplication) ap.getApplication();
+        Path[] result = application.getCVGenerationArgs().getSections();
         assertEquals(result.length, 1);
         assertEquals(expected, result[0].toString());
 
@@ -110,7 +120,9 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         ap.parseArgs(args);
-        Path[] result = ap.getCVGenerationArgs().getSections();
+        
+        CVGeneratorApplication application = (CVGeneratorApplication) ap.getApplication();
+        Path[] result = application.getCVGenerationArgs().getSections();
 
         if(expected.size() != result.length)
             fail("Expected <" + expected.size() + "> and result <" + result.length + "> differ in total files");
@@ -130,7 +142,8 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         ap.parseArgs(args);
-        Path[] result = ap.getCVGenerationArgs().getSections();
+        CVGeneratorApplication application = (CVGeneratorApplication) ap.getApplication();
+        Path[] result = application.getCVGenerationArgs().getSections();
         
         assertEquals(result.length, 0);
     }
@@ -148,7 +161,8 @@ public class ArgParserTest
                                          "src/test/test_files/ArgParser/directory1/B.json"};
         ArgParser ap = new ArgParser();
         ap.parseArgs(args);
-        Path[] result = ap.getCVGenerationArgs().getSections();
+        CVGeneratorApplication application = (CVGeneratorApplication) ap.getApplication();
+        Path[] result = application.getCVGenerationArgs().getSections();
         
         if(expected.length != result.length)
             fail("Expected <" + expected.length + "> and result <" + result.length + "> differ in total files");
@@ -173,7 +187,9 @@ public class ArgParserTest
 
         ArgParser ap = new ArgParser();
         ap.parseArgs(args);
-        Path[] result = ap.getCVGenerationArgs().getSections();
+
+        CVGeneratorApplication application = (CVGeneratorApplication) ap.getApplication();
+        Path[] result = application.getCVGenerationArgs().getSections();
         
         if(expected.length != result.length)
             fail("Expected <" + expected.length + "> and result <" + result.length + "> differ in total files");
@@ -204,13 +220,15 @@ public class ArgParserTest
 
 
     @Test
-    public void parseArgsShouldReturnHelpFlagWhenCVHelpIsSelected()
+    public void parseArgsShouldReturnNullApplicationCVHelpIsSelected()
     {
         String[] args = new String[]{"-cv", "-h"};
 
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
-        assertEquals(0, mode);
+        Application application = ap.getApplication();
+        assertEquals(1, mode);
+        assertNull(application);
     }
 
 
@@ -241,13 +259,15 @@ public class ArgParserTest
 
 
     @Test
-    public void parseArgsShouldReturnFailFlagOnCVGeneratorNotEnoughArgs()
+    public void parseArgsShouldReturnNullApplicationOnCVGeneratorMenuSelected()
     {
         String[] args = new String[]{"-cv"};
 
         ArgParser ap = new ArgParser();
         int mode = ap.parseArgs(args);
-        assertEquals(-1, mode);
+        Application application = ap.getApplication();
+        assertEquals(1, mode);
+        assertNull(application);
     }
 
     @Test

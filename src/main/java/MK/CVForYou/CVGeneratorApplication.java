@@ -11,12 +11,21 @@ public class CVGeneratorApplication implements Application
     Path[] sections;
     Path output_folder;
 
-    public CVGeneratorApplication(CVGenerationArgs ap)
+    CVGenerationArgs args;
+
+    public CVGeneratorApplication(CVGenerationArgs ap) //TODO: ap?
     {
         job_source = ap.getJDSource();
         input_document = ap.getInputDocument();
         sections = ap.getSections();
         output_folder = ap.getOutputFolder();
+        
+        args = ap;
+    }
+
+    public CVGenerationArgs getCVGenerationArgs()
+    {
+        return args;
     }
 
     public static HashMap<String, InputJob> getJobs(JobSource jd_source)
