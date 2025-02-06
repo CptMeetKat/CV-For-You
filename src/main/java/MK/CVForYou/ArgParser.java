@@ -74,7 +74,7 @@ public class ArgParser
     {
         try
         {
-            Menu root_menu = new CVForYouMenu("");
+            Menu root_menu = new CVForYouMenu();
             application = root_menu.parse(args);
         }
         catch (ParseException e){}
