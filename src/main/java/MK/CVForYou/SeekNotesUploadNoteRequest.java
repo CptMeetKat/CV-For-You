@@ -11,15 +11,15 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SeekNotesUploadNote implements Requestable
+public class SeekNotesUploadNoteRequest implements Requestable
 {
-    static final Logger logger = LoggerFactory.getLogger(SeekNotesUploadNote.class);
+    static final Logger logger = LoggerFactory.getLogger(SeekNotesUploadNoteRequest.class);
     SeekSessionManager session_manager;
 
     String job_id;
     String note;
 
-    public SeekNotesUploadNote(String job_id, String note) 
+    public SeekNotesUploadNoteRequest(String job_id, String note) 
     {
         this.session_manager = SeekSessionManager.getManager();
         this.job_id = job_id;
