@@ -388,4 +388,60 @@ public class ArgParserTest
         String application_name = application.getClass().getSimpleName();
         assertEquals("SeekResumesApplication", application_name);
     }
+
+
+    @Test
+    public void parseArgsShouldReturnNullApplicationWhenSeekNotesWithNoArgs()
+    {
+        String[] args = new String[]{"--seek-notes"};
+
+        ArgParser ap = new ArgParser();
+        Application application = ap.parseArgs(args);
+        assertNull(application);
+    }
+
+
+    @Test
+    public void parseArgsShouldReturnNullApplicationWhenSeekNotesHelp()
+    {
+        String[] args = new String[]{"--seek-notes", "-h"};
+
+        ArgParser ap = new ArgParser();
+        Application application = ap.parseArgs(args);
+        assertNull(application);
+    }
+
+
+    @Test
+    public void parseArgsShouldReturnNullApplicationWhenOnlyNoteArgProvided()
+    {
+        String[] args = new String[]{"--seek-notes", "--note", "hello world"};
+
+        ArgParser ap = new ArgParser();
+        Application application = ap.parseArgs(args);
+        assertNull(application);
+    }
+
+
+    @Test
+    public void parseArgsShouldReturnNullApplicationWhenOnlyIDArgProvided()
+    {
+        String[] args = new String[]{"--seek-notes", "--id", "111111"};
+
+        ArgParser ap = new ArgParser();
+        Application application = ap.parseArgs(args);
+        assertNull(application);
+    }
+
+
+    @Test
+    public void parseArgsShouldReturnSeekNotesApplicationWhenCorrectArgs()
+    {
+        String[] args = new String[]{"--seek-notes", "--note", "hello world", "-id", "111111111"};
+
+        ArgParser ap = new ArgParser();
+        Application application = ap.parseArgs(args);
+        String application_name = application.getClass().getSimpleName();
+        assertEquals("SeekNotesApplication", application_name);
+    }
 }
