@@ -69,6 +69,11 @@ public class CVForYouMenu implements Menu
         Menu seek_resumes_menu = new SeekResumesMenu(example_command_prefix + " --seek-resumes");
         menus.put("--seek-resumes", seek_resumes_menu);
         menus.put("-sr", seek_resumes_menu);
+
+
+        Menu seek_notes_menu = new SeekNotesMenu(example_command_prefix + " --seek-notes");
+        menus.put("--seek-notes", seek_notes_menu);
+        menus.put("-sn", seek_notes_menu);
     }
 
     private static Options getOptions()
@@ -88,12 +93,19 @@ public class CVForYouMenu implements Menu
             .desc("Upload CV directly to SEEK")
             .build();
 
+
+        Option seek_notes = Option.builder("sn")
+            .longOpt("seek-notes")
+            .desc("Write notes on saved SEEK roles")
+            .build();
+
         Options options = new Options();
         options.addOption("h", "help", false, "print this message");
 
         options.addOption(cv_generator);
         options.addOption(seek_profile_stats);
         options.addOption(seek_auto_uploader);
+        options.addOption(seek_notes);
         return options;
     }
 }
