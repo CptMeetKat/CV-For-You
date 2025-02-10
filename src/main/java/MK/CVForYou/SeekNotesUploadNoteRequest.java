@@ -34,6 +34,7 @@ public class SeekNotesUploadNoteRequest implements Requestable
 
     public JSONObject deleteSeekResumes(String access_token) throws IOException, InterruptedException
     {
+        logger.debug("Upload note to role {}: {}", job_id, note);
         String operation = "SetSavedJobNotes";
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create("https://www.seek.com.au/graphql"))
@@ -41,10 +42,12 @@ public class SeekNotesUploadNoteRequest implements Requestable
             .header("accept-language", "en-GB,en-US;q=0.9,en;q=0.8")
             .header("authorization", "Bearer " + access_token)
             .header("content-type", "application/json")
-            .method("POST", HttpRequest.BodyPublishers.ofString("{  \"operationName\": \"" + operation + "\",  \"variables\": {    \"input\": {      \"id\": \"" + job_id + "\",      \"notes\": \"test\"    },    \"locale\": \"en-AU\"  },  \"query\": \"mutation SetSavedJobNotes($input: SetSavedJobNotesInput!, $locale: Locale) {\\n  setSavedJobNotes(input: $input) {\\n    ... on SetSavedJobNotesSuccess {\\n      id\\n      __typename\\n    }\\n    ... on SetSavedJobNotesFailure {\\n      errors {\\n        message(locale: $locale)\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\"}"))
+            .method("POST", HttpRequest.BodyPublishers.ofString("{  \"operationName\": \"" + operation + "\",  \"variables\": {    \"input\": {      \"id\": \"" + job_id + "\",      \"notes\": \"" + note + "\"    },    \"locale\": \"en-AU\"  },  \"query\": \"mutation SetSavedJobNotes($input: SetSavedJobNotesInput!, $locale: Locale) {\\n  setSavedJobNotes(input: $input) {\\n    ... on SetSavedJobNotesSuccess {\\n      id\\n      __typename\\n    }\\n    ... on SetSavedJobNotesFailure {\\n      errors {\\n        message(locale: $locale)\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\"}"))
             .build(); 
 
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+
+            logger.info(response.body());
             return new JSONObject(response.body());
     }
 

@@ -18,7 +18,7 @@ public class SeekNotesApplication implements Application
         this.session_manager = SeekSessionManager.getManager();
         mode = args.getMode();
         this.job_id = args.job_id;
-        this.note = args.note;
+        this.note = args.getNote();
     }
 
 	@Override
@@ -29,8 +29,9 @@ public class SeekNotesApplication implements Application
 
     public void uploadNote()
     {
-        //new SeekNotesUploadNote(job_id, note);
-        logger.warn("Unimplemented: Write note");
+        SeekNotesUploadNoteRequest request = new SeekNotesUploadNoteRequest(job_id, note);
+        request.uploadNote();
+
     }
 
 	@Override

@@ -37,8 +37,8 @@ public class SeekNotesMenu implements Menu
             {
                 SeekNotesArgs seek_note_args = new SeekNotesArgs();
                 seek_note_args.setMode(1);
-                seek_note_args.note = cmd.getOptionValue("n");
                 seek_note_args.job_id = cmd.getOptionValue("id");
+                seek_note_args.setNote(cmd.getOptionValues("n"));
                 return new SeekNotesApplication(seek_note_args);
             }
         }
@@ -61,7 +61,7 @@ public class SeekNotesMenu implements Menu
             .desc("ID of the role to add note too")
             .build();
 
-        Option note = Option.builder("n").hasArg()
+        Option note = Option.builder("n").hasArgs()
             .longOpt("note")
             .desc("Note to write to SEEK role")
             .build();
