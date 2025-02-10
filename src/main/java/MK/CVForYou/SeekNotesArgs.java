@@ -4,6 +4,7 @@ public class SeekNotesArgs
 {
     int mode;
     public String note;
+    public String job_id;
 
     public void setMode(int mode)
     {
