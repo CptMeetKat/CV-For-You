@@ -11,7 +11,7 @@ public class SeekNotesMenu implements Menu
 {
     private String example_command_prefix;
 
-    private static final String EXAMPLE_USAGE = "--note <note>";
+    private static final String EXAMPLE_USAGE = "--note <note> -id <id>";
     private static final Logger logger = LoggerFactory.getLogger(SeekNotesMenu.class);
 
     public SeekNotesMenu(String example_command_prefix)
@@ -33,11 +33,14 @@ public class SeekNotesMenu implements Menu
 
             if (!cmd.hasOption("n"))
                 throw new ParseException("-n must be provided");
+            if (!cmd.hasOption("id"))
+                throw new ParseException("-id must be provided");
             else if ( cmd.hasOption("n") )
             {
                 SeekNotesArgs seek_note_args = new SeekNotesArgs();
                 seek_note_args.setMode(1);
                 seek_note_args.note = cmd.getOptionValue("n");
+                seek_note_args.job_id = cmd.getOptionValue("id");
                 return new SeekNotesApplication(seek_note_args);
             }
         }
@@ -54,6 +57,12 @@ public class SeekNotesMenu implements Menu
     {
         Options options = new Options();
 
+
+        Option id = Option.builder("id").hasArg()
+            .longOpt("id")
+            .desc("ID of the role to add note too")
+            .build();
+
         Option note = Option.builder("n").hasArg()
             .longOpt("note")
             .desc("Note to write to SEEK role")
@@ -61,6 +70,7 @@ public class SeekNotesMenu implements Menu
 
 
         options.addOption("h", "help", false, "print this message");
+        options.addOption(id);
         options.addOption(note);
 
         return options;
