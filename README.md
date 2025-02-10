@@ -26,6 +26,7 @@ Automatically create the most effective version of your resume, ensuring your sk
 usage: ./CVForYou --seek-stats -a
  -cv,--cv-generator   Generate a dynamic CV
  -h,--help            print this message
+ -sn,--seek-notes     Write notes on saved SEEK roles
  -sr,--seek-resumes   Upload CV directly to SEEK
  -ss,--seek-stats     Aggregate stats from Seek
 ```
