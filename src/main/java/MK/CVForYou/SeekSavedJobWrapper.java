@@ -46,7 +46,13 @@ public class SeekSavedJobWrapper implements Requestable
 		
         return job_urls;
     }
-    
+
+    public ArrayList<SeekSavedJob> getSavedJobs()
+    {
+        JSONObject jobs_data = session_manager.makeRequest(this);
+        ArrayList<SeekSavedJob> saved_jobs = deserializeSavedJobs(jobs_data);
+        return saved_jobs;
+    }
 
     public static ArrayList<SeekSavedJob> deserializeSavedJobs(JSONObject object)
     {
