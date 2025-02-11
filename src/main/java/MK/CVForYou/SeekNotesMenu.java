@@ -38,7 +38,10 @@ public class SeekNotesMenu implements Menu
                 SeekNotesArgs seek_note_args = new SeekNotesArgs();
                 seek_note_args.setMode(1);
                 seek_note_args.job_id = cmd.getOptionValue("id");
-                seek_note_args.setNote(cmd.getOptionValues("n"));
+                
+                String note = formatNote(cmd.getOptionValues("n"));
+                seek_note_args.setNote(note);
+
                 return new SeekNotesApplication(seek_note_args);
             }
         }
@@ -48,6 +51,14 @@ public class SeekNotesMenu implements Menu
         }
 
         return null;
+    }
+
+    private String formatNote(String[] note)
+    {
+        String temp = String.join(" ", note);
+        if(temp.equals("--empty"))
+            temp = "";
+        return temp;
     }
 
 
@@ -63,7 +74,7 @@ public class SeekNotesMenu implements Menu
 
         Option note = Option.builder("n").hasArgs()
             .longOpt("note")
-            .desc("Note to write to SEEK role")
+            .desc("Note to write to SEEK role (use '--empty' to clear the note)")
             .build();
 
 
