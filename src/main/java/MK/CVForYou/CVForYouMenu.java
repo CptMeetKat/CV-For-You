@@ -74,6 +74,11 @@ public class CVForYouMenu implements Menu
         Menu seek_notes_menu = new SeekNotesMenu(example_command_prefix + " --seek-notes");
         menus.put("--seek-notes", seek_notes_menu);
         menus.put("-sn", seek_notes_menu);
+
+
+        Menu scripts_menu = new SeekHighlightsMenu();
+        menus.put("--scripts", scripts_menu);
+        menus.put("-x", scripts_menu);
     }
 
     private static Options getOptions()
@@ -99,6 +104,11 @@ public class CVForYouMenu implements Menu
             .desc("Write notes on saved SEEK roles")
             .build();
 
+        Option scripts = Option.builder("x")
+            .longOpt("scripts")
+            .desc("...")
+            .build();
+
         Options options = new Options();
         options.addOption("h", "help", false, "print this message");
 
@@ -106,6 +116,7 @@ public class CVForYouMenu implements Menu
         options.addOption(seek_profile_stats);
         options.addOption(seek_auto_uploader);
         options.addOption(seek_notes);
+        options.addOption(scripts);
         return options;
     }
 }
