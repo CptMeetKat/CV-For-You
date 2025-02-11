@@ -25,6 +25,7 @@ public class SeekAppliedJob
     public boolean applied_with_cover;
     public boolean isExternal;
     public String salary;
+    public String notes;
 
     public SeekAppliedJob(){}
 
@@ -63,7 +64,7 @@ public class SeekAppliedJob
         isExternal = node.optBoolean("isExternal");
         applied_with_cv = node.optBoolean("hasAppliedWithResume");
         applied_with_cover = node.optBoolean("hasAppliedWithCoverLetter");
-
+        notes = JSONHelpers.getString(node, "notes");
 
         JSONObject job = node.optJSONObject("job");
         job_title = JSONHelpers.getString(job, "title");
