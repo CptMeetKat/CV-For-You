@@ -16,11 +16,6 @@ public class SeekNotesArgs
         return note;
     }
 
-    public void setNote(String[] note)
-    {
-        this.note = String.join(" ", note);
-    }
-
     public void setNote(String note)
     {
         this.note = note;
