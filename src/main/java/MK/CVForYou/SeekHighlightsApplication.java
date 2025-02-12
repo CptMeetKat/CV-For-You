@@ -23,7 +23,7 @@ public class SeekHighlightsApplication implements Application
         ArrayList<InputJob> saved_jobs = seek.getJobModel();
         for(InputJob job : saved_jobs)
         {
-            List<Integer> position = getMatches(job.job_description, "years");
+            List<Integer> position = getMatches(job.job_description, "year");
             List<Integer> line_breaks_positions = getMatches(job.job_description, "\n");
 
             StringBuilder sb = new StringBuilder(); 
