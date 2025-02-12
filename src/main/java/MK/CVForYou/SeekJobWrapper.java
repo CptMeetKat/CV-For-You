@@ -66,7 +66,6 @@ public class SeekJobWrapper {
 
         job_description = SeekJobParser.extractJobDescriptionFromHTML(page); //SeekJobPageParser //SeekJobDescriptionParser
         job_title = SeekJobParser.extractJobTitleFromHTML(page);
-        logger.trace("Job title detected: {}", job_title);
     }
 
     public String getJobDescription()
