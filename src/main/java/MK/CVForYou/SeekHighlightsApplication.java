@@ -30,11 +30,14 @@ public class SeekHighlightsApplication implements Application
             for(Integer i : position) {
                 int left = firstPositionBefore(i, line_breaks_positions, 50);
                 int right = firstPositionAfter(i, line_breaks_positions, 50, job.job_description.length());
-                String note = job.job_description.substring(left+1,right);
-                sb.append(note + "\\n");
-            }
 
-            if(!roleContainsNotes(job.name))
+                String note = job.job_description.substring(left+1,right);
+                if(note.length() > 0)
+                    sb.append(note + "\\n");
+            }
+            
+            
+            if(!roleContainsNotes(job.name) && sb.length() > 0)
                 writeNoteToRole(job.name, sb.toString());
         }
 	}
