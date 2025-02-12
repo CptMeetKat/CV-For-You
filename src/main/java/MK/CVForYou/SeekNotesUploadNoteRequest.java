@@ -32,7 +32,7 @@ public class SeekNotesUploadNoteRequest implements Requestable
         return null; //TODO: this returns null????
     }
 
-    public JSONObject deleteSeekResumes(String access_token) throws IOException, InterruptedException
+    public JSONObject uploadNote(String access_token) throws IOException, InterruptedException
     {
         logger.debug("Upload note to role {}: {}", job_id, note);
         String operation = "SetSavedJobNotes";
@@ -53,6 +53,6 @@ public class SeekNotesUploadNoteRequest implements Requestable
 
 	@Override
 	public JSONObject request(String access_token) throws IOException, InterruptedException {
-        return deleteSeekResumes(access_token);
+        return uploadNote(access_token);
 	}
 }
