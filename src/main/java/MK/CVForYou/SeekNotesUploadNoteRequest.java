@@ -47,7 +47,7 @@ public class SeekNotesUploadNoteRequest implements Requestable
 
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
-            logger.info(response.body());
+            logger.trace(response.body());
             return new JSONObject(response.body());
     }
 
