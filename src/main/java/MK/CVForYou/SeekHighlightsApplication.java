@@ -17,6 +17,9 @@ public class SeekHighlightsApplication implements Application
 
 	@Override
 	public void run() {
+        int skipped = 0;
+        int uploaded = 0;
+
         jobs = getJobsMap();
 
         JobFromSeekSaved seek = new JobFromSeekSaved();
@@ -24,9 +27,19 @@ public class SeekHighlightsApplication implements Application
         for(InputJob job : saved_jobs)
         {
             String highlight = createHighlight(job.job_description);
-            if(!roleContainsNotes(job.name) && highlight.length() > 0)
+
+            if(!roleContainsNotes(job.name) && !highlight.isBlank())
+            {
                 writeNoteToRole(job.name, highlight);
+                uploaded++;
+            }
+            else
+                skipped++;
         }
+
+        logger.info("***Summary***\n{} highlights skipped\n{} highlights uploaded",
+                                                String.format("%4d", skipped),
+                                                String.format("%4d", uploaded));
 	}
 
     private String createHighlight(String text)
