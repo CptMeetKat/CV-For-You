@@ -18,6 +18,7 @@ public class SeekJobWrapper {
     String job_title;
 
     Path cache_directory = Paths.get("./cache/");
+    private int cache_status; //0 not initialised, 1 not cached, 2 cache
 
     public SeekJobWrapper(String job_url, boolean initialise) { 
         this.job_url = job_url;
@@ -48,11 +49,12 @@ public class SeekJobWrapper {
 		try {
             Path cache_path = Paths.get(cache_directory.toString(), job_id);
 			page = SeekJobParser.getJobCacheFromFile(cache_path);
-            logger.info("JD cache found: {}", job_id);
+            cache_status = 2;
 		}
         catch (IOException e) {
             page = initJDPage();
             cachePage(page, getSeekJobID(), this.cache_directory); //TODO: this getSeekJobID() function smells funny
+            cache_status = 1;
             Utils.sleep(1); //Avoid flagging seek systems
 		}
         return page;
@@ -111,5 +113,11 @@ public class SeekJobWrapper {
     {
         cache_directory = directory;
     }
+
+    public int getCacheStatus()
+    {
+        return cache_status;
+    }
+
 }
 
