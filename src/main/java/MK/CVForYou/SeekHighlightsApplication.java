@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 public class SeekHighlightsApplication implements Application
 {
     static final Logger logger = LoggerFactory.getLogger(SeekHighlightsApplication.class);
+
 	@Override
 	public void run() {
         JobFromSeekSaved seek = new JobFromSeekSaved();
@@ -19,26 +20,46 @@ public class SeekHighlightsApplication implements Application
         {
             System.out.println(String.format("Title: %s (%s)", job.job_title, job.name)); //TODO: Works but inappropriate use of InputJob?
             List<Integer> position = getMatches(job.job_description, "years");
+            List<Integer> line_breaks_positions = getMatches(job.job_description, "\n");
 
 
             for(Integer i : position) {
-                printAroundMatch(job.job_description, i.intValue());
+                int left = firstPositionBefore(i, line_breaks_positions, 50);
+                int right = firstPositionAfter(i, line_breaks_positions, 50, job.job_description.length());
+                System.out.println(job.job_description.substring(left+1,right));
             }
             System.out.println();
         }
-        logger.trace("highlighting");
 	}
 
-
-    private void printAroundMatch(String text, int position)
+    private int firstPositionBefore(int target, List<Integer> positions, int min)
     {
-        int left = Math.max(position-20, 0);
-        int right = Math.min(position+25, text.length());
-
-        String text_to_print = text.substring(left,right).replace("\n","");
-        System.out.println(text_to_print);
+        int result = 0;
+        for(int i : positions)
+        {
+            if(i < target)
+                result = i;
+            else
+                break;
+        }
+        result = Math.max(result, target-min);
+        return result;
     }
 
+    private int firstPositionAfter(int target, List<Integer> positions, int max, int size)
+    {
+        int result = size;
+        for(int i = positions.size()-1; i >= 0; i--)
+        {
+            if(positions.get(i) > target)
+                result = positions.get(i);
+            else
+                break;
+        }
+
+        result = Math.min(target+max, result);
+        return result;
+    }
 
     private List<Integer> getMatches(String text, String pattern)
     {
