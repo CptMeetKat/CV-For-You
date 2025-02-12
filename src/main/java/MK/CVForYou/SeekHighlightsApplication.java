@@ -83,7 +83,7 @@ public class SeekHighlightsApplication implements Application
     
     private void writeNoteToRole(String job_id, String note)
     {
-        logger.info("Writing note to role {}\n", job_id);
+        logger.info("Writing note to role {}", job_id);
         SeekNotesUploadNoteRequest request = new SeekNotesUploadNoteRequest(job_id, note);
         request.uploadNote();
     }
