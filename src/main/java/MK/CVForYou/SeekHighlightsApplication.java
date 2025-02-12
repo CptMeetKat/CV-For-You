@@ -53,14 +53,8 @@ public class SeekHighlightsApplication implements Application
 
     private boolean roleContainsNotes(String role_id)
     {
-
         SeekSavedJob job = jobs.get(role_id);
-        if (job != null)
-        {
-            if(job.notes != null && !job.notes.equals(""))
-                return true;
-        }
-        return false;
+        return job != null && job.notes != null && !job.notes.equals("");
     }
     
     private void writeNoteToRole(String job_id, String note)
