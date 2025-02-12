@@ -23,24 +23,31 @@ public class SeekHighlightsApplication implements Application
         ArrayList<InputJob> saved_jobs = seek.getJobModel();
         for(InputJob job : saved_jobs)
         {
-            List<Integer> position = getMatches(job.job_description, "year");
-            List<Integer> line_breaks_positions = getMatches(job.job_description, "\n");
-
-            StringBuilder sb = new StringBuilder(); 
-            for(Integer i : position) {
-                int left = firstPositionBefore(i, line_breaks_positions, 50);
-                int right = firstPositionAfter(i, line_breaks_positions, 50, job.job_description.length());
-
-                String note = job.job_description.substring(left+1,right);
-                if(note.length() > 0)
-                    sb.append(note + "\\n");
-            }
             
-            
-            if(!roleContainsNotes(job.name) && sb.length() > 0)
-                writeNoteToRole(job.name, sb.toString());
+            String highlight = createHighlight(job);
+            if(!roleContainsNotes(job.name) && highlight.length() > 0)
+                writeNoteToRole(job.name, highlight);
+
         }
 	}
+
+    private String createHighlight(InputJob job)
+    {
+        List<Integer> position = getMatches(job.job_description, "year");
+        List<Integer> line_breaks_positions = getMatches(job.job_description, "\n");
+
+        StringBuilder sb = new StringBuilder(); 
+        for(Integer i : position) {
+            int left = firstPositionBefore(i, line_breaks_positions, 50);
+            int right = firstPositionAfter(i, line_breaks_positions, 50, job.job_description.length());
+
+            String note = job.job_description.substring(left+1,right);
+            if(note.length() > 0)
+                sb.append(note + "\\n");
+        }
+
+        return sb.toString();
+    }
 
     private HashMap<String, SeekSavedJob> getJobsMap()
     {
