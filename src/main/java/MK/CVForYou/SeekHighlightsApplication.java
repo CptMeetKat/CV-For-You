@@ -1,6 +1,7 @@
 package MK.CVForYou;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,26 +12,63 @@ import org.slf4j.LoggerFactory;
 public class SeekHighlightsApplication implements Application
 {
     static final Logger logger = LoggerFactory.getLogger(SeekHighlightsApplication.class);
+    
+    private HashMap<String, SeekSavedJob> jobs;
 
 	@Override
 	public void run() {
+        jobs = getJobsMap();
+
         JobFromSeekSaved seek = new JobFromSeekSaved();
         ArrayList<InputJob> saved_jobs = seek.getJobModel();
         for(InputJob job : saved_jobs)
         {
-            System.out.println(String.format("Title: %s (%s)", job.job_title, job.name)); //TODO: Works but inappropriate use of InputJob?
             List<Integer> position = getMatches(job.job_description, "years");
             List<Integer> line_breaks_positions = getMatches(job.job_description, "\n");
 
-
+            StringBuilder sb = new StringBuilder(); 
             for(Integer i : position) {
                 int left = firstPositionBefore(i, line_breaks_positions, 50);
                 int right = firstPositionAfter(i, line_breaks_positions, 50, job.job_description.length());
-                System.out.println(job.job_description.substring(left+1,right));
+                String note = job.job_description.substring(left+1,right);
+                sb.append(note + "\\n");
             }
-            System.out.println();
+
+            if(!roleContainsNotes(job.name))
+                writeNoteToRole(job.name, sb.toString());
         }
 	}
+
+    private HashMap<String, SeekSavedJob> getJobsMap()
+    {
+        HashMap<String, SeekSavedJob> map = new HashMap<>();
+        SeekSavedJobWrapper wrapper = new SeekSavedJobWrapper();
+        ArrayList<SeekSavedJob> jobs = wrapper.getSavedJobs();
+        for(SeekSavedJob job : jobs)
+        {
+            map.put(job.job_id, job);
+        }
+        return map;
+    }
+
+    private boolean roleContainsNotes(String role_id)
+    {
+
+        SeekSavedJob job = jobs.get(role_id);
+        if (job != null)
+        {
+            if(job.notes != null && !job.notes.equals(""))
+                return true;
+        }
+        return false;
+    }
+    
+    private void writeNoteToRole(String job_id, String note)
+    {
+        logger.info("Writing note to role {}\n", job_id);
+        SeekNotesUploadNoteRequest request = new SeekNotesUploadNoteRequest(job_id, note);
+        request.uploadNote();
+    }
 
     private int firstPositionBefore(int target, List<Integer> positions, int min)
     {
