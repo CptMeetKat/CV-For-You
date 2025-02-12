@@ -23,25 +23,23 @@ public class SeekHighlightsApplication implements Application
         ArrayList<InputJob> saved_jobs = seek.getJobModel();
         for(InputJob job : saved_jobs)
         {
-            
-            String highlight = createHighlight(job);
+            String highlight = createHighlight(job.job_description);
             if(!roleContainsNotes(job.name) && highlight.length() > 0)
                 writeNoteToRole(job.name, highlight);
-
         }
 	}
 
-    private String createHighlight(InputJob job)
+    private String createHighlight(String text)
     {
-        List<Integer> position = getMatches(job.job_description, "year");
-        List<Integer> line_breaks_positions = getMatches(job.job_description, "\n");
+        List<Integer> position = getMatches(text, "year");
+        List<Integer> line_breaks_positions = getMatches(text, "\n");
 
         StringBuilder sb = new StringBuilder(); 
         for(Integer i : position) {
             int left = firstPositionBefore(i, line_breaks_positions, 50);
-            int right = firstPositionAfter(i, line_breaks_positions, 50, job.job_description.length());
+            int right = firstPositionAfter(i, line_breaks_positions, 50, text.length());
 
-            String note = job.job_description.substring(left+1,right);
+            String note = text.substring(left+1,right);
             if(note.length() > 0)
                 sb.append(note + "\\n");
         }
