@@ -17,6 +17,9 @@ public class SeekHighlightsApplication implements Application
 
 	@Override
 	public void run() {
+
+        logger.info("Writing role highlights to SEEK");
+
         int skipped = 0;
         int uploaded = 0;
 
@@ -37,7 +40,7 @@ public class SeekHighlightsApplication implements Application
                 skipped++;
         }
 
-        logger.info("***Summary***\n{} highlights skipped\n{} highlights uploaded",
+        logger.info("***Highlights Summary***\n{} highlights skipped\n{} highlights uploaded",
                                                 String.format("%4d", skipped),
                                                 String.format("%4d", uploaded));
 	}
