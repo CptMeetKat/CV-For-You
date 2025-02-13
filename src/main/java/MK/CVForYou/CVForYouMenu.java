@@ -76,7 +76,7 @@ public class CVForYouMenu implements Menu
         menus.put("-sn", seek_notes_menu);
 
 
-        Menu scripts_menu = new SeekHighlightsMenu();
+        Menu scripts_menu = new SeekScriptsMenu(example_command_prefix + " --seek-scripts");
         menus.put("--scripts", scripts_menu);
         menus.put("-x", scripts_menu);
     }
