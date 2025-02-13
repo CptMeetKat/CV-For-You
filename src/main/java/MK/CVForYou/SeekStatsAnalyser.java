@@ -17,7 +17,7 @@ public class SeekStatsAnalyser
     int total_internal_applications;
     int total_external_application;
 
-    long total_open_applications;
+    long total_open_internal_applications;
     long total_unopened;
     long total_viewed;
     long total_rejected;
@@ -54,10 +54,11 @@ public class SeekStatsAnalyser
         total_internal_applications = internal_applications.size();
         total_external_application = total_applications - total_internal_applications;
 
-        total_open_applications = applications.stream().filter(row -> row.active == true).count();
-        total_unopened = applications.stream().filter(row -> row.latest_status.equals("Applied") == true).count();
-        total_viewed = applications.stream().filter(row -> row.latest_status.equals("Viewed") == true).count();
-        total_rejected = applications.stream().filter(row -> row.latest_status.equals("NotSuitable") == true).count();
+        total_open_internal_applications = internal_applications.stream().filter(row -> row.active == true).count();
+
+        total_unopened = internal_applications.stream().filter(row -> row.latest_status.equals("Applied") == true).count();
+        total_viewed = internal_applications.stream().filter(row -> row.latest_status.equals("Viewed") == true).count();
+        total_rejected = internal_applications.stream().filter(row -> row.latest_status.equals("NotSuitable") == true).count();
         total_opened = total_internal_applications - total_unopened;
 
         total_unopened_percentage = (double) total_unopened / total_internal_applications;
@@ -228,7 +229,7 @@ public class SeekStatsAnalyser
         System.out.printf("\tExternal Applications: %d%n", total_external_application);
 
         System.out.printf("%n****Internal Stats****%n");
-        System.out.printf("\tPending Applications: %d / %d%n", total_open_applications, total_internal_applications);
+        System.out.printf("\tPending Applications: %d / %d%n", total_open_internal_applications, total_internal_applications);
 
         System.out.printf("\tUnopened: %d / %d (%d%%)%n", total_unopened, total_internal_applications, (int)(total_unopened_percentage*100));
         System.out.printf("\tOpened: %d / %d (%d%%)%n", total_opened, total_internal_applications, (int)(total_opened_percentage*100));
