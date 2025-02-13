@@ -34,7 +34,7 @@ public class SeekNotesUploadNoteRequest implements Requestable
 
     public JSONObject uploadNote(String access_token) throws IOException, InterruptedException
     {
-        logger.debug("Upload note to role {}: {}", job_id, note);
+        logger.info("Uploading note to role {}", job_id);
         String operation = "SetSavedJobNotes";
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create("https://www.seek.com.au/graphql"))
@@ -47,7 +47,6 @@ public class SeekNotesUploadNoteRequest implements Requestable
 
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
-            logger.trace(response.body());
             return new JSONObject(response.body());
     }
 
