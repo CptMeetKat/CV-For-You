@@ -444,4 +444,16 @@ public class ArgParserTest
         String application_name = application.getClass().getSimpleName();
         assertEquals("SeekNotesApplication", application_name);
     }
+
+    @Test
+    public void parseArgsShouldReturnSeekNotesApplicationWhenEmptyFlagIsSet()
+    {
+        String[] args = new String[]{"--seek-notes", "--note", "--empty", "-id", "111111111"};
+
+        ArgParser ap = new ArgParser();
+        Application application = ap.parseArgs(args);
+        String application_name = application.getClass().getSimpleName();
+        assertEquals("SeekNotesApplication", application_name);
+    }
+
 }
