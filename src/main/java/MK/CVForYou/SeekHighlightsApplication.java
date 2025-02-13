@@ -19,7 +19,7 @@ public class SeekHighlightsApplication implements Application
 	@Override
 	public void run() {
 
-        logger.info("Writing role highlights to SEEK");
+        logger.info("Writing phrases that contain '{}' to SEEK job notes...", highlight);
 
         int skipped = 0;
         int uploaded = 0;
