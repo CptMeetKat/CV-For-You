@@ -14,6 +14,7 @@ public class SeekHighlightsApplication implements Application
     static final Logger logger = LoggerFactory.getLogger(SeekHighlightsApplication.class);
     
     private HashMap<String, SeekSavedJob> jobs;
+    private String highlight = "year";
 
 	@Override
 	public void run() {
@@ -47,7 +48,7 @@ public class SeekHighlightsApplication implements Application
 
     private String createHighlight(String text)
     {
-        List<Integer> position = getMatches(text, "year");
+        List<Integer> position = getMatches(text, highlight);
         List<Integer> line_breaks_positions = getMatches(text, "\n");
 
         StringBuilder sb = new StringBuilder(); 
