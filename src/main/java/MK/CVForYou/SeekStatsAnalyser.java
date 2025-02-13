@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
@@ -37,10 +38,25 @@ public class SeekStatsAnalyser
 
     public SeekStatsAnalyser(List<SeekAppliedJobCSVRow> applied_jobs)
     {
-        applications = applied_jobs;
+        applications = applied_jobs; 
         internal_applications = new ArrayList<SeekAppliedJobCSVRow>();
         generateStats();
     }
+
+    public SeekStatsAnalyser(List<SeekAppliedJobCSVRow> applied_jobs, int days_ago) //TODO: Combine constructors better
+    {
+        List<SeekAppliedJobCSVRow> filtered = applied_jobs.stream()
+            .filter(row -> getDaysSince(row.applied_at) <= days_ago)
+            .collect(Collectors.toList());
+
+        applications = filtered; 
+        internal_applications = new ArrayList<SeekAppliedJobCSVRow>();
+        generateStats();
+    }
+
+
+
+
 
     public void generateStats()
     {
@@ -129,6 +145,20 @@ public class SeekStatsAnalyser
 
         Instant now = Instant.now();
         long daysSince = ChronoUnit.DAYS.between(best, now);
+
+        return (int) daysSince;
+    }
+
+    
+    //ISO 8601 format
+    /**
+     * @param date_string in ISO8601 UTC format
+     */
+    private static int getDaysSince(String date_string)
+    {
+        Instant then = Instant.parse(date_string);
+        Instant now = Instant.now();
+        long daysSince = ChronoUnit.DAYS.between(then, now);
 
         return (int) daysSince;
     }
