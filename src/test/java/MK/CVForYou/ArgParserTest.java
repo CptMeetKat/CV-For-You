@@ -456,4 +456,16 @@ public class ArgParserTest
         assertEquals("SeekNotesApplication", application_name);
     }
 
+
+    @Test
+    public void parseArgsShouldReturnSeekResumesApplicationWhenDeleteAllSet()
+    {
+        String[] args = new String[]{"--seek-resumes", "--delete", "--all"};
+
+        ArgParser ap = new ArgParser();
+        Application application = ap.parseArgs(args);
+        String application_name = application.getClass().getSimpleName();
+        assertEquals("SeekResumesApplication", application_name);
+    }
+
 }
