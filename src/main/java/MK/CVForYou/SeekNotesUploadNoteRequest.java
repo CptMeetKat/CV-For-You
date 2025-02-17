@@ -23,7 +23,14 @@ public class SeekNotesUploadNoteRequest implements Requestable
     {
         this.session_manager = SeekSessionManager.getManager();
         this.job_id = job_id;
-        this.note = note;
+        this.note = escapeJSONChars(note);
+    }
+
+    private String escapeJSONChars(String note)
+    {
+        String result = note.replaceAll("\"", "\\\\\"");
+
+        return result;
     }
 
     public ArrayList<SeekResumesResponse> uploadNote()
