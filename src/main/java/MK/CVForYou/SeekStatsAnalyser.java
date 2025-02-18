@@ -253,7 +253,7 @@ public class SeekStatsAnalyser
     public void printStats() //TODO: should this use logger or just system.out?
     {
         System.out.println("\n****Seek Job Application Stats****");
-        System.out.printf("\tDays Ago: %d%n", day_since_start);
+        System.out.printf("\tDays Since 1st: %d%n", day_since_start);
         System.out.printf("\tTotal Applications: %d%n", total_applications);
         System.out.printf("\tInternal Applications: %d%n", total_internal_applications);
         System.out.printf("\tExternal Applications: %d%n", total_external_application);
