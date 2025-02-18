@@ -36,6 +36,8 @@ public class SeekStatsSummaryMenu implements Menu
                 return new SeekStatsApplication(seek_stats_args);
             else if ( cmd.hasOption("i") )
                 seek_stats_args.setInput(cmd.getOptionValue("i"));
+            else if ( cmd.hasOption("d") )
+                seek_stats_args.setDaysAgo(Integer.parseInt(cmd.getOptionValue("d")));
 
             return new SeekStatsApplication(seek_stats_args);
         }
@@ -56,8 +58,14 @@ public class SeekStatsSummaryMenu implements Menu
             .desc("CSV input location")
             .build();
 
+        Option days_ago = Option.builder("d").hasArg()
+            .longOpt("days-ago")
+            .desc("Days since to report stats from")
+            .build();
+
         options.addOption("h", "help", false, "print this message");
         options.addOption(input);
+        options.addOption(days_ago);
         return options;
     }
 }

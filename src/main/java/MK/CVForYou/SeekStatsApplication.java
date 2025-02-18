@@ -18,6 +18,9 @@ public class SeekStatsApplication implements Application
     Path output_location;
     Path input_location;
     int mode = 0;
+    int days_ago;
+    boolean hasLimit;
+
     
     public SeekStatsApplication(SeekStatsArgs ap)
     {
@@ -32,6 +35,8 @@ public class SeekStatsApplication implements Application
         else if(mode == 2)
         {
             input_location = ap.getInput();
+            days_ago = ap.getDaysAgo();
+            hasLimit = ap.getHasLimit();
         }
     }
 
@@ -142,7 +147,11 @@ public class SeekStatsApplication implements Application
         String filename = input_location.toString();
 		try {
 			List<SeekAppliedJobCSVRow> applied_jobs = CSVReader.readFromFile(SeekAppliedJobCSVRow.class, filename);
-            SeekStatsAnalyser analyser = new SeekStatsAnalyser(applied_jobs);
+            SeekStatsAnalyser analyser;
+            if(hasLimit)
+                analyser = new SeekStatsAnalyser(applied_jobs, days_ago);
+            else
+                analyser = new SeekStatsAnalyser(applied_jobs);
             analyser.printStats();
 		} catch (IOException e) {
             logger.warn("Unable to read existing Seek statistics file: {}", e.getMessage());
