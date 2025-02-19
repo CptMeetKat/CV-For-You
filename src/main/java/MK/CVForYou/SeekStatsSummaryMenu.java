@@ -36,8 +36,11 @@ public class SeekStatsSummaryMenu implements Menu
                 return new SeekStatsApplication(seek_stats_args);
             else if ( cmd.hasOption("i") )
                 seek_stats_args.setInput(cmd.getOptionValue("i"));
-            else if ( cmd.hasOption("d") )
-                seek_stats_args.setDaysAgo(Integer.parseInt(cmd.getOptionValue("d")));
+            else if ( cmd.hasOption("d"))
+            {
+                if( isValidDaysAgo(cmd.getOptionValue("d")) )
+                    seek_stats_args.setDaysAgo(Integer.parseInt(cmd.getOptionValue("d")));
+            }
 
             return new SeekStatsApplication(seek_stats_args);
         }
@@ -48,6 +51,29 @@ public class SeekStatsSummaryMenu implements Menu
 
         return null;
 	}
+
+    private boolean isValidDaysAgo(String input) throws ParseException
+    {
+        if(isParsableToUnsignedInt(input))
+        {
+            int value = Integer.parseUnsignedInt(input);
+            if(value >= 0)
+                return true;
+        }
+        else
+            throw new ParseException("-d must be a positive number");
+
+        return false;
+    }
+
+    private static boolean isParsableToUnsignedInt(String str) {
+        try {
+            Integer.parseUnsignedInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 
     private static Options getOptions()
     {

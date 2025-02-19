@@ -468,4 +468,69 @@ public class ArgParserTest
         assertEquals("SeekResumesApplication", application_name);
     }
 
+    @Test
+    public void parseArgsShouldReturnNoApplicationWhenDaysAgoEmpty()
+    {
+        String[] args = new String[]{"--seek-stats", "-s", "-d"};
+
+        ArgParser ap = new ArgParser();
+        Application application = ap.parseArgs(args);
+        assertNull(application);
+    }
+
+    @Test
+    public void parseArgsShouldReturnSeekStatsApplicationWhenDaysAgoSetToPositiveInt()
+    {
+        String[] args = new String[]{"--seek-stats", "-s", "-d", "10"};
+
+        ArgParser ap = new ArgParser();
+        Application application = ap.parseArgs(args);
+        String application_name = application.getClass().getSimpleName();
+        assertEquals("SeekStatsApplication", application_name);
+    }
+    
+
+    @Test
+    public void parseArgsShouldReturnNoApplicationWhenDaysAgoIsNegative()
+    {
+        String[] args = new String[]{"--seek-stats", "-s", "-d", "-1"};
+
+        ArgParser ap = new ArgParser();
+        Application application = ap.parseArgs(args);
+        assertNull(application);
+    }
+
+
+    @Test
+    public void parseArgsShouldReturnSeekStatsApplicationWhenDaysAgoZero()
+    {
+        String[] args = new String[]{"--seek-stats", "-s", "-d", "0"};
+
+        ArgParser ap = new ArgParser();
+        Application application = ap.parseArgs(args);
+        String application_name = application.getClass().getSimpleName();
+        assertEquals("SeekStatsApplication", application_name);
+    }
+
+
+    @Test
+    public void parseArgsShouldReturnNoApplicationWhenDaysAgoIsTooBig()
+    {
+        String[] args = new String[]{"--seek-stats", "-s", "-d", "11111111111"};
+
+        ArgParser ap = new ArgParser();
+        Application application = ap.parseArgs(args);
+        assertNull(application);
+    }
+
+
+    @Test
+    public void parseArgsShouldReturnNoApplicationWhenDaysAgoIsAString()
+    {
+        String[] args = new String[]{"--seek-stats", "-s", "-d", "a_word"};
+
+        ArgParser ap = new ArgParser();
+        Application application = ap.parseArgs(args);
+        assertNull(application);
+    }
 }
