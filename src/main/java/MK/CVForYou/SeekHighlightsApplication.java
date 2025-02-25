@@ -120,7 +120,7 @@ public class SeekHighlightsApplication implements Application
     private List<Integer> getMatches(String text, String pattern)
     {
         List<Integer> positions = new ArrayList<Integer>();
-        Pattern compiledPattern = Pattern.compile(pattern);
+        Pattern compiledPattern = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
         Matcher matcher = compiledPattern.matcher(text);
 
         while (matcher.find()) {
