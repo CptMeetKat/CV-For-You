@@ -116,7 +116,7 @@ public class SeekResumesApplication implements Application
         {
             logger.info("Uploading CV file '{}' to Seek", file.getName());
 
-            SeekDocumentUploadFormData params = new SeekCVUploaderParamsWrapper().getUploadParams(); 
+            SeekDocumentUploadFormData params = new SeekCVUploaderParamsRequest().getUploadParams(); 
             try {
                 SeekUploadFileWrapper.uploadFile(params, file);
                 SeekApplyProcessUploadedResume apply_process = new SeekApplyProcessUploadedResume(params.key); //TODO: this class name is not great

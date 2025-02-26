@@ -15,12 +15,12 @@ import org.slf4j.LoggerFactory;
 
 import java.util.UUID;
 
-public class SeekCVUploaderParamsWrapper implements Requestable
+public class SeekCVUploaderParamsRequest implements Requestable
 {
     SeekSessionManager session_manager;
-    static final Logger logger = LoggerFactory.getLogger(SeekCVUploaderParamsWrapper.class);
+    static final Logger logger = LoggerFactory.getLogger(SeekCVUploaderParamsRequest.class);
 
-    public SeekCVUploaderParamsWrapper()
+    public SeekCVUploaderParamsRequest()
     {
         this.session_manager = SeekSessionManager.getManager();
     }
