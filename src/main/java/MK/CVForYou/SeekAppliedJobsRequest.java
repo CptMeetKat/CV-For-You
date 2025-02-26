@@ -17,12 +17,12 @@ import org.json.JSONPointerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SeekAppliedJobsWrapper implements Requestable, SeekAppliedJobSource
+public class SeekAppliedJobsRequest implements Requestable, SeekAppliedJobSource
 {
 
-    static final Logger logger = LoggerFactory.getLogger(SeekAppliedJobsWrapper.class);
+    static final Logger logger = LoggerFactory.getLogger(SeekAppliedJobsRequest.class);
     SeekSessionManager session_manager;
-    public SeekAppliedJobsWrapper()
+    public SeekAppliedJobsRequest()
     {
         this.session_manager = SeekSessionManager.getManager();
     }
