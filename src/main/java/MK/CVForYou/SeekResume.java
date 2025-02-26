@@ -2,7 +2,7 @@ package MK.CVForYou;
 
 import org.json.JSONObject;
 
-public class SeekResumesResponse
+public class SeekResume
 {
     public String name;
     public String created;
@@ -12,7 +12,7 @@ public class SeekResumesResponse
     public String virusScanStatus;
     public String uri;
 
-    public SeekResumesResponse(JSONObject response)
+    public SeekResume(JSONObject response)
     {
         id = JSONHelpers.getString(response, "id");
         created = JSONHelpers.getString(response, "createdDateUtc");

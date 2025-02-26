@@ -24,7 +24,7 @@ public class SeekResumeDeleteRequest implements Requestable
         this.resume_id = resume_id;
     }
 
-    public ArrayList<SeekResumesResponse> deleteSeekResume()
+    public ArrayList<SeekResume> deleteSeekResume()
     {
         session_manager.makeRequest(this); 
         return null; //TODO: this returns null????

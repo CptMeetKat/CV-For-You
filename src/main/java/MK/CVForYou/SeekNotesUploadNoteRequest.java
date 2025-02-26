@@ -33,7 +33,7 @@ public class SeekNotesUploadNoteRequest implements Requestable
         return result;
     }
 
-    public ArrayList<SeekResumesResponse> uploadNote()
+    public ArrayList<SeekResume> uploadNote()
     {
         session_manager.makeRequest(this); 
         return null; //TODO: this returns null????

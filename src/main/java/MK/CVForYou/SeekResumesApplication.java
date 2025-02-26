@@ -57,10 +57,10 @@ public class SeekResumesApplication implements Application
 
     private ArrayList<String> fetchIDsToDelete() throws IOException
     {
-        ArrayList<SeekResumesResponse> seek_resumes = fetchAllResumes();
+        ArrayList<SeekResume> seek_resumes = fetchAllResumes();
         HashSet<String> excluded = getExcludedNames();
         ArrayList<String> ids_to_delete = new ArrayList<>();
-        for(SeekResumesResponse resume : seek_resumes)
+        for(SeekResume resume : seek_resumes)
         {
             if(!excluded.contains(resume.name)) 
                 ids_to_delete.add(resume.id);
@@ -132,17 +132,17 @@ public class SeekResumesApplication implements Application
 
     private void printUploadedResumes()
     {
-        ArrayList<SeekResumesResponse> uploaded = fetchAllResumes();
+        ArrayList<SeekResume> uploaded = fetchAllResumes();
 
         logger.info("{} Resumes on SEEK", uploaded.size());
-        for(SeekResumesResponse resume : uploaded)
+        for(SeekResume resume : uploaded)
             logger.info("\t{} {} {} {}", String.format("%-20s", resume.name),
                     String.format("%-8s", resume.size),
                     resume.created,
                     String.format("%39s", resume.id));
     }
 
-    private ArrayList<SeekResumesResponse> fetchAllResumes()
+    private ArrayList<SeekResume> fetchAllResumes()
     {
         return new SeekResumesRequest().getSeekResumes();
     }

@@ -23,7 +23,7 @@ public class SeekResumesRequest implements Requestable
         this.session_manager = SeekSessionManager.getManager();
     }
 
-    public ArrayList<SeekResumesResponse> getSeekResumes()
+    public ArrayList<SeekResume> getSeekResumes()
     {//TODO: should throw if unobtainable
 
         JSONObject response = session_manager.makeRequest(this); //TODO: this could return null and crash
@@ -31,11 +31,11 @@ public class SeekResumesRequest implements Requestable
 
         Iterator<Object> resume_itr = resumes.iterator();
 
-        ArrayList<SeekResumesResponse> arr = new ArrayList<SeekResumesResponse>();
+        ArrayList<SeekResume> arr = new ArrayList<SeekResume>();
         while(resume_itr.hasNext())
         {
             JSONObject job = (JSONObject)resume_itr.next();
-            arr.add(new SeekResumesResponse(job));
+            arr.add(new SeekResume(job));
         }
 
         return arr;
