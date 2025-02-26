@@ -7,14 +7,14 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class SeekSavedJobWrapperTest 
+public class SeekSavedJobRequestTest 
 {
     @Test
     public void shouldReturnNothingWhenCannotTraverseJSONToDeserialise()
     {
         String single_saved_job = "{}";
         JSONObject json = new JSONObject(single_saved_job);
-        ArrayList<SeekSavedJob> jobs = SeekSavedJobWrapper.deserializeSavedJobs(json);
+        ArrayList<SeekSavedJob> jobs = SeekSavedJobRequest.deserializeSavedJobs(json);
         Assert.assertEquals(jobs.size(), 0);
     }
 
@@ -24,7 +24,7 @@ public class SeekSavedJobWrapperTest
         String single_saved_job = "{\"data\": {\"viewer\": {\"savedJobs\": {}}}}";
 
         JSONObject json = new JSONObject(single_saved_job);
-        ArrayList<SeekSavedJob> jobs = SeekSavedJobWrapper.deserializeSavedJobs(json);
+        ArrayList<SeekSavedJob> jobs = SeekSavedJobRequest.deserializeSavedJobs(json);
         Assert.assertEquals(jobs.size(), 0);
     }
 
@@ -34,7 +34,7 @@ public class SeekSavedJobWrapperTest
     {
         String empty_saved_job = "{\"data\":{\"viewer\":{\"id\":40911111,\"savedJobs\":{\"edges\":[{\"node\":{}}]}}}}";
         JSONObject json = new JSONObject(empty_saved_job);
-        ArrayList<SeekSavedJob> jobs = SeekSavedJobWrapper.deserializeSavedJobs(json);
+        ArrayList<SeekSavedJob> jobs = SeekSavedJobRequest.deserializeSavedJobs(json);
         Assert.assertEquals(jobs.size(), 1);
     }
 }

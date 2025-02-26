@@ -67,7 +67,7 @@ public class SeekHighlightsApplication implements Application
     private HashMap<String, SeekSavedJob> getJobsMap()
     {
         HashMap<String, SeekSavedJob> map = new HashMap<>();
-        SeekSavedJobWrapper wrapper = new SeekSavedJobWrapper();
+        SeekSavedJobRequest wrapper = new SeekSavedJobRequest();
         ArrayList<SeekSavedJob> jobs = wrapper.getSavedJobs();
         for(SeekSavedJob job : jobs)
         {

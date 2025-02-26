@@ -16,7 +16,7 @@ public class JobFromSeekSaved implements JobSource
     {
         ArrayList<InputJob> jobs = new ArrayList<>();
 
-        SeekSavedJobWrapper ssj = new SeekSavedJobWrapper();
+        SeekSavedJobRequest ssj = new SeekSavedJobRequest();
         ArrayList<String> job_urls = ssj.getSavedJobURLs();
         
         int total_cached = 0;

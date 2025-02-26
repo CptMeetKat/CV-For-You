@@ -15,16 +15,16 @@ import org.json.JSONPointerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SeekSavedJobWrapper implements Requestable
+public class SeekSavedJobRequest implements Requestable
 {
-    static final Logger logger = LoggerFactory.getLogger(SeekSavedJobWrapper.class);
+    static final Logger logger = LoggerFactory.getLogger(SeekSavedJobRequest.class);
 
     String timezone = "Australia/Sydney";
 
     SeekSessionManager session_manager;
 
 
-    public SeekSavedJobWrapper()
+    public SeekSavedJobRequest()
     {
         session_manager = SeekSessionManager.getManager();
     }
