@@ -119,7 +119,7 @@ public class SeekResumesApplication implements Application
             SeekDocumentUploadFormData params = new SeekCVUploaderParamsRequest().getUploadParams(); 
             try {
                 SeekDocumentUploader.uploadFile(params, file);
-                SeekApplyProcessUploadedResume apply_process = new SeekApplyProcessUploadedResume(params.key); //TODO: this class name is not great
+                SeekApplyResumeRequest apply_process = new SeekApplyResumeRequest(params.key);
                 apply_process.run();
                 printUploadedResumes();
 

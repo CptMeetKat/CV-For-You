@@ -12,13 +12,13 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.UUID;
 
-public class SeekApplyProcessUploadedResume implements Requestable
+public class SeekApplyResumeRequest implements Requestable
 {
     SeekSessionManager session_manager;
     String uuid;
-    static final Logger logger = LoggerFactory.getLogger(SeekApplyProcessUploadedResume.class);
+    static final Logger logger = LoggerFactory.getLogger(SeekApplyResumeRequest.class);
 
-    public SeekApplyProcessUploadedResume(String uuid)
+    public SeekApplyResumeRequest(String uuid)
     {
         this.session_manager = SeekSessionManager.getManager();
         this.uuid = uuid;
