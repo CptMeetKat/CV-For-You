@@ -11,14 +11,14 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SeekAppliedJobInsightsWrapper implements Requestable, SeekAppliedJobInsightsSource
+public class SeekAppliedJobInsightsRequest implements Requestable, SeekAppliedJobInsightsSource
 {
-    static final Logger logger = LoggerFactory.getLogger(SeekAppliedJobInsightsWrapper.class);
+    static final Logger logger = LoggerFactory.getLogger(SeekAppliedJobInsightsRequest.class);
     SeekSessionManager session_manager;
     
     String job_id;
 
-    public SeekAppliedJobInsightsWrapper()
+    public SeekAppliedJobInsightsRequest()
     {
         this.session_manager = SeekSessionManager.getManager();
     }

@@ -30,7 +30,7 @@ public class SeekStatsApplication implements Application
         {
             output_location = ap.getOutput();
             setDependency(new SeekAppliedJobsRequest(), SeekAppliedJobSource.class);
-            setDependency(new SeekAppliedJobInsightsWrapper(), SeekAppliedJobInsightsSource.class);
+            setDependency(new SeekAppliedJobInsightsRequest(), SeekAppliedJobInsightsSource.class);
         }
         else if(mode == 2)
         {
