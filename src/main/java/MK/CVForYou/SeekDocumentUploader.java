@@ -5,7 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.io.*;
 
-public class SeekUploadFileWrapper
+public class SeekDocumentUploader
 {
     static final String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW"; // Define a unique boundary TODO: may be appropriate to change between uploads
     static final String lineEnd = "\r\n";
