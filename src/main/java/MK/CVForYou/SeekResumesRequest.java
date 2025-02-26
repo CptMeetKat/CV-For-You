@@ -13,12 +13,12 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SeekResumeWrapper implements Requestable
+public class SeekResumesRequest implements Requestable
 {
-    static final Logger logger = LoggerFactory.getLogger(SeekResumeWrapper.class);
+    static final Logger logger = LoggerFactory.getLogger(SeekResumesRequest.class);
     SeekSessionManager session_manager;
 
-    public SeekResumeWrapper() 
+    public SeekResumesRequest() 
     {
         this.session_manager = SeekSessionManager.getManager();
     }

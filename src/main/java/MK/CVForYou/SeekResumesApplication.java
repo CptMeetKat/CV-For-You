@@ -144,7 +144,7 @@ public class SeekResumesApplication implements Application
 
     private ArrayList<SeekResumesResponse> fetchAllResumes()
     {
-        return new SeekResumeWrapper().getSeekResumes();
+        return new SeekResumesRequest().getSeekResumes();
     }
 
 }
