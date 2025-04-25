@@ -57,7 +57,7 @@ public class SeekAppliedJobInsightsRequest implements Requestable, SeekAppliedJo
 
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
-            Utils.sleep(1); //Avoid flagging SEEK systems
+            Utils.sleep(5); //Avoid flagging SEEK systems
 
             return new JSONObject(response.body());
     }
