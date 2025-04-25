@@ -98,7 +98,7 @@ public class SeekResumesApplication implements Application
     {
         for(String id : ids)
         {
-            logger.info("Deleteing CV file '{}' from Seek", id);
+            logger.info("Deleteing CV file '{}' from Seek", id); //TODO: This should say the file name
             SeekResumeDeleteRequest request = new SeekResumeDeleteRequest(id);
             request.deleteSeekResume();
             Utils.sleep(3);
