@@ -57,7 +57,7 @@ public class GitHubPullRequests
             String author_association = pr.getString("author_association");
             String state = pr.getString("state");
             String repository_url = pr.getString("repository_url");
-            String repo_name = repository_url.substring(repository_url.lastIndexOf("/")+1); //TODO: This could be made safer
+            String repo_name = repository_url.substring(repository_url.lastIndexOf("/")+1);
             if(author_association.equals("CONTRIBUTOR"))
                 System.out.printf("%s %s: %s\n", repo_name, state, title);
         }
