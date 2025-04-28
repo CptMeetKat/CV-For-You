@@ -14,30 +14,37 @@ import org.slf4j.LoggerFactory;
 public class GitHubPullRequests
 {
     static final Logger logger = LoggerFactory.getLogger(GitHubPullRequests.class);
+    String username;
     public GitHubPullRequests()
     {
         System.out.println("Hello from PRs module!");
         readConfig();
+        run();
+    }
+
+    private void run()
+    {
+        try {
+			fetchPullRequests(username);
+		} catch (IOException e) {
+            logger.info("Unable to obtain GitHub pull requests");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
     }
 
     private void readConfig()
     {
         try {
             System.out.println(System.getProperty("user.dir"));
-			String username = IOUtils.readFile("./target/classes/GithubPullRequestsConfig");
+			username = IOUtils.readFile("./target/classes/GithubPullRequestsConfig");
             logger.info("Obtaining GitHub information for user {}", username);
-
-            fetchPullRequests(username);
-
 		} catch (IOException e) {
             logger.warn("Unable to read username of target GitHub account: {}", e.toString());
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
     }
 
-    private void fetchPullRequests(String username) throws IOException, InterruptedException
+    private HttpResponse<String> fetchPullRequests(String username) throws IOException, InterruptedException
     {
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create("https://api.github.com/search/issues?q=author:" + username + "+type:pr+is:merged"))
@@ -49,5 +56,6 @@ public class GitHubPullRequests
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
         System.out.println(response);
         System.out.println(response.body());
+        return response;
     }
 }
