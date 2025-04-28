@@ -10,6 +10,11 @@ import MK.CVForYou.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Iterator;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class GitHubPullRequests
 {
@@ -25,12 +30,36 @@ public class GitHubPullRequests
     private void run()
     {
         try {
-			fetchPullRequests(username);
+			HttpResponse<String> response = fetchPullRequests(username);
+            if( response.statusCode() != 200)
+                logger.warn("{} response code received, unable to calculate pull requests");
+            else
+                calculatePullRequests(response.body());
+
 		} catch (IOException e) {
-            logger.info("Unable to obtain GitHub pull requests");
+            logger.warn("Unable to obtain GitHub pull requests");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+    }
+
+    private void calculatePullRequests(String body)
+    {
+        JSONObject json = new JSONObject(body);
+        JSONArray pull_requests = (JSONArray) json.query("/items");
+        if(pull_requests == null)
+            return;
+            
+        Iterator<Object> pr_itr = pull_requests.iterator();
+        while(pr_itr.hasNext())
+        {
+            JSONObject pr = (JSONObject)pr_itr.next();
+            String title = pr.getString("title");
+            String author_association = pr.getString("author_association");
+            String state = pr.getString("state");
+            if(author_association.equals("CONTRIBUTOR"))
+                System.out.printf("%s: %s\n", state, title);
+        }
     }
 
     private void readConfig()
@@ -54,8 +83,6 @@ public class GitHubPullRequests
             .build(); 
 
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response);
-        System.out.println(response.body());
         return response;
     }
 }
