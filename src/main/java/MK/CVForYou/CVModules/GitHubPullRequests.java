@@ -10,6 +10,7 @@ import MK.CVForYou.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -50,6 +51,8 @@ public class GitHubPullRequests
             return;
             
         Iterator<Object> pr_itr = pull_requests.iterator();
+        HashMap<String, Integer> total_prs = new HashMap<>();
+        System.out.printf("Total elements %d\n", pull_requests.length());
         while(pr_itr.hasNext())
         {
             JSONObject pr = (JSONObject)pr_itr.next();
@@ -59,8 +62,21 @@ public class GitHubPullRequests
             String repository_url = pr.getString("repository_url");
             String repo_name = repository_url.substring(repository_url.lastIndexOf("/")+1);
             if(author_association.equals("CONTRIBUTOR"))
+            {
+                if(total_prs.containsKey(repo_name))
+                    total_prs.put(repo_name, total_prs.get(repo_name)+1);
+                else
+                    total_prs.put(repo_name, 1);
+
                 System.out.printf("%s %s: %s\n", repo_name, state, title);
+            }
         }
+        
+
+        for (String key : total_prs.keySet()) {
+            System.out.printf("%d %s\n", total_prs.get(key), key);
+        }
+
     }
 
     private void readConfig()
