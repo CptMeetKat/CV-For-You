@@ -22,7 +22,6 @@ public class GitHubPullRequests
     String username;
     public GitHubPullRequests()
     {
-        System.out.println("Hello from PRs module!");
         readConfig();
         run();
     }
@@ -82,7 +81,6 @@ public class GitHubPullRequests
     private void readConfig()
     {
         try {
-            System.out.println(System.getProperty("user.dir"));
 			username = IOUtils.readFile("./target/classes/GithubPullRequestsConfig");
             logger.info("Obtaining GitHub information for user {}", username);
 		} catch (IOException e) {
