@@ -22,7 +22,7 @@ public class GitHubPullRequests
     String username;
     public GitHubPullRequests()
     {
-        readConfig();
+        username = readUsernameFromFile();
         run();
     }
 
@@ -78,14 +78,16 @@ public class GitHubPullRequests
 
     }
 
-    private void readConfig()
+    private String readUsernameFromFile()
     {
+        String username = null;
         try {
 			username = IOUtils.readFile("./target/classes/GithubPullRequestsConfig");
             logger.info("Obtaining GitHub information for user {}", username);
 		} catch (IOException e) {
             logger.warn("Unable to read username of target GitHub account: {}", e.toString());
 		}
+        return username;
     }
 
     private HttpResponse<String> fetchPullRequests(String username) throws IOException, InterruptedException
