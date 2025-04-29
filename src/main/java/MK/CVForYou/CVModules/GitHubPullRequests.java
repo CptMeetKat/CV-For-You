@@ -78,7 +78,7 @@ public class GitHubPullRequests
 
     }
 
-    private String readUsernameFromFile()
+    private static String readUsernameFromFile()
     {
         String username = null;
         try {
