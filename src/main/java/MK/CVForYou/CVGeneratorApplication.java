@@ -4,6 +4,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import MK.CVForYou.CVModules.GitHubPullRequests;
+
 public class CVGeneratorApplication implements Application
 {
     JobSource job_source;
@@ -28,6 +30,12 @@ public class CVGeneratorApplication implements Application
     public CVGenerationArgs getCVGenerationArgs()
     {
         return args;
+    }
+
+
+    public void setDocumentStage(GitHubPullRequests pr)
+    {
+        generator.addStage(pr);
     }
 
     public static HashMap<String, InputJob> getJobs(JobSource jd_source)

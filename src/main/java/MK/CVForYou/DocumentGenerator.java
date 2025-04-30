@@ -10,6 +10,8 @@ import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import MK.CVForYou.CVModules.GitHubPullRequests;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.lang.reflect.Field;
@@ -21,6 +23,7 @@ public class DocumentGenerator
     String template;
     ArrayList<DynamicSection> sections = new ArrayList<DynamicSection>();
     Path output_directory = Paths.get("./");
+    ArrayList<GitHubPullRequests> stages = new ArrayList<>();
 
     public DocumentGenerator(Path template_file, Path[] component_paths,
                              Path output_directory )
@@ -122,6 +125,10 @@ public class DocumentGenerator
         if(success)
             logger.info("Document has been generated at: {}", out_path);
     }
+
+	public void addStage(GitHubPullRequests pr) {
+        stages.add(pr);
+	}
 
 }
 
