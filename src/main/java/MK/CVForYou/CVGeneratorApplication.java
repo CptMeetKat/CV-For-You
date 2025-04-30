@@ -12,6 +12,7 @@ public class CVGeneratorApplication implements Application
     Path output_folder;
 
     CVGenerationArgs args;
+    DocumentGenerator generator;
 
     public CVGeneratorApplication(CVGenerationArgs args)
     {
@@ -19,8 +20,9 @@ public class CVGeneratorApplication implements Application
         input_document = args.getInputDocument();
         sections = args.getSections();
         output_folder = args.getOutputFolder();
-        
         this.args = args;
+        
+        generator = new DocumentGenerator(input_document, sections, output_folder);
     }
 
     public CVGenerationArgs getCVGenerationArgs()
@@ -46,9 +48,6 @@ public class CVGeneratorApplication implements Application
 
         for (String job_id: job_descriptions.keySet()) 
         {
-            DocumentGenerator generator = new DocumentGenerator(input_document,
-                                    sections,
-                                    output_folder);
             generator.generateDocument(job_descriptions.get(job_id), job_id);
             ExecuteChromePDFGenerator.run(job_id, output_folder);
         }
