@@ -85,7 +85,7 @@ public class SeekSessionManager
             .header("sec-fetch-dest", "empty")
             .header("sec-fetch-mode", "cors")
             .header("sec-fetch-site", "cross-site")
-            .header("user-agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36")
+            .header("user-agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0")
             .method("POST", HttpRequest.BodyPublishers.ofString("{\"redirect_uri\":\"https://www.seek.com.au/oauth/callback/\",\"initial_scope\":\"openid profile email offline_access\",\"JobseekerSessionId\":\"" + JobseekerSessionId + "\",\"identity_sdk_version\":\"7.0.0\",\"refresh_href\":\"https://www.seek.com.au/my-activity/saved-jobs\",\"client_id\":\"" + client_id + "\",\"grant_type\":\"refresh_token\",\"refresh_token\":\"" + refresh_token + "\"}" ))
             .build();
 

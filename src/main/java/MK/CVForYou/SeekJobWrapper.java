@@ -84,7 +84,7 @@ public class SeekJobWrapper {
     {
         // Seek does not respond to jsoup default useragent
         Document result = null;
-        String useragent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
+        String useragent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0";
         try {
             logger.info("Obtaining job description from Seek: " + job_url);
             Document doc = Jsoup.connect(job_url)
