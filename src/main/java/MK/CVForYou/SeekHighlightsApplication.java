@@ -30,6 +30,12 @@ public class SeekHighlightsApplication implements Application
         ArrayList<InputJob> saved_jobs = seek.getJobModel();
         for(InputJob job : saved_jobs)
         {
+            if(job.job_description == null)
+            {
+                logger.warn("Job contains no job description: {} {}", job.name, job.job_title);
+                continue;
+            }
+
             String highlight = createHighlight(job.job_description);
 
             if(!roleContainsNotes(job.name) && !highlight.isBlank())
