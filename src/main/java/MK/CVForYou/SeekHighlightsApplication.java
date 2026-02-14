@@ -47,8 +47,7 @@ public class SeekHighlightsApplication implements Application
                     !highlight1.isBlank() &&
                     !highlight2.isBlank())
             {
-                String note = String.format("%s %s %s\\n", highlight, highlight1, highlight2);
-                System.out.println("writing note: " + note);
+                String note = String.format("[0] %s\\n [1] %s\\n [2] %s\\n", highlight, highlight1, highlight2);
                 writeNoteToRole(job.name, note);
                 uploaded++;
             }
