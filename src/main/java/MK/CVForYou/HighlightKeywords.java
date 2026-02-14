@@ -40,7 +40,7 @@ public class HighlightKeywords
 			String data = readFile(filename);
             parseHighlightMap(data);
 		} catch (IOException e) {
-			e.printStackTrace();
+            logger.warn("Unable to parse keyword file {}\n", e.getMessage()); 
 		}
     }
 
@@ -49,7 +49,6 @@ public class HighlightKeywords
         String words[] = data.split("\n");
         for(String word : words)
         {
-            System.out.println("Writing word:" + word);
             highlights.add(word.toLowerCase());
         }
     }
