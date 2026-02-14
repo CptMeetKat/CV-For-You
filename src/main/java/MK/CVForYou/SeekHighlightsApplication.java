@@ -64,7 +64,7 @@ public class SeekHighlightsApplication implements Application
 
             String note = text.substring(left+1,right);
             if(note.length() > 0)
-                sb.append(note + "\\n");
+                sb.append("[0]" + note + "\\n");
         }
 
         return sb.toString();
