@@ -204,7 +204,7 @@ public class CVGeneratorMenu implements Menu
             fileArray = fileNames.toArray(new String[0]);
 
         } catch (NoSuchFileException e) {
-            logger.warn("Unable to find files in %s\n", e.getMessage());
+            logger.warn("Unable to find files in {}\n", e.getMessage()); 
         } catch (IOException e) {
             e.printStackTrace();
         }
