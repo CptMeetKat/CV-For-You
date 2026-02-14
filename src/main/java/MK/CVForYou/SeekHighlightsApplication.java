@@ -27,7 +27,7 @@ public class SeekHighlightsApplication implements Application
         ArrayList<InputJob> saved_jobs = seek.getJobModel();
 
 
-        HighlightKeywords happy_words = new HighlightKeywords("./stub.sample");
+        HighlightKeywords happy_words = new HighlightKeywords("./happy_keywords");
         for(InputJob job : saved_jobs)
         {
             if(job.job_description == null)

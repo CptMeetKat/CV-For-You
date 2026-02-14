@@ -1,8 +1,11 @@
 package MK.CVForYou;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,10 +23,21 @@ public class HighlightKeywords
         init();
     }
 
+    private static String readFile(String path) 
+    throws IOException
+    {
+        String result = null;
+        
+        List<String> lines = Files.readAllLines(Paths.get(path));
+        result = String.join("\n", lines);
+
+        return result;
+    }
+
     private void init()
     {
         try {
-			String data = IOUtils.readFile(filename);
+			String data = readFile(filename);
             parseHighlightMap(data);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -32,7 +46,12 @@ public class HighlightKeywords
 
     private void parseHighlightMap(String data)
     {
-        highlights.add("SQL");
+        String words[] = data.split("\n");
+        for(String word : words)
+        {
+            System.out.println("Writing word:" + word);
+            highlights.add(word);
+        }
     }
 
     public String createHighlight(String text)
