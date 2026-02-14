@@ -25,6 +25,9 @@ public class SeekHighlightsApplication implements Application
 
         JobFromSeekSaved seek = new JobFromSeekSaved();
         ArrayList<InputJob> saved_jobs = seek.getJobModel();
+
+
+        HighlightKeywords happy_words = new HighlightKeywords("./stub.sample");
         for(InputJob job : saved_jobs)
         {
             if(job.job_description == null)
@@ -34,10 +37,12 @@ public class SeekHighlightsApplication implements Application
             }
 
             String highlight = HighlightSequence.createHighlight("year", job.job_description);
+            String highlight1 = happy_words.createHighlight(job.job_description);
 
-            if(!roleContainsNotes(job.name) && !highlight.isBlank())
+
+            if(!roleContainsNotes(job.name) && !highlight.isBlank() && !highlight1.isBlank())
             {
-                writeNoteToRole(job.name, highlight);
+                writeNoteToRole(job.name, highlight+"[1]: " + highlight1);
                 uploaded++;
             }
             else
