@@ -27,7 +27,8 @@ public class SeekHighlightsApplication implements Application
         ArrayList<InputJob> saved_jobs = seek.getJobModel();
 
 
-        HighlightKeywords happy_words = new HighlightKeywords("./happy_keywords");
+        HighlightKeywords positive_words = new HighlightKeywords("./happy_keywords");
+        HighlightKeywords negative_words = new HighlightKeywords("./negative_keywords");
         for(InputJob job : saved_jobs)
         {
             if(job.job_description == null)
@@ -37,12 +38,18 @@ public class SeekHighlightsApplication implements Application
             }
 
             String highlight = HighlightSequence.createHighlight("year", job.job_description);
-            String highlight1 = happy_words.createHighlight(job.job_description);
+            String highlight1 = positive_words.createHighlight(job.job_description);
+            String highlight2 = negative_words.createHighlight(job.job_description);
 
 
-            if(!roleContainsNotes(job.name) && !highlight.isBlank() && !highlight1.isBlank())
+            if(!roleContainsNotes(job.name) &&
+                    !highlight.isBlank() &&
+                    !highlight1.isBlank() &&
+                    !highlight2.isBlank())
             {
-                writeNoteToRole(job.name, highlight+"[1]: " + highlight1);
+                String note = String.format("%s %s %s\\n", highlight, highlight1, highlight2);
+                System.out.println("writing note: " + note);
+                writeNoteToRole(job.name, note);
                 uploaded++;
             }
             else
