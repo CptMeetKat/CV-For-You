@@ -50,13 +50,13 @@ public class HighlightKeywords
         for(String word : words)
         {
             System.out.println("Writing word:" + word);
-            highlights.add(word);
+            highlights.add(word.toLowerCase());
         }
     }
 
     public String createHighlight(String text)
     {
-        return getHighlight(text);
+        return getHighlight(text.toLowerCase());
     }
 
     private String getHighlight(String text)
