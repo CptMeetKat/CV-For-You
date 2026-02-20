@@ -59,6 +59,11 @@ public class SeekScriptsMenu implements Menu
         Menu seek_highlights = new SeekHighlightsMenu();
         menus.put("--seek-highlights", seek_highlights);
         menus.put("-sh", seek_highlights);
+
+
+        Menu keyword_generator = new SeekKeywordGeneratorMenu();
+        menus.put("--generate-keywords", keyword_generator);
+        menus.put("-gk", keyword_generator);
     }
 
     private static Options getOptions()
@@ -69,10 +74,17 @@ public class SeekScriptsMenu implements Menu
             .build();
 
 
+        Option generate_keywords = Option.builder("gk")
+            .longOpt("generate-keywords")
+            .desc("generate a list of all keywords in SEEK jobs")
+            .build();
+
+
         Options options = new Options();
         options.addOption("h", "help", false, "print this message");
 
         options.addOption(cv_generator);
+        options.addOption(generate_keywords);
         return options;
     }
 }
