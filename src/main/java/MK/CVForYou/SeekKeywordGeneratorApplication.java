@@ -26,14 +26,16 @@ public class SeekKeywordGeneratorApplication implements Application
         JobFromCache cached_jobs = new JobFromCache(seek_jobs);
         ArrayList<InputJob> jobs = cached_jobs.getJobModel();
         List< Entry<String, Integer>> unique_words = getAllUniqueWords(jobs);
+        unique_words.sort(Entry.<String, Integer>comparingByValue().reversed());
 
+        StringBuilder sb = new StringBuilder();
 
         for (Entry<String,Integer> e : unique_words) {
             System.out.println(e.getValue() + " " + e.getKey() ); 
+            sb.append(e.getValue() + " " + e.getKey() + "\n");
         }
 
-        //String data = String.join("\n", unique_words);
-        //IOUtils.writeToFile(data, "./wordlist.txt");
+        IOUtils.writeToFile(sb.toString().strip(), "./wordlist.txt");
 	}
 
     private ArrayList<Entry<String, Integer>> getAllUniqueWords(ArrayList<InputJob> jobs)
