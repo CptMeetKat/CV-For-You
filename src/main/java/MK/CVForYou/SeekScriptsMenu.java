@@ -70,7 +70,7 @@ public class SeekScriptsMenu implements Menu
     {
         Option cv_generator = Option.builder("sh")
             .longOpt("seek-highlights")
-            .desc("...")
+            .desc("write highlights to SEEK job notes")
             .build();
 
 
