@@ -55,7 +55,7 @@ public class HighlightKeywords
 
     public String createHighlight(String text)
     {
-        return getHighlight(text.toLowerCase());
+        return getHighlight(text);
     }
 
     private String getHighlight(String text)
