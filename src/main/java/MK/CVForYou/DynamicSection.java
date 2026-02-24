@@ -8,11 +8,13 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.function.Predicate;
 
 
 public class DynamicSection
 {
     int max_display;
+    boolean display_unmatched;
 
     ArrayList<DynamicHTMLElement> dynamic_options;
     String file_name;
@@ -39,6 +41,12 @@ public class DynamicSection
         return file_name.substring(0, extension_pos);
     }
 
+    public void filter(Predicate<DynamicHTMLElement> predicate)
+    {
+        if(!display_unmatched)
+            dynamic_options.removeIf(predicate.negate());
+    }
+
     public void sort(Comparator<DynamicHTMLElement> sorter)
     {
         dynamic_options.sort(sorter);
@@ -61,6 +69,7 @@ public class DynamicSection
         String container = (String)object.get("container");
         
         max_display = object.optInt("max", Integer.MAX_VALUE);
+        display_unmatched = object.optBoolean("display_unmatched", true);
 
         JSONArray options = (JSONArray) object.query("/options");
         Iterator<Object> options_itr = options.iterator();

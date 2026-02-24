@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.function.Predicate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -110,7 +111,9 @@ public class DocumentGenerator
             }
             else {
                 Comparator<DynamicHTMLElement> sorter = new CosineSimilarityComparator(evaluation_value);
+                Predicate<DynamicHTMLElement> filter = new CosineSimilarityFilter(evaluation_value);
                 section.sort(sorter);
+                section.filter(filter);
             }
 
             template = template.replace(key_to_replace.getOriginalKey(), section.compose());
