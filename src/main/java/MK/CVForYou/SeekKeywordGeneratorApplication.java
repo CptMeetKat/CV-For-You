@@ -24,7 +24,8 @@ public class SeekKeywordGeneratorApplication implements Application
         ArrayList<InputJob> jobs = cached_jobs.getJobModel();
         List<String> unique_words = getAllUniqueWords(jobs);
 
-        System.out.println(String.join("\n", unique_words));
+        String data = String.join("\n", unique_words);
+        IOUtils.writeToFile(data, "./wordlist.txt");
 	}
 
     private List<String> getAllUniqueWords(ArrayList<InputJob> jobs)
