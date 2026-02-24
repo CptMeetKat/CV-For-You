@@ -44,17 +44,14 @@ public class SeekKeywordGeneratorApplication implements Application
         for (InputJob job : jobs) {
             if(job.job_description != null)
             {
-                String text = job.job_description.replaceAll("[^\\w\\s+-]", " ").toLowerCase();
-                String[] split_text = text.split("[-., \n]");
-                for(String word : split_text) {
-                    String normalised_word = word.strip();
+                List<String> tokens = SeekJobDescriptionTokenizer.tokenize(job.job_description);
 
-                    if(!normalised_word.isEmpty())
-                    {
-                        if(word_map.containsKey(normalised_word))
-                            word_map.put(normalised_word, word_map.get(normalised_word) + 1);
+                for(String word : tokens) {
+                    if(!word.isEmpty()) {
+                        if(word_map.containsKey(word))
+                            word_map.put(word, word_map.get(word) + 1);
                         else
-                            word_map.put(normalised_word, 1);
+                            word_map.put(word, 1);
                     }
                 }
             }
