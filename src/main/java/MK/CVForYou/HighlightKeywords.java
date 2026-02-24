@@ -60,9 +60,12 @@ public class HighlightKeywords
 
     private String getHighlight(String text)
     {
+        List<String> search_source = SeekJobDescriptionTokenizer.tokenize(text);
+        HashSet<String> search_set = new HashSet<>(search_source);
+
         ArrayList<String> found = new ArrayList<String>();
         for (String highlight : highlights) {
-            if(text.contains(highlight))
+            if(search_set.contains(highlight))
                 found.add(highlight);
         }
         return String.join(", ", found);
