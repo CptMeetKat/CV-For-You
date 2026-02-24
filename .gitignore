@@ -15,3 +15,5 @@ startup.sh
 *.csv
 *.pdf
 whitelist
+positive_keywords
+negative_keywords
