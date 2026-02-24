@@ -14,7 +14,7 @@ public class SeekJobDescriptionTokenizer
     {
         ArrayList<String> result = new ArrayList<>();
         text = text.replaceAll("[^\\w\\s+#-]", " ").toLowerCase();
-        String[] split_text = text.split("[-., \n]"); //a bit redundant?
+        String[] split_text = text.split("[- \n]");
         for(String word : split_text) {
             String normalised_word = word.strip();
             result.add(normalised_word);
