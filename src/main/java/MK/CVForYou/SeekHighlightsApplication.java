@@ -41,13 +41,15 @@ public class SeekHighlightsApplication implements Application
             String highlight1 = positive_words.createHighlight(job.job_description);
             String highlight2 = negative_words.createHighlight(job.job_description);
 
+            String note = "";
+            if( !highlight.isBlank() )
+                note = note + String.format("[0] %s\\n", highlight);
+            if( !highlight1.isBlank() )
+                note = note + String.format("[1] %s\\n",  highlight1);
+            if( !highlight2.isBlank() )
+                note = note + String.format("[2] %s\\n",  highlight2);
 
-            if(!roleContainsNotes(job.name) &&
-                    !highlight.isBlank() &&
-                    !highlight1.isBlank() &&
-                    !highlight2.isBlank())
-            {
-                String note = String.format("[0] %s\\n [1] %s\\n [2] %s\\n", highlight, highlight1, highlight2);
+            if(!roleContainsNotes(job.name)) {
                 writeNoteToRole(job.name, note);
                 uploaded++;
             }
