@@ -30,11 +30,13 @@ public class SeekJobParser
         page = getJobCacheFromFile(path);
     }
 
+    //can return null
     public String getJobDescription()
     {
         return extractJobDescriptionFromHTML(page);
     }
-
+    
+    //can return null
     public String getJobTitle()
     {
         return extractJobTitleFromHTML(page);
