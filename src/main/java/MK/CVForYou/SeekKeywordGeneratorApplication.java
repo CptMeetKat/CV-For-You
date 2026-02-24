@@ -18,13 +18,13 @@ public class SeekKeywordGeneratorApplication implements Application
 
 	@Override
 	public void run() {
-        logger.info("Hello world");
         ArrayList<Path> seek_jobs = getAllFilesInFolder(cache_directory);
-        for(Path p : seek_jobs)
-        {
-            System.out.println(p.toString());
+        JobFromCache cached_jobs = new JobFromCache(seek_jobs);
+        ArrayList<InputJob> jobs = cached_jobs.getJobModel();
+
+        for(InputJob job : jobs) {
+            System.out.println(job.job_title);
         }
-        logger.info("end");
 	}
 
    // private void getAllUniqueWordsInJobDescription(Path seek_job_html)
