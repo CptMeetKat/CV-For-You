@@ -33,9 +33,11 @@ public class SeekKeywordGeneratorApplication implements Application
         for (InputJob job : jobs) {
             if(job.job_description != null)
             {
-                String[] split_text = job.job_description.split("[-., ]");
+                String text = job.job_description.replaceAll("[^\\w\\s+-]", " ").toLowerCase();
+                String[] split_text = text.split("[-., \n]");
                 for(String word : split_text) {
-                    word_map.add(word);
+                    if(!word.strip().isEmpty())
+                        word_map.add(word.strip());
                 }
             }
         }
