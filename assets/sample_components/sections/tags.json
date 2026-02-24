@@ -1,5 +1,6 @@
 {
     "container": "<div>{$elements[0]} {$elements[1]}</div>",
+    "display_unmatched": true,
     "options": [
         {
             "keywords": "Java",
